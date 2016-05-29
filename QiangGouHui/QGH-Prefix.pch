@@ -1,0 +1,15 @@
+//
+//  QGH-Prefix.h
+//  QiangGouHui
+//
+//  Created by 姚驰 on 16/5/29.
+//  Copyright © 2016年 softbank. All rights reserved.
+//
+
+#ifdef __OBJC__
+
+
+#import "MMHConstants.h"
+
+
+#endif
