@@ -9,7 +9,10 @@
 #ifdef __OBJC__
 
 
-#import "MMHConstants.h"
-
+#import "QGHConstants.h"
+#import "MMHAssistant.h"
+#import "QGHAppearance.h"
+#import "UIView+StringTag.h"
+#import "NSString+QSCalcSize.h"
 
 #endif

@@ -16,6 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (kScreenIs4InchRetina) {
+        //
+    }
     // Do any additional setup after loading the view, typically from a nib.
 }
 
