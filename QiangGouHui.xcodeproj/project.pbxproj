@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		415955411D04639900AC2BD4 /* QGHFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 415955401D04639900AC2BD4 /* QGHFirstViewController.m */; };
+		415955441D0465E500AC2BD4 /* QGHBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 415955431D0465E500AC2BD4 /* QGHBannerCell.m */; };
+		4159554A1D04685D00AC2BD4 /* QGHFirstBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 415955481D04685D00AC2BD4 /* QGHFirstBannerCell.m */; };
+		4159554B1D04685D00AC2BD4 /* QGHFirstBannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 415955491D04685D00AC2BD4 /* QGHFirstBannerCell.xib */; };
+		415955511D046DC800AC2BD4 /* QGHRushPurchaseItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 415955501D046DC800AC2BD4 /* QGHRushPurchaseItemView.m */; };
+		415955551D046F5000AC2BD4 /* QHGRushPurchaseItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 415955541D046F5000AC2BD4 /* QHGRushPurchaseItemView.xib */; };
 		41B3F3F41CFC87010007195B /* MMHImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B3F3F31CFC87010007195B /* MMHImageView.m */; };
 		41B3F3F71CFC8A670007195B /* MMHAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B3F3F61CFC8A670007195B /* MMHAssistant.m */; };
 		41B3F3FC1CFC93940007195B /* UIView+StringTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B3F3FB1CFC93940007195B /* UIView+StringTag.m */; };
@@ -14,6 +20,13 @@
 		41B3F4021CFC97230007195B /* NSString+QSCalcSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B3F4011CFC97230007195B /* NSString+QSCalcSize.m */; };
 		41B3F4061CFC98E70007195B /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B3F4051CFC98E70007195B /* BaseViewController.m */; };
 		41B3F4091CFCA0830007195B /* QGHTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B3F4081CFCA0830007195B /* QGHTabBarController.m */; };
+		41BEEB211D0D979E00612F88 /* QGHRushPurchaseItemsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BEEB201D0D979E00612F88 /* QGHRushPurchaseItemsCell.m */; };
+		41BEEB281D0D9A6A00612F88 /* QGHGoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BEEB261D0D9A6A00612F88 /* QGHGoodsTableViewCell.m */; };
+		41BEEB291D0D9A6A00612F88 /* QGHGoodsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BEEB271D0D9A6A00612F88 /* QGHGoodsTableViewCell.xib */; };
+		41BEEB2C1D0EF82400612F88 /* QGHGoodsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BEEB2B1D0EF82400612F88 /* QGHGoodsHeaderView.m */; };
+		41BEEB2E1D0EF84A00612F88 /* QGHGoodsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BEEB2D1D0EF84A00612F88 /* QGHGoodsHeaderView.xib */; };
+		41BEEB311D0F06FE00612F88 /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BEEB301D0F06FE00612F88 /* Stepper.swift */; };
+		41BEEB351D0F086100612F88 /* QGHCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BEEB341D0F086100612F88 /* QGHCartViewController.m */; };
 		41BF0F991CFB4F6100FB23C2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BF0F981CFB4F6100FB23C2 /* main.m */; };
 		41BF0F9C1CFB4F6100FB23C2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BF0F9B1CFB4F6100FB23C2 /* AppDelegate.m */; };
 		41BF0F9F1CFB4F6100FB23C2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BF0F9E1CFB4F6100FB23C2 /* ViewController.m */; };
@@ -25,6 +38,16 @@
 
 /* Begin PBXFileReference section */
 		3CF590EBA94ADBACCEF0BC3D /* Pods-QiangGouHui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiangGouHui.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QiangGouHui/Pods-QiangGouHui.debug.xcconfig"; sourceTree = "<group>"; };
+		4159553F1D04639900AC2BD4 /* QGHFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHFirstViewController.h; sourceTree = "<group>"; };
+		415955401D04639900AC2BD4 /* QGHFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHFirstViewController.m; sourceTree = "<group>"; };
+		415955421D0465E500AC2BD4 /* QGHBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHBannerCell.h; sourceTree = "<group>"; };
+		415955431D0465E500AC2BD4 /* QGHBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHBannerCell.m; sourceTree = "<group>"; };
+		415955471D04685D00AC2BD4 /* QGHFirstBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHFirstBannerCell.h; sourceTree = "<group>"; };
+		415955481D04685D00AC2BD4 /* QGHFirstBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHFirstBannerCell.m; sourceTree = "<group>"; };
+		415955491D04685D00AC2BD4 /* QGHFirstBannerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QGHFirstBannerCell.xib; sourceTree = "<group>"; };
+		4159554F1D046DC800AC2BD4 /* QGHRushPurchaseItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHRushPurchaseItemView.h; sourceTree = "<group>"; };
+		415955501D046DC800AC2BD4 /* QGHRushPurchaseItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHRushPurchaseItemView.m; sourceTree = "<group>"; };
+		415955541D046F5000AC2BD4 /* QHGRushPurchaseItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QHGRushPurchaseItemView.xib; sourceTree = "<group>"; };
 		41B3F3F21CFC87010007195B /* MMHImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHImageView.h; sourceTree = "<group>"; };
 		41B3F3F31CFC87010007195B /* MMHImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHImageView.m; sourceTree = "<group>"; };
 		41B3F3F51CFC8A670007195B /* MMHAssistant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHAssistant.h; sourceTree = "<group>"; };
@@ -39,6 +62,18 @@
 		41B3F4051CFC98E70007195B /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		41B3F4071CFCA0830007195B /* QGHTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHTabBarController.h; sourceTree = "<group>"; };
 		41B3F4081CFCA0830007195B /* QGHTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHTabBarController.m; sourceTree = "<group>"; };
+		41BEEB1F1D0D979E00612F88 /* QGHRushPurchaseItemsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHRushPurchaseItemsCell.h; sourceTree = "<group>"; };
+		41BEEB201D0D979E00612F88 /* QGHRushPurchaseItemsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHRushPurchaseItemsCell.m; sourceTree = "<group>"; };
+		41BEEB251D0D9A6A00612F88 /* QGHGoodsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHGoodsTableViewCell.h; sourceTree = "<group>"; };
+		41BEEB261D0D9A6A00612F88 /* QGHGoodsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHGoodsTableViewCell.m; sourceTree = "<group>"; };
+		41BEEB271D0D9A6A00612F88 /* QGHGoodsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QGHGoodsTableViewCell.xib; sourceTree = "<group>"; };
+		41BEEB2A1D0EF82400612F88 /* QGHGoodsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHGoodsHeaderView.h; sourceTree = "<group>"; };
+		41BEEB2B1D0EF82400612F88 /* QGHGoodsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHGoodsHeaderView.m; sourceTree = "<group>"; };
+		41BEEB2D1D0EF84A00612F88 /* QGHGoodsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QGHGoodsHeaderView.xib; sourceTree = "<group>"; };
+		41BEEB2F1D0F06FD00612F88 /* QiangGouHui-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QiangGouHui-Bridging-Header.h"; sourceTree = "<group>"; };
+		41BEEB301D0F06FE00612F88 /* Stepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stepper.swift; sourceTree = "<group>"; };
+		41BEEB331D0F086100612F88 /* QGHCartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHCartViewController.h; sourceTree = "<group>"; };
+		41BEEB341D0F086100612F88 /* QGHCartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHCartViewController.m; sourceTree = "<group>"; };
 		41BF0F941CFB4F6100FB23C2 /* QiangGouHui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiangGouHui.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41BF0F981CFB4F6100FB23C2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		41BF0F9A1CFB4F6100FB23C2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -68,6 +103,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4159553E1D04636B00AC2BD4 /* FirstPage */ = {
+			isa = PBXGroup;
+			children = (
+				415955461D0465F100AC2BD4 /* View */,
+				415955451D0465E800AC2BD4 /* Controller */,
+			);
+			name = FirstPage;
+			sourceTree = "<group>";
+		};
+		415955451D0465E800AC2BD4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4159553F1D04639900AC2BD4 /* QGHFirstViewController.h */,
+				415955401D04639900AC2BD4 /* QGHFirstViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		415955461D0465F100AC2BD4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				415955421D0465E500AC2BD4 /* QGHBannerCell.h */,
+				415955431D0465E500AC2BD4 /* QGHBannerCell.m */,
+				415955471D04685D00AC2BD4 /* QGHFirstBannerCell.h */,
+				415955481D04685D00AC2BD4 /* QGHFirstBannerCell.m */,
+				415955491D04685D00AC2BD4 /* QGHFirstBannerCell.xib */,
+				4159554F1D046DC800AC2BD4 /* QGHRushPurchaseItemView.h */,
+				415955501D046DC800AC2BD4 /* QGHRushPurchaseItemView.m */,
+				415955541D046F5000AC2BD4 /* QHGRushPurchaseItemView.xib */,
+				41BEEB1F1D0D979E00612F88 /* QGHRushPurchaseItemsCell.h */,
+				41BEEB201D0D979E00612F88 /* QGHRushPurchaseItemsCell.m */,
+				41BEEB251D0D9A6A00612F88 /* QGHGoodsTableViewCell.h */,
+				41BEEB261D0D9A6A00612F88 /* QGHGoodsTableViewCell.m */,
+				41BEEB271D0D9A6A00612F88 /* QGHGoodsTableViewCell.xib */,
+				41BEEB2A1D0EF82400612F88 /* QGHGoodsHeaderView.h */,
+				41BEEB2B1D0EF82400612F88 /* QGHGoodsHeaderView.m */,
+				41BEEB2D1D0EF84A00612F88 /* QGHGoodsHeaderView.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		41B3F3F91CFC93860007195B /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -82,12 +158,22 @@
 		41B3F4031CFC98C80007195B /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				41BEEB301D0F06FE00612F88 /* Stepper.swift */,
 				41B3F4041CFC98E70007195B /* BaseViewController.h */,
 				41B3F4051CFC98E70007195B /* BaseViewController.m */,
 				41B3F4071CFCA0830007195B /* QGHTabBarController.h */,
 				41B3F4081CFCA0830007195B /* QGHTabBarController.m */,
 			);
 			name = Base;
+			sourceTree = "<group>";
+		};
+		41BEEB321D0F084500612F88 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				41BEEB331D0F086100612F88 /* QGHCartViewController.h */,
+				41BEEB341D0F086100612F88 /* QGHCartViewController.m */,
+			);
+			name = Cart;
 			sourceTree = "<group>";
 		};
 		41BF0F8B1CFB4F6100FB23C2 = {
@@ -125,6 +211,7 @@
 		41BF0F971CFB4F6100FB23C2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				41BEEB2F1D0F06FD00612F88 /* QiangGouHui-Bridging-Header.h */,
 				41BF0F9A1CFB4F6100FB23C2 /* AppDelegate.h */,
 				41BF0F9B1CFB4F6100FB23C2 /* AppDelegate.m */,
 				41BF0F9D1CFB4F6100FB23C2 /* ViewController.h */,
@@ -141,6 +228,8 @@
 		41BF0FAE1CFB504700FB23C2 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				4159553E1D04636B00AC2BD4 /* FirstPage */,
+				41BEEB321D0F084500612F88 /* Cart */,
 				41B3F4031CFC98C80007195B /* Base */,
 			);
 			name = Class;
@@ -245,6 +334,7 @@
 		41BF0F8C1CFB4F6100FB23C2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = QGH;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = SoftBank;
 				TargetAttributes = {
@@ -278,7 +368,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				41BF0FA71CFB4F6100FB23C2 /* LaunchScreen.storyboard in Resources */,
+				41BEEB291D0D9A6A00612F88 /* QGHGoodsTableViewCell.xib in Resources */,
+				4159554B1D04685D00AC2BD4 /* QGHFirstBannerCell.xib in Resources */,
 				41BF0FA41CFB4F6100FB23C2 /* Assets.xcassets in Resources */,
+				415955551D046F5000AC2BD4 /* QHGRushPurchaseItemView.xib in Resources */,
+				41BEEB2E1D0EF84A00612F88 /* QGHGoodsHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,14 +434,23 @@
 				41B3F3FC1CFC93940007195B /* UIView+StringTag.m in Sources */,
 				41B3F4061CFC98E70007195B /* BaseViewController.m in Sources */,
 				41BF0F9F1CFB4F6100FB23C2 /* ViewController.m in Sources */,
+				41BEEB351D0F086100612F88 /* QGHCartViewController.m in Sources */,
+				4159554A1D04685D00AC2BD4 /* QGHFirstBannerCell.m in Sources */,
+				41BEEB211D0D979E00612F88 /* QGHRushPurchaseItemsCell.m in Sources */,
+				41BEEB281D0D9A6A00612F88 /* QGHGoodsTableViewCell.m in Sources */,
 				41B3F4021CFC97230007195B /* NSString+QSCalcSize.m in Sources */,
 				41B3F3FF1CFC948C0007195B /* QGHAppearance.m in Sources */,
 				41B3F3F71CFC8A670007195B /* MMHAssistant.m in Sources */,
+				41BEEB2C1D0EF82400612F88 /* QGHGoodsHeaderView.m in Sources */,
+				415955411D04639900AC2BD4 /* QGHFirstViewController.m in Sources */,
 				41BF0F9C1CFB4F6100FB23C2 /* AppDelegate.m in Sources */,
 				41B3F4091CFCA0830007195B /* QGHTabBarController.m in Sources */,
 				41BF0F991CFB4F6100FB23C2 /* main.m in Sources */,
+				415955441D0465E500AC2BD4 /* QGHBannerCell.m in Sources */,
 				41B3F3F41CFC87010007195B /* MMHImageView.m in Sources */,
 				41BF0FB81CFB50D600FB23C2 /* QGHLocationManager.m in Sources */,
+				41BEEB311D0F06FE00612F88 /* Stepper.swift in Sources */,
+				415955511D046DC800AC2BD4 /* QGHRushPurchaseItemView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +555,7 @@
 			baseConfigurationReference = 3CF590EBA94ADBACCEF0BC3D /* Pods-QiangGouHui.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QiangGouHui/QGH-Prefix.pch";
 				INFOPLIST_FILE = QiangGouHui/Info.plist;
@@ -459,6 +563,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.softbank.purchase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "QiangGouHui/QiangGouHui-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -467,6 +573,7 @@
 			baseConfigurationReference = B9BECC3B9212C2BF0AD13B4F /* Pods-QiangGouHui.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QiangGouHui/QGH-Prefix.pch";
 				INFOPLIST_FILE = QiangGouHui/Info.plist;
@@ -474,6 +581,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.softbank.purchase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "QiangGouHui/QiangGouHui-Bridging-Header.h";
 			};
 			name = Release;
 		};

@@ -11,8 +11,10 @@
 
 #import "QGHConstants.h"
 #import "MMHAssistant.h"
+#import "MMHImageView.h"
 #import "QGHAppearance.h"
 #import "UIView+StringTag.h"
 #import "NSString+QSCalcSize.h"
+#import <Masonry.h>
 
 #endif

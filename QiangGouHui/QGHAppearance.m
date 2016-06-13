@@ -71,7 +71,7 @@ UIColor *C25;
     C25 = [UIColor colorWithHexString:@"ff6c00"];
     
     [[UINavigationBar appearance] setTintColor:C6];
-    [[UINavigationBar appearance] setBarTintColor:C0];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:254 / 255.0 green:204 / 255.0 blue:47 / 255.0 alpha:1]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName : F6}];
     [[UIBarButtonItem appearance] setTintColor:C6];
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{ NSFontAttributeName : F5 } forState:UIControlStateNormal];
@@ -98,5 +98,8 @@ UIColor *C25;
     return [UIColor colorWithHexString:@"dcdcdc"];
 }
 
++ (UIColor *)themeColor {
+    return [UIColor colorWithRed:254 / 255.0 green:204 / 255.0 blue:47 / 255.0 alpha:1];
+}
 
 @end

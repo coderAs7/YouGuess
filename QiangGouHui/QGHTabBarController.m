@@ -7,6 +7,8 @@
 //
 
 #import "QGHTabBarController.h"
+#import "QGHFirstViewController.h"
+
 
 @interface QGHTabBarController ()
 
@@ -16,6 +18,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    QGHFirstViewController *firstViewController = [[QGHFirstViewController alloc] init];
+    UINavigationController *firstVCNav = [[UINavigationController alloc] initWithRootViewController:firstViewController];
+    self.viewControllers = @[firstVCNav];
 }
 
 
