@@ -36,6 +36,7 @@ UIColor *C22;
 UIColor *C23;
 UIColor *C24;
 UIColor *C25;
+UIColor *C26;
 
 
 @implementation QGHAppearance
@@ -69,6 +70,7 @@ UIColor *C25;
     C23 = [UIColor colorWithHexString:@"5cccccc"];
     C24 = [UIColor colorWithHexString:@"3bbc9c"];
     C25 = [UIColor colorWithHexString:@"ff6c00"];
+    C26 = [UIColor colorWithRed:106 / 255.0 green:69 / 255.0 blue:18 / 255.0 alpha:1];
     
     [[UINavigationBar appearance] setTintColor:C6];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:254 / 255.0 green:204 / 255.0 blue:47 / 255.0 alpha:1]];
@@ -76,9 +78,9 @@ UIColor *C25;
     [[UIBarButtonItem appearance] setTintColor:C6];
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{ NSFontAttributeName : F5 } forState:UIControlStateNormal];
     
-    [[UITabBar appearance] setBarTintColor:C0];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : C5 } forState:UIControlStateNormal];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : C21 } forState:UIControlStateSelected];
+    [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : C6 } forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:254 / 255.0 green:204 / 255.0 blue:47 / 255.0 alpha:1] } forState:UIControlStateSelected];
     
 }
 

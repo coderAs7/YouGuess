@@ -33,6 +33,12 @@
 		41BF0FA41CFB4F6100FB23C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41BF0FA31CFB4F6100FB23C2 /* Assets.xcassets */; };
 		41BF0FA71CFB4F6100FB23C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41BF0FA51CFB4F6100FB23C2 /* LaunchScreen.storyboard */; };
 		41BF0FB81CFB50D600FB23C2 /* QGHLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BF0FB71CFB50D600FB23C2 /* QGHLocationManager.m */; };
+		41DA4ACE1D1594BE00A8E42D /* QGHPersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4ACD1D1594BE00A8E42D /* QGHPersonalCenterViewController.m */; };
+		41DA4AD41D15962000A8E42D /* QGHCommonCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4AD21D15962000A8E42D /* QGHCommonCellTableViewCell.m */; };
+		41DA4AD51D15962000A8E42D /* QGHCommonCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41DA4AD31D15962000A8E42D /* QGHCommonCellTableViewCell.xib */; };
+		41DA4ADE1D159B5000A8E42D /* MMHPersonalCenterAllOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4ADD1D159B5000A8E42D /* MMHPersonalCenterAllOrderCell.m */; };
+		41DA4AE21D16F31300A8E42D /* QGHChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4AE11D16F31300A8E42D /* QGHChatViewController.m */; };
+		41DA4AE51D16FDEF00A8E42D /* QGHSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4AE41D16FDEF00A8E42D /* QGHSegmentedControl.m */; };
 		D1BC298755BEA9C0E319311F /* libPods-QiangGouHui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67968EB60CF93479054CD498 /* libPods-QiangGouHui.a */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +93,17 @@
 		41BF0FB61CFB50D600FB23C2 /* QGHLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHLocationManager.h; sourceTree = "<group>"; };
 		41BF0FB71CFB50D600FB23C2 /* QGHLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHLocationManager.m; sourceTree = "<group>"; };
 		41BF0FB91CFB50F100FB23C2 /* QGH-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QGH-Prefix.pch"; sourceTree = "<group>"; };
+		41DA4ACC1D1594BE00A8E42D /* QGHPersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHPersonalCenterViewController.h; sourceTree = "<group>"; };
+		41DA4ACD1D1594BE00A8E42D /* QGHPersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHPersonalCenterViewController.m; sourceTree = "<group>"; };
+		41DA4AD11D15962000A8E42D /* QGHCommonCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHCommonCellTableViewCell.h; sourceTree = "<group>"; };
+		41DA4AD21D15962000A8E42D /* QGHCommonCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHCommonCellTableViewCell.m; sourceTree = "<group>"; };
+		41DA4AD31D15962000A8E42D /* QGHCommonCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QGHCommonCellTableViewCell.xib; sourceTree = "<group>"; };
+		41DA4ADC1D159B5000A8E42D /* MMHPersonalCenterAllOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHPersonalCenterAllOrderCell.h; sourceTree = "<group>"; };
+		41DA4ADD1D159B5000A8E42D /* MMHPersonalCenterAllOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHPersonalCenterAllOrderCell.m; sourceTree = "<group>"; };
+		41DA4AE01D16F31300A8E42D /* QGHChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHChatViewController.h; sourceTree = "<group>"; };
+		41DA4AE11D16F31300A8E42D /* QGHChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHChatViewController.m; sourceTree = "<group>"; };
+		41DA4AE31D16FDEF00A8E42D /* QGHSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHSegmentedControl.h; sourceTree = "<group>"; };
+		41DA4AE41D16FDEF00A8E42D /* QGHSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHSegmentedControl.m; sourceTree = "<group>"; };
 		67968EB60CF93479054CD498 /* libPods-QiangGouHui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QiangGouHui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9BECC3B9212C2BF0AD13B4F /* Pods-QiangGouHui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiangGouHui.release.xcconfig"; path = "Pods/Target Support Files/Pods-QiangGouHui/Pods-QiangGouHui.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,6 +157,8 @@
 				41BEEB2A1D0EF82400612F88 /* QGHGoodsHeaderView.h */,
 				41BEEB2B1D0EF82400612F88 /* QGHGoodsHeaderView.m */,
 				41BEEB2D1D0EF84A00612F88 /* QGHGoodsHeaderView.xib */,
+				41DA4AE31D16FDEF00A8E42D /* QGHSegmentedControl.h */,
+				41DA4AE41D16FDEF00A8E42D /* QGHSegmentedControl.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -229,7 +248,9 @@
 			isa = PBXGroup;
 			children = (
 				4159553E1D04636B00AC2BD4 /* FirstPage */,
+				41DA4ADF1D16F18000A8E42D /* Chat */,
 				41BEEB321D0F084500612F88 /* Cart */,
+				41DA4ACB1D1594A500A8E42D /* PersonalCenter */,
 				41B3F4031CFC98C80007195B /* Base */,
 			);
 			name = Class;
@@ -286,6 +307,45 @@
 				41BF0FB71CFB50D600FB23C2 /* QGHLocationManager.m */,
 			);
 			name = Location;
+			sourceTree = "<group>";
+		};
+		41DA4ACB1D1594A500A8E42D /* PersonalCenter */ = {
+			isa = PBXGroup;
+			children = (
+				41DA4AD01D1595FE00A8E42D /* View */,
+				41DA4ACF1D1595F300A8E42D /* Controller */,
+			);
+			name = PersonalCenter;
+			sourceTree = "<group>";
+		};
+		41DA4ACF1D1595F300A8E42D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				41DA4ACC1D1594BE00A8E42D /* QGHPersonalCenterViewController.h */,
+				41DA4ACD1D1594BE00A8E42D /* QGHPersonalCenterViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		41DA4AD01D1595FE00A8E42D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				41DA4ADC1D159B5000A8E42D /* MMHPersonalCenterAllOrderCell.h */,
+				41DA4ADD1D159B5000A8E42D /* MMHPersonalCenterAllOrderCell.m */,
+				41DA4AD11D15962000A8E42D /* QGHCommonCellTableViewCell.h */,
+				41DA4AD21D15962000A8E42D /* QGHCommonCellTableViewCell.m */,
+				41DA4AD31D15962000A8E42D /* QGHCommonCellTableViewCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		41DA4ADF1D16F18000A8E42D /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				41DA4AE01D16F31300A8E42D /* QGHChatViewController.h */,
+				41DA4AE11D16F31300A8E42D /* QGHChatViewController.m */,
+			);
+			name = Chat;
 			sourceTree = "<group>";
 		};
 		784FAF7F814C9758168FAB42 /* Frameworks */ = {
@@ -367,6 +427,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41DA4AD51D15962000A8E42D /* QGHCommonCellTableViewCell.xib in Resources */,
 				41BF0FA71CFB4F6100FB23C2 /* LaunchScreen.storyboard in Resources */,
 				41BEEB291D0D9A6A00612F88 /* QGHGoodsTableViewCell.xib in Resources */,
 				4159554B1D04685D00AC2BD4 /* QGHFirstBannerCell.xib in Resources */,
@@ -431,26 +492,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41DA4ADE1D159B5000A8E42D /* MMHPersonalCenterAllOrderCell.m in Sources */,
 				41B3F3FC1CFC93940007195B /* UIView+StringTag.m in Sources */,
 				41B3F4061CFC98E70007195B /* BaseViewController.m in Sources */,
 				41BF0F9F1CFB4F6100FB23C2 /* ViewController.m in Sources */,
+				41DA4ACE1D1594BE00A8E42D /* QGHPersonalCenterViewController.m in Sources */,
 				41BEEB351D0F086100612F88 /* QGHCartViewController.m in Sources */,
 				4159554A1D04685D00AC2BD4 /* QGHFirstBannerCell.m in Sources */,
 				41BEEB211D0D979E00612F88 /* QGHRushPurchaseItemsCell.m in Sources */,
 				41BEEB281D0D9A6A00612F88 /* QGHGoodsTableViewCell.m in Sources */,
 				41B3F4021CFC97230007195B /* NSString+QSCalcSize.m in Sources */,
+				41DA4AD41D15962000A8E42D /* QGHCommonCellTableViewCell.m in Sources */,
 				41B3F3FF1CFC948C0007195B /* QGHAppearance.m in Sources */,
 				41B3F3F71CFC8A670007195B /* MMHAssistant.m in Sources */,
 				41BEEB2C1D0EF82400612F88 /* QGHGoodsHeaderView.m in Sources */,
 				415955411D04639900AC2BD4 /* QGHFirstViewController.m in Sources */,
 				41BF0F9C1CFB4F6100FB23C2 /* AppDelegate.m in Sources */,
 				41B3F4091CFCA0830007195B /* QGHTabBarController.m in Sources */,
+				41DA4AE21D16F31300A8E42D /* QGHChatViewController.m in Sources */,
 				41BF0F991CFB4F6100FB23C2 /* main.m in Sources */,
 				415955441D0465E500AC2BD4 /* QGHBannerCell.m in Sources */,
 				41B3F3F41CFC87010007195B /* MMHImageView.m in Sources */,
 				41BF0FB81CFB50D600FB23C2 /* QGHLocationManager.m in Sources */,
 				41BEEB311D0F06FE00612F88 /* Stepper.swift in Sources */,
 				415955511D046DC800AC2BD4 /* QGHRushPurchaseItemView.m in Sources */,
+				41DA4AE51D16FDEF00A8E42D /* QGHSegmentedControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

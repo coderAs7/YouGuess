@@ -36,6 +36,7 @@ extern UIColor *C22;
 extern UIColor *C23;
 extern UIColor *C24;
 extern UIColor *C25;
+extern UIColor *C26;
 
 
 @interface QGHAppearance : NSObject
@@ -49,5 +50,6 @@ extern UIColor *C25;
 
 + (UIColor *)backgroundColor;
 + (UIColor *)separatorColor;
++ (UIColor *)themeColor;
 
 @end

@@ -11,6 +11,7 @@
 #import "QGHRushPurchaseItemsCell.h"
 #import "QGHGoodsTableViewCell.h"
 #import "QGHGoodsHeaderView.h"
+#import "QGHSegmentedControl.h"
 
 
 static NSString *QGHBannerCellIdentifier = @"QGHBannerCellIdentifier";
@@ -18,8 +19,9 @@ static NSString *QGHPurchaseItemCellIdentifier = @"QGHPurchaseItemCellIdentifier
 static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 
-@interface QGHFirstViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface QGHFirstViewController ()<UITableViewDataSource, UITableViewDelegate, QGHSegmentedControlDelegate>
 
+@property (nonatomic, strong) QGHSegmentedControl *segmented;
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
@@ -31,7 +33,18 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setNavigationBar];
     [self makeTableView];
+}
+
+
+- (void)setNavigationBar {
+    self.segmented = [[QGHSegmentedControl alloc] initWithTitleArr:@[@"抢购", @"预约", @"定制"]];
+    self.segmented.delegate = self;
+    self.navigationItem.titleView = self.segmented;
+    
+    UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"seach_ic"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonAction)];
+    self.navigationItem.rightBarButtonItem = searchItem;
 }
 
 
@@ -121,5 +134,20 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     }
     return 10;
 }
+
+
+#pragma mark - QGHSegmentedControlDelegate
+
+
+- (void)segmentedControlDidSelected:(NSInteger)index {
+    //TODO
+}
+
+#pragma mark - Actions
+
+- (void)searchButtonAction {
+    //TODO
+}
+
 
 @end
