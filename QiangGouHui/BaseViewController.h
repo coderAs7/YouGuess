@@ -10,4 +10,7 @@
 
 @interface BaseViewController : UIViewController
 
+- (void)presentLoginViewControllerWithSucceededHandler:(void(^)())succeededHandler;
+- (void)presentRegisterViewControllerWithSucceededHandler:(void(^)())succeededHandler;
+
 @end

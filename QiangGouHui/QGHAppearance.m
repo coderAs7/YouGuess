@@ -74,9 +74,10 @@ UIColor *C26;
     
     [[UINavigationBar appearance] setTintColor:C6];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:254 / 255.0 green:204 / 255.0 blue:47 / 255.0 alpha:1]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName : F6}];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName : F6, NSForegroundColorAttributeName: C26}];
+    
     [[UIBarButtonItem appearance] setTintColor:C6];
-    [[UIBarButtonItem appearance] setTitleTextAttributes:@{ NSFontAttributeName : F5 } forState:UIControlStateNormal];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{ NSFontAttributeName : F4, NSForegroundColorAttributeName: C26 } forState:UIControlStateNormal];
     
     [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
     [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : C6 } forState:UIControlStateNormal];

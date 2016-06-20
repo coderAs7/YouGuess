@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		411ADC3E1D1835370050B8EB /* QGHRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC3D1D1835370050B8EB /* QGHRegisterViewController.m */; };
+		411ADC411D184D6D0050B8EB /* VerificationCodeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC401D184D6D0050B8EB /* VerificationCodeTimer.swift */; };
 		415955411D04639900AC2BD4 /* QGHFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 415955401D04639900AC2BD4 /* QGHFirstViewController.m */; };
 		415955441D0465E500AC2BD4 /* QGHBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 415955431D0465E500AC2BD4 /* QGHBannerCell.m */; };
 		4159554A1D04685D00AC2BD4 /* QGHFirstBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 415955481D04685D00AC2BD4 /* QGHFirstBannerCell.m */; };
@@ -33,6 +35,8 @@
 		41BF0FA41CFB4F6100FB23C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41BF0FA31CFB4F6100FB23C2 /* Assets.xcassets */; };
 		41BF0FA71CFB4F6100FB23C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41BF0FA51CFB4F6100FB23C2 /* LaunchScreen.storyboard */; };
 		41BF0FB81CFB50D600FB23C2 /* QGHLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BF0FB71CFB50D600FB23C2 /* QGHLocationManager.m */; };
+		41C64C6D1D181AF300E22E5B /* AdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C64C6C1D181AF300E22E5B /* AdView.m */; };
+		41C64C721D181C0300E22E5B /* QGHLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C64C711D181C0300E22E5B /* QGHLoginViewController.m */; };
 		41DA4ACE1D1594BE00A8E42D /* QGHPersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4ACD1D1594BE00A8E42D /* QGHPersonalCenterViewController.m */; };
 		41DA4AD41D15962000A8E42D /* QGHCommonCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4AD21D15962000A8E42D /* QGHCommonCellTableViewCell.m */; };
 		41DA4AD51D15962000A8E42D /* QGHCommonCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41DA4AD31D15962000A8E42D /* QGHCommonCellTableViewCell.xib */; };
@@ -44,6 +48,9 @@
 
 /* Begin PBXFileReference section */
 		3CF590EBA94ADBACCEF0BC3D /* Pods-QiangGouHui.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiangGouHui.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QiangGouHui/Pods-QiangGouHui.debug.xcconfig"; sourceTree = "<group>"; };
+		411ADC3C1D1835370050B8EB /* QGHRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHRegisterViewController.h; sourceTree = "<group>"; };
+		411ADC3D1D1835370050B8EB /* QGHRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHRegisterViewController.m; sourceTree = "<group>"; };
+		411ADC401D184D6D0050B8EB /* VerificationCodeTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationCodeTimer.swift; sourceTree = "<group>"; };
 		4159553F1D04639900AC2BD4 /* QGHFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHFirstViewController.h; sourceTree = "<group>"; };
 		415955401D04639900AC2BD4 /* QGHFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHFirstViewController.m; sourceTree = "<group>"; };
 		415955421D0465E500AC2BD4 /* QGHBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHBannerCell.h; sourceTree = "<group>"; };
@@ -93,6 +100,10 @@
 		41BF0FB61CFB50D600FB23C2 /* QGHLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHLocationManager.h; sourceTree = "<group>"; };
 		41BF0FB71CFB50D600FB23C2 /* QGHLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHLocationManager.m; sourceTree = "<group>"; };
 		41BF0FB91CFB50F100FB23C2 /* QGH-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QGH-Prefix.pch"; sourceTree = "<group>"; };
+		41C64C6B1D181AF300E22E5B /* AdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdView.h; sourceTree = "<group>"; };
+		41C64C6C1D181AF300E22E5B /* AdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdView.m; sourceTree = "<group>"; };
+		41C64C701D181C0300E22E5B /* QGHLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHLoginViewController.h; sourceTree = "<group>"; };
+		41C64C711D181C0300E22E5B /* QGHLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHLoginViewController.m; sourceTree = "<group>"; };
 		41DA4ACC1D1594BE00A8E42D /* QGHPersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHPersonalCenterViewController.h; sourceTree = "<group>"; };
 		41DA4ACD1D1594BE00A8E42D /* QGHPersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHPersonalCenterViewController.m; sourceTree = "<group>"; };
 		41DA4AD11D15962000A8E42D /* QGHCommonCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHCommonCellTableViewCell.h; sourceTree = "<group>"; };
@@ -120,6 +131,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		411ADC3F1D184D610050B8EB /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				411ADC401D184D6D0050B8EB /* VerificationCodeTimer.swift */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
 		4159553E1D04636B00AC2BD4 /* FirstPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +266,7 @@
 		41BF0FAE1CFB504700FB23C2 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				41C64C6E1D181BD300E22E5B /* Account */,
 				4159553E1D04636B00AC2BD4 /* FirstPage */,
 				41DA4ADF1D16F18000A8E42D /* Chat */,
 				41BEEB321D0F084500612F88 /* Cart */,
@@ -289,6 +309,8 @@
 		41BF0FB21CFB508500FB23C2 /* ThirdSources */ = {
 			isa = PBXGroup;
 			children = (
+				41C64C6B1D181AF300E22E5B /* AdView.h */,
+				41C64C6C1D181AF300E22E5B /* AdView.m */,
 			);
 			name = ThirdSources;
 			sourceTree = "<group>";
@@ -307,6 +329,26 @@
 				41BF0FB71CFB50D600FB23C2 /* QGHLocationManager.m */,
 			);
 			name = Location;
+			sourceTree = "<group>";
+		};
+		41C64C6E1D181BD300E22E5B /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				411ADC3F1D184D610050B8EB /* Tools */,
+				41C64C6F1D181BDC00E22E5B /* Controller */,
+			);
+			name = Account;
+			sourceTree = "<group>";
+		};
+		41C64C6F1D181BDC00E22E5B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				41C64C701D181C0300E22E5B /* QGHLoginViewController.h */,
+				41C64C711D181C0300E22E5B /* QGHLoginViewController.m */,
+				411ADC3C1D1835370050B8EB /* QGHRegisterViewController.h */,
+				411ADC3D1D1835370050B8EB /* QGHRegisterViewController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		41DA4ACB1D1594A500A8E42D /* PersonalCenter */ = {
@@ -510,11 +552,15 @@
 				41BF0F9C1CFB4F6100FB23C2 /* AppDelegate.m in Sources */,
 				41B3F4091CFCA0830007195B /* QGHTabBarController.m in Sources */,
 				41DA4AE21D16F31300A8E42D /* QGHChatViewController.m in Sources */,
+				411ADC3E1D1835370050B8EB /* QGHRegisterViewController.m in Sources */,
 				41BF0F991CFB4F6100FB23C2 /* main.m in Sources */,
+				411ADC411D184D6D0050B8EB /* VerificationCodeTimer.swift in Sources */,
+				41C64C6D1D181AF300E22E5B /* AdView.m in Sources */,
 				415955441D0465E500AC2BD4 /* QGHBannerCell.m in Sources */,
 				41B3F3F41CFC87010007195B /* MMHImageView.m in Sources */,
 				41BF0FB81CFB50D600FB23C2 /* QGHLocationManager.m in Sources */,
 				41BEEB311D0F06FE00612F88 /* Stepper.swift in Sources */,
+				41C64C721D181C0300E22E5B /* QGHLoginViewController.m in Sources */,
 				415955511D046DC800AC2BD4 /* QGHRushPurchaseItemView.m in Sources */,
 				41DA4AE51D16FDEF00A8E42D /* QGHSegmentedControl.m in Sources */,
 			);
@@ -622,6 +668,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QiangGouHui/QGH-Prefix.pch";
 				INFOPLIST_FILE = QiangGouHui/Info.plist;
@@ -640,6 +687,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QiangGouHui/QGH-Prefix.pch";
 				INFOPLIST_FILE = QiangGouHui/Info.plist;

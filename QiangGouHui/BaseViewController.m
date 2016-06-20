@@ -7,6 +7,8 @@
 //
 
 #import "BaseViewController.h"
+#import "QGHloginViewController.h"
+#import "QGHRegisterViewController.h"
 
 
 @interface BaseViewController ()
@@ -62,6 +64,39 @@
         UIBarButtonItem *item = [[self.navigationItem leftBarButtonItems] firstObject];
         item.enabled = NO;
         [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+
+- (void)presentLoginViewControllerWithSucceededHandler:(void(^)())succeededHandler
+{
+    QGHLoginViewController *loginViewController = [[QGHLoginViewController alloc] init];
+//    if (succeededHandler) {
+//        loginViewController.succeededHandler = ^(MMHAccount *account) {
+//            succeededHandler();
+//        };
+//    }
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
+    if (self.navigationController != nil) {
+        [self.navigationController presentViewController:navigationController animated:YES completion:^{
+            
+        }];
+        
+    } else {
+        [self presentViewController:navigationController animated:YES completion:nil];
+    }
+}
+
+
+- (void)presentRegisterViewControllerWithSucceededHandler:(void(^)())succeededHandler {
+    QGHRegisterViewController *registerViewController = [[QGHRegisterViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:registerViewController];
+    if (self.navigationController != nil) {
+        [self.navigationController presentViewController:navigationController animated:YES completion:^{
+            
+        }];
+    } else {
+        [self presentViewController:navigationController animated:YES completion:nil];
     }
 }
 

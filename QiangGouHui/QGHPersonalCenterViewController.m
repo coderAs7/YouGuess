@@ -9,6 +9,7 @@
 #import "QGHPersonalCenterViewController.h"
 #import "MMHPersonalCenterAllOrderCell.h"
 #import "QGHCommonCellTableViewCell.h"
+#import "QGHLoginViewController.h"
 
 
 static NSString *QGHPersonalCenterCommonCellIdentifier = @"QGHPersonalCenterCommonCellIdentifier";
@@ -122,7 +123,18 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
 }
 
 
+#pragma mark - Actions
+
+
+- (void)loginButtonAction {
+
+    [self presentLoginViewControllerWithSucceededHandler:^{
+    }];
+}
+
+
 #pragma mark - getters and setters
+
 
 - (UIButton *)loginButton {
     if (!_loginButton) {
@@ -134,6 +146,7 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
         _loginButton.layer.cornerRadius = 5;
         [_loginButton setTitle:@"登录/注册" forState:UIControlStateNormal];
         [_loginButton setTitleColor:[UIColor colorWithRed:106 / 255.0 green:69 / 255.0 blue:18 / 255.0 alpha:1] forState:UIControlStateNormal];
+        [_loginButton addTarget:self action:@selector(loginButtonAction) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return _loginButton;
