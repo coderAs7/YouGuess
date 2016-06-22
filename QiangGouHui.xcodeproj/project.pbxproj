@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		411ADC3E1D1835370050B8EB /* QGHRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC3D1D1835370050B8EB /* QGHRegisterViewController.m */; };
 		411ADC411D184D6D0050B8EB /* VerificationCodeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC401D184D6D0050B8EB /* VerificationCodeTimer.swift */; };
+		411ADC451D1AC07F0050B8EB /* QGHProductDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC441D1AC07F0050B8EB /* QGHProductDetailViewController.m */; };
+		411ADC481D1AC2F90050B8EB /* QGHPersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC471D1AC2F90050B8EB /* QGHPersonalInfoViewController.m */; };
+		411ADC4B1D1AD1B70050B8EB /* QGHNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC4A1D1AD1B70050B8EB /* QGHNavigationController.m */; };
+		411ADC4F1D1AF22C0050B8EB /* AppAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC4E1D1AF22C0050B8EB /* AppAlertViewController.m */; };
 		415955411D04639900AC2BD4 /* QGHFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 415955401D04639900AC2BD4 /* QGHFirstViewController.m */; };
 		415955441D0465E500AC2BD4 /* QGHBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 415955431D0465E500AC2BD4 /* QGHBannerCell.m */; };
 		4159554A1D04685D00AC2BD4 /* QGHFirstBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 415955481D04685D00AC2BD4 /* QGHFirstBannerCell.m */; };
@@ -51,6 +55,14 @@
 		411ADC3C1D1835370050B8EB /* QGHRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHRegisterViewController.h; sourceTree = "<group>"; };
 		411ADC3D1D1835370050B8EB /* QGHRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHRegisterViewController.m; sourceTree = "<group>"; };
 		411ADC401D184D6D0050B8EB /* VerificationCodeTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationCodeTimer.swift; sourceTree = "<group>"; };
+		411ADC431D1AC07F0050B8EB /* QGHProductDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductDetailViewController.h; sourceTree = "<group>"; };
+		411ADC441D1AC07F0050B8EB /* QGHProductDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductDetailViewController.m; sourceTree = "<group>"; };
+		411ADC461D1AC2F90050B8EB /* QGHPersonalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHPersonalInfoViewController.h; sourceTree = "<group>"; };
+		411ADC471D1AC2F90050B8EB /* QGHPersonalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHPersonalInfoViewController.m; sourceTree = "<group>"; };
+		411ADC491D1AD1B70050B8EB /* QGHNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHNavigationController.h; sourceTree = "<group>"; };
+		411ADC4A1D1AD1B70050B8EB /* QGHNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHNavigationController.m; sourceTree = "<group>"; };
+		411ADC4D1D1AF22C0050B8EB /* AppAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppAlertViewController.h; sourceTree = "<group>"; };
+		411ADC4E1D1AF22C0050B8EB /* AppAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppAlertViewController.m; sourceTree = "<group>"; };
 		4159553F1D04639900AC2BD4 /* QGHFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHFirstViewController.h; sourceTree = "<group>"; };
 		415955401D04639900AC2BD4 /* QGHFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHFirstViewController.m; sourceTree = "<group>"; };
 		415955421D0465E500AC2BD4 /* QGHBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHBannerCell.h; sourceTree = "<group>"; };
@@ -139,6 +151,24 @@
 			name = Tools;
 			sourceTree = "<group>";
 		};
+		411ADC421D1AC05D0050B8EB /* ProductDetail */ = {
+			isa = PBXGroup;
+			children = (
+				411ADC431D1AC07F0050B8EB /* QGHProductDetailViewController.h */,
+				411ADC441D1AC07F0050B8EB /* QGHProductDetailViewController.m */,
+			);
+			name = ProductDetail;
+			sourceTree = "<group>";
+		};
+		411ADC4C1D1AF21A0050B8EB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				411ADC4D1D1AF22C0050B8EB /* AppAlertViewController.h */,
+				411ADC4E1D1AF22C0050B8EB /* AppAlertViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		4159553E1D04636B00AC2BD4 /* FirstPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +231,8 @@
 				41B3F4051CFC98E70007195B /* BaseViewController.m */,
 				41B3F4071CFCA0830007195B /* QGHTabBarController.h */,
 				41B3F4081CFCA0830007195B /* QGHTabBarController.m */,
+				411ADC491D1AD1B70050B8EB /* QGHNavigationController.h */,
+				411ADC4A1D1AD1B70050B8EB /* QGHNavigationController.m */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -266,6 +298,7 @@
 		41BF0FAE1CFB504700FB23C2 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				411ADC421D1AC05D0050B8EB /* ProductDetail */,
 				41C64C6E1D181BD300E22E5B /* Account */,
 				4159553E1D04636B00AC2BD4 /* FirstPage */,
 				41DA4ADF1D16F18000A8E42D /* Chat */,
@@ -286,6 +319,7 @@
 		41BF0FB01CFB505F00FB23C2 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
+				411ADC4C1D1AF21A0050B8EB /* Controllers */,
 				41B3F3F91CFC93860007195B /* Category */,
 				41B3F3F51CFC8A670007195B /* MMHAssistant.h */,
 				41B3F3F61CFC8A670007195B /* MMHAssistant.m */,
@@ -365,6 +399,8 @@
 			children = (
 				41DA4ACC1D1594BE00A8E42D /* QGHPersonalCenterViewController.h */,
 				41DA4ACD1D1594BE00A8E42D /* QGHPersonalCenterViewController.m */,
+				411ADC461D1AC2F90050B8EB /* QGHPersonalInfoViewController.h */,
+				411ADC471D1AC2F90050B8EB /* QGHPersonalInfoViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -538,9 +574,12 @@
 				41B3F3FC1CFC93940007195B /* UIView+StringTag.m in Sources */,
 				41B3F4061CFC98E70007195B /* BaseViewController.m in Sources */,
 				41BF0F9F1CFB4F6100FB23C2 /* ViewController.m in Sources */,
+				411ADC451D1AC07F0050B8EB /* QGHProductDetailViewController.m in Sources */,
 				41DA4ACE1D1594BE00A8E42D /* QGHPersonalCenterViewController.m in Sources */,
 				41BEEB351D0F086100612F88 /* QGHCartViewController.m in Sources */,
+				411ADC4F1D1AF22C0050B8EB /* AppAlertViewController.m in Sources */,
 				4159554A1D04685D00AC2BD4 /* QGHFirstBannerCell.m in Sources */,
+				411ADC4B1D1AD1B70050B8EB /* QGHNavigationController.m in Sources */,
 				41BEEB211D0D979E00612F88 /* QGHRushPurchaseItemsCell.m in Sources */,
 				41BEEB281D0D9A6A00612F88 /* QGHGoodsTableViewCell.m in Sources */,
 				41B3F4021CFC97230007195B /* NSString+QSCalcSize.m in Sources */,
@@ -556,6 +595,7 @@
 				41BF0F991CFB4F6100FB23C2 /* main.m in Sources */,
 				411ADC411D184D6D0050B8EB /* VerificationCodeTimer.swift in Sources */,
 				41C64C6D1D181AF300E22E5B /* AdView.m in Sources */,
+				411ADC481D1AC2F90050B8EB /* QGHPersonalInfoViewController.m in Sources */,
 				415955441D0465E500AC2BD4 /* QGHBannerCell.m in Sources */,
 				41B3F3F41CFC87010007195B /* MMHImageView.m in Sources */,
 				41BF0FB81CFB50D600FB23C2 /* QGHLocationManager.m in Sources */,
@@ -672,7 +712,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QiangGouHui/QGH-Prefix.pch";
 				INFOPLIST_FILE = QiangGouHui/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.softbank.purchase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -691,7 +731,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QiangGouHui/QGH-Prefix.pch";
 				INFOPLIST_FILE = QiangGouHui/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.softbank.purchase;
 				PRODUCT_NAME = "$(TARGET_NAME)";

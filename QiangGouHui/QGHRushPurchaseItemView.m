@@ -36,7 +36,7 @@
     }];
     
     [self.numLabel bringToFront];
-    self.numLabel.textColor = C0;
+    self.numLabel.textColor = C1;
     self.numLabel.backgroundColor = [C2 colorWithAlphaComponent:0.65];
     
     self.priceLabel.textColor = C22;

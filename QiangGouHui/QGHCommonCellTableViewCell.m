@@ -11,9 +11,9 @@
 
 @interface QGHCommonCellTableViewCell()
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *arrow;
+@property (weak, nonatomic, readwrite) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic, readwrite) IBOutlet UILabel *subTitleLabel;
+@property (weak, nonatomic, readwrite) IBOutlet UIImageView *arrow;
 
 @end
 
@@ -23,8 +23,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
 
-    self.titleLabel.textColor = C6;
-    self.subTitleLabel.textColor = C5;
+    self.titleLabel.textColor = C8;
+    self.subTitleLabel.textColor = C7;
 }
 
 - (void)setTitle:(NSString *)title {

@@ -14,4 +14,8 @@
 @property (nonatomic, copy) NSString *subTitle;
 @property (nonatomic, assign) BOOL isHiddenArrow;
 
+@property (weak, nonatomic, readonly) UILabel *titleLabel;
+@property (weak, nonatomic, readonly) UILabel *subTitleLabel;
+@property (weak, nonatomic, readonly) UIImageView *arrow;
+
 @end

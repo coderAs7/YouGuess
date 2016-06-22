@@ -16,5 +16,6 @@
 #import "UIView+StringTag.h"
 #import "NSString+QSCalcSize.h"
 #import <Masonry.h>
+#import "AppAlertViewController.h"
 
 #endif

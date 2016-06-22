@@ -47,14 +47,14 @@
 
 - (UIButton *)makeButtonWithTitle:(NSString *)title {
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, BUTTON_WIDTH, BUTTON_HEIGHT)];
-    [button setBackgroundImage:[UIImage patternImageWithColor:[QGHAppearance themeColor]] forState:UIControlStateNormal];
+//    [button setBackgroundImage:[UIImage patternImageWithColor:[QGHAppearance themeColor]] forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage patternImageWithColor:RGBACOLOR(254, 237, 170, 0.65)] forState:UIControlStateSelected];
     [button setBackgroundImage:[UIImage patternImageWithColor:RGBACOLOR(254, 237, 170, 0.65)] forState:UIControlStateHighlighted];
     button.layer.cornerRadius = BUTTON_HEIGHT * 0.5;
     button.layer.masksToBounds = YES;
     [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:C26 forState:UIControlStateSelected];
-    [button setTitleColor:[C26 colorWithAlphaComponent:0.65] forState:UIControlStateNormal];
+    [button setTitleColor:C21 forState:UIControlStateSelected];
+    [button setTitleColor:[C21 colorWithAlphaComponent:0.65] forState:UIControlStateNormal];
     button.titleLabel.font = F6;
     [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.buttonArr addObject:button];

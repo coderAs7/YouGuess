@@ -8,6 +8,16 @@
 
 #import "BaseViewController.h"
 
+
+typedef NS_ENUM(NSInteger, QGHRegisterViewType) {
+    QGHRegisterViewTypeNormal = 0,
+    QGHRegisterViewTypeChangePwd = 1,
+    QGHRegisterViewTypeBindPhone = 2,
+};
+
+
 @interface QGHRegisterViewController : BaseViewController
+
+- (instancetype)initWithType:(QGHRegisterViewType)type;
 
 @end

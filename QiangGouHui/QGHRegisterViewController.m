@@ -12,6 +12,8 @@
 
 @interface QGHRegisterViewController ()<VerificationCodeTimerDelegate, UITextFieldDelegate>
 
+@property (nonatomic, assign) QGHRegisterViewType type;
+@property (nonatomic, strong) UIView *securityTipsView;
 @property (nonatomic, strong) UIView *inputView;
 @property (nonatomic, strong) UITextField *telTextField;
 @property (nonatomic, strong) UITextField *verifyCodeTextField;
@@ -25,15 +27,35 @@
 
 @implementation QGHRegisterViewController
 
+
+- (instancetype)initWithType:(QGHRegisterViewType)type {
+    self = [super init];
+    
+    if (self) {
+        _type = type;
+    }
+    
+    return self;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = [QGHAppearance backgroundColor];
     
     [self setNavigationBar];
+    
+    if (self.type == QGHRegisterViewTypeBindPhone) {
+        [self makeSecurityTipsView];
+    }
+    
     [self makeInputView];
     [self makeCommitButton];
-    [self makeUserProtocolLabel];
+    
+    if (self.type == QGHRegisterViewTypeNormal) {
+        [self makeUserProtocolLabel];
+    }
     
     [VerificationCodeTimer sharedTimer].delegate = self;
     [self updateVerifyCodeButtonState:[VerificationCodeTimer sharedTimer]];
@@ -41,19 +63,61 @@
 
 
 - (void)setNavigationBar {
-    self.title = @"快速注册";
+    switch (self.type) {
+        case QGHRegisterViewTypeNormal: {
+            self.title = @"快速注册";
+            
+            UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"去登录" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemAction)];
+            self.navigationItem.rightBarButtonItem = rightBarItem;
+            
+            
+            UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cart_ic"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction)];
+            self.navigationItem.leftBarButtonItem = leftBarItem;
+            
+            
+            break;
+        }
+        case QGHRegisterViewTypeChangePwd: {
+            self.title = @"修改密码";
+            
+            break;
+        }
+        case QGHRegisterViewTypeBindPhone: {
+            self.title = @"绑定手机号";
+            
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+
+- (void)makeSecurityTipsView {
+    _securityTipsView = [[UIView alloc] initWithFrame:CGRectMake(72, (80 - 39) * 0.5, mmh_screen_width() - 144, 39)];
+    _securityTipsView.backgroundColor = [UIColor whiteColor];
+    _securityTipsView.layer.cornerRadius = 39 * 0.5;
     
-    UIBarButtonItem *leftBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cart_ic"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction)];
-    self.navigationItem.leftBarButtonItem = leftBarItem;
+    UILabel *tipsLabel = [[UILabel alloc] init];
+    tipsLabel.font = F3;
+    tipsLabel.textColor = C8;
+    tipsLabel.text = @"为了您的账户安全请及时绑定手机";
+    [tipsLabel sizeToFit];
     
-    UIBarButtonItem *rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"去登录" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemAction)];
-    self.navigationItem.rightBarButtonItem = rightBarItem;
+    [_securityTipsView addSubview:tipsLabel];
+    tipsLabel.center = CGPointMake(_securityTipsView.width * 0.5, _securityTipsView.height * 0.5);
     
+    [self.view addSubview:_securityTipsView];
 }
 
 
 - (void)makeInputView {
-    _inputView = [[UIView alloc] initWithFrame:CGRectMake(0, 10, mmh_screen_width(), 144)];
+    CGFloat originY = 10;
+    if (self.type == QGHRegisterViewTypeBindPhone) {
+        originY = 80;
+    }
+    
+    _inputView = [[UIView alloc] initWithFrame:CGRectMake(0, originY, mmh_screen_width(), 144)];
     _inputView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_inputView];
     
@@ -70,10 +134,10 @@
     _getVerifyCodeButton.layer.masksToBounds = YES;
     _getVerifyCodeButton.titleLabel.font = F3;
     [_getVerifyCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
-    [_getVerifyCodeButton setTitleColor:C26 forState:UIControlStateNormal];
+    [_getVerifyCodeButton setTitleColor:C20 forState:UIControlStateNormal];
     [_getVerifyCodeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
     [_getVerifyCodeButton setBackgroundImage:[UIImage patternImageWithColor:[QGHAppearance themeColor]] forState:UIControlStateNormal];
-    [_getVerifyCodeButton setBackgroundImage:[UIImage patternImageWithColor:C3] forState:UIControlStateDisabled];
+    [_getVerifyCodeButton setBackgroundImage:[UIImage patternImageWithColor:C5] forState:UIControlStateDisabled];
     [_getVerifyCodeButton sizeToFit];
     [_getVerifyCodeButton setWidth:_getVerifyCodeButton.width + 20];
     [_getVerifyCodeButton setHeight:32];
@@ -115,7 +179,7 @@
     _commitButton.layer.masksToBounds = YES;
     _commitButton.titleLabel.font = F8;
     [_commitButton setTitle:@"提交" forState:UIControlStateNormal];
-    [_commitButton setTitleColor:C26 forState:UIControlStateNormal];
+    [_commitButton setTitleColor:C21 forState:UIControlStateNormal];
     [_commitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
     [_commitButton setBackgroundImage:[UIImage patternImageWithColor:[QGHAppearance themeColor]] forState:UIControlStateNormal];
     [_commitButton setBackgroundImage:[UIImage patternImageWithColor:C3] forState:UIControlStateDisabled];

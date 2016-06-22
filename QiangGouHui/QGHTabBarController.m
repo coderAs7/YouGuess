@@ -11,6 +11,7 @@
 #import "QGHChatViewController.h"
 #import "QGHCartViewController.h"
 #import "QGHPersonalCenterViewController.h"
+#import "QGHNavigationController.h"
 
 
 @interface QGHTabBarController ()
@@ -24,19 +25,19 @@
     
     QGHFirstViewController *firstViewController = [[QGHFirstViewController alloc] init];
     firstViewController.title = @"首页";
-    UINavigationController *firstVCNav = [[UINavigationController alloc] initWithRootViewController:firstViewController];
+    QGHNavigationController *firstVCNav = [[QGHNavigationController alloc] initWithRootViewController:firstViewController];
     
     QGHChatViewController *chatVC = [[QGHChatViewController alloc] init];
     chatVC.title = @"聊天";
-    UINavigationController *chatVCNav = [[UINavigationController alloc] initWithRootViewController:chatVC];
+    QGHNavigationController *chatVCNav = [[QGHNavigationController alloc] initWithRootViewController:chatVC];
     
     QGHCartViewController *cartVC = [[QGHCartViewController alloc] init];
     cartVC.title = @"购物车";
-    UINavigationController *cartVCNav = [[UINavigationController alloc] initWithRootViewController:cartVC];
+    QGHNavigationController *cartVCNav = [[QGHNavigationController alloc] initWithRootViewController:cartVC];
     
     QGHPersonalCenterViewController *personalCenterVC = [[QGHPersonalCenterViewController alloc] init];
     personalCenterVC.title = @"我的";
-    UINavigationController *personalCenterVCNav = [[UINavigationController alloc] initWithRootViewController:personalCenterVC];
+    QGHNavigationController *personalCenterVCNav = [[QGHNavigationController alloc] initWithRootViewController:personalCenterVC];
     
     self.viewControllers = @[firstVCNav, chatVCNav, cartVCNav, personalCenterVCNav];
 }

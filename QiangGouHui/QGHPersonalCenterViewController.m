@@ -10,6 +10,7 @@
 #import "MMHPersonalCenterAllOrderCell.h"
 #import "QGHCommonCellTableViewCell.h"
 #import "QGHLoginViewController.h"
+#import "QGHPersonalInfoViewController.h"
 
 
 static NSString *QGHPersonalCenterCommonCellIdentifier = @"QGHPersonalCenterCommonCellIdentifier";
@@ -30,11 +31,25 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
 
 @implementation QGHPersonalCenterViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.hidden = YES;
     
     [self makeTableView];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 
@@ -50,11 +65,13 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
     [self.view addSubview:_tableView];
 }
 
+
 - (UIView *)personalCenterHeaderView {
     if (!_headerView) {
         _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), 220)];
         _headerView.backgroundColor = [QGHAppearance themeColor];
         [_headerView addSubview:self.loginButton];
+        [_headerView addSubview:self.personalView];
     }
     
      return _headerView;
@@ -63,9 +80,11 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
 
 #pragma mark - UITalbeView DataSource and Delegate
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
@@ -74,6 +93,7 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
         return 2;
     }
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
@@ -162,17 +182,26 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
         _personalImage.layer.borderColor = [UIColor colorWithRed:106 / 255.0 green:69 / 255.0 blue:18 / 255.0 alpha:1].CGColor;
         _personalImage.layer.borderWidth = 1;
         _personalImage.layer.cornerRadius = 35;
+        _personalImage.userInteractionEnabled = YES;
+        __weak typeof(self) weakSelf = self;
+        _personalImage.actionBlock = ^{
+            QGHPersonalInfoViewController *personalInfoVC = [[QGHPersonalInfoViewController alloc] init];
+            [weakSelf.navigationController pushViewController:personalInfoVC animated:YES];
+        };
         [_personalView addSubview:_personalImage];
         
         _personalNameLabel = [[UILabel alloc] init];
+        _personalNameLabel.textAlignment = NSTextAlignmentCenter;
         _personalNameLabel.font = F4;
         _personalNameLabel.text = @"宇宙第一帅";
-        _personalNameLabel.textColor = C6;
+        _personalNameLabel.textColor = C8;
         [_personalNameLabel sizeToFit];
         [_personalNameLabel setWidth:mmh_screen_width()];
         [_personalNameLabel setCenterX:mmh_screen_width() * 0.5];
         [_personalNameLabel attachToBottomSideOfView:_personalImage byDistance:10];
         [_personalView addSubview:_personalNameLabel];
+        
+        [_personalView setCenterY:220 * 0.5];
     }
     
     return _personalView;

@@ -21,7 +21,7 @@ extern UIFont *F10;
 extern UIFont *F13;
 
 
-extern UIColor *C0;
+//extern UIColor *C0;
 extern UIColor *C1;
 extern UIColor *C2;
 extern UIColor *C3;
@@ -29,14 +29,15 @@ extern UIColor *C4;
 extern UIColor *C5;
 extern UIColor *C6;
 extern UIColor *C7;
+extern UIColor *C8;
 
 extern UIColor *C20;
 extern UIColor *C21;
 extern UIColor *C22;
 extern UIColor *C23;
-extern UIColor *C24;
-extern UIColor *C25;
-extern UIColor *C26;
+//extern UIColor *C24;
+//extern UIColor *C25;
+//extern UIColor *C26;
 
 
 @interface QGHAppearance : NSObject

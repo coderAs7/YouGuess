@@ -84,7 +84,7 @@
     _loginButton.layer.masksToBounds = YES;
     _loginButton.titleLabel.font = F8;
     [_loginButton setTitle:@"登录" forState:UIControlStateNormal];
-    [_loginButton setTitleColor:C26 forState:UIControlStateNormal];
+    [_loginButton setTitleColor:C21 forState:UIControlStateNormal];
     [_loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
     [_loginButton setBackgroundImage:[UIImage patternImageWithColor:[QGHAppearance themeColor]] forState:UIControlStateNormal];
     [_loginButton setBackgroundImage:[UIImage patternImageWithColor:C3] forState:UIControlStateDisabled];
@@ -95,11 +95,12 @@
 - (void)makeForgetPasswordButton {
     UIButton *forgetButon = [[UIButton alloc] init];
     [forgetButon setTitle:@"忘记密码？" forState:UIControlStateNormal];
-    [forgetButon setTitleColor:C4 forState:UIControlStateNormal];
+    [forgetButon setTitleColor:C7 forState:UIControlStateNormal];
     forgetButon.titleLabel.font = F3;
     forgetButon.x = 15;
     [forgetButon attachToBottomSideOfView:self.loginButton byDistance:18];
     [forgetButon sizeToFit];
+    [forgetButon addTarget:self action:@selector(forgetButonAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:forgetButon];
 }
 
@@ -107,7 +108,7 @@
 - (void)makeStrollButton {
     UIButton *strollButton = [[UIButton alloc] init];
     [strollButton setTitle:@"随便逛逛 >>" forState:UIControlStateNormal];
-    [strollButton setTitleColor:C4 forState:UIControlStateNormal];
+    [strollButton setTitleColor:C7 forState:UIControlStateNormal];
     strollButton.titleLabel.font = F3;
     [strollButton sizeToFit];
     strollButton.right = self.loginButton.right;
@@ -127,6 +128,17 @@
 - (void)rightBarButtonItemAction {
     [self presentRegisterViewControllerWithSucceededHandler:^{
     }];
+}
+
+
+- (void)forgetButonAction {
+    QGHRegisterViewController *forgetPwdVC = [[QGHRegisterViewController alloc] initWithType:QGHRegisterViewTypeChangePwd];
+    [self.navigationController pushViewController:forgetPwdVC animated:YES];
+}
+
+
+- (void)strollButtonAction {
+
 }
 
 

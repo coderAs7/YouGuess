@@ -21,7 +21,7 @@ UIFont *F10;
 UIFont *F13;
 
 
-UIColor *C0;
+//UIColor *C0;
 UIColor *C1;
 UIColor *C2;
 UIColor *C3;
@@ -29,14 +29,15 @@ UIColor *C4;
 UIColor *C5;
 UIColor *C6;
 UIColor *C7;
+UIColor *C8;
 
 UIColor *C20;
 UIColor *C21;
 UIColor *C22;
 UIColor *C23;
-UIColor *C24;
-UIColor *C25;
-UIColor *C26;
+//UIColor *C24;
+//UIColor *C25;
+//UIColor *C26;
 
 
 @implementation QGHAppearance
@@ -56,28 +57,29 @@ UIColor *C26;
     F13 = [UIFont systemFontOfSize:23.0f];
     
 
-    C0 = [UIColor colorWithHexString:@"fafafa"];
-    C1 = [UIColor colorWithHexString:@"f0f0f0"];
-    C2 = [UIColor colorWithHexString:@"dcdcdc"];
-    C3 = [UIColor colorWithHexString:@"cccccc"];
-    C4 = [UIColor colorWithHexString:@"999999"];
-    C5 = [UIColor colorWithHexString:@"666666"];
-    C6 = [UIColor colorWithHexString:@"333333"];
-    C7 = [UIColor colorWithHexString:@"000000"];
-    C20 = [UIColor colorWithHexString:@"fc687c"];
-    C21 = [UIColor colorWithHexString:@"ff4d61"];
-    C22 = [UIColor colorWithHexString:@"477ed8"];
-    C23 = [UIColor colorWithHexString:@"5cccccc"];
-    C24 = [UIColor colorWithHexString:@"3bbc9c"];
-    C25 = [UIColor colorWithHexString:@"ff6c00"];
-    C26 = [UIColor colorWithRed:106 / 255.0 green:69 / 255.0 blue:18 / 255.0 alpha:1];
+//    C0 = [UIColor colorWithHexString:@"fafafa"];
+    C1 = [UIColor colorWithHexString:@"ffffff"];
+    C2 = [UIColor colorWithHexString:@"000000"];
+    C3 = [UIColor colorWithHexString:@"f7f7f7"];
+    C4 = [UIColor colorWithHexString:@"e7e7e7"];
+    C5 = [UIColor colorWithHexString:@"cccccc"];
+    C6 = [UIColor colorWithHexString:@"999999"];
+    C7 = [UIColor colorWithHexString:@"666666"];
+    C8 = [UIColor colorWithHexString:@"333333"];
+    C20 = [UIColor colorWithHexString:@"ffcd00"];
+    C21 = [UIColor colorWithHexString:@"6b450a"];
+    C22 = [UIColor colorWithHexString:@"ff2640"];
+    C23 = [UIColor colorWithHexString:@"ff7800"];
+//    C24 = [UIColor colorWithHexString:@"3bbc9c"];
+//    C25 = [UIColor colorWithHexString:@"ff6c00"];
+//    C26 = [UIColor colorWithRed:106 / 255.0 green:69 / 255.0 blue:18 / 255.0 alpha:1];
     
     [[UINavigationBar appearance] setTintColor:C6];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:254 / 255.0 green:204 / 255.0 blue:47 / 255.0 alpha:1]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName : F6, NSForegroundColorAttributeName: C26}];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName : F6, NSForegroundColorAttributeName: C21}];
     
     [[UIBarButtonItem appearance] setTintColor:C6];
-    [[UIBarButtonItem appearance] setTitleTextAttributes:@{ NSFontAttributeName : F4, NSForegroundColorAttributeName: C26 } forState:UIControlStateNormal];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{ NSFontAttributeName : F4, NSForegroundColorAttributeName: C21 } forState:UIControlStateNormal];
     
     [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
     [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : C6 } forState:UIControlStateNormal];
@@ -102,7 +104,7 @@ UIColor *C26;
 }
 
 + (UIColor *)themeColor {
-    return [UIColor colorWithRed:254 / 255.0 green:204 / 255.0 blue:47 / 255.0 alpha:1];
+    return C20;
 }
 
 @end
