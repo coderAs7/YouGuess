@@ -8,6 +8,8 @@
 
 #import "QGHPersonalInfoViewController.h"
 #import "QGHCommonCellTableViewCell.h"
+#import "QGHChangeNickNameViewController.h"
+#import "QGHReceiptAddressViewController.h"
 
 
 static NSString *const QGHPersonalAvatarCommonCellIdentifier = @"QGHPersonalAvatarCommonCellIdentifier";
@@ -114,13 +116,15 @@ static NSString *const QGHPersonalInfoCommonCellIdentifier = @"QGHPersonalInfoCo
         
         [self.navigationController presentViewController:actionSheet animated:YES completion:nil];
     } else if (indexPath.row == 1) {
-    
+        QGHChangeNickNameViewController *changeNickNameVC = [[QGHChangeNickNameViewController alloc] initWithNickName:@"fuck"];
+        [self.navigationController pushViewController:changeNickNameVC animated:YES];
     } else if (indexPath.row == 2) {
-    
+        [self takeSex];
     } else if (indexPath.row == 3) {
-    
+        
     } else {
-    
+        QGHReceiptAddressViewController *receiptAddressVC = [[QGHReceiptAddressViewController alloc] init];
+        [self.navigationController pushViewController:receiptAddressVC animated:YES];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -171,6 +175,20 @@ static NSString *const QGHPersonalInfoCommonCellIdentifier = @"QGHPersonalInfoCo
         AppAlertViewController *alert = [[AppAlertViewController alloc] initWithParentController:self];
         [alert showAlert:@"提示" message:@"当前相机不可用" sureTitle:nil cancelTitle:@"确定" sure:nil cancel:nil];
     }
+}
+
+
+- (void)takeSex {
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"选择图片来源" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"帅哥" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //TODO
+    }];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"美女" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //TODO
+    }];
+    [actionSheet addAction:action1];
+    [actionSheet addAction:action2];
+    [self.navigationController presentViewController:actionSheet animated:YES completion:nil];
 }
 
 

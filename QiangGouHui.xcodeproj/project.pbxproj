@@ -13,6 +13,13 @@
 		411ADC481D1AC2F90050B8EB /* QGHPersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC471D1AC2F90050B8EB /* QGHPersonalInfoViewController.m */; };
 		411ADC4B1D1AD1B70050B8EB /* QGHNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC4A1D1AD1B70050B8EB /* QGHNavigationController.m */; };
 		411ADC4F1D1AF22C0050B8EB /* AppAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC4E1D1AF22C0050B8EB /* AppAlertViewController.m */; };
+		411ADC561D1C14AC0050B8EB /* QGHChangeNickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC541D1C14AC0050B8EB /* QGHChangeNickNameViewController.m */; };
+		411ADC5A1D1C24F30050B8EB /* MMHSelectAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC591D1C24F30050B8EB /* MMHSelectAddressView.m */; };
+		411ADC5F1D1C25B80050B8EB /* MMHAddressSingleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC5E1D1C25B80050B8EB /* MMHAddressSingleModel.m */; };
+		411ADC631D1C26000050B8EB /* MMHFetchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC621D1C26000050B8EB /* MMHFetchModel.m */; };
+		411ADC691D1C2BA20050B8EB /* QGHReceiptAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 411ADC671D1C2BA20050B8EB /* QGHReceiptAddressCell.xib */; };
+		411ADC6C1D1C32610050B8EB /* QGHReceiptAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC6B1D1C32610050B8EB /* QGHReceiptAddressCell.m */; };
+		411ADC701D1C473B0050B8EB /* QGHReceiptAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC6F1D1C473B0050B8EB /* QGHReceiptAddressViewController.m */; };
 		415955411D04639900AC2BD4 /* QGHFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 415955401D04639900AC2BD4 /* QGHFirstViewController.m */; };
 		415955441D0465E500AC2BD4 /* QGHBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 415955431D0465E500AC2BD4 /* QGHBannerCell.m */; };
 		4159554A1D04685D00AC2BD4 /* QGHFirstBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 415955481D04685D00AC2BD4 /* QGHFirstBannerCell.m */; };
@@ -63,6 +70,19 @@
 		411ADC4A1D1AD1B70050B8EB /* QGHNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHNavigationController.m; sourceTree = "<group>"; };
 		411ADC4D1D1AF22C0050B8EB /* AppAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppAlertViewController.h; sourceTree = "<group>"; };
 		411ADC4E1D1AF22C0050B8EB /* AppAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppAlertViewController.m; sourceTree = "<group>"; };
+		411ADC531D1C14AC0050B8EB /* QGHChangeNickNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHChangeNickNameViewController.h; sourceTree = "<group>"; };
+		411ADC541D1C14AC0050B8EB /* QGHChangeNickNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHChangeNickNameViewController.m; sourceTree = "<group>"; };
+		411ADC581D1C24F30050B8EB /* MMHSelectAddressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHSelectAddressView.h; sourceTree = "<group>"; };
+		411ADC591D1C24F30050B8EB /* MMHSelectAddressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHSelectAddressView.m; sourceTree = "<group>"; };
+		411ADC5D1D1C25B80050B8EB /* MMHAddressSingleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHAddressSingleModel.h; sourceTree = "<group>"; };
+		411ADC5E1D1C25B80050B8EB /* MMHAddressSingleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHAddressSingleModel.m; sourceTree = "<group>"; };
+		411ADC611D1C26000050B8EB /* MMHFetchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHFetchModel.h; sourceTree = "<group>"; };
+		411ADC621D1C26000050B8EB /* MMHFetchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHFetchModel.m; sourceTree = "<group>"; };
+		411ADC671D1C2BA20050B8EB /* QGHReceiptAddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QGHReceiptAddressCell.xib; sourceTree = "<group>"; };
+		411ADC6A1D1C32610050B8EB /* QGHReceiptAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHReceiptAddressCell.h; sourceTree = "<group>"; };
+		411ADC6B1D1C32610050B8EB /* QGHReceiptAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHReceiptAddressCell.m; sourceTree = "<group>"; };
+		411ADC6E1D1C473B0050B8EB /* QGHReceiptAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHReceiptAddressViewController.h; sourceTree = "<group>"; };
+		411ADC6F1D1C473B0050B8EB /* QGHReceiptAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHReceiptAddressViewController.m; sourceTree = "<group>"; };
 		4159553F1D04639900AC2BD4 /* QGHFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHFirstViewController.h; sourceTree = "<group>"; };
 		415955401D04639900AC2BD4 /* QGHFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHFirstViewController.m; sourceTree = "<group>"; };
 		415955421D0465E500AC2BD4 /* QGHBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHBannerCell.h; sourceTree = "<group>"; };
@@ -169,6 +189,53 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		411ADC5B1D1C25800050B8EB /* Address */ = {
+			isa = PBXGroup;
+			children = (
+				411ADC6D1D1C47140050B8EB /* Controller */,
+				411ADC641D1C2AAF0050B8EB /* View */,
+				411ADC5C1D1C25AB0050B8EB /* Model */,
+			);
+			name = Address;
+			sourceTree = "<group>";
+		};
+		411ADC5C1D1C25AB0050B8EB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				411ADC5D1D1C25B80050B8EB /* MMHAddressSingleModel.h */,
+				411ADC5E1D1C25B80050B8EB /* MMHAddressSingleModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		411ADC601D1C25F20050B8EB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				411ADC611D1C26000050B8EB /* MMHFetchModel.h */,
+				411ADC621D1C26000050B8EB /* MMHFetchModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		411ADC641D1C2AAF0050B8EB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				411ADC6A1D1C32610050B8EB /* QGHReceiptAddressCell.h */,
+				411ADC6B1D1C32610050B8EB /* QGHReceiptAddressCell.m */,
+				411ADC671D1C2BA20050B8EB /* QGHReceiptAddressCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		411ADC6D1D1C47140050B8EB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				411ADC6E1D1C473B0050B8EB /* QGHReceiptAddressViewController.h */,
+				411ADC6F1D1C473B0050B8EB /* QGHReceiptAddressViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		4159553E1D04636B00AC2BD4 /* FirstPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +293,9 @@
 		41B3F4031CFC98C80007195B /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				411ADC601D1C25F20050B8EB /* Model */,
+				411ADC581D1C24F30050B8EB /* MMHSelectAddressView.h */,
+				411ADC591D1C24F30050B8EB /* MMHSelectAddressView.m */,
 				41BEEB301D0F06FE00612F88 /* Stepper.swift */,
 				41B3F4041CFC98E70007195B /* BaseViewController.h */,
 				41B3F4051CFC98E70007195B /* BaseViewController.m */,
@@ -298,6 +368,7 @@
 		41BF0FAE1CFB504700FB23C2 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				411ADC5B1D1C25800050B8EB /* Address */,
 				411ADC421D1AC05D0050B8EB /* ProductDetail */,
 				41C64C6E1D181BD300E22E5B /* Account */,
 				4159553E1D04636B00AC2BD4 /* FirstPage */,
@@ -401,6 +472,8 @@
 				41DA4ACD1D1594BE00A8E42D /* QGHPersonalCenterViewController.m */,
 				411ADC461D1AC2F90050B8EB /* QGHPersonalInfoViewController.h */,
 				411ADC471D1AC2F90050B8EB /* QGHPersonalInfoViewController.m */,
+				411ADC531D1C14AC0050B8EB /* QGHChangeNickNameViewController.h */,
+				411ADC541D1C14AC0050B8EB /* QGHChangeNickNameViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -509,6 +582,7 @@
 				41BF0FA71CFB4F6100FB23C2 /* LaunchScreen.storyboard in Resources */,
 				41BEEB291D0D9A6A00612F88 /* QGHGoodsTableViewCell.xib in Resources */,
 				4159554B1D04685D00AC2BD4 /* QGHFirstBannerCell.xib in Resources */,
+				411ADC691D1C2BA20050B8EB /* QGHReceiptAddressCell.xib in Resources */,
 				41BF0FA41CFB4F6100FB23C2 /* Assets.xcassets in Resources */,
 				415955551D046F5000AC2BD4 /* QHGRushPurchaseItemView.xib in Resources */,
 				41BEEB2E1D0EF84A00612F88 /* QGHGoodsHeaderView.xib in Resources */,
@@ -574,10 +648,12 @@
 				41B3F3FC1CFC93940007195B /* UIView+StringTag.m in Sources */,
 				41B3F4061CFC98E70007195B /* BaseViewController.m in Sources */,
 				41BF0F9F1CFB4F6100FB23C2 /* ViewController.m in Sources */,
+				411ADC6C1D1C32610050B8EB /* QGHReceiptAddressCell.m in Sources */,
 				411ADC451D1AC07F0050B8EB /* QGHProductDetailViewController.m in Sources */,
 				41DA4ACE1D1594BE00A8E42D /* QGHPersonalCenterViewController.m in Sources */,
 				41BEEB351D0F086100612F88 /* QGHCartViewController.m in Sources */,
 				411ADC4F1D1AF22C0050B8EB /* AppAlertViewController.m in Sources */,
+				411ADC631D1C26000050B8EB /* MMHFetchModel.m in Sources */,
 				4159554A1D04685D00AC2BD4 /* QGHFirstBannerCell.m in Sources */,
 				411ADC4B1D1AD1B70050B8EB /* QGHNavigationController.m in Sources */,
 				41BEEB211D0D979E00612F88 /* QGHRushPurchaseItemsCell.m in Sources */,
@@ -595,8 +671,12 @@
 				41BF0F991CFB4F6100FB23C2 /* main.m in Sources */,
 				411ADC411D184D6D0050B8EB /* VerificationCodeTimer.swift in Sources */,
 				41C64C6D1D181AF300E22E5B /* AdView.m in Sources */,
+				411ADC561D1C14AC0050B8EB /* QGHChangeNickNameViewController.m in Sources */,
 				411ADC481D1AC2F90050B8EB /* QGHPersonalInfoViewController.m in Sources */,
+				411ADC5A1D1C24F30050B8EB /* MMHSelectAddressView.m in Sources */,
+				411ADC701D1C473B0050B8EB /* QGHReceiptAddressViewController.m in Sources */,
 				415955441D0465E500AC2BD4 /* QGHBannerCell.m in Sources */,
+				411ADC5F1D1C25B80050B8EB /* MMHAddressSingleModel.m in Sources */,
 				41B3F3F41CFC87010007195B /* MMHImageView.m in Sources */,
 				41BF0FB81CFB50D600FB23C2 /* QGHLocationManager.m in Sources */,
 				41BEEB311D0F06FE00612F88 /* Stepper.swift in Sources */,
