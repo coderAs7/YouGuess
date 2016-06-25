@@ -24,6 +24,7 @@ static NSString *const QGHReceiptAddressCellIdentifier = @"QGHReceiptAddressCell
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"选择地址";
     
     [self makeTableView];
 }
@@ -53,7 +54,7 @@ static NSString *const QGHReceiptAddressCellIdentifier = @"QGHReceiptAddressCell
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QGHReceiptAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHReceiptAddressCellIdentifier forIndexPath:indexPath];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     return cell;
 }
@@ -61,6 +62,15 @@ static NSString *const QGHReceiptAddressCellIdentifier = @"QGHReceiptAddressCell
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 128;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.00001;
 }
 
 @end

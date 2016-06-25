@@ -34,6 +34,9 @@ static NSString *const QGHPersonalInfoCommonCellIdentifier = @"QGHPersonalInfoCo
     self.dataSource = @[@"头像", @"昵称", @"性别", @"居住地", @"收货地址"];
     
     [self makeTableView];
+    
+    UIBarButtonItem *saveItem = [[UIBarButtonItem alloc] initWithTitle:@"保存 " style:UIBarButtonItemStylePlain target:self action:@selector(saveAction)];
+    self.navigationItem.rightBarButtonItem = saveItem;
 }
 
 
@@ -189,6 +192,14 @@ static NSString *const QGHPersonalInfoCommonCellIdentifier = @"QGHPersonalInfoCo
     [actionSheet addAction:action1];
     [actionSheet addAction:action2];
     [self.navigationController presentViewController:actionSheet animated:YES completion:nil];
+}
+
+
+#pragma mark - Action
+
+
+- (void)saveAction {
+
 }
 
 
