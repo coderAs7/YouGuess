@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="QGHOrderAddressCellTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dingdan_dizhi" translatesAutoresizingMaskIntoConstraints="NO" id="pI2-EM-IBq">
+                        <rect key="frame" x="15" y="26" width="15" height="18"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宇宙第一帅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vg7-a7-iI8">
+                        <rect key="frame" x="45" y="13" width="70" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18512345678" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJO-9G-BqA">
+                        <rect key="frame" x="140" y="13" width="90" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="浙江省杭州市滨江区寰宇天下" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEp-5q-j3N">
+                        <rect key="frame" x="45" y="39" width="182" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="jJO-9G-BqA" firstAttribute="centerY" secondItem="Vg7-a7-iI8" secondAttribute="centerY" id="4mK-Rw-IcN"/>
+                    <constraint firstItem="Vg7-a7-iI8" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-4" id="B5o-OO-POR"/>
+                    <constraint firstItem="pI2-EM-IBq" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VaB-r2-PbP"/>
+                    <constraint firstItem="pI2-EM-IBq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Xdm-fg-aWx"/>
+                    <constraint firstItem="OEp-5q-j3N" firstAttribute="leading" secondItem="pI2-EM-IBq" secondAttribute="trailing" constant="15" id="ksw-Yd-hqg"/>
+                    <constraint firstItem="OEp-5q-j3N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="4" id="sre-Az-RxV"/>
+                    <constraint firstItem="jJO-9G-BqA" firstAttribute="leading" secondItem="Vg7-a7-iI8" secondAttribute="trailing" constant="25" id="u8n-Qs-NAe"/>
+                    <constraint firstItem="Vg7-a7-iI8" firstAttribute="leading" secondItem="pI2-EM-IBq" secondAttribute="trailing" constant="15" id="yhw-cz-znv"/>
+                </constraints>
+            </tableViewCellContentView>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="dingdan_dizhi" width="15" height="18"/>
+    </resources>
+</document>

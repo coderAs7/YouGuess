@@ -54,6 +54,24 @@
 		41DA4ADE1D159B5000A8E42D /* MMHPersonalCenterAllOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4ADD1D159B5000A8E42D /* MMHPersonalCenterAllOrderCell.m */; };
 		41DA4AE21D16F31300A8E42D /* QGHChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4AE11D16F31300A8E42D /* QGHChatViewController.m */; };
 		41DA4AE51D16FDEF00A8E42D /* QGHSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DA4AE41D16FDEF00A8E42D /* QGHSegmentedControl.m */; };
+		41DC07721D1E566F00DDC5DD /* QGHOrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07711D1E566F00DDC5DD /* QGHOrderListViewController.m */; };
+		41DC077B1D1E581C00DDC5DD /* QGHOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07791D1E581C00DDC5DD /* QGHOrderListCell.m */; };
+		41DC077C1D1E581C00DDC5DD /* QGHOrderListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41DC077A1D1E581C00DDC5DD /* QGHOrderListCell.xib */; };
+		41DC07801D1E680E00DDC5DD /* MMHetchModelProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC077F1D1E680E00DDC5DD /* MMHetchModelProperty.m */; };
+		41DC07831D1E683600DDC5DD /* QGHOrderListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07821D1E683600DDC5DD /* QGHOrderListItem.m */; };
+		41DC07871D1E705800DDC5DD /* MMHUnderlinedSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07861D1E705800DDC5DD /* MMHUnderlinedSegmentedControl.m */; };
+		41DC078A1D1E782E00DDC5DD /* QGHOrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07891D1E782E00DDC5DD /* QGHOrderDetailViewController.m */; };
+		41DC078D1D1E7D9A00DDC5DD /* MMHOrderInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC078C1D1E7D9A00DDC5DD /* MMHOrderInfoTableViewCell.m */; };
+		41DC07971D1E810D00DDC5DD /* QGHOrderAddressCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07951D1E810D00DDC5DD /* QGHOrderAddressCellTableViewCell.m */; };
+		41DC07981D1E810D00DDC5DD /* QGHOrderAddressCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41DC07961D1E810D00DDC5DD /* QGHOrderAddressCellTableViewCell.xib */; };
+		41DC079C1D1FA36400DDC5DD /* QGHOrderDetailProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC079A1D1FA36400DDC5DD /* QGHOrderDetailProductCell.m */; };
+		41DC079D1D1FA36400DDC5DD /* QGHOrderDetailProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41DC079B1D1FA36400DDC5DD /* QGHOrderDetailProductCell.xib */; };
+		41DC07A01D1FA88500DDC5DD /* QGHOrderDetailCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC079F1D1FA88500DDC5DD /* QGHOrderDetailCommonCell.m */; };
+		41DC07A31D1FBFB900DDC5DD /* QGHLogisticsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07A21D1FBFB900DDC5DD /* QGHLogisticsDetailViewController.m */; };
+		41DC07A71D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07A51D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.m */; };
+		41DC07A81D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41DC07A61D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.xib */; };
+		41DC07AC1D2003FC00DDC5DD /* MMHProductDetailHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07AB1D2003FC00DDC5DD /* MMHProductDetailHeaderCell.m */; };
+		41DC07B11D201DCB00DDC5DD /* QGHProductDetailPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07B01D201DCB00DDC5DD /* QGHProductDetailPriceCell.m */; };
 		D1BC298755BEA9C0E319311F /* libPods-QiangGouHui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67968EB60CF93479054CD498 /* libPods-QiangGouHui.a */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +165,38 @@
 		41DA4AE11D16F31300A8E42D /* QGHChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHChatViewController.m; sourceTree = "<group>"; };
 		41DA4AE31D16FDEF00A8E42D /* QGHSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHSegmentedControl.h; sourceTree = "<group>"; };
 		41DA4AE41D16FDEF00A8E42D /* QGHSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHSegmentedControl.m; sourceTree = "<group>"; };
+		41DC07701D1E566F00DDC5DD /* QGHOrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHOrderListViewController.h; sourceTree = "<group>"; };
+		41DC07711D1E566F00DDC5DD /* QGHOrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHOrderListViewController.m; sourceTree = "<group>"; };
+		41DC07781D1E581C00DDC5DD /* QGHOrderListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHOrderListCell.h; sourceTree = "<group>"; };
+		41DC07791D1E581C00DDC5DD /* QGHOrderListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHOrderListCell.m; sourceTree = "<group>"; };
+		41DC077A1D1E581C00DDC5DD /* QGHOrderListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QGHOrderListCell.xib; sourceTree = "<group>"; };
+		41DC077E1D1E680E00DDC5DD /* MMHetchModelProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHetchModelProperty.h; sourceTree = "<group>"; };
+		41DC077F1D1E680E00DDC5DD /* MMHetchModelProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHetchModelProperty.m; sourceTree = "<group>"; };
+		41DC07811D1E683600DDC5DD /* QGHOrderListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHOrderListItem.h; sourceTree = "<group>"; };
+		41DC07821D1E683600DDC5DD /* QGHOrderListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHOrderListItem.m; sourceTree = "<group>"; };
+		41DC07851D1E705800DDC5DD /* MMHUnderlinedSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHUnderlinedSegmentedControl.h; sourceTree = "<group>"; };
+		41DC07861D1E705800DDC5DD /* MMHUnderlinedSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHUnderlinedSegmentedControl.m; sourceTree = "<group>"; };
+		41DC07881D1E782E00DDC5DD /* QGHOrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHOrderDetailViewController.h; sourceTree = "<group>"; };
+		41DC07891D1E782E00DDC5DD /* QGHOrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHOrderDetailViewController.m; sourceTree = "<group>"; };
+		41DC078B1D1E7D9A00DDC5DD /* MMHOrderInfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHOrderInfoTableViewCell.h; sourceTree = "<group>"; };
+		41DC078C1D1E7D9A00DDC5DD /* MMHOrderInfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHOrderInfoTableViewCell.m; sourceTree = "<group>"; };
+		41DC07941D1E810D00DDC5DD /* QGHOrderAddressCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHOrderAddressCellTableViewCell.h; sourceTree = "<group>"; };
+		41DC07951D1E810D00DDC5DD /* QGHOrderAddressCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHOrderAddressCellTableViewCell.m; sourceTree = "<group>"; };
+		41DC07961D1E810D00DDC5DD /* QGHOrderAddressCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QGHOrderAddressCellTableViewCell.xib; sourceTree = "<group>"; };
+		41DC07991D1FA36400DDC5DD /* QGHOrderDetailProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHOrderDetailProductCell.h; sourceTree = "<group>"; };
+		41DC079A1D1FA36400DDC5DD /* QGHOrderDetailProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHOrderDetailProductCell.m; sourceTree = "<group>"; };
+		41DC079B1D1FA36400DDC5DD /* QGHOrderDetailProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QGHOrderDetailProductCell.xib; sourceTree = "<group>"; };
+		41DC079E1D1FA88500DDC5DD /* QGHOrderDetailCommonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHOrderDetailCommonCell.h; sourceTree = "<group>"; };
+		41DC079F1D1FA88500DDC5DD /* QGHOrderDetailCommonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHOrderDetailCommonCell.m; sourceTree = "<group>"; };
+		41DC07A11D1FBFB900DDC5DD /* QGHLogisticsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHLogisticsDetailViewController.h; sourceTree = "<group>"; };
+		41DC07A21D1FBFB900DDC5DD /* QGHLogisticsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHLogisticsDetailViewController.m; sourceTree = "<group>"; };
+		41DC07A41D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHOrderLogisticsInfoCell.h; sourceTree = "<group>"; };
+		41DC07A51D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHOrderLogisticsInfoCell.m; sourceTree = "<group>"; };
+		41DC07A61D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QGHOrderLogisticsInfoCell.xib; sourceTree = "<group>"; };
+		41DC07AA1D2003FC00DDC5DD /* MMHProductDetailHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHProductDetailHeaderCell.h; sourceTree = "<group>"; };
+		41DC07AB1D2003FC00DDC5DD /* MMHProductDetailHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHProductDetailHeaderCell.m; sourceTree = "<group>"; };
+		41DC07AF1D201DCB00DDC5DD /* QGHProductDetailPriceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductDetailPriceCell.h; sourceTree = "<group>"; };
+		41DC07B01D201DCB00DDC5DD /* QGHProductDetailPriceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductDetailPriceCell.m; sourceTree = "<group>"; };
 		67968EB60CF93479054CD498 /* libPods-QiangGouHui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QiangGouHui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9BECC3B9212C2BF0AD13B4F /* Pods-QiangGouHui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiangGouHui.release.xcconfig"; path = "Pods/Target Support Files/Pods-QiangGouHui/Pods-QiangGouHui.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -211,6 +261,8 @@
 		411ADC601D1C25F20050B8EB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				41DC077E1D1E680E00DDC5DD /* MMHetchModelProperty.h */,
+				41DC077F1D1E680E00DDC5DD /* MMHetchModelProperty.m */,
 				411ADC611D1C26000050B8EB /* MMHFetchModel.h */,
 				411ADC621D1C26000050B8EB /* MMHFetchModel.m */,
 			);
@@ -368,6 +420,8 @@
 		41BF0FAE1CFB504700FB23C2 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				41DC07A91D2003EF00DDC5DD /* Product */,
+				41DC076F1D1E561400DDC5DD /* Order */,
 				411ADC5B1D1C25800050B8EB /* Address */,
 				411ADC421D1AC05D0050B8EB /* ProductDetail */,
 				41C64C6E1D181BD300E22E5B /* Account */,
@@ -390,6 +444,7 @@
 		41BF0FB01CFB505F00FB23C2 /* Utilites */ = {
 			isa = PBXGroup;
 			children = (
+				41DC07841D1E704A00DDC5DD /* SegmentControl */,
 				411ADC4C1D1AF21A0050B8EB /* Controllers */,
 				41B3F3F91CFC93860007195B /* Category */,
 				41B3F3F51CFC8A670007195B /* MMHAssistant.h */,
@@ -499,6 +554,97 @@
 			name = Chat;
 			sourceTree = "<group>";
 		};
+		41DC076F1D1E561400DDC5DD /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				41DC077D1D1E678D00DDC5DD /* Model */,
+				41DC07741D1E57A300DDC5DD /* View */,
+				41DC07731D1E579600DDC5DD /* Controller */,
+			);
+			name = Order;
+			sourceTree = "<group>";
+		};
+		41DC07731D1E579600DDC5DD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				41DC07701D1E566F00DDC5DD /* QGHOrderListViewController.h */,
+				41DC07711D1E566F00DDC5DD /* QGHOrderListViewController.m */,
+				41DC07881D1E782E00DDC5DD /* QGHOrderDetailViewController.h */,
+				41DC07891D1E782E00DDC5DD /* QGHOrderDetailViewController.m */,
+				41DC07A11D1FBFB900DDC5DD /* QGHLogisticsDetailViewController.h */,
+				41DC07A21D1FBFB900DDC5DD /* QGHLogisticsDetailViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		41DC07741D1E57A300DDC5DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				41DC078B1D1E7D9A00DDC5DD /* MMHOrderInfoTableViewCell.h */,
+				41DC078C1D1E7D9A00DDC5DD /* MMHOrderInfoTableViewCell.m */,
+				41DC07781D1E581C00DDC5DD /* QGHOrderListCell.h */,
+				41DC07791D1E581C00DDC5DD /* QGHOrderListCell.m */,
+				41DC077A1D1E581C00DDC5DD /* QGHOrderListCell.xib */,
+				41DC07941D1E810D00DDC5DD /* QGHOrderAddressCellTableViewCell.h */,
+				41DC07951D1E810D00DDC5DD /* QGHOrderAddressCellTableViewCell.m */,
+				41DC07961D1E810D00DDC5DD /* QGHOrderAddressCellTableViewCell.xib */,
+				41DC07991D1FA36400DDC5DD /* QGHOrderDetailProductCell.h */,
+				41DC079A1D1FA36400DDC5DD /* QGHOrderDetailProductCell.m */,
+				41DC079B1D1FA36400DDC5DD /* QGHOrderDetailProductCell.xib */,
+				41DC079E1D1FA88500DDC5DD /* QGHOrderDetailCommonCell.h */,
+				41DC079F1D1FA88500DDC5DD /* QGHOrderDetailCommonCell.m */,
+				41DC07A41D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.h */,
+				41DC07A51D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.m */,
+				41DC07A61D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		41DC077D1D1E678D00DDC5DD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				41DC07811D1E683600DDC5DD /* QGHOrderListItem.h */,
+				41DC07821D1E683600DDC5DD /* QGHOrderListItem.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		41DC07841D1E704A00DDC5DD /* SegmentControl */ = {
+			isa = PBXGroup;
+			children = (
+				41DC07851D1E705800DDC5DD /* MMHUnderlinedSegmentedControl.h */,
+				41DC07861D1E705800DDC5DD /* MMHUnderlinedSegmentedControl.m */,
+			);
+			name = SegmentControl;
+			sourceTree = "<group>";
+		};
+		41DC07A91D2003EF00DDC5DD /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				41DC07AE1D2004AB00DDC5DD /* Controller */,
+				41DC07AD1D2004A000DDC5DD /* View */,
+			);
+			name = Product;
+			sourceTree = "<group>";
+		};
+		41DC07AD1D2004A000DDC5DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				41DC07AA1D2003FC00DDC5DD /* MMHProductDetailHeaderCell.h */,
+				41DC07AB1D2003FC00DDC5DD /* MMHProductDetailHeaderCell.m */,
+				41DC07AF1D201DCB00DDC5DD /* QGHProductDetailPriceCell.h */,
+				41DC07B01D201DCB00DDC5DD /* QGHProductDetailPriceCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		41DC07AE1D2004AB00DDC5DD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		784FAF7F814C9758168FAB42 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -581,11 +727,15 @@
 				41DA4AD51D15962000A8E42D /* QGHCommonCellTableViewCell.xib in Resources */,
 				41BF0FA71CFB4F6100FB23C2 /* LaunchScreen.storyboard in Resources */,
 				41BEEB291D0D9A6A00612F88 /* QGHGoodsTableViewCell.xib in Resources */,
+				41DC079D1D1FA36400DDC5DD /* QGHOrderDetailProductCell.xib in Resources */,
 				4159554B1D04685D00AC2BD4 /* QGHFirstBannerCell.xib in Resources */,
 				411ADC691D1C2BA20050B8EB /* QGHReceiptAddressCell.xib in Resources */,
 				41BF0FA41CFB4F6100FB23C2 /* Assets.xcassets in Resources */,
 				415955551D046F5000AC2BD4 /* QHGRushPurchaseItemView.xib in Resources */,
+				41DC077C1D1E581C00DDC5DD /* QGHOrderListCell.xib in Resources */,
+				41DC07981D1E810D00DDC5DD /* QGHOrderAddressCellTableViewCell.xib in Resources */,
 				41BEEB2E1D0EF84A00612F88 /* QGHGoodsHeaderView.xib in Resources */,
+				41DC07A81D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,12 +796,15 @@
 			files = (
 				41DA4ADE1D159B5000A8E42D /* MMHPersonalCenterAllOrderCell.m in Sources */,
 				41B3F3FC1CFC93940007195B /* UIView+StringTag.m in Sources */,
+				41DC07A31D1FBFB900DDC5DD /* QGHLogisticsDetailViewController.m in Sources */,
 				41B3F4061CFC98E70007195B /* BaseViewController.m in Sources */,
+				41DC07871D1E705800DDC5DD /* MMHUnderlinedSegmentedControl.m in Sources */,
 				41BF0F9F1CFB4F6100FB23C2 /* ViewController.m in Sources */,
 				411ADC6C1D1C32610050B8EB /* QGHReceiptAddressCell.m in Sources */,
 				411ADC451D1AC07F0050B8EB /* QGHProductDetailViewController.m in Sources */,
 				41DA4ACE1D1594BE00A8E42D /* QGHPersonalCenterViewController.m in Sources */,
 				41BEEB351D0F086100612F88 /* QGHCartViewController.m in Sources */,
+				41DC077B1D1E581C00DDC5DD /* QGHOrderListCell.m in Sources */,
 				411ADC4F1D1AF22C0050B8EB /* AppAlertViewController.m in Sources */,
 				411ADC631D1C26000050B8EB /* MMHFetchModel.m in Sources */,
 				4159554A1D04685D00AC2BD4 /* QGHFirstBannerCell.m in Sources */,
@@ -659,29 +812,40 @@
 				41BEEB211D0D979E00612F88 /* QGHRushPurchaseItemsCell.m in Sources */,
 				41BEEB281D0D9A6A00612F88 /* QGHGoodsTableViewCell.m in Sources */,
 				41B3F4021CFC97230007195B /* NSString+QSCalcSize.m in Sources */,
+				41DC07AC1D2003FC00DDC5DD /* MMHProductDetailHeaderCell.m in Sources */,
 				41DA4AD41D15962000A8E42D /* QGHCommonCellTableViewCell.m in Sources */,
 				41B3F3FF1CFC948C0007195B /* QGHAppearance.m in Sources */,
 				41B3F3F71CFC8A670007195B /* MMHAssistant.m in Sources */,
+				41DC078A1D1E782E00DDC5DD /* QGHOrderDetailViewController.m in Sources */,
 				41BEEB2C1D0EF82400612F88 /* QGHGoodsHeaderView.m in Sources */,
+				41DC07831D1E683600DDC5DD /* QGHOrderListItem.m in Sources */,
 				415955411D04639900AC2BD4 /* QGHFirstViewController.m in Sources */,
+				41DC07971D1E810D00DDC5DD /* QGHOrderAddressCellTableViewCell.m in Sources */,
 				41BF0F9C1CFB4F6100FB23C2 /* AppDelegate.m in Sources */,
+				41DC078D1D1E7D9A00DDC5DD /* MMHOrderInfoTableViewCell.m in Sources */,
 				41B3F4091CFCA0830007195B /* QGHTabBarController.m in Sources */,
 				41DA4AE21D16F31300A8E42D /* QGHChatViewController.m in Sources */,
 				411ADC3E1D1835370050B8EB /* QGHRegisterViewController.m in Sources */,
+				41DC07801D1E680E00DDC5DD /* MMHetchModelProperty.m in Sources */,
 				41BF0F991CFB4F6100FB23C2 /* main.m in Sources */,
 				411ADC411D184D6D0050B8EB /* VerificationCodeTimer.swift in Sources */,
 				41C64C6D1D181AF300E22E5B /* AdView.m in Sources */,
 				411ADC561D1C14AC0050B8EB /* QGHChangeNickNameViewController.m in Sources */,
 				411ADC481D1AC2F90050B8EB /* QGHPersonalInfoViewController.m in Sources */,
 				411ADC5A1D1C24F30050B8EB /* MMHSelectAddressView.m in Sources */,
+				41DC07B11D201DCB00DDC5DD /* QGHProductDetailPriceCell.m in Sources */,
 				411ADC701D1C473B0050B8EB /* QGHReceiptAddressViewController.m in Sources */,
+				41DC079C1D1FA36400DDC5DD /* QGHOrderDetailProductCell.m in Sources */,
 				415955441D0465E500AC2BD4 /* QGHBannerCell.m in Sources */,
+				41DC07A01D1FA88500DDC5DD /* QGHOrderDetailCommonCell.m in Sources */,
 				411ADC5F1D1C25B80050B8EB /* MMHAddressSingleModel.m in Sources */,
 				41B3F3F41CFC87010007195B /* MMHImageView.m in Sources */,
 				41BF0FB81CFB50D600FB23C2 /* QGHLocationManager.m in Sources */,
 				41BEEB311D0F06FE00612F88 /* Stepper.swift in Sources */,
+				41DC07A71D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.m in Sources */,
 				41C64C721D181C0300E22E5B /* QGHLoginViewController.m in Sources */,
 				415955511D046DC800AC2BD4 /* QGHRushPurchaseItemView.m in Sources */,
+				41DC07721D1E566F00DDC5DD /* QGHOrderListViewController.m in Sources */,
 				41DA4AE51D16FDEF00A8E42D /* QGHSegmentedControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

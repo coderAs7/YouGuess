@@ -6,7 +6,7 @@ pod 'Masonry'
 pod 'AFNetworking'
 pod 'SDWebImage'
 pod 'MBProgressHUD'
-#pod 'AMap2DMap'
-#pod 'AMapSearch'
-
+pod 'AMap2DMap'
+pod 'AMapSearch'
+pod 'HTHorizontalSelectionList', '0.4.7'
 end

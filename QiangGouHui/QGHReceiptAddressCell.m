@@ -45,6 +45,33 @@
         make.width.mas_equalTo(mmh_screen_width());
         make.bottom.equalTo(self.defaultImage).offset(15);
     }];
+    
+    self.defaultImage.userInteractionEnabled = YES;
+    UITapGestureRecognizer *defaultTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(defaultButtonAction)];
+    [self.defaultImage addGestureRecognizer:defaultTap];
+    
+    self.delImage.userInteractionEnabled = YES;
+    UITapGestureRecognizer *deleteTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deleteButtonAction)];
+    [self.delImage addGestureRecognizer:deleteTap];
+    
+    self.editImage.userInteractionEnabled = YES;
+    UITapGestureRecognizer *editTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editButtonAction)];
+    [self.editImage addGestureRecognizer:editTap];
+}
+
+
+- (void)defaultButtonAction {
+
+}
+
+
+- (void)deleteButtonAction {
+
+}
+
+
+- (void)editButtonAction {
+
 }
 
 

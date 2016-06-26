@@ -35,6 +35,7 @@ UIColor *C20;
 UIColor *C21;
 UIColor *C22;
 UIColor *C23;
+UIColor *C24;   //浅黄色
 //UIColor *C24;
 //UIColor *C25;
 //UIColor *C26;
@@ -70,6 +71,7 @@ UIColor *C23;
     C21 = [UIColor colorWithHexString:@"6b450a"];
     C22 = [UIColor colorWithHexString:@"ff2640"];
     C23 = [UIColor colorWithHexString:@"ff7800"];
+    C24 = RGBCOLOR(254, 204, 47);
 //    C24 = [UIColor colorWithHexString:@"3bbc9c"];
 //    C25 = [UIColor colorWithHexString:@"ff6c00"];
 //    C26 = [UIColor colorWithRed:106 / 255.0 green:69 / 255.0 blue:18 / 255.0 alpha:1];

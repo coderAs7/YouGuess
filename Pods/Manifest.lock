@@ -20,6 +20,11 @@ PODS:
   - AFNetworking/UIKit (2.5.2):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - AMap2DMap (3.3.0)
+  - AMapFoundation (1.1.0)
+  - AMapSearch (4.1.0):
+    - AMapFoundation (~> 1.0)
+  - HTHorizontalSelectionList (0.4.7)
   - Masonry (0.6.1)
   - MBProgressHUD (0.9.1)
   - SDWebImage (3.7.2):
@@ -28,16 +33,23 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - AMap2DMap
+  - AMapSearch
+  - HTHorizontalSelectionList (= 0.4.7)
   - Masonry
   - MBProgressHUD
   - SDWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
+  AMap2DMap: e53461cdc345375e514579db17dbd721ff9ed9eb
+  AMapFoundation: 15db20567e6512422a086a01b42a88b145bc2500
+  AMapSearch: cb4722480d2d4331a032d43bd1070ed0fa55dac9
+  HTHorizontalSelectionList: 9a6195ecec2356c6cc4b4c792fa082a3d7347967
   Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
 
-PODFILE CHECKSUM: 1a34f956d51ed88fd457bc22f9a0dfae29b6b7a3
+PODFILE CHECKSUM: 28092766aae0c2bec6b9bd59fabc36f11120a86b
 
 COCOAPODS: 1.0.0

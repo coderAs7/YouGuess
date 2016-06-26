@@ -35,6 +35,7 @@ extern UIColor *C20;
 extern UIColor *C21;
 extern UIColor *C22;
 extern UIColor *C23;
+extern UIColor *C24;
 //extern UIColor *C24;
 //extern UIColor *C25;
 //extern UIColor *C26;

@@ -11,6 +11,7 @@
 #import "QGHCommonCellTableViewCell.h"
 #import "QGHLoginViewController.h"
 #import "QGHPersonalInfoViewController.h"
+#import "QGHOrderListViewController.h"
 
 
 static NSString *QGHPersonalCenterCommonCellIdentifier = @"QGHPersonalCenterCommonCellIdentifier";
@@ -140,6 +141,17 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 10;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            QGHOrderListViewController *orderListVC = [[QGHOrderListViewController alloc] init];
+            [self.navigationController pushViewController:orderListVC animated:YES];
+        }
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 
