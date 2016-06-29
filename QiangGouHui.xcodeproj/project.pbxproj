@@ -72,6 +72,9 @@
 		41DC07A81D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41DC07A61D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.xib */; };
 		41DC07AC1D2003FC00DDC5DD /* MMHProductDetailHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07AB1D2003FC00DDC5DD /* MMHProductDetailHeaderCell.m */; };
 		41DC07B11D201DCB00DDC5DD /* QGHProductDetailPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07B01D201DCB00DDC5DD /* QGHProductDetailPriceCell.m */; };
+		41DC07B41D24064600DDC5DD /* MMHDeleteLineLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07B31D24064600DDC5DD /* MMHDeleteLineLabel.m */; };
+		41DC07B81D24103D00DDC5DD /* QGHProductDetailCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07B61D24103D00DDC5DD /* QGHProductDetailCommentCell.m */; };
+		41DC07B91D24103D00DDC5DD /* QGHProductDetailCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41DC07B71D24103D00DDC5DD /* QGHProductDetailCommentCell.xib */; };
 		D1BC298755BEA9C0E319311F /* libPods-QiangGouHui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67968EB60CF93479054CD498 /* libPods-QiangGouHui.a */; };
 /* End PBXBuildFile section */
 
@@ -197,6 +200,11 @@
 		41DC07AB1D2003FC00DDC5DD /* MMHProductDetailHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHProductDetailHeaderCell.m; sourceTree = "<group>"; };
 		41DC07AF1D201DCB00DDC5DD /* QGHProductDetailPriceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductDetailPriceCell.h; sourceTree = "<group>"; };
 		41DC07B01D201DCB00DDC5DD /* QGHProductDetailPriceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductDetailPriceCell.m; sourceTree = "<group>"; };
+		41DC07B21D24064600DDC5DD /* MMHDeleteLineLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHDeleteLineLabel.h; sourceTree = "<group>"; };
+		41DC07B31D24064600DDC5DD /* MMHDeleteLineLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHDeleteLineLabel.m; sourceTree = "<group>"; };
+		41DC07B51D24103D00DDC5DD /* QGHProductDetailCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductDetailCommentCell.h; sourceTree = "<group>"; };
+		41DC07B61D24103D00DDC5DD /* QGHProductDetailCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductDetailCommentCell.m; sourceTree = "<group>"; };
+		41DC07B71D24103D00DDC5DD /* QGHProductDetailCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QGHProductDetailCommentCell.xib; sourceTree = "<group>"; };
 		67968EB60CF93479054CD498 /* libPods-QiangGouHui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QiangGouHui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9BECC3B9212C2BF0AD13B4F /* Pods-QiangGouHui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiangGouHui.release.xcconfig"; path = "Pods/Target Support Files/Pods-QiangGouHui/Pods-QiangGouHui.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -451,6 +459,8 @@
 				41B3F3F61CFC8A670007195B /* MMHAssistant.m */,
 				41B3F3F21CFC87010007195B /* MMHImageView.h */,
 				41B3F3F31CFC87010007195B /* MMHImageView.m */,
+				41DC07B21D24064600DDC5DD /* MMHDeleteLineLabel.h */,
+				41DC07B31D24064600DDC5DD /* MMHDeleteLineLabel.m */,
 				41BF0FB41CFB50C000FB23C2 /* QGHConstants.h */,
 				41B3F3FD1CFC948C0007195B /* QGHAppearance.h */,
 				41B3F3FE1CFC948C0007195B /* QGHAppearance.m */,
@@ -634,6 +644,9 @@
 				41DC07AB1D2003FC00DDC5DD /* MMHProductDetailHeaderCell.m */,
 				41DC07AF1D201DCB00DDC5DD /* QGHProductDetailPriceCell.h */,
 				41DC07B01D201DCB00DDC5DD /* QGHProductDetailPriceCell.m */,
+				41DC07B51D24103D00DDC5DD /* QGHProductDetailCommentCell.h */,
+				41DC07B61D24103D00DDC5DD /* QGHProductDetailCommentCell.m */,
+				41DC07B71D24103D00DDC5DD /* QGHProductDetailCommentCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -730,6 +743,7 @@
 				41DC079D1D1FA36400DDC5DD /* QGHOrderDetailProductCell.xib in Resources */,
 				4159554B1D04685D00AC2BD4 /* QGHFirstBannerCell.xib in Resources */,
 				411ADC691D1C2BA20050B8EB /* QGHReceiptAddressCell.xib in Resources */,
+				41DC07B91D24103D00DDC5DD /* QGHProductDetailCommentCell.xib in Resources */,
 				41BF0FA41CFB4F6100FB23C2 /* Assets.xcassets in Resources */,
 				415955551D046F5000AC2BD4 /* QHGRushPurchaseItemView.xib in Resources */,
 				41DC077C1D1E581C00DDC5DD /* QGHOrderListCell.xib in Resources */,
@@ -808,6 +822,7 @@
 				411ADC4F1D1AF22C0050B8EB /* AppAlertViewController.m in Sources */,
 				411ADC631D1C26000050B8EB /* MMHFetchModel.m in Sources */,
 				4159554A1D04685D00AC2BD4 /* QGHFirstBannerCell.m in Sources */,
+				41DC07B41D24064600DDC5DD /* MMHDeleteLineLabel.m in Sources */,
 				411ADC4B1D1AD1B70050B8EB /* QGHNavigationController.m in Sources */,
 				41BEEB211D0D979E00612F88 /* QGHRushPurchaseItemsCell.m in Sources */,
 				41BEEB281D0D9A6A00612F88 /* QGHGoodsTableViewCell.m in Sources */,
@@ -830,6 +845,7 @@
 				41BF0F991CFB4F6100FB23C2 /* main.m in Sources */,
 				411ADC411D184D6D0050B8EB /* VerificationCodeTimer.swift in Sources */,
 				41C64C6D1D181AF300E22E5B /* AdView.m in Sources */,
+				41DC07B81D24103D00DDC5DD /* QGHProductDetailCommentCell.m in Sources */,
 				411ADC561D1C14AC0050B8EB /* QGHChangeNickNameViewController.m in Sources */,
 				411ADC481D1AC2F90050B8EB /* QGHPersonalInfoViewController.m in Sources */,
 				411ADC5A1D1C24F30050B8EB /* MMHSelectAddressView.m in Sources */,

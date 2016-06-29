@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+
+typedef NS_ENUM(NSInteger, QGHProductDetailPriceCellType) {
+    QGHProductDetailPriceCellTypeCommon,
+    QGHProductDetailPriceCellTypeCustomized,
+    QGHProductDetailPriceCellTypePurchase,
+    QGHProductDetailPriceCellTypeAppoint,
+};
+
+
 @interface QGHProductDetailPriceCell : UITableViewCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier type:(QGHProductDetailPriceCellType)type;
 
 @end
