@@ -62,4 +62,9 @@
 }
 
 
+- (void)setData:(QGHProductDetailModel *)model {
+//    self.priceLabel.text
+}
+
+
 @end

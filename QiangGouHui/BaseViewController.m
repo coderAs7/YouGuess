@@ -71,11 +71,11 @@
 - (void)presentLoginViewControllerWithSucceededHandler:(void(^)())succeededHandler
 {
     QGHLoginViewController *loginViewController = [[QGHLoginViewController alloc] init];
-//    if (succeededHandler) {
-//        loginViewController.succeededHandler = ^(MMHAccount *account) {
-//            succeededHandler();
-//        };
-//    }
+    if (succeededHandler) {
+        loginViewController.succeededHandler = ^(MMHAccount *account) {
+            succeededHandler();
+        };
+    }
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:loginViewController];
     if (self.navigationController != nil) {
         [self.navigationController presentViewController:navigationController animated:YES completion:^{

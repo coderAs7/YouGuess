@@ -43,14 +43,14 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 
@@ -72,7 +72,7 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
         _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), 220)];
         _headerView.backgroundColor = [QGHAppearance themeColor];
         [_headerView addSubview:self.loginButton];
-        [_headerView addSubview:self.personalView];
+//        [_headerView addSubview:self.personalView];
     }
     
      return _headerView;

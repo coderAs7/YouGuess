@@ -17,5 +17,7 @@
 #import "NSString+QSCalcSize.h"
 #import <Masonry.h>
 #import "AppAlertViewController.h"
+#import "QGHDefines.h"
+#import "MMHPullToRefresh.h"
 
 #endif

@@ -2,21 +2,18 @@
 //  QGHLocationManager.m
 //  QiangGouHui
 //
-//  Created by 姚驰 on 16/5/29.
-//  Copyright © 2016年 姚驰. All rights reserved.
+//  Created by 姚驰 on 16/7/3.
+//  Copyright © 2016年 SoftBank. All rights reserved.
 //
 
 #import "QGHLocationManager.h"
 #import <CoreLocation/CoreLocation.h>
 
-//typedef void(^CurrentAddressBlock)(AMapAddressComponent *addressComponent);
 
+@interface QGHLocationManager ()<CLLocationManagerDelegate>
 
-@interface QGHLocationManager ()
-
-
-//@property (nonatomic, copy) CurrentAddressBlock currentAddressBlock;
-
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, copy) NSString *city;
 
 @end
 
@@ -24,44 +21,90 @@
 @implementation QGHLocationManager
 
 
-+ (QGHLocationManager *)sharedLocationManager {
-    __strong static QGHLocationManager *_manager = nil;
-    static dispatch_once_t onceToken = 0;
-    dispatch_once(&onceToken, ^{
-        _manager = [[QGHLocationManager alloc] init];
++ (QGHLocationManager *)shareManager {
+    static dispatch_once_t pred = 0;
+    __strong static id _sharedObject = nil;
+    dispatch_once(&pred, ^{
+        _sharedObject = [[self alloc] init];
     });
-    
-    return _manager;
+    return _sharedObject;
 }
 
 
-+ (void)getArea {
-    
++ (void)startLocation {
+    [[self shareManager].locationManager startUpdatingLocation];
 }
 
 
-//- (void)getLocationCoordinate:(CurrentAddressBlock)currentAddressBlock {
-//    self.currentAddressBlock = currentAddressBlock;
-//    [self startLocation];
-//}
+- (instancetype)init {
+    self = [super init];
+    
+    if (self) {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        _locationManager.distanceFilter = 200;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+        if (ios8) {
+            [_locationManager requestAlwaysAuthorization];
+        }
+    }
+    
+    return self;
+}
 
 
-- (void)startLocation {
-//    if (IS_IOS8_LATER) {
-//        _locationManager = [[CLLocationManager alloc] init];
-//        _locationManager.delegate = self;
-//        _locationManager.distanceFilter = 200;
-//        _locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
-//    } else {
-//        if (_mapView) {
-//            _mapView = nil;
-//        }
-//        
-//        _mapView = [[MKMapView alloc] init];
-//        _mapView.delegate = self;
-//        _mapView.showsUserLocation = YES;
+- (NSString *)currentCity {
+    if ([_city hasSuffix:@"市"]) {
+        return [_city stringByReplacingOccurrencesOfString:@"市" withString:@""];
+    }
+    
+    return _city;
+}
+
+
+#pragma mark - CLLocationManagerDelegate
+
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations {
+    CLLocation *currentLocation = [locations lastObject];
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        CLPlacemark *placemark = placemarks[0];
+        NSString *city = placemark.locality;
+        if (!city) {
+            city = placemark.administrativeArea;
+        }
+        _city = city;
+        [_locationManager stopUpdatingLocation];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MMHCurrentLocationNotification object:nil];
+    }];
+}
+
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    switch (status) {
+        case kCLAuthorizationStatusDenied : {
+//            if ([[MMHTool userDefaultGetWithKey:MMHIsOpenLocation] isEqualToString:@"No"]) {
+                UIAlertView *tempA = [[UIAlertView alloc] initWithTitle:@"当前定位服务未打开，可能会影响商品价格变化，小主去设置吧" message:@"方法：设置-隐私-定位服务-妈妈好-选择“始终”" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+                [tempA show];
+            /*}*/ break;
+        }
+        case kCLAuthorizationStatusNotDetermined:
+            if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+                [_locationManager requestAlwaysAuthorization];
+            }
+            break;
+        case kCLAuthorizationStatusRestricted:{
+            UIAlertView *tempA = [[UIAlertView alloc] initWithTitle:@"提醒" message:@"定位服务无法使用！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [tempA show];
+        }
+        default:
+            [self.locationManager startUpdatingLocation];
+            break;
+    }
+    
+//    if ([[MMHTool userDefaultGetWithKey:MMHIsOpenLocation] isEqualToString:@"No"]) {
+//        [MMHTool userDefaulteWithKey:MMHIsOpenLocation Obj:@"Yes"];
 //    }
 }
-
-
 @end

@@ -29,7 +29,8 @@
     _goodsImg = [[MMHImageView alloc] init];
     [self.goodsImgBackView addSubview:_goodsImg];
     [_goodsImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.and.with.equalTo(self.goodsImgBackView);
+        make.height.equalTo(self.goodsImgBackView);
+        make.width.equalTo(self.goodsImgBackView);
         make.left.and.top.mas_equalTo(0);
     }];
     
@@ -41,5 +42,13 @@
     
     self.separator.backgroundColor = [QGHAppearance backgroundColor];
 }
+
+- (void)setGoodsModel:(QGHFirstPageGoodsModel *)model {
+    [self.goodsImg updateViewWithImageAtURL:model.img_path];
+    self.nameLabel.text = model.title;
+    self.desLabel.text = model.sub_title;
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%ld", (long)model.original_price];
+}
+
 
 @end

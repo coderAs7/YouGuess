@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		411ADC3E1D1835370050B8EB /* QGHRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC3D1D1835370050B8EB /* QGHRegisterViewController.m */; };
 		411ADC411D184D6D0050B8EB /* VerificationCodeTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC401D184D6D0050B8EB /* VerificationCodeTimer.swift */; };
-		411ADC451D1AC07F0050B8EB /* QGHProductDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC441D1AC07F0050B8EB /* QGHProductDetailViewController.m */; };
 		411ADC481D1AC2F90050B8EB /* QGHPersonalInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC471D1AC2F90050B8EB /* QGHPersonalInfoViewController.m */; };
 		411ADC4B1D1AD1B70050B8EB /* QGHNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC4A1D1AD1B70050B8EB /* QGHNavigationController.m */; };
 		411ADC4F1D1AF22C0050B8EB /* AppAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC4E1D1AF22C0050B8EB /* AppAlertViewController.m */; };
@@ -75,6 +74,31 @@
 		41DC07B41D24064600DDC5DD /* MMHDeleteLineLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07B31D24064600DDC5DD /* MMHDeleteLineLabel.m */; };
 		41DC07B81D24103D00DDC5DD /* QGHProductDetailCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07B61D24103D00DDC5DD /* QGHProductDetailCommentCell.m */; };
 		41DC07B91D24103D00DDC5DD /* QGHProductDetailCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41DC07B71D24103D00DDC5DD /* QGHProductDetailCommentCell.xib */; };
+		41DC07C91D26B0ED00DDC5DD /* QGHProductDetailInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07C71D26B0ED00DDC5DD /* QGHProductDetailInfoCell.m */; };
+		41DC07CA1D26B0ED00DDC5DD /* QGHProductDetailInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41DC07C81D26B0ED00DDC5DD /* QGHProductDetailInfoCell.xib */; };
+		41DC07CD1D26BD1300DDC5DD /* QGHProductDetailVIewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07CC1D26BD1300DDC5DD /* QGHProductDetailVIewController.m */; };
+		41DC07D21D27547000DDC5DD /* QGHConfirmOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07D11D27547000DDC5DD /* QGHConfirmOrderViewController.m */; };
+		41DC07D81D27927500DDC5DD /* QGHCartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07D61D27927500DDC5DD /* QGHCartCell.m */; };
+		41DC07D91D27927500DDC5DD /* QGHCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41DC07D71D27927500DDC5DD /* QGHCartCell.xib */; };
+		41DC07E11D28ABFD00DDC5DD /* MMHNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07DC1D28ABFD00DDC5DD /* MMHNetworkEngine.m */; };
+		41DC07E21D28ABFD00DDC5DD /* MMHRequestSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07DE1D28ABFD00DDC5DD /* MMHRequestSerializer.m */; };
+		41DC07E31D28ABFD00DDC5DD /* MMHResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07E01D28ABFD00DDC5DD /* MMHResponseSerializer.m */; };
+		41DC07E61D28AC9100DDC5DD /* MMHNetworkAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07E51D28AC9100DDC5DD /* MMHNetworkAdapter.m */; };
+		41DC07E91D28BC4F00DDC5DD /* MMHNetworkAdapter+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07E81D28BC4F00DDC5DD /* MMHNetworkAdapter+Login.m */; };
+		41DC07ED1D28F74400DDC5DD /* MMHAccountSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07EC1D28F74400DDC5DD /* MMHAccountSession.m */; };
+		41DC07F01D28F79E00DDC5DD /* MMHAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07EF1D28F79E00DDC5DD /* MMHAccount.m */; };
+		41DC07F61D2950C400DDC5DD /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41DC07F51D2950C400DDC5DD /* citydict.plist */; };
+		41DC07F91D2950E100DDC5DD /* CityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07F81D2950E100DDC5DD /* CityListViewController.m */; };
+		41DC07FC1D295E3900DDC5DD /* MMHNetworkAdapter+FirstPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC07FB1D295E3900DDC5DD /* MMHNetworkAdapter+FirstPage.m */; };
+		41DC08031D29623300DDC5DD /* QGHFirstPageGoodsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC08021D29623300DDC5DD /* QGHFirstPageGoodsModel.m */; };
+		41DC08061D29679800DDC5DD /* MMHTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC08051D29679800DDC5DD /* MMHTimeline.m */; };
+		41DC08091D29687A00DDC5DD /* QGHFirstPageGoodsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC08081D29687A00DDC5DD /* QGHFirstPageGoodsList.m */; };
+		41DC080C1D2A945B00DDC5DD /* MMHPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC080B1D2A945B00DDC5DD /* MMHPullToRefresh.m */; };
+		41DC080F1D2AA25400DDC5DD /* MMHNetworkAdapter+Product.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC080E1D2AA25400DDC5DD /* MMHNetworkAdapter+Product.m */; };
+		41DC08131D2AA40600DDC5DD /* QGHProductDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC08121D2AA40600DDC5DD /* QGHProductDetailModel.m */; };
+		41DC08161D2AA42A00DDC5DD /* QGHSKUCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC08151D2AA42A00DDC5DD /* QGHSKUCategory.m */; };
+		41DC08191D2AA43800DDC5DD /* QGHSKUPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC08181D2AA43800DDC5DD /* QGHSKUPrice.m */; };
+		41DC081C1D2AA45300DDC5DD /* QGHProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC081B1D2AA45300DDC5DD /* QGHProductInfo.m */; };
 		D1BC298755BEA9C0E319311F /* libPods-QiangGouHui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67968EB60CF93479054CD498 /* libPods-QiangGouHui.a */; };
 /* End PBXBuildFile section */
 
@@ -83,8 +107,6 @@
 		411ADC3C1D1835370050B8EB /* QGHRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHRegisterViewController.h; sourceTree = "<group>"; };
 		411ADC3D1D1835370050B8EB /* QGHRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHRegisterViewController.m; sourceTree = "<group>"; };
 		411ADC401D184D6D0050B8EB /* VerificationCodeTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationCodeTimer.swift; sourceTree = "<group>"; };
-		411ADC431D1AC07F0050B8EB /* QGHProductDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductDetailViewController.h; sourceTree = "<group>"; };
-		411ADC441D1AC07F0050B8EB /* QGHProductDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductDetailViewController.m; sourceTree = "<group>"; };
 		411ADC461D1AC2F90050B8EB /* QGHPersonalInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHPersonalInfoViewController.h; sourceTree = "<group>"; };
 		411ADC471D1AC2F90050B8EB /* QGHPersonalInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHPersonalInfoViewController.m; sourceTree = "<group>"; };
 		411ADC491D1AD1B70050B8EB /* QGHNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHNavigationController.h; sourceTree = "<group>"; };
@@ -205,6 +227,54 @@
 		41DC07B51D24103D00DDC5DD /* QGHProductDetailCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductDetailCommentCell.h; sourceTree = "<group>"; };
 		41DC07B61D24103D00DDC5DD /* QGHProductDetailCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductDetailCommentCell.m; sourceTree = "<group>"; };
 		41DC07B71D24103D00DDC5DD /* QGHProductDetailCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QGHProductDetailCommentCell.xib; sourceTree = "<group>"; };
+		41DC07BD1D26A48500DDC5DD /* QGHDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QGHDefines.h; sourceTree = "<group>"; };
+		41DC07C61D26B0ED00DDC5DD /* QGHProductDetailInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductDetailInfoCell.h; sourceTree = "<group>"; };
+		41DC07C71D26B0ED00DDC5DD /* QGHProductDetailInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductDetailInfoCell.m; sourceTree = "<group>"; };
+		41DC07C81D26B0ED00DDC5DD /* QGHProductDetailInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QGHProductDetailInfoCell.xib; sourceTree = "<group>"; };
+		41DC07CB1D26BD1300DDC5DD /* QGHProductDetailVIewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductDetailVIewController.h; sourceTree = "<group>"; };
+		41DC07CC1D26BD1300DDC5DD /* QGHProductDetailVIewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductDetailVIewController.m; sourceTree = "<group>"; };
+		41DC07D01D27547000DDC5DD /* QGHConfirmOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHConfirmOrderViewController.h; sourceTree = "<group>"; };
+		41DC07D11D27547000DDC5DD /* QGHConfirmOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHConfirmOrderViewController.m; sourceTree = "<group>"; };
+		41DC07D51D27927500DDC5DD /* QGHCartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHCartCell.h; sourceTree = "<group>"; };
+		41DC07D61D27927500DDC5DD /* QGHCartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHCartCell.m; sourceTree = "<group>"; };
+		41DC07D71D27927500DDC5DD /* QGHCartCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QGHCartCell.xib; sourceTree = "<group>"; };
+		41DC07DB1D28ABFD00DDC5DD /* MMHNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHNetworkEngine.h; sourceTree = "<group>"; };
+		41DC07DC1D28ABFD00DDC5DD /* MMHNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHNetworkEngine.m; sourceTree = "<group>"; };
+		41DC07DD1D28ABFD00DDC5DD /* MMHRequestSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHRequestSerializer.h; sourceTree = "<group>"; };
+		41DC07DE1D28ABFD00DDC5DD /* MMHRequestSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHRequestSerializer.m; sourceTree = "<group>"; };
+		41DC07DF1D28ABFD00DDC5DD /* MMHResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHResponseSerializer.h; sourceTree = "<group>"; };
+		41DC07E01D28ABFD00DDC5DD /* MMHResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHResponseSerializer.m; sourceTree = "<group>"; };
+		41DC07E41D28AC9100DDC5DD /* MMHNetworkAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHNetworkAdapter.h; sourceTree = "<group>"; };
+		41DC07E51D28AC9100DDC5DD /* MMHNetworkAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHNetworkAdapter.m; sourceTree = "<group>"; };
+		41DC07E71D28BC4F00DDC5DD /* MMHNetworkAdapter+Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMHNetworkAdapter+Login.h"; sourceTree = "<group>"; };
+		41DC07E81D28BC4F00DDC5DD /* MMHNetworkAdapter+Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMHNetworkAdapter+Login.m"; sourceTree = "<group>"; };
+		41DC07EB1D28F74400DDC5DD /* MMHAccountSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHAccountSession.h; sourceTree = "<group>"; };
+		41DC07EC1D28F74400DDC5DD /* MMHAccountSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHAccountSession.m; sourceTree = "<group>"; };
+		41DC07EE1D28F79E00DDC5DD /* MMHAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHAccount.h; sourceTree = "<group>"; };
+		41DC07EF1D28F79E00DDC5DD /* MMHAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHAccount.m; sourceTree = "<group>"; };
+		41DC07F51D2950C400DDC5DD /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = citydict.plist; sourceTree = "<group>"; };
+		41DC07F71D2950E100DDC5DD /* CityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CityListViewController.h; sourceTree = "<group>"; };
+		41DC07F81D2950E100DDC5DD /* CityListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CityListViewController.m; sourceTree = "<group>"; };
+		41DC07FA1D295E3900DDC5DD /* MMHNetworkAdapter+FirstPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMHNetworkAdapter+FirstPage.h"; sourceTree = "<group>"; };
+		41DC07FB1D295E3900DDC5DD /* MMHNetworkAdapter+FirstPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMHNetworkAdapter+FirstPage.m"; sourceTree = "<group>"; };
+		41DC08011D29623300DDC5DD /* QGHFirstPageGoodsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHFirstPageGoodsModel.h; sourceTree = "<group>"; };
+		41DC08021D29623300DDC5DD /* QGHFirstPageGoodsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHFirstPageGoodsModel.m; sourceTree = "<group>"; };
+		41DC08041D29679800DDC5DD /* MMHTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHTimeline.h; sourceTree = "<group>"; };
+		41DC08051D29679800DDC5DD /* MMHTimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHTimeline.m; sourceTree = "<group>"; };
+		41DC08071D29687A00DDC5DD /* QGHFirstPageGoodsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHFirstPageGoodsList.h; sourceTree = "<group>"; };
+		41DC08081D29687A00DDC5DD /* QGHFirstPageGoodsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHFirstPageGoodsList.m; sourceTree = "<group>"; };
+		41DC080A1D2A945B00DDC5DD /* MMHPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHPullToRefresh.h; sourceTree = "<group>"; };
+		41DC080B1D2A945B00DDC5DD /* MMHPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHPullToRefresh.m; sourceTree = "<group>"; };
+		41DC080D1D2AA25400DDC5DD /* MMHNetworkAdapter+Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMHNetworkAdapter+Product.h"; sourceTree = "<group>"; };
+		41DC080E1D2AA25400DDC5DD /* MMHNetworkAdapter+Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMHNetworkAdapter+Product.m"; sourceTree = "<group>"; };
+		41DC08111D2AA40600DDC5DD /* QGHProductDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductDetailModel.h; sourceTree = "<group>"; };
+		41DC08121D2AA40600DDC5DD /* QGHProductDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductDetailModel.m; sourceTree = "<group>"; };
+		41DC08141D2AA42A00DDC5DD /* QGHSKUCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHSKUCategory.h; sourceTree = "<group>"; };
+		41DC08151D2AA42A00DDC5DD /* QGHSKUCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHSKUCategory.m; sourceTree = "<group>"; };
+		41DC08171D2AA43800DDC5DD /* QGHSKUPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHSKUPrice.h; sourceTree = "<group>"; };
+		41DC08181D2AA43800DDC5DD /* QGHSKUPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHSKUPrice.m; sourceTree = "<group>"; };
+		41DC081A1D2AA45300DDC5DD /* QGHProductInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductInfo.h; sourceTree = "<group>"; };
+		41DC081B1D2AA45300DDC5DD /* QGHProductInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductInfo.m; sourceTree = "<group>"; };
 		67968EB60CF93479054CD498 /* libPods-QiangGouHui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QiangGouHui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9BECC3B9212C2BF0AD13B4F /* Pods-QiangGouHui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiangGouHui.release.xcconfig"; path = "Pods/Target Support Files/Pods-QiangGouHui/Pods-QiangGouHui.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -227,15 +297,6 @@
 				411ADC401D184D6D0050B8EB /* VerificationCodeTimer.swift */,
 			);
 			name = Tools;
-			sourceTree = "<group>";
-		};
-		411ADC421D1AC05D0050B8EB /* ProductDetail */ = {
-			isa = PBXGroup;
-			children = (
-				411ADC431D1AC07F0050B8EB /* QGHProductDetailViewController.h */,
-				411ADC441D1AC07F0050B8EB /* QGHProductDetailViewController.m */,
-			);
-			name = ProductDetail;
 			sourceTree = "<group>";
 		};
 		411ADC4C1D1AF21A0050B8EB /* Controllers */ = {
@@ -269,6 +330,8 @@
 		411ADC601D1C25F20050B8EB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				41DC07F11D2914EB00DDC5DD /* Location */,
+				41DC07EA1D28F73400DDC5DD /* Account */,
 				41DC077E1D1E680E00DDC5DD /* MMHetchModelProperty.h */,
 				41DC077F1D1E680E00DDC5DD /* MMHetchModelProperty.m */,
 				411ADC611D1C26000050B8EB /* MMHFetchModel.h */,
@@ -290,6 +353,8 @@
 		411ADC6D1D1C47140050B8EB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				41DC07F71D2950E100DDC5DD /* CityListViewController.h */,
+				41DC07F81D2950E100DDC5DD /* CityListViewController.m */,
 				411ADC6E1D1C473B0050B8EB /* QGHReceiptAddressViewController.h */,
 				411ADC6F1D1C473B0050B8EB /* QGHReceiptAddressViewController.m */,
 			);
@@ -299,6 +364,7 @@
 		4159553E1D04636B00AC2BD4 /* FirstPage */ = {
 			isa = PBXGroup;
 			children = (
+				41DC07FD1D2961FF00DDC5DD /* Model */,
 				415955461D0465F100AC2BD4 /* View */,
 				415955451D0465E800AC2BD4 /* Controller */,
 			);
@@ -370,8 +436,8 @@
 		41BEEB321D0F084500612F88 /* Cart */ = {
 			isa = PBXGroup;
 			children = (
-				41BEEB331D0F086100612F88 /* QGHCartViewController.h */,
-				41BEEB341D0F086100612F88 /* QGHCartViewController.m */,
+				41DC07D41D27920500DDC5DD /* View */,
+				41DC07D31D2791F800DDC5DD /* Controller */,
 			);
 			name = Cart;
 			sourceTree = "<group>";
@@ -428,10 +494,10 @@
 		41BF0FAE1CFB504700FB23C2 /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				41DC07CE1D27543B00DDC5DD /* ConfirmOrder */,
 				41DC07A91D2003EF00DDC5DD /* Product */,
 				41DC076F1D1E561400DDC5DD /* Order */,
 				411ADC5B1D1C25800050B8EB /* Address */,
-				411ADC421D1AC05D0050B8EB /* ProductDetail */,
 				41C64C6E1D181BD300E22E5B /* Account */,
 				4159553E1D04636B00AC2BD4 /* FirstPage */,
 				41DA4ADF1D16F18000A8E42D /* Chat */,
@@ -445,6 +511,15 @@
 		41BF0FAF1CFB504F00FB23C2 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				41DC07DA1D28ABE900DDC5DD /* Engine */,
+				41DC07E41D28AC9100DDC5DD /* MMHNetworkAdapter.h */,
+				41DC07E51D28AC9100DDC5DD /* MMHNetworkAdapter.m */,
+				41DC07E71D28BC4F00DDC5DD /* MMHNetworkAdapter+Login.h */,
+				41DC07E81D28BC4F00DDC5DD /* MMHNetworkAdapter+Login.m */,
+				41DC07FA1D295E3900DDC5DD /* MMHNetworkAdapter+FirstPage.h */,
+				41DC07FB1D295E3900DDC5DD /* MMHNetworkAdapter+FirstPage.m */,
+				41DC080D1D2AA25400DDC5DD /* MMHNetworkAdapter+Product.h */,
+				41DC080E1D2AA25400DDC5DD /* MMHNetworkAdapter+Product.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -455,6 +530,8 @@
 				41DC07841D1E704A00DDC5DD /* SegmentControl */,
 				411ADC4C1D1AF21A0050B8EB /* Controllers */,
 				41B3F3F91CFC93860007195B /* Category */,
+				41DC08041D29679800DDC5DD /* MMHTimeline.h */,
+				41DC08051D29679800DDC5DD /* MMHTimeline.m */,
 				41B3F3F51CFC8A670007195B /* MMHAssistant.h */,
 				41B3F3F61CFC8A670007195B /* MMHAssistant.m */,
 				41B3F3F21CFC87010007195B /* MMHImageView.h */,
@@ -464,6 +541,9 @@
 				41BF0FB41CFB50C000FB23C2 /* QGHConstants.h */,
 				41B3F3FD1CFC948C0007195B /* QGHAppearance.h */,
 				41B3F3FE1CFC948C0007195B /* QGHAppearance.m */,
+				41DC07BD1D26A48500DDC5DD /* QGHDefines.h */,
+				41DC080A1D2A945B00DDC5DD /* MMHPullToRefresh.h */,
+				41DC080B1D2A945B00DDC5DD /* MMHPullToRefresh.m */,
 			);
 			name = Utilites;
 			sourceTree = "<group>";
@@ -471,7 +551,6 @@
 		41BF0FB11CFB507900FB23C2 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				41BF0FB51CFB50CC00FB23C2 /* Location */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -488,17 +567,9 @@
 		41BF0FB31CFB509700FB23C2 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				41DC07F51D2950C400DDC5DD /* citydict.plist */,
 			);
 			name = Resource;
-			sourceTree = "<group>";
-		};
-		41BF0FB51CFB50CC00FB23C2 /* Location */ = {
-			isa = PBXGroup;
-			children = (
-				41BF0FB61CFB50D600FB23C2 /* QGHLocationManager.h */,
-				41BF0FB71CFB50D600FB23C2 /* QGHLocationManager.m */,
-			);
-			name = Location;
 			sourceTree = "<group>";
 		};
 		41C64C6E1D181BD300E22E5B /* Account */ = {
@@ -631,6 +702,7 @@
 		41DC07A91D2003EF00DDC5DD /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				41DC08101D2AA3EC00DDC5DD /* Model */,
 				41DC07AE1D2004AB00DDC5DD /* Controller */,
 				41DC07AD1D2004A000DDC5DD /* View */,
 			);
@@ -647,6 +719,9 @@
 				41DC07B51D24103D00DDC5DD /* QGHProductDetailCommentCell.h */,
 				41DC07B61D24103D00DDC5DD /* QGHProductDetailCommentCell.m */,
 				41DC07B71D24103D00DDC5DD /* QGHProductDetailCommentCell.xib */,
+				41DC07C61D26B0ED00DDC5DD /* QGHProductDetailInfoCell.h */,
+				41DC07C71D26B0ED00DDC5DD /* QGHProductDetailInfoCell.m */,
+				41DC07C81D26B0ED00DDC5DD /* QGHProductDetailInfoCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -654,8 +729,105 @@
 		41DC07AE1D2004AB00DDC5DD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				41DC07CB1D26BD1300DDC5DD /* QGHProductDetailVIewController.h */,
+				41DC07CC1D26BD1300DDC5DD /* QGHProductDetailVIewController.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		41DC07CE1D27543B00DDC5DD /* ConfirmOrder */ = {
+			isa = PBXGroup;
+			children = (
+				41DC07CF1D27545A00DDC5DD /* Controller */,
+			);
+			name = ConfirmOrder;
+			sourceTree = "<group>";
+		};
+		41DC07CF1D27545A00DDC5DD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				41DC07D01D27547000DDC5DD /* QGHConfirmOrderViewController.h */,
+				41DC07D11D27547000DDC5DD /* QGHConfirmOrderViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		41DC07D31D2791F800DDC5DD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				41BEEB331D0F086100612F88 /* QGHCartViewController.h */,
+				41BEEB341D0F086100612F88 /* QGHCartViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		41DC07D41D27920500DDC5DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				41DC07D51D27927500DDC5DD /* QGHCartCell.h */,
+				41DC07D61D27927500DDC5DD /* QGHCartCell.m */,
+				41DC07D71D27927500DDC5DD /* QGHCartCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		41DC07DA1D28ABE900DDC5DD /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				41DC07DB1D28ABFD00DDC5DD /* MMHNetworkEngine.h */,
+				41DC07DC1D28ABFD00DDC5DD /* MMHNetworkEngine.m */,
+				41DC07DD1D28ABFD00DDC5DD /* MMHRequestSerializer.h */,
+				41DC07DE1D28ABFD00DDC5DD /* MMHRequestSerializer.m */,
+				41DC07DF1D28ABFD00DDC5DD /* MMHResponseSerializer.h */,
+				41DC07E01D28ABFD00DDC5DD /* MMHResponseSerializer.m */,
+			);
+			name = Engine;
+			sourceTree = "<group>";
+		};
+		41DC07EA1D28F73400DDC5DD /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				41DC07EE1D28F79E00DDC5DD /* MMHAccount.h */,
+				41DC07EF1D28F79E00DDC5DD /* MMHAccount.m */,
+				41DC07EB1D28F74400DDC5DD /* MMHAccountSession.h */,
+				41DC07EC1D28F74400DDC5DD /* MMHAccountSession.m */,
+			);
+			name = Account;
+			sourceTree = "<group>";
+		};
+		41DC07F11D2914EB00DDC5DD /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				41BF0FB61CFB50D600FB23C2 /* QGHLocationManager.h */,
+				41BF0FB71CFB50D600FB23C2 /* QGHLocationManager.m */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
+		41DC07FD1D2961FF00DDC5DD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				41DC08011D29623300DDC5DD /* QGHFirstPageGoodsModel.h */,
+				41DC08021D29623300DDC5DD /* QGHFirstPageGoodsModel.m */,
+				41DC08071D29687A00DDC5DD /* QGHFirstPageGoodsList.h */,
+				41DC08081D29687A00DDC5DD /* QGHFirstPageGoodsList.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		41DC08101D2AA3EC00DDC5DD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				41DC08111D2AA40600DDC5DD /* QGHProductDetailModel.h */,
+				41DC08121D2AA40600DDC5DD /* QGHProductDetailModel.m */,
+				41DC08141D2AA42A00DDC5DD /* QGHSKUCategory.h */,
+				41DC08151D2AA42A00DDC5DD /* QGHSKUCategory.m */,
+				41DC08171D2AA43800DDC5DD /* QGHSKUPrice.h */,
+				41DC08181D2AA43800DDC5DD /* QGHSKUPrice.m */,
+				41DC081A1D2AA45300DDC5DD /* QGHProductInfo.h */,
+				41DC081B1D2AA45300DDC5DD /* QGHProductInfo.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		784FAF7F814C9758168FAB42 /* Frameworks */ = {
@@ -738,8 +910,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				41DA4AD51D15962000A8E42D /* QGHCommonCellTableViewCell.xib in Resources */,
+				41DC07D91D27927500DDC5DD /* QGHCartCell.xib in Resources */,
 				41BF0FA71CFB4F6100FB23C2 /* LaunchScreen.storyboard in Resources */,
 				41BEEB291D0D9A6A00612F88 /* QGHGoodsTableViewCell.xib in Resources */,
+				41DC07CA1D26B0ED00DDC5DD /* QGHProductDetailInfoCell.xib in Resources */,
+				41DC07F61D2950C400DDC5DD /* citydict.plist in Resources */,
 				41DC079D1D1FA36400DDC5DD /* QGHOrderDetailProductCell.xib in Resources */,
 				4159554B1D04685D00AC2BD4 /* QGHFirstBannerCell.xib in Resources */,
 				411ADC691D1C2BA20050B8EB /* QGHReceiptAddressCell.xib in Resources */,
@@ -808,25 +983,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41DC07FC1D295E3900DDC5DD /* MMHNetworkAdapter+FirstPage.m in Sources */,
 				41DA4ADE1D159B5000A8E42D /* MMHPersonalCenterAllOrderCell.m in Sources */,
+				41DC07ED1D28F74400DDC5DD /* MMHAccountSession.m in Sources */,
 				41B3F3FC1CFC93940007195B /* UIView+StringTag.m in Sources */,
 				41DC07A31D1FBFB900DDC5DD /* QGHLogisticsDetailViewController.m in Sources */,
 				41B3F4061CFC98E70007195B /* BaseViewController.m in Sources */,
+				41DC07CD1D26BD1300DDC5DD /* QGHProductDetailVIewController.m in Sources */,
 				41DC07871D1E705800DDC5DD /* MMHUnderlinedSegmentedControl.m in Sources */,
 				41BF0F9F1CFB4F6100FB23C2 /* ViewController.m in Sources */,
 				411ADC6C1D1C32610050B8EB /* QGHReceiptAddressCell.m in Sources */,
-				411ADC451D1AC07F0050B8EB /* QGHProductDetailViewController.m in Sources */,
 				41DA4ACE1D1594BE00A8E42D /* QGHPersonalCenterViewController.m in Sources */,
+				41DC08191D2AA43800DDC5DD /* QGHSKUPrice.m in Sources */,
 				41BEEB351D0F086100612F88 /* QGHCartViewController.m in Sources */,
 				41DC077B1D1E581C00DDC5DD /* QGHOrderListCell.m in Sources */,
 				411ADC4F1D1AF22C0050B8EB /* AppAlertViewController.m in Sources */,
 				411ADC631D1C26000050B8EB /* MMHFetchModel.m in Sources */,
 				4159554A1D04685D00AC2BD4 /* QGHFirstBannerCell.m in Sources */,
+				41DC07E31D28ABFD00DDC5DD /* MMHResponseSerializer.m in Sources */,
 				41DC07B41D24064600DDC5DD /* MMHDeleteLineLabel.m in Sources */,
 				411ADC4B1D1AD1B70050B8EB /* QGHNavigationController.m in Sources */,
 				41BEEB211D0D979E00612F88 /* QGHRushPurchaseItemsCell.m in Sources */,
+				41DC08161D2AA42A00DDC5DD /* QGHSKUCategory.m in Sources */,
 				41BEEB281D0D9A6A00612F88 /* QGHGoodsTableViewCell.m in Sources */,
 				41B3F4021CFC97230007195B /* NSString+QSCalcSize.m in Sources */,
+				41DC07E91D28BC4F00DDC5DD /* MMHNetworkAdapter+Login.m in Sources */,
 				41DC07AC1D2003FC00DDC5DD /* MMHProductDetailHeaderCell.m in Sources */,
 				41DA4AD41D15962000A8E42D /* QGHCommonCellTableViewCell.m in Sources */,
 				41B3F3FF1CFC948C0007195B /* QGHAppearance.m in Sources */,
@@ -835,14 +1016,19 @@
 				41BEEB2C1D0EF82400612F88 /* QGHGoodsHeaderView.m in Sources */,
 				41DC07831D1E683600DDC5DD /* QGHOrderListItem.m in Sources */,
 				415955411D04639900AC2BD4 /* QGHFirstViewController.m in Sources */,
+				41DC07F01D28F79E00DDC5DD /* MMHAccount.m in Sources */,
 				41DC07971D1E810D00DDC5DD /* QGHOrderAddressCellTableViewCell.m in Sources */,
+				41DC08131D2AA40600DDC5DD /* QGHProductDetailModel.m in Sources */,
+				41DC07D21D27547000DDC5DD /* QGHConfirmOrderViewController.m in Sources */,
 				41BF0F9C1CFB4F6100FB23C2 /* AppDelegate.m in Sources */,
 				41DC078D1D1E7D9A00DDC5DD /* MMHOrderInfoTableViewCell.m in Sources */,
 				41B3F4091CFCA0830007195B /* QGHTabBarController.m in Sources */,
+				41DC08091D29687A00DDC5DD /* QGHFirstPageGoodsList.m in Sources */,
 				41DA4AE21D16F31300A8E42D /* QGHChatViewController.m in Sources */,
 				411ADC3E1D1835370050B8EB /* QGHRegisterViewController.m in Sources */,
 				41DC07801D1E680E00DDC5DD /* MMHetchModelProperty.m in Sources */,
 				41BF0F991CFB4F6100FB23C2 /* main.m in Sources */,
+				41DC07C91D26B0ED00DDC5DD /* QGHProductDetailInfoCell.m in Sources */,
 				411ADC411D184D6D0050B8EB /* VerificationCodeTimer.swift in Sources */,
 				41C64C6D1D181AF300E22E5B /* AdView.m in Sources */,
 				41DC07B81D24103D00DDC5DD /* QGHProductDetailCommentCell.m in Sources */,
@@ -853,16 +1039,26 @@
 				411ADC701D1C473B0050B8EB /* QGHReceiptAddressViewController.m in Sources */,
 				41DC079C1D1FA36400DDC5DD /* QGHOrderDetailProductCell.m in Sources */,
 				415955441D0465E500AC2BD4 /* QGHBannerCell.m in Sources */,
+				41DC07E11D28ABFD00DDC5DD /* MMHNetworkEngine.m in Sources */,
 				41DC07A01D1FA88500DDC5DD /* QGHOrderDetailCommonCell.m in Sources */,
 				411ADC5F1D1C25B80050B8EB /* MMHAddressSingleModel.m in Sources */,
 				41B3F3F41CFC87010007195B /* MMHImageView.m in Sources */,
+				41DC08061D29679800DDC5DD /* MMHTimeline.m in Sources */,
+				41DC07F91D2950E100DDC5DD /* CityListViewController.m in Sources */,
+				41DC07D81D27927500DDC5DD /* QGHCartCell.m in Sources */,
 				41BF0FB81CFB50D600FB23C2 /* QGHLocationManager.m in Sources */,
 				41BEEB311D0F06FE00612F88 /* Stepper.swift in Sources */,
+				41DC07E21D28ABFD00DDC5DD /* MMHRequestSerializer.m in Sources */,
+				41DC080F1D2AA25400DDC5DD /* MMHNetworkAdapter+Product.m in Sources */,
 				41DC07A71D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.m in Sources */,
 				41C64C721D181C0300E22E5B /* QGHLoginViewController.m in Sources */,
 				415955511D046DC800AC2BD4 /* QGHRushPurchaseItemView.m in Sources */,
 				41DC07721D1E566F00DDC5DD /* QGHOrderListViewController.m in Sources */,
 				41DA4AE51D16FDEF00A8E42D /* QGHSegmentedControl.m in Sources */,
+				41DC081C1D2AA45300DDC5DD /* QGHProductInfo.m in Sources */,
+				41DC07E61D28AC9100DDC5DD /* MMHNetworkAdapter.m in Sources */,
+				41DC08031D29623300DDC5DD /* QGHFirstPageGoodsModel.m in Sources */,
+				41DC080C1D2A945B00DDC5DD /* MMHPullToRefresh.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -968,6 +1164,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QiangGouHui/QGH-Prefix.pch";
@@ -987,6 +1184,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: yaochi330@icloud.com (2KZ52NRRAF)";
 				DEFINES_MODULE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/QiangGouHui/QGH-Prefix.pch";

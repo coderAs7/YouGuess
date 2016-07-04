@@ -186,15 +186,18 @@
     
     if (_imageLinkURL.count == 1) {
         [_centerImageView sd_setImageWithURL:imageLinkURL[centerImageIndex] placeholderImage:self.placeHoldImage];
-        _adScrollView.userInteractionEnabled = NO;
+//        _adScrollView.userInteractionEnabled = NO;
+        _adScrollView.scrollEnabled = NO;
         _isNeedCycleRoll = NO;
     }else if (_imageLinkURL.count == 2){
         [_leftImageView sd_setImageWithURL:imageLinkURL[leftImageIndex] placeholderImage:self.placeHoldImage];
         [_centerImageView sd_setImageWithURL:imageLinkURL[centerImageIndex] placeholderImage:self.placeHoldImage];
+        _adScrollView.scrollEnabled = YES;
     }else{
         [_leftImageView sd_setImageWithURL:imageLinkURL[leftImageIndex] placeholderImage:self.placeHoldImage];
         [_centerImageView sd_setImageWithURL:imageLinkURL[centerImageIndex] placeholderImage:self.placeHoldImage];
         [_rightImageView sd_setImageWithURL:imageLinkURL[rightImageIndex] placeholderImage:self.placeHoldImage];
+        _adScrollView.scrollEnabled = YES;
     }
 }
 

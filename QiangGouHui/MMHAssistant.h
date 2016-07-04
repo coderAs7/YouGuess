@@ -32,6 +32,7 @@ extern NSString *const MMHUserPersonalInformationChangedNotification;
 
 extern NSString *const MMHUnreadMessageCountDidChangeNotification;
 
+extern NSString *const MMHCurrentLocationNotification;
 
 extern BOOL MMHUsingAPIMamahaoCom();
 

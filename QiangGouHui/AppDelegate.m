@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "QGHTabBarController.h"
+#import "QGHLocationManager.h"
+#import "MMHAccountSession.h"
+
 
 @interface AppDelegate ()
 
@@ -17,6 +20,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [QGHLocationManager startLocation];
+    [MMHAccountSession start];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

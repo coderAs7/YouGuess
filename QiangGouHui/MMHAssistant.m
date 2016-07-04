@@ -24,6 +24,7 @@ NSString *const MMHUserPersonalInformationChangedNotification = @"MMHUserPersona
 
 NSString *const MMHUnreadMessageCountDidChangeNotification = @"MMHUnreadMessageCountDidChangeNotification";
 
+NSString *const MMHCurrentLocationNotification = @"MMHCurrentLocationNotification";
 
 BOOL MMHUsingAPIMamahaoCom() {
 #if defined (API_MAMAHAO_COM)

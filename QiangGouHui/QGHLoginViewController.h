@@ -8,6 +8,12 @@
 
 #import "BaseViewController.h"
 
+
+@class MMHAccount;
+
+
 @interface QGHLoginViewController : BaseViewController
+
+@property (nonatomic, copy) void(^succeededHandler)(MMHAccount *account);
 
 @end

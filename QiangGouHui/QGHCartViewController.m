@@ -7,31 +7,74 @@
 //
 
 #import "QGHCartViewController.h"
+#import "QGHCartCell.h"
 
-@interface QGHCartViewController ()
+
+static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
+
+
+@interface QGHCartViewController ()<UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIView *bottomView;
 
 @end
 
+
 @implementation QGHCartViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [self makeTableView];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)makeTableView {
+    _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    //    _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    _tableView.dataSource = self;
+    _tableView.delegate = self;
+  
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:_tableView];
+    [_tableView registerNib:[UINib nibWithNibName:@"QGHCartCell" bundle:nil] forCellReuseIdentifier:QGHCartCellIdentifier];
+    [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.and.right.left.mas_equalTo(0);
+        make.bottom.mas_equalTo(-48);
+    }];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)makeBottomView {
+    
 }
-*/
+
+
+#pragma mark - UITalbeView DataSource and Delegate
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 3;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    QGHCartCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHCartCellIdentifier forIndexPath:indexPath];
+    return cell;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 110;
+}
+
 
 @end

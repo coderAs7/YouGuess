@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QGHFirstPageGoodsModel.h"
 
 @interface QGHGoodsTableViewCell : UITableViewCell
+
+- (void)setGoodsModel:(QGHFirstPageGoodsModel *)model;
 
 @end

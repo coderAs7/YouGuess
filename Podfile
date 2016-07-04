@@ -9,4 +9,5 @@ pod 'MBProgressHUD'
 pod 'AMap2DMap'
 pod 'AMapSearch'
 pod 'HTHorizontalSelectionList', '0.4.7'
+pod 'MJRefresh'
 end

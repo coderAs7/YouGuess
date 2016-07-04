@@ -27,6 +27,7 @@ PODS:
   - HTHorizontalSelectionList (0.4.7)
   - Masonry (0.6.1)
   - MBProgressHUD (0.9.1)
+  - MJRefresh (3.1.9)
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
   - SDWebImage/Core (3.7.2)
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - HTHorizontalSelectionList (= 0.4.7)
   - Masonry
   - MBProgressHUD
+  - MJRefresh
   - SDWebImage
 
 SPEC CHECKSUMS:
@@ -48,8 +50,9 @@ SPEC CHECKSUMS:
   HTHorizontalSelectionList: 9a6195ecec2356c6cc4b4c792fa082a3d7347967
   Masonry: 4972309f2f134de9dd312f4dc4a21359b50e6caa
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  MJRefresh: c5f1f1653e5a1b932c90f78074f2bc86f3f9bd5e
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
 
-PODFILE CHECKSUM: 28092766aae0c2bec6b9bd59fabc36f11120a86b
+PODFILE CHECKSUM: 78fb24197e7cf0b2f624f8497fb7e4efb51ab7e1
 
 COCOAPODS: 1.0.0

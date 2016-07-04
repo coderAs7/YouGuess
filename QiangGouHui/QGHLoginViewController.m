@@ -8,6 +8,7 @@
 
 #import "QGHLoginViewController.h"
 #import "QGHRegisterViewController.h"
+#import "MMHNetworkAdapter+Login.h"
 
 
 @interface QGHLoginViewController ()
@@ -88,6 +89,7 @@
     [_loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
     [_loginButton setBackgroundImage:[UIImage patternImageWithColor:[QGHAppearance themeColor]] forState:UIControlStateNormal];
     [_loginButton setBackgroundImage:[UIImage patternImageWithColor:C3] forState:UIControlStateDisabled];
+    [_loginButton addTarget:self action:@selector(loginButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_loginButton];
 }
 
@@ -119,6 +121,16 @@
 
 #pragma mark - Actions
 
+
+- (void)loginButtonAction {
+    [[MMHNetworkAdapter sharedAdapter] loginWithPhoneNumber:self.telTextField.text passCode:self.pwdTextField.text from:self succeededHandler:^(MMHAccount *account) {
+        if (self.succeededHandler) {
+            self.succeededHandler(account);
+        }
+        [self dismissViewControllerWithAnimation];
+    } failedHandler:^(NSError *error) {
+    }];
+}
 
 - (void)leftBarButtonItemAction {
     [self dismissViewControllerWithAnimation];
