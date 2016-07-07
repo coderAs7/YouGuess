@@ -19,5 +19,6 @@
 #import "AppAlertViewController.h"
 #import "QGHDefines.h"
 #import "MMHPullToRefresh.h"
+#import "QGHTabBarController.h"
 
 #endif

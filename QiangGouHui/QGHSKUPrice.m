@@ -8,10 +8,28 @@
 
 #import "QGHSKUPrice.h"
 
+
 @implementation QGHSKUPrice
+
 
 - (NSDictionary *)modelKeyJSONKeyMapper {
     return @{@"priceId": @"id"};
 }
+
+
+//- (instancetype)initWithJSONDict:(NSDictionary *)dict {
+//    self = [super initWithJSONDict:dict];
+//    
+//    if (self) {
+//        NSString *categoryIds = [dict objectForKey:@"category_id"];
+//        if (categoryIds.length > 0) {
+//            NSString *tempString = [categoryIds substringWithRange:NSMakeRange(1, categoryIds.length - 2)];
+//            self.category_id = [tempString componentsSeparatedByString:@","];
+//        }
+//    }
+//    
+//    return self;
+//}
+
 
 @end

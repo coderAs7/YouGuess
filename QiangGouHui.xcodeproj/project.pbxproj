@@ -99,6 +99,18 @@
 		41DC08161D2AA42A00DDC5DD /* QGHSKUCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC08151D2AA42A00DDC5DD /* QGHSKUCategory.m */; };
 		41DC08191D2AA43800DDC5DD /* QGHSKUPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC08181D2AA43800DDC5DD /* QGHSKUPrice.m */; };
 		41DC081C1D2AA45300DDC5DD /* QGHProductInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC081B1D2AA45300DDC5DD /* QGHProductInfo.m */; };
+		41DC081F1D2BFC8E00DDC5DD /* QGHProductDetailWebViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC081E1D2BFC8E00DDC5DD /* QGHProductDetailWebViewCell.m */; };
+		41E87A871D2C0A0F003A987E /* QGHProductDetailScoreInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E87A861D2C0A0F003A987E /* QGHProductDetailScoreInfo.m */; };
+		41E87A8A1D2C0A5A003A987E /* QGHProductDetailComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E87A891D2C0A5A003A987E /* QGHProductDetailComment.m */; };
+		41E87A8D1D2D30C7003A987E /* MMHProductSpecSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E87A8C1D2D30C7003A987E /* MMHProductSpecSelectionViewController.m */; };
+		41E87A901D2D30FF003A987E /* MMHFloatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E87A8F1D2D30FF003A987E /* MMHFloatingViewController.m */; };
+		41E87A931D2D3132003A987E /* UIViewController+Floating.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E87A921D2D3132003A987E /* UIViewController+Floating.m */; };
+		41E87A961D2D40A3003A987E /* ProductSpecSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E87A951D2D40A3003A987E /* ProductSpecSelectionCell.swift */; };
+		41E87A981D2D4103003A987E /* ProductSpecSelectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E87A971D2D4103003A987E /* ProductSpecSelectionHeaderView.swift */; };
+		41E87A9B1D2D51EE003A987E /* MMHNetworkAdapter+Cart.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E87A9A1D2D51EE003A987E /* MMHNetworkAdapter+Cart.m */; };
+		41E87A9F1D2D5311003A987E /* QGHCartItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E87A9E1D2D5311003A987E /* QGHCartItem.m */; };
+		41E87AA21D2E8F0C003A987E /* QGHSKUSelectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E87AA11D2E8F0C003A987E /* QGHSKUSelectModel.m */; };
+		41E87AA51D2E98A7003A987E /* MMHFilterTermSelectionAgeGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E87AA41D2E98A7003A987E /* MMHFilterTermSelectionAgeGroupCell.m */; };
 		D1BC298755BEA9C0E319311F /* libPods-QiangGouHui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67968EB60CF93479054CD498 /* libPods-QiangGouHui.a */; };
 /* End PBXBuildFile section */
 
@@ -275,6 +287,29 @@
 		41DC08181D2AA43800DDC5DD /* QGHSKUPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHSKUPrice.m; sourceTree = "<group>"; };
 		41DC081A1D2AA45300DDC5DD /* QGHProductInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductInfo.h; sourceTree = "<group>"; };
 		41DC081B1D2AA45300DDC5DD /* QGHProductInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductInfo.m; sourceTree = "<group>"; };
+		41DC081D1D2BFC8E00DDC5DD /* QGHProductDetailWebViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductDetailWebViewCell.h; sourceTree = "<group>"; };
+		41DC081E1D2BFC8E00DDC5DD /* QGHProductDetailWebViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductDetailWebViewCell.m; sourceTree = "<group>"; };
+		41E87A851D2C0A0F003A987E /* QGHProductDetailScoreInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductDetailScoreInfo.h; sourceTree = "<group>"; };
+		41E87A861D2C0A0F003A987E /* QGHProductDetailScoreInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductDetailScoreInfo.m; sourceTree = "<group>"; };
+		41E87A881D2C0A5A003A987E /* QGHProductDetailComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductDetailComment.h; sourceTree = "<group>"; };
+		41E87A891D2C0A5A003A987E /* QGHProductDetailComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductDetailComment.m; sourceTree = "<group>"; };
+		41E87A8B1D2D30C7003A987E /* MMHProductSpecSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHProductSpecSelectionViewController.h; sourceTree = "<group>"; };
+		41E87A8C1D2D30C7003A987E /* MMHProductSpecSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHProductSpecSelectionViewController.m; sourceTree = "<group>"; };
+		41E87A8E1D2D30FF003A987E /* MMHFloatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHFloatingViewController.h; sourceTree = "<group>"; };
+		41E87A8F1D2D30FF003A987E /* MMHFloatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHFloatingViewController.m; sourceTree = "<group>"; };
+		41E87A911D2D3132003A987E /* UIViewController+Floating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Floating.h"; sourceTree = "<group>"; };
+		41E87A921D2D3132003A987E /* UIViewController+Floating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Floating.m"; sourceTree = "<group>"; };
+		41E87A941D2D31D3003A987E /* MMHFloatingSettledViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MMHFloatingSettledViewController.h; sourceTree = "<group>"; };
+		41E87A951D2D40A3003A987E /* ProductSpecSelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSpecSelectionCell.swift; sourceTree = "<group>"; };
+		41E87A971D2D4103003A987E /* ProductSpecSelectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSpecSelectionHeaderView.swift; sourceTree = "<group>"; };
+		41E87A991D2D51EE003A987E /* MMHNetworkAdapter+Cart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMHNetworkAdapter+Cart.h"; sourceTree = "<group>"; };
+		41E87A9A1D2D51EE003A987E /* MMHNetworkAdapter+Cart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMHNetworkAdapter+Cart.m"; sourceTree = "<group>"; };
+		41E87A9D1D2D5311003A987E /* QGHCartItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHCartItem.h; sourceTree = "<group>"; };
+		41E87A9E1D2D5311003A987E /* QGHCartItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHCartItem.m; sourceTree = "<group>"; };
+		41E87AA01D2E8F0C003A987E /* QGHSKUSelectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHSKUSelectModel.h; sourceTree = "<group>"; };
+		41E87AA11D2E8F0C003A987E /* QGHSKUSelectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHSKUSelectModel.m; sourceTree = "<group>"; };
+		41E87AA31D2E98A7003A987E /* MMHFilterTermSelectionAgeGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHFilterTermSelectionAgeGroupCell.h; sourceTree = "<group>"; };
+		41E87AA41D2E98A7003A987E /* MMHFilterTermSelectionAgeGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHFilterTermSelectionAgeGroupCell.m; sourceTree = "<group>"; };
 		67968EB60CF93479054CD498 /* libPods-QiangGouHui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QiangGouHui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9BECC3B9212C2BF0AD13B4F /* Pods-QiangGouHui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiangGouHui.release.xcconfig"; path = "Pods/Target Support Files/Pods-QiangGouHui/Pods-QiangGouHui.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -408,6 +443,8 @@
 		41B3F3F91CFC93860007195B /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				41E87A911D2D3132003A987E /* UIViewController+Floating.h */,
+				41E87A921D2D3132003A987E /* UIViewController+Floating.m */,
 				41B3F3FA1CFC93940007195B /* UIView+StringTag.h */,
 				41B3F3FB1CFC93940007195B /* UIView+StringTag.m */,
 				41B3F4001CFC97230007195B /* NSString+QSCalcSize.h */,
@@ -429,6 +466,9 @@
 				41B3F4081CFCA0830007195B /* QGHTabBarController.m */,
 				411ADC491D1AD1B70050B8EB /* QGHNavigationController.h */,
 				411ADC4A1D1AD1B70050B8EB /* QGHNavigationController.m */,
+				41E87A8E1D2D30FF003A987E /* MMHFloatingViewController.h */,
+				41E87A8F1D2D30FF003A987E /* MMHFloatingViewController.m */,
+				41E87A941D2D31D3003A987E /* MMHFloatingSettledViewController.h */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -436,6 +476,7 @@
 		41BEEB321D0F084500612F88 /* Cart */ = {
 			isa = PBXGroup;
 			children = (
+				41E87A9C1D2D52B2003A987E /* Model */,
 				41DC07D41D27920500DDC5DD /* View */,
 				41DC07D31D2791F800DDC5DD /* Controller */,
 			);
@@ -520,6 +561,8 @@
 				41DC07FB1D295E3900DDC5DD /* MMHNetworkAdapter+FirstPage.m */,
 				41DC080D1D2AA25400DDC5DD /* MMHNetworkAdapter+Product.h */,
 				41DC080E1D2AA25400DDC5DD /* MMHNetworkAdapter+Product.m */,
+				41E87A991D2D51EE003A987E /* MMHNetworkAdapter+Cart.h */,
+				41E87A9A1D2D51EE003A987E /* MMHNetworkAdapter+Cart.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -712,6 +755,10 @@
 		41DC07AD1D2004A000DDC5DD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				41E87AA31D2E98A7003A987E /* MMHFilterTermSelectionAgeGroupCell.h */,
+				41E87AA41D2E98A7003A987E /* MMHFilterTermSelectionAgeGroupCell.m */,
+				41E87A951D2D40A3003A987E /* ProductSpecSelectionCell.swift */,
+				41E87A971D2D4103003A987E /* ProductSpecSelectionHeaderView.swift */,
 				41DC07AA1D2003FC00DDC5DD /* MMHProductDetailHeaderCell.h */,
 				41DC07AB1D2003FC00DDC5DD /* MMHProductDetailHeaderCell.m */,
 				41DC07AF1D201DCB00DDC5DD /* QGHProductDetailPriceCell.h */,
@@ -722,6 +769,8 @@
 				41DC07C61D26B0ED00DDC5DD /* QGHProductDetailInfoCell.h */,
 				41DC07C71D26B0ED00DDC5DD /* QGHProductDetailInfoCell.m */,
 				41DC07C81D26B0ED00DDC5DD /* QGHProductDetailInfoCell.xib */,
+				41DC081D1D2BFC8E00DDC5DD /* QGHProductDetailWebViewCell.h */,
+				41DC081E1D2BFC8E00DDC5DD /* QGHProductDetailWebViewCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -729,6 +778,8 @@
 		41DC07AE1D2004AB00DDC5DD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				41E87A8B1D2D30C7003A987E /* MMHProductSpecSelectionViewController.h */,
+				41E87A8C1D2D30C7003A987E /* MMHProductSpecSelectionViewController.m */,
 				41DC07CB1D26BD1300DDC5DD /* QGHProductDetailVIewController.h */,
 				41DC07CC1D26BD1300DDC5DD /* QGHProductDetailVIewController.m */,
 			);
@@ -826,6 +877,21 @@
 				41DC08181D2AA43800DDC5DD /* QGHSKUPrice.m */,
 				41DC081A1D2AA45300DDC5DD /* QGHProductInfo.h */,
 				41DC081B1D2AA45300DDC5DD /* QGHProductInfo.m */,
+				41E87A851D2C0A0F003A987E /* QGHProductDetailScoreInfo.h */,
+				41E87A861D2C0A0F003A987E /* QGHProductDetailScoreInfo.m */,
+				41E87A881D2C0A5A003A987E /* QGHProductDetailComment.h */,
+				41E87A891D2C0A5A003A987E /* QGHProductDetailComment.m */,
+				41E87AA01D2E8F0C003A987E /* QGHSKUSelectModel.h */,
+				41E87AA11D2E8F0C003A987E /* QGHSKUSelectModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		41E87A9C1D2D52B2003A987E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				41E87A9D1D2D5311003A987E /* QGHCartItem.h */,
+				41E87A9E1D2D5311003A987E /* QGHCartItem.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -989,6 +1055,8 @@
 				41B3F3FC1CFC93940007195B /* UIView+StringTag.m in Sources */,
 				41DC07A31D1FBFB900DDC5DD /* QGHLogisticsDetailViewController.m in Sources */,
 				41B3F4061CFC98E70007195B /* BaseViewController.m in Sources */,
+				41E87AA21D2E8F0C003A987E /* QGHSKUSelectModel.m in Sources */,
+				41E87AA51D2E98A7003A987E /* MMHFilterTermSelectionAgeGroupCell.m in Sources */,
 				41DC07CD1D26BD1300DDC5DD /* QGHProductDetailVIewController.m in Sources */,
 				41DC07871D1E705800DDC5DD /* MMHUnderlinedSegmentedControl.m in Sources */,
 				41BF0F9F1CFB4F6100FB23C2 /* ViewController.m in Sources */,
@@ -996,6 +1064,7 @@
 				41DA4ACE1D1594BE00A8E42D /* QGHPersonalCenterViewController.m in Sources */,
 				41DC08191D2AA43800DDC5DD /* QGHSKUPrice.m in Sources */,
 				41BEEB351D0F086100612F88 /* QGHCartViewController.m in Sources */,
+				41E87A981D2D4103003A987E /* ProductSpecSelectionHeaderView.swift in Sources */,
 				41DC077B1D1E581C00DDC5DD /* QGHOrderListCell.m in Sources */,
 				411ADC4F1D1AF22C0050B8EB /* AppAlertViewController.m in Sources */,
 				411ADC631D1C26000050B8EB /* MMHFetchModel.m in Sources */,
@@ -1009,7 +1078,9 @@
 				41B3F4021CFC97230007195B /* NSString+QSCalcSize.m in Sources */,
 				41DC07E91D28BC4F00DDC5DD /* MMHNetworkAdapter+Login.m in Sources */,
 				41DC07AC1D2003FC00DDC5DD /* MMHProductDetailHeaderCell.m in Sources */,
+				41E87A9B1D2D51EE003A987E /* MMHNetworkAdapter+Cart.m in Sources */,
 				41DA4AD41D15962000A8E42D /* QGHCommonCellTableViewCell.m in Sources */,
+				41E87A9F1D2D5311003A987E /* QGHCartItem.m in Sources */,
 				41B3F3FF1CFC948C0007195B /* QGHAppearance.m in Sources */,
 				41B3F3F71CFC8A670007195B /* MMHAssistant.m in Sources */,
 				41DC078A1D1E782E00DDC5DD /* QGHOrderDetailViewController.m in Sources */,
@@ -1019,6 +1090,7 @@
 				41DC07F01D28F79E00DDC5DD /* MMHAccount.m in Sources */,
 				41DC07971D1E810D00DDC5DD /* QGHOrderAddressCellTableViewCell.m in Sources */,
 				41DC08131D2AA40600DDC5DD /* QGHProductDetailModel.m in Sources */,
+				41E87A871D2C0A0F003A987E /* QGHProductDetailScoreInfo.m in Sources */,
 				41DC07D21D27547000DDC5DD /* QGHConfirmOrderViewController.m in Sources */,
 				41BF0F9C1CFB4F6100FB23C2 /* AppDelegate.m in Sources */,
 				41DC078D1D1E7D9A00DDC5DD /* MMHOrderInfoTableViewCell.m in Sources */,
@@ -1028,16 +1100,19 @@
 				411ADC3E1D1835370050B8EB /* QGHRegisterViewController.m in Sources */,
 				41DC07801D1E680E00DDC5DD /* MMHetchModelProperty.m in Sources */,
 				41BF0F991CFB4F6100FB23C2 /* main.m in Sources */,
+				41E87A961D2D40A3003A987E /* ProductSpecSelectionCell.swift in Sources */,
 				41DC07C91D26B0ED00DDC5DD /* QGHProductDetailInfoCell.m in Sources */,
 				411ADC411D184D6D0050B8EB /* VerificationCodeTimer.swift in Sources */,
 				41C64C6D1D181AF300E22E5B /* AdView.m in Sources */,
 				41DC07B81D24103D00DDC5DD /* QGHProductDetailCommentCell.m in Sources */,
+				41E87A931D2D3132003A987E /* UIViewController+Floating.m in Sources */,
 				411ADC561D1C14AC0050B8EB /* QGHChangeNickNameViewController.m in Sources */,
 				411ADC481D1AC2F90050B8EB /* QGHPersonalInfoViewController.m in Sources */,
 				411ADC5A1D1C24F30050B8EB /* MMHSelectAddressView.m in Sources */,
 				41DC07B11D201DCB00DDC5DD /* QGHProductDetailPriceCell.m in Sources */,
 				411ADC701D1C473B0050B8EB /* QGHReceiptAddressViewController.m in Sources */,
 				41DC079C1D1FA36400DDC5DD /* QGHOrderDetailProductCell.m in Sources */,
+				41E87A901D2D30FF003A987E /* MMHFloatingViewController.m in Sources */,
 				415955441D0465E500AC2BD4 /* QGHBannerCell.m in Sources */,
 				41DC07E11D28ABFD00DDC5DD /* MMHNetworkEngine.m in Sources */,
 				41DC07A01D1FA88500DDC5DD /* QGHOrderDetailCommonCell.m in Sources */,
@@ -1051,7 +1126,9 @@
 				41DC07E21D28ABFD00DDC5DD /* MMHRequestSerializer.m in Sources */,
 				41DC080F1D2AA25400DDC5DD /* MMHNetworkAdapter+Product.m in Sources */,
 				41DC07A71D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.m in Sources */,
+				41E87A8D1D2D30C7003A987E /* MMHProductSpecSelectionViewController.m in Sources */,
 				41C64C721D181C0300E22E5B /* QGHLoginViewController.m in Sources */,
+				41DC081F1D2BFC8E00DDC5DD /* QGHProductDetailWebViewCell.m in Sources */,
 				415955511D046DC800AC2BD4 /* QGHRushPurchaseItemView.m in Sources */,
 				41DC07721D1E566F00DDC5DD /* QGHOrderListViewController.m in Sources */,
 				41DA4AE51D16FDEF00A8E42D /* QGHSegmentedControl.m in Sources */,
@@ -1059,6 +1136,7 @@
 				41DC07E61D28AC9100DDC5DD /* MMHNetworkAdapter.m in Sources */,
 				41DC08031D29623300DDC5DD /* QGHFirstPageGoodsModel.m in Sources */,
 				41DC080C1D2A945B00DDC5DD /* MMHPullToRefresh.m in Sources */,
+				41E87A8A1D2C0A5A003A987E /* QGHProductDetailComment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MMHFloatingViewController.h"
+#import "MMHFloatingSettledViewController.h"
 
-@interface QGHTabBarController : UITabBarController
+@interface QGHTabBarController : UITabBarController <MMHFloatingSettledViewController>
+
+@property (nonatomic, strong, nullable) UIView *floatingBackgroundView;
+@property (nonatomic, strong, nullable) MMHFloatingViewController *floatingViewController;
 
 @end

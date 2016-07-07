@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QGHProductDetailComment.h"
 
 @interface QGHProductDetailCommentCell : UITableViewCell
+
+- (void)setComment:(QGHProductDetailComment *)comment;
 
 @end

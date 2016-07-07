@@ -55,3 +55,41 @@ extern UIColor *C24;
 + (UIColor *)themeColor;
 
 @end
+
+
+
+@protocol MMHStandardLabel <NSObject>
+
++ (CGFloat)defaultHeight;
+
+@end
+
+
+@interface MMHTitleLabel : UILabel <MMHStandardLabel>
+
+@end
+
+
+@interface MMHSubtitleLabel : UILabel <MMHStandardLabel>
+
+@end
+
+
+@interface MMHTextLabel : UILabel <MMHStandardLabel>
+
+@end
+
+
+@interface MMHSmallTextLabel : UILabel <MMHStandardLabel>
+
+@end
+
+
+@interface MMHTipsLabel : UILabel <MMHStandardLabel>
+
+@end
+
+
+@interface MMHSmallTipsLabel : UILabel <MMHStandardLabel>
+
+@end

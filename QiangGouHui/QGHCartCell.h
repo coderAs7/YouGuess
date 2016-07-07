@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QGHCartItem.h"
+
 
 @interface QGHCartCell : UITableViewCell
+
+- (void)setCartItem:(QGHCartItem *)item;
 
 @end

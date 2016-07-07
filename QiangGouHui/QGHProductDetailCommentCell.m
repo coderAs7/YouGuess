@@ -34,6 +34,13 @@
 }
 
 
+- (void)setComment:(QGHProductDetailComment *)comment {
+    self.commentLabel.text = comment.content;
+    self.nickNameLabel.text = comment.username;
+    [self setStartNum:comment.star];
+}
+
+
 - (void)setStartNum:(NSInteger)num {
     CGFloat originX = 0;
     for (NSInteger i = 0; i < num; ++i) {

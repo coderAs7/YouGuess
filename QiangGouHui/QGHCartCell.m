@@ -74,4 +74,13 @@
     }];
 }
 
+
+- (void)setCartItem:(QGHCartItem *)item {
+    [self.productImage updateViewWithImageAtURL:item.img_path];
+    self.productTitle.text = item.title;
+    self.priceLabel.text = [NSString stringWithFormat:@"%f", item.min_price];
+    self.stepper.value = item.count;
+}
+
+
 @end

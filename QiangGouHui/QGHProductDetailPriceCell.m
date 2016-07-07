@@ -24,7 +24,7 @@
 @implementation QGHProductDetailPriceCell
 
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier type:(QGHProductDetailPriceCellType)type {
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
@@ -63,7 +63,12 @@
 
 
 - (void)setData:(QGHProductDetailModel *)model {
-//    self.priceLabel.text
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%@", model.product.min_price];
+    [self.priceLabel sizeToFit];
+    [self.priceLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.centerY.equalTo(self.contentView);
+    }];
 }
 
 

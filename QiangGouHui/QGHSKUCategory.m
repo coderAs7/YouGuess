@@ -10,8 +10,14 @@
 
 @implementation QGHSKUCategory
 
+
 - (NSDictionary *)modelKeyJSONKeyMapper {
     return @{@"skuId": @"id"};
+}
+
+
++ (id)copyWithZone:(NSZone *)zone {
+    return (id)self;
 }
 
 @end

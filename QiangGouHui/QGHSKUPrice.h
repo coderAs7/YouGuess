@@ -11,7 +11,7 @@
 @interface QGHSKUPrice : MMHFetchModel
 
 @property (nonatomic, copy) NSString *priceId;
-@property (nonatomic, copy) NSString *category_id;
+@property (nonatomic, strong) NSArray *category_id;
 @property (nonatomic, copy) NSString *original_price;
 @property (nonatomic, copy) NSString *discount_price;
 @property (nonatomic, copy) NSString *stock;

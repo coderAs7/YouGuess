@@ -110,3 +110,142 @@ UIColor *C24;   //浅黄色
 }
 
 @end
+
+
+
+@implementation MMHTitleLabel
+
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+//        self.font = [QGHAppearance titleFont];
+//        self.textColor = [QGHAppearance blackColor];
+    }
+    return self;
+}
+
+
++ (CGFloat)defaultHeight
+{
+    return 18.0f;
+}
+
+
+@end
+
+
+@implementation MMHSubtitleLabel
+
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+//        self.font = [MMHAppearance subtitleFont];
+//        self.textColor = [MMHAppearance blackColor];
+    }
+    return self;
+}
+
+
++ (CGFloat)defaultHeight
+{
+    return 16.0f;
+}
+
+
+@end
+
+
+@implementation MMHTextLabel
+
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.font = F5;
+        self.textColor = C8;
+    }
+    return self;
+}
+
+
++ (CGFloat)defaultHeight
+{
+    return 15.0f;
+}
+
+
+@end
+
+
+@implementation MMHSmallTextLabel
+
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.font = F4;
+        self.textColor = C7;
+    }
+    return self;
+}
+
+
++ (CGFloat)defaultHeight
+{
+    return 14.0f;
+}
+
+
+@end
+
+
+@implementation MMHTipsLabel
+
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.font = F3;
+        self.textColor = C6;
+    }
+    return self;
+}
+
+
++ (CGFloat)defaultHeight
+{
+    return 13.0f;
+}
+
+
+@end
+
+
+@implementation MMHSmallTipsLabel
+
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.font = F2;
+        self.textColor = C6;
+    }
+    return self;
+}
+
+
++ (CGFloat)defaultHeight
+{
+    return 12.0f;
+}
+
+
+@end

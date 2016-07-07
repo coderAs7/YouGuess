@@ -19,8 +19,6 @@ typedef NS_ENUM(NSInteger, QGHProductDetailPriceCellType) {
 
 @interface QGHProductDetailPriceCell : UITableViewCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier type:(QGHProductDetailPriceCellType)type;
-
 - (void)setData:(QGHProductDetailModel *)model;
 
 @end

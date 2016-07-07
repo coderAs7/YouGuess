@@ -8,6 +8,7 @@
 
 #import "QGHCartViewController.h"
 #import "QGHCartCell.h"
+#import "MMHNetworkAdapter+Cart.h"
 
 
 static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
@@ -29,6 +30,8 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
     // Do any additional setup after loading the view.
     
     [self makeTableView];
+    
+    [self fetchData];
 }
 
 
@@ -50,6 +53,18 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
 
 - (void)makeBottomView {
     
+}
+
+
+#pragma mark - network
+
+
+- (void)fetchData {
+    [[MMHNetworkAdapter sharedAdapter] fetchCartListFrom:self succeededHandler:^(NSArray<QGHCartItem *> *itemArr) {
+        
+    } failedHandler:^(NSError *error) {
+        [self.view showTipsWithError:error];
+    }];
 }
 
 

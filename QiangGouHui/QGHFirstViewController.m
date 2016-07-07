@@ -149,6 +149,9 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     }
     
     NSString *city = [[QGHLocationManager shareManager] currentCity];
+    if (city.length == 0) {
+        city = self.selectedCity;
+    }
     
     _purchaseList = [[QGHFirstPageGoodsList alloc] initWithFlag:1 city:city];
     _purchaseList.delegate = self;
@@ -358,6 +361,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     cityListVC.selectCityBlock = ^(NSString *city) {
         [self.locationLabel setText:city];
         self.selectedCity = city;
+        [self fetchGoodsList];
         [self.navigationController popToViewController:self animated:YES];
     };
     [self.navigationController pushViewController:cityListVC animated:YES];

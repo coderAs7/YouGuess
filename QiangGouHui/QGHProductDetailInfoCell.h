@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QGHProductDetailModel.h"
+
 
 @interface QGHProductDetailInfoCell : UITableViewCell
+
+- (void)setData:(QGHProductDetailModel *)model;
 
 @end

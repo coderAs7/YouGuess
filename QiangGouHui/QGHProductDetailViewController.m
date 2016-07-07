@@ -13,6 +13,8 @@
 #import "QGHProductDetailInfoCell.h"
 #import "QGHConfirmOrderViewController.h"
 #import "MMHNetworkAdapter+Product.h"
+#import "QGHProductDetailWebViewCell.h"
+#import "MMHProductSpecSelectionViewController.h"
 
 
 static NSString *const QGHProductDetailHeaderCellIdentifier = @"QGHProductDetailHeaderCellIdentifier";
@@ -24,14 +26,17 @@ static NSString *const QGHProductDetailImageTitleCellIdentifier = @"QGHProductDe
 static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailImageCellIdentifier";
 
 
-@interface QGHProductDetailVIewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface QGHProductDetailVIewController ()<UITableViewDelegate, UITableViewDataSource, QGHProductDetailWebViewCellDelegate>
 
 @property (nonatomic, assign) QGHBussType bussType;
 @property (nonatomic, strong) NSString *goodsId;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIView *bottomView;
+@property (nonatomic, assign) CGFloat productDetaiImageHeight;
 
 @property (nonatomic, strong) QGHProductDetailModel *productDetailModel;
+@property (nonatomic, strong) QGHProductDetailScoreInfo *scoreInfo;
+@property (nonatomic, strong) NSArray<QGHProductDetailComment *> *comments;
 
 @end
 
@@ -75,7 +80,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:QGHProductDetailCommentTitleCellIdentifier];
     [_tableView registerClass:[QGHProductDetailCommentCell class] forCellReuseIdentifier:QGHProductCommentCellIdentifier];
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:QGHProductDetailImageTitleCellIdentifier];
-    [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:QGHProductDetailImageCellIdentifier];
+    [_tableView registerClass:[QGHProductDetailWebViewCell class] forCellReuseIdentifier:QGHProductDetailImageCellIdentifier];
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:_tableView];
     
@@ -89,18 +94,28 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 - (void)makeBottomView {
     _bottomView = [[UIView alloc] init];
     
+    UIImage *image = [UIImage imageNamed:@"pro_btn_kefu"];
+    NSString *title = @"客服";
+    CGSize titleSize = [title sizeWithFont:F3 constrainedToWidth:CGFLOAT_MAX lineCount:1];
     UIButton *customerServiceBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 75, 48)];
-    [customerServiceBtn setImage:[UIImage imageNamed:@"pro_btn_kefu"] forState:UIControlStateNormal];
-    [customerServiceBtn setTitle:@"客服" forState:UIControlStateNormal];
+    [customerServiceBtn setImage:image forState:UIControlStateNormal];
+    [customerServiceBtn setTitle:title forState:UIControlStateNormal];
     customerServiceBtn.titleLabel.font = F3;
     [customerServiceBtn setTitleColor:C7 forState:UIControlStateNormal];
+    [customerServiceBtn setImageEdgeInsets:UIEdgeInsetsMake(-titleSize.height, titleSize.width, 0, 0)];
+    [customerServiceBtn setTitleEdgeInsets:UIEdgeInsetsMake(image.size.height, -image.size.width, 0, 0)];
     [_bottomView addSubview:customerServiceBtn];
     
+    image = [UIImage imageNamed:@"pro_btn_shopping_n"];
+    title = @"购物车";
+    titleSize = [title sizeWithFont:F3 constrainedToWidth:CGFLOAT_MAX lineCount:1];
     UIButton *cartBtn = [[UIButton alloc] initWithFrame:CGRectMake(75, 0, 75, 48)];
-    [cartBtn setImage:[UIImage imageNamed:@"pro_btn_shopping_n"] forState:UIControlStateNormal];
-    [cartBtn setTitle:@"购物车" forState:UIControlStateNormal];
+    [cartBtn setImage:image forState:UIControlStateNormal];
+    [cartBtn setTitle:title forState:UIControlStateNormal];
     cartBtn.titleLabel.font = F3;
     [cartBtn setTitleColor:C7 forState:UIControlStateNormal];
+    [cartBtn setImageEdgeInsets:UIEdgeInsetsMake(-titleSize.height, (titleSize.width - image.size.width), 0, 0)];
+    [cartBtn setTitleEdgeInsets:UIEdgeInsetsMake(image.size.height, -image.size.width, 0, 0)];
     [_bottomView addSubview:cartBtn];
     
     if (self.bussType == QGHBussTypeAppoint && self.bussType == QGHBussTypeCustom) {
@@ -151,6 +166,14 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     } failedHandler:^(NSError *error) {
         [self.view showTipsWithError:error];
     }];
+    
+    
+    [[MMHNetworkAdapter sharedAdapter] fetchProductCommentsWithRequester:self goodsId:self.goodsId page:1 size:10 succeededHandler:^(QGHProductDetailScoreInfo *scoreInfo, NSArray<QGHProductDetailComment *> *commentArr) {
+        self.scoreInfo = scoreInfo;
+        self.comments = commentArr;
+    } failedHandler:^(NSError *error) {
+        [self.view showTipsWithError:error];
+    }];
 }
 
 
@@ -166,7 +189,8 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     if (section == 0) {
         return 3;
     } else if (section == 1) {
-        return 1 + 2;
+        NSInteger count = (self.comments.count > 2) ? 2 : self.comments.count;
+        return 1 + count;
     } else {
         return 2;
     }
@@ -184,19 +208,20 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
             return cell;
         } else if (indexPath.row == 1) {
             QGHProductDetailPriceCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHProductDetailPriceCellIdentifier forIndexPath:indexPath];
+            [cell setData:self.productDetailModel];
             return cell;
         } else {
             QGHProductDetailInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHProductDetailProductTitleCellIdentifier forIndexPath:indexPath];
-            
+            [cell setData:self.productDetailModel];
             return cell;
         }
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHProductDetailCommentTitleCellIdentifier forIndexPath:indexPath];
-            cell.textLabel.text = @"商品评价";
+            cell.textLabel.text = [NSString stringWithFormat:@"商品评价(%@条，%@好评率)", self.scoreInfo.count, self.scoreInfo.star];
             cell.textLabel.font = F5;
             cell.textLabel.textColor = C8;
-            
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             return cell;
         } else {
             QGHProductDetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHProductCommentCellIdentifier forIndexPath:indexPath];
@@ -211,7 +236,10 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
             
             return cell;
         } else {
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHProductDetailImageCellIdentifier forIndexPath:indexPath];
+            QGHProductDetailWebViewCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHProductDetailImageCellIdentifier forIndexPath:indexPath];
+            cell.delegate = self;
+            [cell setProductDetailUrl:self.productDetailModel.product.info];
+            
             return cell;
         }
     }
@@ -237,11 +265,19 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
         if (indexPath.row == 0) {
             return 43;
         } else {
-            return 100;
+            return self.productDetaiImageHeight;
         }
     }
 }
 
+
+#pragma mark - QGHProductDetailWebViewCellDelegate
+
+
+- (void)productDetailWebViewCellLoadedFinish:(CGFloat)webViewContentHeight {
+    self.productDetaiImageHeight = webViewContentHeight;
+    [self.tableView reloadData];
+}
 
 #pragma mark - Action
 
@@ -252,8 +288,12 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 
 
 - (void)buyNowBtnAction {
-    QGHConfirmOrderViewController *confirmOrderVC = [[QGHConfirmOrderViewController alloc] initWithBussType:QGHBussTypeNormal];
-    [self.navigationController pushViewController:confirmOrderVC animated:YES];
+    MMHProductSpecSelectionViewController *specVC = [[MMHProductSpecSelectionViewController alloc] initWithProductDetail:self.productDetailModel];
+    QGHTabBarController *tabBarController = (QGHTabBarController *)self.tabBarController;
+    [tabBarController presentFloatingViewController:specVC animated:YES];
+    
+//    QGHConfirmOrderViewController *confirmOrderVC = [[QGHConfirmOrderViewController alloc] initWithBussType:QGHBussTypeNormal];
+//    [self.navigationController pushViewController:confirmOrderVC animated:YES];
 }
 
 
