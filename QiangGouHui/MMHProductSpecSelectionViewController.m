@@ -97,7 +97,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
 //    else {
 //        contentView.height = 220.0f;
 //    }
-    contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     contentView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:contentView];
     self.contentView = contentView;
@@ -165,7 +165,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0.0f, 88.0f, self.contentView.bounds.size.width, self.contentView.bounds.size.height - 88.0f - confirmViewHeight)
                                                           collectionViewLayout:layout];
 //    collectionView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 90.0f, 0.0f);
-    collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     collectionView.allowsMultipleSelection = YES;
     collectionView.dataSource = self;
     collectionView.delegate = self;
@@ -178,7 +178,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
     self.collectionView = collectionView;
 
     UIView *confirmView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.contentView.bounds.size.width, confirmViewHeight)];
-    confirmView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+//    confirmView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     [confirmView moveToBottom:CGRectGetMaxY(self.contentView.bounds)];
     confirmView.backgroundColor = [UIColor whiteColor];
     [self.contentView addSubview:confirmView];
@@ -223,6 +223,9 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
 
 //    [self.specFilter selectDefaultIndexes];
     [self updateViews];
+    
+    self.contentView.height = 88 + self.collectionView.collectionViewLayout.collectionViewContentSize.height + 120;
+    [self.confirmView setBottom:self.contentView.height];
 }
 
 
@@ -337,7 +340,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
 {
     NSArray *keys = self.productDetail.categoryDict.allKeys;
     NSArray *categoryArr = [self.productDetail.categoryDict objectForKey:[keys objectAtIndex:indexPath.section]];
-    NSString *name = ((QGHSKUCategory *)categoryArr[indexPath.row]).name;
+    NSString *name = ((QGHSKUCategory *)categoryArr[indexPath.row]).value;
     
     ProductSpecSelectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MMHProductSpecSelectionCellIdentifier forIndexPath:indexPath];
     cell.layer.cornerRadius = 3.0f;
