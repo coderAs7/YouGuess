@@ -12,6 +12,7 @@
 #import "QGHLoginViewController.h"
 #import "QGHPersonalInfoViewController.h"
 #import "QGHOrderListViewController.h"
+#import "MMHAccountSession.h"
 
 
 static NSString *QGHPersonalCenterCommonCellIdentifier = @"QGHPersonalCenterCommonCellIdentifier";
@@ -37,6 +38,8 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
     [super viewDidLoad];
     
     [self makeTableView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginNotification) name:MMHUserDidLoginNotification object:nil];
 }
 
 
@@ -72,7 +75,14 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
         _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), 220)];
         _headerView.backgroundColor = [QGHAppearance themeColor];
         [_headerView addSubview:self.loginButton];
-//        [_headerView addSubview:self.personalView];
+        [_headerView addSubview:self.personalView];
+        if ([[MMHAccountSession currentSession] alreadyLoggedIn]) {
+            self.loginButton.hidden = YES;
+            self.personalView.hidden = NO;
+        } else {
+            self.loginButton.hidden = NO;
+            self.personalView.hidden = YES;
+        }
     }
     
      return _headerView;
@@ -165,6 +175,11 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
 }
 
 
+- (void)loginNotification {
+    self.loginButton.hidden = YES;
+    self.personalView.hidden = NO;
+}
+
 #pragma mark - getters and setters
 
 
@@ -215,6 +230,9 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
         
         [_personalView setCenterY:220 * 0.5];
     }
+    
+    [_personalImage updateViewWithImageAtURL:[[MMHAccountSession currentSession] avatar]];
+    _personalNameLabel.text = [[MMHAccountSession currentSession] nickname];
     
     return _personalView;
 }

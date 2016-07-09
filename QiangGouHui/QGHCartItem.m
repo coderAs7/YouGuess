@@ -16,4 +16,15 @@
 }
 
 
+- (instancetype)initWithJSONDict:(NSDictionary *)dict {
+    self = [super initWithJSONDict:dict];
+    
+    if (self) {
+        self.isSelected = YES;
+    }
+    
+    return self;
+}
+
+
 @end

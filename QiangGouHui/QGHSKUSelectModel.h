@@ -11,7 +11,10 @@
 
 @interface QGHSKUSelectModel : NSObject
 
-@property (nonatomic, strong) NSDictionary<NSString*, QGHSKUCategory *> *selectedSKU;
+@property (nonatomic, strong) NSMutableDictionary<NSString*, QGHSKUCategory *> *selectedSKU;
 @property (nonatomic, assign) NSInteger count;
+
+@property (nonatomic, strong) NSArray *selectedSKUValues;
+@property (nonatomic, strong) NSArray *selectedSKUIds;
 
 @end

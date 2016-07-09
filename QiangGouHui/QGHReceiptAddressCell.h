@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QGHReceiptAddressModel.h"
+
 
 @interface QGHReceiptAddressCell : UITableViewCell
+
+- (void)setReceiptAddressModel:(QGHReceiptAddressModel *)model;
 
 @end

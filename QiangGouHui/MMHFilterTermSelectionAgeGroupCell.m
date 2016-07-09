@@ -109,14 +109,15 @@
     }
 
     if (selected) {
-        self.layer.borderColor = C21.CGColor;
-        self.layer.borderWidth = 1.0f;
-        self.titleLabel.textColor = C21;
+        self.backgroundColor = C20;
+        self.layer.borderWidth = 0;
+        self.titleLabel.textColor = C7;
     }
     else {
-        self.layer.borderColor = C3.CGColor;
+        self.backgroundColor = [UIColor clearColor];
+        self.layer.borderColor = C4.CGColor;
         self.layer.borderWidth = mmh_pixel();
-        self.titleLabel.textColor = C5;
+        self.titleLabel.textColor = C7;
     }
 }
 

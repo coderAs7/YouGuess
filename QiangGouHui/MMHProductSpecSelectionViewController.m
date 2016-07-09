@@ -25,6 +25,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
 @interface MMHProductSpecSelectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate, StepperDelegate>
 
 //@property (nonatomic, strong) ProductSpecFilter *specFilter;
+@property (nonatomic, copy) void (^selectedSpecHandler)(NSArray *selectedSpec);
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) MMHImageView *imageView;
@@ -34,7 +35,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
 @property (nonatomic, strong) Stepper *quantityStepper;
 @property (nonatomic, strong) UILabel *quantityTipsLabel;
 @property (nonatomic, strong) UIButton *confirmButton;
-@property (nonatomic, copy) void (^specSelectedHandler)(NSArray *selectedSpec);
+@property (nonatomic, copy) void (^specSelectedHandler)(QGHSKUSelectModel *selectedModel);
 @property (nonatomic, strong) UIButton *closeButton;
 //@property (nonatomic, strong) id<MMHProductDetailProtocol> productDetail;
 @property (nonatomic, strong) QGHProductDetailModel *productDetail;
@@ -75,11 +76,12 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
 //    }
 //    return self;
 //}
-- (instancetype)initWithProductDetail:(QGHProductDetailModel *)productDetail {
+- (instancetype)initWithProductDetail:(QGHProductDetailModel *)productDetail specSelectedHandler:(void (^)(QGHSKUSelectModel *selectedSpec))specSelectedHandler {
     self = [super init];
     
     if (self) {
         _productDetail = productDetail;
+        _specSelectedHandler = specSelectedHandler;
     }
     
     return self;
@@ -90,17 +92,8 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor clearColor];
-    UIView *contentView = [[UIView alloc] initWithFrame:self.view.bounds];
-//    if ([self.specFilter hasAnySpecs]) {
-//        contentView.height = 420.0f;
-//    }
-//    else {
-//        contentView.height = 220.0f;
-//    }
-//    contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    contentView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:contentView];
-    self.contentView = contentView;
+    
+    [self.view addSubview:self.contentView];
 
     UIView *imageBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, -20.0f, 100.0f, 100.0f)];
     imageBackgroundView.backgroundColor = [UIColor whiteColor];
@@ -114,6 +107,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
 //    imageView.layer.borderColor = [[UIColor colorWithHexString:@"ebebeb"] CGColor];
 //    imageView.layer.borderWidth = 1.0f;
     [imageBackgroundView addSubview:imageView];
+    [imageView updateViewWithImageAtURL:self.productDetail.product.img_path];
     self.imageView = imageView;
     [imageView moveToCenterOfSuperview];
     
@@ -129,7 +123,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
     UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(120.0f, 18.0f, 0.0f, 0.0f)];
 //    [priceLabel setMaxX:self.closeButton.left];
     [priceLabel setMaxX:mmh_screen_width() - 36.0f];
-    priceLabel.textColor = C21;
+    priceLabel.textColor = C22;
     priceLabel.font = F13;
 //    [priceLabel setSingleLineText:@"￥29999.88" constrainedToWidth:CGFLOAT_MAX];
     [self.contentView addSubview:priceLabel];
@@ -141,7 +135,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
 //    [selectedSpecsLabel attachToBottomSideOfView:self.priceLabel byDistance:7.0f];
     selectedSpecsLabel.top = 53.0f;
     selectedSpecsLabel.font = F4;
-    selectedSpecsLabel.textColor = C4;
+    selectedSpecsLabel.textColor = C6;
     [self.contentView addSubview:selectedSpecsLabel];
     self.selectedSpecsLabel = selectedSpecsLabel;
     
@@ -151,45 +145,21 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
         [self.contentView addSubview:separatorLine];
     }
 
-    UICollectionViewLeftAlignedLayout * layout = [[UICollectionViewLeftAlignedLayout alloc] init];
-    layout.headerReferenceSize = CGSizeMake(0.0f, 35.0f);
-    layout.sectionInset = UIEdgeInsetsMake(15.0f, 10.0f, 15.0f, 10.0f);
-    layout.minimumLineSpacing = 15.0f;
-//    [layout registerClass:[FilterTermSelectionDecorationView class] forDecorationViewOfKind:MMHFilterTermSelectionDecorationViewIdentifier];
     
-    CGFloat confirmViewHeight = 120;
-    if (self.isHideCount) {
-        confirmViewHeight = 50;
-    }
     
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0.0f, 88.0f, self.contentView.bounds.size.width, self.contentView.bounds.size.height - 88.0f - confirmViewHeight)
-                                                          collectionViewLayout:layout];
-//    collectionView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 90.0f, 0.0f);
-//    collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    collectionView.allowsMultipleSelection = YES;
-    collectionView.dataSource = self;
-    collectionView.delegate = self;
-    collectionView.alwaysBounceVertical = YES;
-    collectionView.backgroundColor = [UIColor whiteColor];
-//    [collectionView registerClass:[MMHFilterTermSelectionBrandCell class] forCellWithReuseIdentifier:MMHFilterTermSelectionBrandCellIdentifier];
-    [collectionView registerClass:[ProductSpecSelectionCell class] forCellWithReuseIdentifier:MMHProductSpecSelectionCellIdentifier];
-    [collectionView registerClass:[ProductSpecSelectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:MMHProductSpecSelectionHeaderIdentifier];
-    [self.contentView addSubview:collectionView];
-    self.collectionView = collectionView;
-
-    UIView *confirmView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.contentView.bounds.size.width, confirmViewHeight)];
-//    confirmView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [confirmView moveToBottom:CGRectGetMaxY(self.contentView.bounds)];
-    confirmView.backgroundColor = [UIColor whiteColor];
-    [self.contentView addSubview:confirmView];
-    self.confirmView = confirmView;
+    [self.contentView addSubview:self.collectionView];
+    [self.contentView addSubview:self.confirmView];
 
     if (!self.isHideCount) {
-        CGRect stepperFrame = CGRectMake(0.0f, 15.0f, 134.0f, 40.0f);
+        CGRect stepperFrame = CGRectMake(0.0f, 15.0f, 124.0f, 33.0f);
         Stepper *quantityStepper = [[Stepper alloc] initWithFrame:stepperFrame
                                                      minimumValue:1
                                                      maximumValue:NSIntegerMax
                                                             value:1];
+        [quantityStepper setDecreaseButtonImage:[UIImage imageNamed:@"cart_icon_shopping_reduce_n"] forState:UIControlStateNormal];
+        [quantityStepper setDecreaseButtonImage:[UIImage imageNamed:@"cart_icon_shopping_reduce_d"] forState:UIControlStateDisabled];
+        [quantityStepper setIncreaseButtonImage:[UIImage imageNamed:@"cart_icon_shopping_add_n"] forState:UIControlStateNormal];
+        quantityStepper.layer.cornerRadius = 5;
         quantityStepper.right = CGRectGetMaxX(self.confirmView.bounds) - 10.0f;
         //    quantityStepper.bottom = CGRectGetMaxY(self.confirmView.bounds) - 85.0f;
         //    [quantityStepper addTarget:self action:@selector(quantityStepperStepped:) forControlEvents:UIControlEventValueChanged];
@@ -199,7 +169,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
         
         UILabel *quantityTipsLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 0.0f, 100.0f, 0.0f)];
         quantityTipsLabel.font = F6;
-        quantityTipsLabel.textColor = C6;
+        quantityTipsLabel.textColor = C8;
         [quantityTipsLabel setText:@"购买数量" constrainedToLineCount:0];
         quantityTipsLabel.centerY = self.quantityStepper.centerY;
         [self.confirmView addSubview:quantityTipsLabel];
@@ -212,6 +182,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
     [confirmButton setBackgroundImage:[UIImage patternImageWithColor:[QGHAppearance separatorColor]] forState:UIControlStateDisabled];
 //    confirmButton.backgroundColor = [MMHAppearance pinkColor];
     [confirmButton setTitle:@"确定" forState:UIControlStateNormal];
+    [confirmButton setTitleColor:C21 forState:UIControlStateNormal];
     confirmButton.titleLabel.font = F8;
     [confirmButton addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
     [self.confirmView addSubview:confirmButton];
@@ -229,12 +200,78 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
 }
 
 
+- (UIView *)contentView {
+    if (!_contentView) {
+        _contentView = [[UIView alloc] initWithFrame:self.view.bounds];
+        //    if ([self.specFilter hasAnySpecs]) {
+        //        contentView.height = 420.0f;
+        //    }
+        //    else {
+        //        contentView.height = 220.0f;
+        //    }
+        //    contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _contentView.backgroundColor = [UIColor whiteColor];
+//        [self.view addSubview:_contentView];
+    }
+    
+    return _contentView;
+}
+
+
+- (UICollectionView *)collectionView {
+    if (!_collectionView) {
+        UICollectionViewLeftAlignedLayout * layout = [[UICollectionViewLeftAlignedLayout alloc] init];
+        layout.headerReferenceSize = CGSizeMake(0.0f, 35.0f);
+        layout.sectionInset = UIEdgeInsetsMake(15.0f, 10.0f, 15.0f, 10.0f);
+        layout.minimumLineSpacing = 15.0f;
+        //    [layout registerClass:[FilterTermSelectionDecorationView class] forDecorationViewOfKind:MMHFilterTermSelectionDecorationViewIdentifier];
+        
+        CGFloat confirmViewHeight = 120;
+        if (self.isHideCount) {
+            confirmViewHeight = 50;
+        }
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0.0f, 88.0f, self.contentView.bounds.size.width, self.contentView.bounds.size.height - 88.0f - confirmViewHeight)
+                                                              collectionViewLayout:layout];
+        //    collectionView.contentInset = UIEdgeInsetsMake(0.0f, 0.0f, 90.0f, 0.0f);
+//        _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _collectionView.allowsMultipleSelection = YES;
+        _collectionView.dataSource = self;
+        _collectionView.delegate = self;
+        _collectionView.alwaysBounceVertical = YES;
+        _collectionView.backgroundColor = [UIColor whiteColor];
+        //    [collectionView registerClass:[MMHFilterTermSelectionBrandCell class] forCellWithReuseIdentifier:MMHFilterTermSelectionBrandCellIdentifier];
+        [_collectionView registerClass:[ProductSpecSelectionCell class] forCellWithReuseIdentifier:MMHProductSpecSelectionCellIdentifier];
+        [_collectionView registerClass:[ProductSpecSelectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:MMHProductSpecSelectionHeaderIdentifier];
+    }
+    
+    return _collectionView;
+}
+
+
+- (UIView *)confirmView {
+    if (!_confirmView) {
+        CGFloat confirmViewHeight = 120;
+        if (self.isHideCount) {
+            confirmViewHeight = 50;
+        }
+        
+        _confirmView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.contentView.bounds.size.width, confirmViewHeight)];
+//            confirmView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+        [_confirmView moveToBottom:CGRectGetMaxY(self.contentView.bounds)];
+        _confirmView.backgroundColor = [UIColor whiteColor];
+    }
+    
+    return _confirmView;
+}
+
+
 - (void)updateViews
 {
 //    NSString *priceString = [NSString stringWithFormat:@"￥ %.2f", self.productDetail.price];
 //    [self.priceLabel setText:priceString constrainedToLineCount:1];
 //
-    NSArray *selectedSpecNames = [self.productDetail.categoryDict allKeys];
+    NSArray *selectedSpecNames = [self.productDetail.skuSelectModel selectedSKUValues];
     if ([selectedSpecNames count] == 0) {
         self.selectedSpecsLabel.text = @"";
 //        self.closeButton.hidden = YES;
@@ -272,7 +309,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
             __weak __typeof(self) weakSelf = self;
             [self.settledViewController dismissFloatingViewControllerAnimated:YES completion:^{
                 if (weakSelf.specSelectedHandler) {
-//                    weakSelf.specSelectedHandler(weakSelf.specFilter.selectedSpecs);
+                    weakSelf.specSelectedHandler(weakSelf.productDetail.skuSelectModel);
                 }
             }];
     }
@@ -288,7 +325,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
         __weak __typeof(self) weakSelf = self;
         [self.settledViewController dismissFloatingViewControllerAnimated:YES completion:^{
             if (weakSelf.specSelectedHandler) {
-//                weakSelf.specSelectedHandler(weakSelf.specFilter.selectedSpecs);
+                weakSelf.specSelectedHandler(weakSelf.productDetail.skuSelectModel);
             }
         }];
 }
@@ -340,12 +377,20 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
 {
     NSArray *keys = self.productDetail.categoryDict.allKeys;
     NSArray *categoryArr = [self.productDetail.categoryDict objectForKey:[keys objectAtIndex:indexPath.section]];
-    NSString *name = ((QGHSKUCategory *)categoryArr[indexPath.row]).value;
+    NSString *value = ((QGHSKUCategory *)categoryArr[indexPath.row]).value;
     
     ProductSpecSelectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MMHProductSpecSelectionCellIdentifier forIndexPath:indexPath];
     cell.layer.cornerRadius = 3.0f;
-    cell.title = name;
+    cell.title = value;
+    cell.enabled = YES;
     
+    NSString *name =  ((QGHSKUCategory *)categoryArr[indexPath.row]).name;
+    QGHSKUCategory *category = self.productDetail.skuSelectModel.selectedSKU[name];
+    if (category && [value isEqualToString:category.value]) {
+        cell.selected = YES;
+    } else {
+        cell.selected = NO;
+    }
 //    if (![self.specFilter selectabilityForOptionAtIndex:indexPath.row forSpecAtSection:indexPath.section]) {
 //        cell.enabled = NO;
 //    }
@@ -428,6 +473,10 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
 //    }
 //    
 //    [self.specFilter setSelectedOptionIndex:indexPath.row ofSpecAtIndex:indexPath.section];
+    NSArray *keys = self.productDetail.categoryDict.allKeys;
+    NSArray *categoryArr = [self.productDetail.categoryDict objectForKey:[keys objectAtIndex:indexPath.section]];
+    NSString *name = ((QGHSKUCategory *)categoryArr[indexPath.row]).name;
+    self.productDetail.skuSelectModel.selectedSKU[name] = (QGHSKUCategory *)categoryArr[indexPath.row];
     [collectionView reloadData];
     [self updateViews];
 }
@@ -463,11 +512,20 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
     }
     
 //    if (![self.specFilter isCurrentSelectionAvailableForSale]) {
-        self.priceLabel.text = @"暂无供应";
-        return;
+    QGHSKUPrice *price = [self.productDetail allSepcSelectedPrice];
+    if (price) {
+        [self.priceLabel setSingleLineText:[NSString stringWithFormat:@"¥%@", price.original_price]];
+        self.confirmButton.enabled = YES;
+    } else {
+        [self.priceLabel setSingleLineText:@"暂无供应"];
+        self.confirmButton.enabled = NO;
+//        self.priceLabel.text = @"暂无供应";
+    }
+    
+    return;
 //    }
 //    else {
-        self.priceLabel.text = @"";
+//        self.priceLabel.text = @"";
 //    }
     
 //    if (self.productDetail.defaultImage && self.productDetail.defaultPrice > 0) {

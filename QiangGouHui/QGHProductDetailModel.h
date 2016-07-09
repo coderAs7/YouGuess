@@ -21,8 +21,10 @@
 
 @property (nonatomic, strong) NSDictionary<NSString*, NSArray<QGHSKUCategory *> *> *categoryDict;
 
+
 @property (nonatomic, strong) QGHSKUSelectModel *skuSelectModel;
 
 - (BOOL)isAllSpecSelected;
+- (QGHSKUPrice *)allSepcSelectedPrice;
 
 @end

@@ -60,6 +60,18 @@
 }
 
 
+- (void)setReceiptAddressModel:(QGHReceiptAddressModel *)model {
+    self.receiptName.text = [NSString stringWithFormat:@"收货人：%@", model.username];
+    self.phoneLabel.text = model.phone;
+    self.addressLabel.text = [NSString stringWithFormat:@"%@ %@ %@ %@", model.province, model.city, model.area, model.address];
+    if ([model.isdefault isEqualToString:@"1"]) {
+        self.defaultImage.image = [UIImage imageNamed:@"dizhi_xuanzhong"];
+    } else {
+        self.defaultImage.image = [UIImage imageNamed:@"dizhi_weixuanzhong"];
+    }
+}
+
+
 - (void)defaultButtonAction {
 
 }

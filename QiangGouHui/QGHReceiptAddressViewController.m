@@ -8,12 +8,14 @@
 
 #import "QGHReceiptAddressViewController.h"
 #import "QGHReceiptAddressCell.h"
+#import "MMHNetworkAdapter+ReceiptAddress.h"
 
 static NSString *const QGHReceiptAddressCellIdentifier = @"QGHReceiptAddressCellIdentifier";
 
 
 @interface QGHReceiptAddressViewController ()<UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, strong) NSMutableArray *receiptArr;
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
@@ -27,6 +29,7 @@ static NSString *const QGHReceiptAddressCellIdentifier = @"QGHReceiptAddressCell
     self.title = @"选择地址";
     
     [self makeTableView];
+    [self fetchData];
 }
 
 
@@ -42,10 +45,27 @@ static NSString *const QGHReceiptAddressCellIdentifier = @"QGHReceiptAddressCell
 }
 
 
+#pragma mark - network
+
+
+- (void)fetchData {
+    [self.view showProcessingView];
+    [[MMHNetworkAdapter sharedAdapter] fetchReceiptAddressListFrom:self succeededHandler:^(NSArray<QGHReceiptAddressModel *> *receiptAddressArr) {
+        [self.view hideProcessingView];
+        self.receiptArr = [NSMutableArray arrayWithArray:receiptAddressArr];
+        [self.tableView reloadData];
+    } failedHandler:^(NSError *error) {
+        [self.view hideProcessingView];
+        [self.view showTipsWithError:error];
+    }];
+}
+
+
 #pragma mark - UITalbeView DataSource and Delegate
 
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return self.receiptArr.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -55,7 +75,8 @@ static NSString *const QGHReceiptAddressCellIdentifier = @"QGHReceiptAddressCell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QGHReceiptAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHReceiptAddressCellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
+    [cell setReceiptAddressModel:[self.receiptArr objectAtIndex:indexPath.section]];
+    
     return cell;
 }
 

@@ -111,6 +111,8 @@
 		41E87A9F1D2D5311003A987E /* QGHCartItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E87A9E1D2D5311003A987E /* QGHCartItem.m */; };
 		41E87AA21D2E8F0C003A987E /* QGHSKUSelectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E87AA11D2E8F0C003A987E /* QGHSKUSelectModel.m */; };
 		41E87AA51D2E98A7003A987E /* MMHFilterTermSelectionAgeGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E87AA41D2E98A7003A987E /* MMHFilterTermSelectionAgeGroupCell.m */; };
+		41E97F331D31401200335C78 /* MMHNetworkAdapter+ReceiptAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E97F321D31401200335C78 /* MMHNetworkAdapter+ReceiptAddress.m */; };
+		41E97F381D31409200335C78 /* QGHReceiptAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E97F371D31409200335C78 /* QGHReceiptAddressModel.m */; };
 		D1BC298755BEA9C0E319311F /* libPods-QiangGouHui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67968EB60CF93479054CD498 /* libPods-QiangGouHui.a */; };
 /* End PBXBuildFile section */
 
@@ -310,6 +312,10 @@
 		41E87AA11D2E8F0C003A987E /* QGHSKUSelectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHSKUSelectModel.m; sourceTree = "<group>"; };
 		41E87AA31D2E98A7003A987E /* MMHFilterTermSelectionAgeGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHFilterTermSelectionAgeGroupCell.h; sourceTree = "<group>"; };
 		41E87AA41D2E98A7003A987E /* MMHFilterTermSelectionAgeGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHFilterTermSelectionAgeGroupCell.m; sourceTree = "<group>"; };
+		41E97F311D31401200335C78 /* MMHNetworkAdapter+ReceiptAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMHNetworkAdapter+ReceiptAddress.h"; sourceTree = "<group>"; };
+		41E97F321D31401200335C78 /* MMHNetworkAdapter+ReceiptAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMHNetworkAdapter+ReceiptAddress.m"; sourceTree = "<group>"; };
+		41E97F361D31409200335C78 /* QGHReceiptAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHReceiptAddressModel.h; sourceTree = "<group>"; };
+		41E97F371D31409200335C78 /* QGHReceiptAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHReceiptAddressModel.m; sourceTree = "<group>"; };
 		67968EB60CF93479054CD498 /* libPods-QiangGouHui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QiangGouHui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9BECC3B9212C2BF0AD13B4F /* Pods-QiangGouHui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiangGouHui.release.xcconfig"; path = "Pods/Target Support Files/Pods-QiangGouHui/Pods-QiangGouHui.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -563,6 +569,8 @@
 				41DC080E1D2AA25400DDC5DD /* MMHNetworkAdapter+Product.m */,
 				41E87A991D2D51EE003A987E /* MMHNetworkAdapter+Cart.h */,
 				41E87A9A1D2D51EE003A987E /* MMHNetworkAdapter+Cart.m */,
+				41E97F311D31401200335C78 /* MMHNetworkAdapter+ReceiptAddress.h */,
+				41E97F321D31401200335C78 /* MMHNetworkAdapter+ReceiptAddress.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -638,6 +646,7 @@
 		41DA4ACB1D1594A500A8E42D /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				41E97F341D31406C00335C78 /* Model */,
 				41DA4AD01D1595FE00A8E42D /* View */,
 				41DA4ACF1D1595F300A8E42D /* Controller */,
 			);
@@ -896,6 +905,23 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		41E97F341D31406C00335C78 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				41E97F351D31407100335C78 /* ReceiptAddress */,
+				41E97F361D31409200335C78 /* QGHReceiptAddressModel.h */,
+				41E97F371D31409200335C78 /* QGHReceiptAddressModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		41E97F351D31407100335C78 /* ReceiptAddress */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ReceiptAddress;
+			sourceTree = "<group>";
+		};
 		784FAF7F814C9758168FAB42 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1126,6 +1152,8 @@
 				41DC07E21D28ABFD00DDC5DD /* MMHRequestSerializer.m in Sources */,
 				41DC080F1D2AA25400DDC5DD /* MMHNetworkAdapter+Product.m in Sources */,
 				41DC07A71D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.m in Sources */,
+				41E97F331D31401200335C78 /* MMHNetworkAdapter+ReceiptAddress.m in Sources */,
+				41E97F381D31409200335C78 /* QGHReceiptAddressModel.m in Sources */,
 				41E87A8D1D2D30C7003A987E /* MMHProductSpecSelectionViewController.m in Sources */,
 				41C64C721D181C0300E22E5B /* QGHLoginViewController.m in Sources */,
 				41DC081F1D2BFC8E00DDC5DD /* QGHProductDetailWebViewCell.m in Sources */,

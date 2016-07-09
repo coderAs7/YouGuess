@@ -10,8 +10,21 @@
 #import "QGHCartItem.h"
 
 
+@class QGHCartCell;
+
+
+@protocol QGHCartCellDelegate <NSObject>
+
+- (void)cartCellModifyCount:(QGHCartCell *)cell changeValueFrom:(NSInteger)currentValue to:(NSInteger)newValue;
+- (void)cartCellDeleteItem:(QGHCartCell *)cell;
+- (void)cartCellSelectItem:(QGHCartCell *)cell;
+
+@end
+
+
 @interface QGHCartCell : UITableViewCell
 
-- (void)setCartItem:(QGHCartItem *)item;
+@property (nonatomic, weak) id<QGHCartCellDelegate> delegate;
+@property (nonatomic, strong) QGHCartItem *cartItem;
 
 @end

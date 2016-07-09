@@ -13,6 +13,7 @@
 
 //@class MMHProductDetailModel;
 //@protocol MMHProductDetailProtocol;
+@class QGHSKUSelectModel;
 
 
 @interface MMHProductSpecSelectionViewController : MMHFloatingViewController
@@ -21,6 +22,6 @@
 
 //- (instancetype)initWithProductDetail:(id<MMHProductDetailProtocol>)productDetail isHideCount:(BOOL)isHideCount specSelectedHander:(void (^)(NSArray *selectedSpec))specSelectedHandler;
 
-- (instancetype)initWithProductDetail:(QGHProductDetailModel *)productDetail;
+- (instancetype)initWithProductDetail:(QGHProductDetailModel *)productDetail specSelectedHandler:(void (^)(QGHSKUSelectModel *selectedModel))specSelectedHandler;
 
 @end

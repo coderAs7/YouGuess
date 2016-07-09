@@ -24,4 +24,6 @@
 @property (nonatomic, copy) NSString *skuId;
 @property (nonatomic, assign) int count;
 
+@property (nonatomic, assign) BOOL isSelected;
+
 @end

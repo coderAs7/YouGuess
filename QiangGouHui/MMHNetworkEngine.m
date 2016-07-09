@@ -132,6 +132,13 @@
                    failedBlock(error);
                    return ;
                }
+               if ([allKeys containsObject:@"error"] && [[responseObject objectForKey:@"error"] integerValue] != 0) {
+                   NSError *error = [NSError errorWithDomain:@"MMHErrorDomain"
+                                                        code:[responseObject[@"error_code"] integerValue]
+                                                    userInfo:@{NSLocalizedDescriptionKey: responseObject[@"info"]}];
+                   failedBlock(error);
+                   return;
+               }
            }
            
            if (responseObjectClass == nil) {

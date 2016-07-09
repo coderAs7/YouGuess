@@ -42,7 +42,7 @@ class ProductSpecSelectionHeaderView: UICollectionReusableView {
         self.titleLabel.width = mmh_screen_width() - 20
         self.titleLabel.backgroundColor = UIColor.clearColor()
         self.titleLabel.font = F6
-        self.titleLabel.textColor = C6
+        self.titleLabel.textColor = C8
         super.init(frame: frame)
         
         self.backgroundColor = UIColor.whiteColor()

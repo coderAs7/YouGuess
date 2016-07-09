@@ -8,6 +8,7 @@
 
 #import "QGHCartCell.h"
 #import "QiangGouHui-Swift.h"
+#import "MMHNetworkAdapter+Cart.h"
 
 
 @interface QGHCartCell ()<StepperDelegate>
@@ -29,6 +30,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.checkImage.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    [self.checkImage addGestureRecognizer:tap];
     
     self.productBackView.backgroundColor = [UIColor clearColor];
     
@@ -54,6 +59,7 @@
     self.deleteButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [self.deleteButton setTitleColor:C6 forState:UIControlStateNormal];
     self.deleteButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0);
+    [self.deleteButton addTarget:self action:@selector(deleteButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [self.deleteButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(55);
     }];
@@ -76,10 +82,56 @@
 
 
 - (void)setCartItem:(QGHCartItem *)item {
+    _cartItem = item;
+    
     [self.productImage updateViewWithImageAtURL:item.img_path];
     self.productTitle.text = item.title;
-    self.priceLabel.text = [NSString stringWithFormat:@"%f", item.min_price];
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%g", item.min_price];
+    [self.colorLabel setSingleLineText:item.sku];
+    self.sizeLabel.text = @"";
     self.stepper.value = item.count;
+    if (item.isSelected) {
+        self.checkImage.image = [UIImage imageNamed:@"dizhi_xuanzhong"];
+    } else {
+        self.checkImage.image = [UIImage imageNamed:@"dizhi_weixuanzhong"];
+    }
+}
+
+
+#pragma mark - StepperDelegate
+
+
+- (BOOL)stepper:(Stepper * __nonnull)stepper shouldChangeValueFrom:(NSInteger)currentValue to:(NSInteger)newValue
+{
+    if ([self.delegate respondsToSelector:@selector(cartCellModifyCount:changeValueFrom:to:)]) {
+        [self.delegate cartCellModifyCount:self changeValueFrom:currentValue to:newValue];
+    }
+    
+    return NO;
+}
+
+
+#pragma mark - Action
+
+
+- (void)deleteButtonAction {
+    if ([self.delegate respondsToSelector:@selector(cartCellDeleteItem:)]) {
+        [self.delegate cartCellDeleteItem:self];
+    }
+}
+
+
+- (void)tap {
+    self.cartItem.isSelected = !self.cartItem.isSelected;
+    if (self.cartItem.isSelected) {
+        self.checkImage.image = [UIImage imageNamed:@"dizhi_xuanzhong"];
+    } else {
+        self.checkImage.image = [UIImage imageNamed:@"dizhi_weixuanzhong"];
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(cartCellSelectItem:)]) {
+        [self.delegate cartCellSelectItem:self];
+    }
 }
 
 

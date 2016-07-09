@@ -15,6 +15,7 @@
 #import "MMHNetworkAdapter+Product.h"
 #import "QGHProductDetailWebViewCell.h"
 #import "MMHProductSpecSelectionViewController.h"
+#import "MMHNetworkAdapter+Cart.h"
 
 
 static NSString *const QGHProductDetailHeaderCellIdentifier = @"QGHProductDetailHeaderCellIdentifier";
@@ -131,6 +132,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
         [addCartBtn setTitle:@"加入购物车" forState:UIControlStateNormal];
         [addCartBtn setTitleColor:C21 forState:UIControlStateNormal];
         addCartBtn.titleLabel.font = F6;
+        [addCartBtn addTarget:self action:@selector(addCartBtnAction) forControlEvents:UIControlEventTouchUpInside];
         [_bottomView addSubview:addCartBtn];
         
         UIButton *buyNowBtn = [[UIButton alloc] initWithFrame:CGRectMake(addCartBtn.right, 0, (mmh_screen_width() - 150) * 0.5, 48)];
@@ -287,8 +289,24 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 }
 
 
+- (void)addCartBtnAction {
+    MMHProductSpecSelectionViewController *specVC = [[MMHProductSpecSelectionViewController alloc] initWithProductDetail:self.productDetailModel specSelectedHandler:^(QGHSKUSelectModel *selectedSpec) {
+        [[MMHNetworkAdapter sharedAdapter] addCartFrom:self goodsId:self.productDetailModel.product.goodsId count:selectedSpec.count price:self.productDetailModel.product.min_price skuId:self.productDetailModel.allSepcSelectedPrice.priceId succeededHandler:^{
+            //TODO
+        } failedHandler:^(NSError *error) {
+            [self.view showTipsWithError:error];
+        }];
+    }];
+    QGHTabBarController *tabBarController = (QGHTabBarController *)self.tabBarController;
+    [tabBarController presentFloatingViewController:specVC animated:YES];
+
+}
+
+
 - (void)buyNowBtnAction {
-    MMHProductSpecSelectionViewController *specVC = [[MMHProductSpecSelectionViewController alloc] initWithProductDetail:self.productDetailModel];
+    MMHProductSpecSelectionViewController *specVC = [[MMHProductSpecSelectionViewController alloc] initWithProductDetail:self.productDetailModel specSelectedHandler:^(QGHSKUSelectModel *selectedSpec) {
+        //TODO
+    }];
     QGHTabBarController *tabBarController = (QGHTabBarController *)self.tabBarController;
     [tabBarController presentFloatingViewController:specVC animated:YES];
     
