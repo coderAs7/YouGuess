@@ -10,8 +10,20 @@
 #import "QGHReceiptAddressModel.h"
 
 
+@class QGHReceiptAddressCell;
+
+
+@protocol QGHReceiptAddressCellDelegate <NSObject>
+
+- (void)receiptAddressCellSetDefaultAddress:(QGHReceiptAddressCell *)cell;
+- (void)receiptAddressCellDeleteAddress:(QGHReceiptAddressCell *)cell;
+
+@end
+
+
 @interface QGHReceiptAddressCell : UITableViewCell
 
-- (void)setReceiptAddressModel:(QGHReceiptAddressModel *)model;
+@property (nonatomic, weak) id<QGHReceiptAddressCellDelegate> delegate;
+@property (nonatomic, strong) QGHReceiptAddressModel *receiptAddressModel;
 
 @end

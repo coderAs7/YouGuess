@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QGHReceiptAddressModel.h"
+
 
 @interface QGHOrderAddressCellTableViewCell : UITableViewCell
+
+@property (nonatomic, strong) QGHReceiptAddressModel *receiptAddressModel;
 
 @end

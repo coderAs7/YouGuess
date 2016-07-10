@@ -7,9 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "QGHProductDetailModel.h"
 
 @interface QGHConfirmOrderViewController : BaseViewController
 
-- (instancetype)initWithBussType:(QGHBussType)type;
+- (instancetype)initWithBussType:(QGHBussType)type productDetail:(QGHProductDetailModel *)productDetail;
 
 @end

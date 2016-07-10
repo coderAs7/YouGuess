@@ -61,6 +61,8 @@
 
 
 - (void)setReceiptAddressModel:(QGHReceiptAddressModel *)model {
+    _receiptAddressModel = model;
+    
     self.receiptName.text = [NSString stringWithFormat:@"收货人：%@", model.username];
     self.phoneLabel.text = model.phone;
     self.addressLabel.text = [NSString stringWithFormat:@"%@ %@ %@ %@", model.province, model.city, model.area, model.address];
@@ -73,12 +75,16 @@
 
 
 - (void)defaultButtonAction {
-
+    if ([self.delegate respondsToSelector:@selector(receiptAddressCellSetDefaultAddress:)]) {
+        [self.delegate receiptAddressCellSetDefaultAddress:self];
+    }
 }
 
 
 - (void)deleteButtonAction {
-
+    if ([self.delegate respondsToSelector:@selector(receiptAddressCellDeleteAddress:)]) {
+        [self.delegate receiptAddressCellDeleteAddress:self];
+    }
 }
 
 

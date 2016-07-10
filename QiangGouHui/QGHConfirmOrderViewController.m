@@ -10,6 +10,8 @@
 #import "QGHOrderAddressCellTableViewCell.h"
 #import "QGHOrderDetailProductCell.h"
 #import "QGHOrderDetailCommonCell.h"
+#import "MMHNetworkAdapter+ReceiptAddress.h"
+#import "MMHNetworkAdapter+Order.h"
 
 
 static NSString *const QGHConfirmOrderAddressCellIdentifier = @"QGHConfirmOrderAddressCellIdentifier";
@@ -29,16 +31,25 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 @property (nonatomic, strong) UIView *bottom;
 @property (nonatomic, strong) UILabel *priceLabel;
 
+@property (nonatomic, assign) BOOL defaultReceiptStandBy;
+@property (nonatomic, assign) BOOL mailPriceStandBy;
+
+@property (nonatomic, strong) QGHReceiptAddressModel *defaultReceiptAddress;
+@property (nonatomic, assign) float mailPrice;
+
+@property (nonatomic, strong) QGHProductDetailModel *productDetail;
+
 @end
 
 @implementation QGHConfirmOrderViewController
 
 
-- (instancetype)initWithBussType:(QGHBussType)type {
+- (instancetype)initWithBussType:(QGHBussType)type productDetail:(QGHProductDetailModel *)detail {
     self = [super init];
     
     if (self) {
         _bussType = type;
+        _productDetail = detail;
     }
     
     return self;
@@ -66,6 +77,8 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     
     [self makeTableView];
     [self makeBottomView];
+    
+    [self fetchDefaultReceiptAddress];
 }
 
 
@@ -108,6 +121,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     [settleButton setTitleColor:C21 forState:UIControlStateNormal];
     [settleButton setTitle:@"去结算" forState:UIControlStateNormal];
     settleButton.titleLabel.font = F6;
+    [settleButton addTarget:self action:@selector(settleButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [_bottom addSubview:settleButton];
     
     [_bottom addTopSeparatorLine];
@@ -134,6 +148,47 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
         make.height.equalTo(_bottom);
         make.right.and.bottom.mas_equalTo(0);
     }];
+}
+
+
+- (void)fetchDefaultReceiptAddress {
+    [self.view showProcessingView];
+    
+    [[MMHNetworkAdapter sharedAdapter] fetchDefaultReceiptAddressFrom:self succeededHandler:^(QGHReceiptAddressModel *address) {
+        self.defaultReceiptAddress = address;
+        self.defaultReceiptStandBy = YES;
+        [self fetchMailPrice];
+    } failedHandler:^(NSError *error) {
+        [self.view showTipsWithError:error];
+        self.defaultReceiptStandBy = YES;
+        [self tryToHideProcessingView];
+    }];
+}
+
+
+- (void)fetchMailPrice {
+    [[MMHNetworkAdapter sharedAdapter] fetchMailPriceFrom:self goodsId:self.productDetail.product.goodsId province:self.defaultReceiptAddress.province succeededHandler:^(float mainPrice) {
+        self.mailPrice = mainPrice;
+        self.mailPriceStandBy = YES;
+        [self tryToHideProcessingView];
+    } failedHandler:^(NSError *error) {
+        [self.view showTipsWithError:error];
+        self.mailPriceStandBy = YES;
+        [self tryToHideProcessingView];
+    }];
+}
+
+
+- (void)tryToHideProcessingView {
+    if (!self.defaultReceiptStandBy) {
+        return;
+    }
+    if (!self.mailPriceStandBy) {
+        return;
+    }
+    
+    [self.view hideProcessingView];
+    [self.tableView reloadData];
 }
 
 
@@ -167,28 +222,40 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[self nameForSection:indexPath.section] isEqualToString:@"地址"]) {
         QGHOrderAddressCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHConfirmOrderAddressCellIdentifier forIndexPath:indexPath];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.receiptAddressModel = self.defaultReceiptAddress;
+        
         return cell;
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"商品"]) {
         QGHOrderDetailProductCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHConfirmOrderProductCellIdentifier forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         return cell;
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"配送方式"]) {
         QGHOrderDetailCommonCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHConfirmOrderCommonCellIdentifier forIndexPath:indexPath];
         [cell setData:@[@{@"key": @"配送方式", @"value": @"快递配送"}]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"发货时间"]) {
         QGHOrderDetailCommonCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHConfirmOrderCommonCellIdentifier forIndexPath:indexPath];
         [cell setData:@[@{@"key": @"发货时间", @"value": @"6月10日"}]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"生产周期"]) {
         QGHOrderDetailCommonCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHConfirmOrderCommonCellIdentifier forIndexPath:indexPath];
         [cell setData:@[@{@"key": @"商品生产周期", @"value": @"15天"}]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"价格"]) {
         QGHOrderDetailCommonCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHConfirmOrderCommonCellIdentifier forIndexPath:indexPath];
-        [cell setData:@[@{@"key": @"商品金额", @"value": @"¥99"}, @{@"key": @"运费", @"value": @"¥10"}]];
+        NSString *priceStr = [NSString stringWithFormat:@"¥%@", self.productDetail.product.min_price];
+        NSString *mailPriceStr = [NSString stringWithFormat:@"¥%g", self.mailPrice];
+        [cell setData:@[@{@"key": @"商品金额", @"value": priceStr}, @{@"key": @"运费", @"value": mailPriceStr}]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
     }
@@ -227,6 +294,14 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.00001;
+}
+
+
+#pragma mark - Actions
+
+
+- (void)settleButtonAction {
+    
 }
 
 

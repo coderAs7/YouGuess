@@ -8,17 +8,31 @@
 
 #import "QGHOrderAddressCellTableViewCell.h"
 
+
+@interface QGHOrderAddressCellTableViewCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+
+@end
+
+
 @implementation QGHOrderAddressCellTableViewCell
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+- (void)setReceiptAddressModel:(QGHReceiptAddressModel *)receiptAddressModel {
+    _receiptAddressModel = receiptAddressModel;
+    self.nameLabel.text = receiptAddressModel.username;
+    self.phoneLabel.text = receiptAddressModel.phone;
+    self.addressLabel.text = [NSString stringWithFormat:@"%@%@%@%@", receiptAddressModel.province, receiptAddressModel.city, receiptAddressModel.area, receiptAddressModel.address];
 }
+
 
 @end

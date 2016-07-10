@@ -824,6 +824,33 @@ NSString *MMHPathDocumentsAppendingPathComponent(NSString *pathComponent) {
 }
 
 
+- (NSString *)clearSheng {
+    if ([self hasSuffix:@"省"]) {
+        return [self stringByReplacingCharactersInRange:NSMakeRange(self.length - 1, 1) withString:@""];
+    }
+    
+    return self;
+}
+
+
+- (NSString *)clearShi {
+    if ([self hasSuffix:@"市"]) {
+        return  [self stringByReplacingCharactersInRange:NSMakeRange(self.length - 1, 1) withString:@""];
+    }
+    
+    return self;
+}
+
+
+- (NSString *)clearQu {
+    if ([self hasSuffix:@"区"]) {
+        return [self stringByReplacingCharactersInRange:NSMakeRange(self.length - 1, 1) withString:@""];
+    }
+    
+    return self;
+}
+
+
 @end
 
 

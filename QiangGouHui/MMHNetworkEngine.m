@@ -171,7 +171,7 @@
 
 - (NSString *)parametersString:(NSDictionary *)parameters {
     NSMutableDictionary *mutableParameters = [parameters mutableCopy];
-    [mutableParameters removeObjectForKey:@"apiCode"];
+//    [mutableParameters removeObjectForKey:@"apiCode"];
     NSArray *keys = [mutableParameters allKeys];
     NSArray *sortedKeys = [keys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         NSString *key1 = (NSString *)obj1;
@@ -179,7 +179,7 @@
         return [key1 compare:key2];
     }];
     
-    NSString *token = parameters[@"apiCode"];
+    NSString *token = @"";
     for (NSString *key in sortedKeys) {
         NSString *value = [NSString stringWithFormat:@"%@", parameters[key]];
         token = [token stringByAppendingString:value];
@@ -188,7 +188,7 @@
     token = [token md5String];
     
 
-    [mutableParameters addEntriesFromDictionary:@{@"apiCode": parameters[@"apiCode"], @"token": token}];
+    [mutableParameters addEntriesFromDictionary:@{@"token": token}];
     return [mutableParameters mmh_JSONString];
 }
 

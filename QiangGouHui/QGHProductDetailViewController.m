@@ -305,13 +305,11 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 
 - (void)buyNowBtnAction {
     MMHProductSpecSelectionViewController *specVC = [[MMHProductSpecSelectionViewController alloc] initWithProductDetail:self.productDetailModel specSelectedHandler:^(QGHSKUSelectModel *selectedSpec) {
-        //TODO
+        QGHConfirmOrderViewController *confirmOrderVC = [[QGHConfirmOrderViewController alloc] initWithBussType:QGHBussTypeNormal productDetail:self.productDetailModel];
+        [self.navigationController pushViewController:confirmOrderVC animated:YES];
     }];
     QGHTabBarController *tabBarController = (QGHTabBarController *)self.tabBarController;
     [tabBarController presentFloatingViewController:specVC animated:YES];
-    
-//    QGHConfirmOrderViewController *confirmOrderVC = [[QGHConfirmOrderViewController alloc] initWithBussType:QGHBussTypeNormal];
-//    [self.navigationController pushViewController:confirmOrderVC animated:YES];
 }
 
 

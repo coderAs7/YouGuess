@@ -113,6 +113,13 @@
 		41E87AA51D2E98A7003A987E /* MMHFilterTermSelectionAgeGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E87AA41D2E98A7003A987E /* MMHFilterTermSelectionAgeGroupCell.m */; };
 		41E97F331D31401200335C78 /* MMHNetworkAdapter+ReceiptAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E97F321D31401200335C78 /* MMHNetworkAdapter+ReceiptAddress.m */; };
 		41E97F381D31409200335C78 /* QGHReceiptAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E97F371D31409200335C78 /* QGHReceiptAddressModel.m */; };
+		41E97F3A1D31F61500335C78 /* area.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41E97F391D31F61500335C78 /* area.plist */; };
+		41E97F3D1D31F65000335C78 /* QGHAddAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E97F3C1D31F65000335C78 /* QGHAddAddressViewController.m */; };
+		41E97F441D31FA4C00335C78 /* QGHCommonEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E97F421D31FA4C00335C78 /* QGHCommonEditCell.m */; };
+		41E97F451D31FA4C00335C78 /* QGHCommonEditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41E97F431D31FA4C00335C78 /* QGHCommonEditCell.xib */; };
+		41E97F491D32352100335C78 /* address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 41E97F481D32352100335C78 /* address.plist */; };
+		41E97F4C1D3237E500335C78 /* QGHAddAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E97F4B1D3237E500335C78 /* QGHAddAddressModel.m */; };
+		41E97F4F1D326F0A00335C78 /* MMHNetworkAdapter+Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E97F4E1D326F0A00335C78 /* MMHNetworkAdapter+Order.m */; };
 		D1BC298755BEA9C0E319311F /* libPods-QiangGouHui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67968EB60CF93479054CD498 /* libPods-QiangGouHui.a */; };
 /* End PBXBuildFile section */
 
@@ -316,6 +323,17 @@
 		41E97F321D31401200335C78 /* MMHNetworkAdapter+ReceiptAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMHNetworkAdapter+ReceiptAddress.m"; sourceTree = "<group>"; };
 		41E97F361D31409200335C78 /* QGHReceiptAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHReceiptAddressModel.h; sourceTree = "<group>"; };
 		41E97F371D31409200335C78 /* QGHReceiptAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHReceiptAddressModel.m; sourceTree = "<group>"; };
+		41E97F391D31F61500335C78 /* area.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = area.plist; sourceTree = "<group>"; };
+		41E97F3B1D31F65000335C78 /* QGHAddAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHAddAddressViewController.h; sourceTree = "<group>"; };
+		41E97F3C1D31F65000335C78 /* QGHAddAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHAddAddressViewController.m; sourceTree = "<group>"; };
+		41E97F411D31FA4C00335C78 /* QGHCommonEditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHCommonEditCell.h; sourceTree = "<group>"; };
+		41E97F421D31FA4C00335C78 /* QGHCommonEditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHCommonEditCell.m; sourceTree = "<group>"; };
+		41E97F431D31FA4C00335C78 /* QGHCommonEditCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QGHCommonEditCell.xib; sourceTree = "<group>"; };
+		41E97F481D32352100335C78 /* address.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = address.plist; sourceTree = "<group>"; };
+		41E97F4A1D3237E500335C78 /* QGHAddAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHAddAddressModel.h; sourceTree = "<group>"; };
+		41E97F4B1D3237E500335C78 /* QGHAddAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHAddAddressModel.m; sourceTree = "<group>"; };
+		41E97F4D1D326F0A00335C78 /* MMHNetworkAdapter+Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MMHNetworkAdapter+Order.h"; sourceTree = "<group>"; };
+		41E97F4E1D326F0A00335C78 /* MMHNetworkAdapter+Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MMHNetworkAdapter+Order.m"; sourceTree = "<group>"; };
 		67968EB60CF93479054CD498 /* libPods-QiangGouHui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QiangGouHui.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9BECC3B9212C2BF0AD13B4F /* Pods-QiangGouHui.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiangGouHui.release.xcconfig"; path = "Pods/Target Support Files/Pods-QiangGouHui/Pods-QiangGouHui.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -364,6 +382,8 @@
 			children = (
 				411ADC5D1D1C25B80050B8EB /* MMHAddressSingleModel.h */,
 				411ADC5E1D1C25B80050B8EB /* MMHAddressSingleModel.m */,
+				41E97F4A1D3237E500335C78 /* QGHAddAddressModel.h */,
+				41E97F4B1D3237E500335C78 /* QGHAddAddressModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -387,6 +407,9 @@
 				411ADC6A1D1C32610050B8EB /* QGHReceiptAddressCell.h */,
 				411ADC6B1D1C32610050B8EB /* QGHReceiptAddressCell.m */,
 				411ADC671D1C2BA20050B8EB /* QGHReceiptAddressCell.xib */,
+				41E97F411D31FA4C00335C78 /* QGHCommonEditCell.h */,
+				41E97F421D31FA4C00335C78 /* QGHCommonEditCell.m */,
+				41E97F431D31FA4C00335C78 /* QGHCommonEditCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -398,6 +421,8 @@
 				41DC07F81D2950E100DDC5DD /* CityListViewController.m */,
 				411ADC6E1D1C473B0050B8EB /* QGHReceiptAddressViewController.h */,
 				411ADC6F1D1C473B0050B8EB /* QGHReceiptAddressViewController.m */,
+				41E97F3B1D31F65000335C78 /* QGHAddAddressViewController.h */,
+				41E97F3C1D31F65000335C78 /* QGHAddAddressViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -571,6 +596,8 @@
 				41E87A9A1D2D51EE003A987E /* MMHNetworkAdapter+Cart.m */,
 				41E97F311D31401200335C78 /* MMHNetworkAdapter+ReceiptAddress.h */,
 				41E97F321D31401200335C78 /* MMHNetworkAdapter+ReceiptAddress.m */,
+				41E97F4D1D326F0A00335C78 /* MMHNetworkAdapter+Order.h */,
+				41E97F4E1D326F0A00335C78 /* MMHNetworkAdapter+Order.m */,
 			);
 			name = Networking;
 			sourceTree = "<group>";
@@ -618,7 +645,9 @@
 		41BF0FB31CFB509700FB23C2 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				41E97F391D31F61500335C78 /* area.plist */,
 				41DC07F51D2950C400DDC5DD /* citydict.plist */,
+				41E97F481D32352100335C78 /* address.plist */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -1003,13 +1032,16 @@
 			files = (
 				41DA4AD51D15962000A8E42D /* QGHCommonCellTableViewCell.xib in Resources */,
 				41DC07D91D27927500DDC5DD /* QGHCartCell.xib in Resources */,
+				41E97F3A1D31F61500335C78 /* area.plist in Resources */,
 				41BF0FA71CFB4F6100FB23C2 /* LaunchScreen.storyboard in Resources */,
 				41BEEB291D0D9A6A00612F88 /* QGHGoodsTableViewCell.xib in Resources */,
 				41DC07CA1D26B0ED00DDC5DD /* QGHProductDetailInfoCell.xib in Resources */,
 				41DC07F61D2950C400DDC5DD /* citydict.plist in Resources */,
+				41E97F451D31FA4C00335C78 /* QGHCommonEditCell.xib in Resources */,
 				41DC079D1D1FA36400DDC5DD /* QGHOrderDetailProductCell.xib in Resources */,
 				4159554B1D04685D00AC2BD4 /* QGHFirstBannerCell.xib in Resources */,
 				411ADC691D1C2BA20050B8EB /* QGHReceiptAddressCell.xib in Resources */,
+				41E97F491D32352100335C78 /* address.plist in Resources */,
 				41DC07B91D24103D00DDC5DD /* QGHProductDetailCommentCell.xib in Resources */,
 				41BF0FA41CFB4F6100FB23C2 /* Assets.xcassets in Resources */,
 				415955551D046F5000AC2BD4 /* QHGRushPurchaseItemView.xib in Resources */,
@@ -1099,6 +1131,7 @@
 				41DC07B41D24064600DDC5DD /* MMHDeleteLineLabel.m in Sources */,
 				411ADC4B1D1AD1B70050B8EB /* QGHNavigationController.m in Sources */,
 				41BEEB211D0D979E00612F88 /* QGHRushPurchaseItemsCell.m in Sources */,
+				41E97F3D1D31F65000335C78 /* QGHAddAddressViewController.m in Sources */,
 				41DC08161D2AA42A00DDC5DD /* QGHSKUCategory.m in Sources */,
 				41BEEB281D0D9A6A00612F88 /* QGHGoodsTableViewCell.m in Sources */,
 				41B3F4021CFC97230007195B /* NSString+QSCalcSize.m in Sources */,
@@ -1118,6 +1151,7 @@
 				41DC08131D2AA40600DDC5DD /* QGHProductDetailModel.m in Sources */,
 				41E87A871D2C0A0F003A987E /* QGHProductDetailScoreInfo.m in Sources */,
 				41DC07D21D27547000DDC5DD /* QGHConfirmOrderViewController.m in Sources */,
+				41E97F4F1D326F0A00335C78 /* MMHNetworkAdapter+Order.m in Sources */,
 				41BF0F9C1CFB4F6100FB23C2 /* AppDelegate.m in Sources */,
 				41DC078D1D1E7D9A00DDC5DD /* MMHOrderInfoTableViewCell.m in Sources */,
 				41B3F4091CFCA0830007195B /* QGHTabBarController.m in Sources */,
@@ -1152,6 +1186,7 @@
 				41DC07E21D28ABFD00DDC5DD /* MMHRequestSerializer.m in Sources */,
 				41DC080F1D2AA25400DDC5DD /* MMHNetworkAdapter+Product.m in Sources */,
 				41DC07A71D1FC3D500DDC5DD /* QGHOrderLogisticsInfoCell.m in Sources */,
+				41E97F4C1D3237E500335C78 /* QGHAddAddressModel.m in Sources */,
 				41E97F331D31401200335C78 /* MMHNetworkAdapter+ReceiptAddress.m in Sources */,
 				41E97F381D31409200335C78 /* QGHReceiptAddressModel.m in Sources */,
 				41E87A8D1D2D30C7003A987E /* MMHProductSpecSelectionViewController.m in Sources */,
@@ -1163,6 +1198,7 @@
 				41DC081C1D2AA45300DDC5DD /* QGHProductInfo.m in Sources */,
 				41DC07E61D28AC9100DDC5DD /* MMHNetworkAdapter.m in Sources */,
 				41DC08031D29623300DDC5DD /* QGHFirstPageGoodsModel.m in Sources */,
+				41E97F441D31FA4C00335C78 /* QGHCommonEditCell.m in Sources */,
 				41DC080C1D2A945B00DDC5DD /* MMHPullToRefresh.m in Sources */,
 				41E87A8A1D2C0A5A003A987E /* QGHProductDetailComment.m in Sources */,
 			);

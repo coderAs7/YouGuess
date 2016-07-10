@@ -9,11 +9,13 @@
 #import "QGHReceiptAddressViewController.h"
 #import "QGHReceiptAddressCell.h"
 #import "MMHNetworkAdapter+ReceiptAddress.h"
+#import "QGHAddAddressViewController.h"
+
 
 static NSString *const QGHReceiptAddressCellIdentifier = @"QGHReceiptAddressCellIdentifier";
 
 
-@interface QGHReceiptAddressViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface QGHReceiptAddressViewController ()<UITableViewDataSource, UITableViewDelegate, QGHReceiptAddressCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray *receiptArr;
 @property (nonatomic, strong) UITableView *tableView;
@@ -27,6 +29,9 @@ static NSString *const QGHReceiptAddressCellIdentifier = @"QGHReceiptAddressCell
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"选择地址";
+    
+    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"header_add"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(addAddressAction)];
+    self.navigationItem.rightBarButtonItem = shareItem;
     
     [self makeTableView];
     [self fetchData];
@@ -75,8 +80,8 @@ static NSString *const QGHReceiptAddressCellIdentifier = @"QGHReceiptAddressCell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QGHReceiptAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHReceiptAddressCellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.delegate = self;
     [cell setReceiptAddressModel:[self.receiptArr objectAtIndex:indexPath.section]];
-    
     return cell;
 }
 
@@ -93,5 +98,47 @@ static NSString *const QGHReceiptAddressCellIdentifier = @"QGHReceiptAddressCell
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.00001;
 }
+
+
+#pragma mark - QGHReceiptAddressCellDelegate
+
+
+- (void)receiptAddressCellSetDefaultAddress:(QGHReceiptAddressCell *)cell {
+    [self.view showProcessingView];
+    [[MMHNetworkAdapter sharedAdapter] setDefaultReceiptAddressFrom:self addressId:cell.receiptAddressModel.receiptAddressId succeededHandler:^{
+        [self.view hideProcessingView];
+        for (QGHReceiptAddressModel *address in self.receiptArr) {
+            address.isdefault = @"2";
+        }
+        cell.receiptAddressModel.isdefault = @"1";
+        [self.tableView reloadData];
+    } failedHandler:^(NSError *error) {
+        [self.view hideProcessingView];
+        [self.view showTipsWithError:error];
+    }];
+}
+
+
+- (void)receiptAddressCellDeleteAddress:(QGHReceiptAddressCell *)cell{
+    [self.view showProcessingView];
+    [[MMHNetworkAdapter sharedAdapter] deleteReceiptAddressFrom:self addressId:cell.receiptAddressModel.receiptAddressId succeededHandler:^{
+        [self.view hideProcessingView];
+        [self.receiptArr removeObject:cell.receiptAddressModel];
+        [self.tableView reloadData];
+    } failedHandler:^(NSError *error) {
+        [self.view hideProcessingView];
+        [self.view showTipsWithError:error];
+    }];
+}
+
+
+#pragma mark - Actions
+
+
+- (void)addAddressAction {
+    QGHAddAddressViewController *addAddressVC = [[QGHAddAddressViewController alloc] init];
+    [self.navigationController pushViewController:addAddressVC animated:YES];
+}
+
 
 @end

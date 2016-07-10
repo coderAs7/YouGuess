@@ -160,6 +160,10 @@ extern NSString *MMHPathDocumentsAppendingPathComponent(NSString *pathComponent)
 - (CGSize)sizeWithFont:(UIFont *)font constrainedToWidth:(CGFloat)maxWidth lineCount:(NSUInteger)maxLineCount constrained:(BOOL *)constrained;
 - (CGFloat)heightWithFont:(UIFont *)font constrainedToWidth:(CGFloat)maxWidth lineCount:(NSUInteger)maxLineCount;
 - (CGFloat)heightWithFont:(UIFont *)font constrainedToWidth:(CGFloat)maxWidth lineCount:(NSUInteger)maxLineCount constrained:(BOOL *)constrained;
+- (NSString *)clearSheng;
+- (NSString *)clearShi;
+- (NSString *)clearQu;
+
 @end
 
 
