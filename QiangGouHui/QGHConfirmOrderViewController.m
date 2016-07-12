@@ -12,6 +12,8 @@
 #import "QGHOrderDetailCommonCell.h"
 #import "MMHNetworkAdapter+ReceiptAddress.h"
 #import "MMHNetworkAdapter+Order.h"
+#import "QGHToSettlementModel.h"
+#import "MMHWXPayHandle.h"
 
 
 static NSString *const QGHConfirmOrderAddressCellIdentifier = @"QGHConfirmOrderAddressCellIdentifier";
@@ -36,6 +38,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 
 @property (nonatomic, strong) QGHReceiptAddressModel *defaultReceiptAddress;
 @property (nonatomic, assign) float mailPrice;
+@property (nonatomic, strong) NSMutableArray *productArr;
 
 @property (nonatomic, strong) QGHProductDetailModel *productDetail;
 
@@ -50,6 +53,8 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     if (self) {
         _bussType = type;
         _productDetail = detail;
+        _productArr = [NSMutableArray array];
+        [_productArr addObject:detail];
     }
     
     return self;
@@ -204,7 +209,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     if ([[self nameForSection:section] isEqualToString:@"地址"]) {
         return 1;
     } else if ([[self nameForSection:section] isEqualToString:@"商品"]) {
-        return 2;
+        return self.productArr.count;
     } else if ([[self nameForSection:section] isEqualToString:@"配送方式"]) {
         return 1;
     } else if ([[self nameForSection:section] isEqualToString:@"发货时间"]) {
@@ -230,6 +235,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"商品"]) {
         QGHOrderDetailProductCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHConfirmOrderProductCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell setProductDetailModel:self.productDetail];
         
         return cell;
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"配送方式"]) {
@@ -301,7 +307,19 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 
 
 - (void)settleButtonAction {
+    QGHToSettlementModel *toSettlementModel = [[QGHToSettlementModel alloc] init];
+    toSettlementModel.receiptId = self.defaultReceiptAddress.receiptAddressId;
+    toSettlementModel.autoOrder = @"1";
+    toSettlementModel.productArr = @[self.productDetail];
+    toSettlementModel.amount = [self.productDetail.product.min_price floatValue];
+//    toSettlementModel.delivery = 
     
+    [[MMHNetworkAdapter sharedAdapter] sendRequestSettlementFrom:self parameters:[toSettlementModel parameters] succeededHandler:^(NSString *payId, NSString *orderNo) {
+        
+        [[MMHWXPayHandle wxPayHandle] sendPayWithOrder:orderNo];
+    } failedHandler:^(NSError *error) {
+        [self.view showTipsWithError:error];
+    }];
 }
 
 

@@ -240,10 +240,13 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
         switch (self.selectedFlag) {
             case QGHBussTypePurchase:
                 list = self.purchaseList;
+                break;
             case QGHBussTypeAppoint:
                 list = self.appointList;
+                break;
             case QGHBussTypeCustom:
                 list = self.customList;
+                break;
             default:
                 break;
         }

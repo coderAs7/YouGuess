@@ -10,9 +10,10 @@
 #import "QGHTabBarController.h"
 #import "QGHLocationManager.h"
 #import "MMHAccountSession.h"
+#import "MMHWeChatAdapter.h"
 
 
-@interface AppDelegate ()
+@interface AppDelegate ()<WXApiDelegate>
 
 @end
 
@@ -20,6 +21,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [MMHWeChatAdapter start];
     [QGHLocationManager startLocation];
     [MMHAccountSession start];
     
@@ -54,5 +56,33 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    //    NSLog(@"------>>>>>> login handle open url: %@", url);
+    if ([MMHWeChatAdapter shouldHandleOpenURL:url]) {
+        return [MMHWeChatAdapter handleOpenURL:url delegate:self];
+    }
+    return NO;
+}
+
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    if ([MMHWeChatAdapter shouldHandleOpenURL:url]) {
+        return [MMHWeChatAdapter handleOpenURL:url delegate:self];
+    }
+    
+    return YES;
+}
+
+- (void)onResp:(BaseResp *)resp {
+    if ([resp isKindOfClass:[PayResp class]]) {
+        PayResp *response = (PayResp *)resp;
+        if (response.errCode == WXSuccess) {
+            NSLog(@"fuck pay success");
+        }
+    }
+}
+
 
 @end

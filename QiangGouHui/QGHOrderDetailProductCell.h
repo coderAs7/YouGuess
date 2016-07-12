@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class QGHProductDetailModel;
+
 @interface QGHOrderDetailProductCell : UITableViewCell
+
+@property (nonatomic, strong) QGHProductDetailModel *productDetailModel;
 
 @end

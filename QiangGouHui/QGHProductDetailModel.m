@@ -55,7 +55,7 @@
 
 
 - (BOOL)isAllSpecSelected {
-    if (self.skuSelectModel.selectedSKU.count == self.categoryDict.count) {
+    if (self.skuSelectModel.selectedSKU.count == self.categoryDict.count && self.categoryDict.count != 0) {
         return  YES;
     }
     

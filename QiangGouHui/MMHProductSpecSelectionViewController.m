@@ -506,6 +506,13 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
 - (void)tryToUpdateSpecParameter
 {
     self.confirmButton.enabled = NO;
+    
+    if (self.productDetail.categorylist.count == 0 && self.productDetail.pricelist.count == 0) {
+        [self.priceLabel setSingleLineText:[NSString stringWithFormat:@"¥%@", self.productDetail.product.min_price]];
+        self.confirmButton.enabled = YES;
+        return;
+    }
+    
     if (![self.productDetail isAllSpecSelected]) {
         self.priceLabel.text = @"";
         return;
@@ -519,8 +526,9 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
     } else {
         [self.priceLabel setSingleLineText:@"暂无供应"];
         self.confirmButton.enabled = NO;
-//        self.priceLabel.text = @"暂无供应";
+        //        self.priceLabel.text = @"暂无供应";
     }
+    
     
     return;
 //    }

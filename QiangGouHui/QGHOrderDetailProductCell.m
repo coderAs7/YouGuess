@@ -7,7 +7,7 @@
 //
 
 #import "QGHOrderDetailProductCell.h"
-
+#import "QGHProductDetailModel.h"
 
 @interface QGHOrderDetailProductCell ()
 
@@ -44,6 +44,16 @@
     }];
     
     self.priceLabel.textColor = RGBCOLOR(252, 43, 70);
+}
+
+
+- (void)setProductDetailModel:(QGHProductDetailModel *)productDetailModel {
+    [self.productImage updateViewWithImageAtURL:productDetailModel.product.img_path];
+    self.nameLabel.text = productDetailModel.product.title;
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%@", productDetailModel.product.min_price];
+    self.colorLabel.text = @"";
+    self.sizeLabel.text = @"";
+    self.numLabel.text = [NSString stringWithFormat:@"x%ld", productDetailModel.skuSelectModel.count];
 }
 
 
