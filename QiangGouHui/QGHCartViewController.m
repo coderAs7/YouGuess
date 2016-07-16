@@ -9,6 +9,7 @@
 #import "QGHCartViewController.h"
 #import "QGHCartCell.h"
 #import "MMHNetworkAdapter+Cart.h"
+#import "QGHConfirmOrderViewController.h"
 
 
 static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
@@ -110,6 +111,15 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
     [bottomView addSubview:_sumLabel];
 }
 
+- (void)setSumLabelValue {
+    float sumPrice = 0;
+    for (QGHCartItem *item in self.cartItemArr) {
+        sumPrice += item.min_price;
+    }
+    
+//    self.sumLabel.text = [NSString stringWithFormat:@"合计：%g", sumPrice];
+    [self setSumPrice: sumPrice];
+}
 
 #pragma mark - network
 
@@ -119,6 +129,7 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
         self.cartItemArr = [NSMutableArray arrayWithArray:itemArr];
         [self.tableView reloadData];
         [self.allSelectButton setImage:[UIImage imageNamed:@"dizhi_xuanzhong"] forState:UIControlStateNormal];
+        [self setSumLabelValue];
     } failedHandler:^(NSError *error) {
         [self.view showTipsWithError:error];
     }];
@@ -250,7 +261,8 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
 
 
 - (void)buyNowButtonAction {
-    //TODO
+    QGHConfirmOrderViewController *confirmOrderVC = [[QGHConfirmOrderViewController alloc] initWithCartItemArr:self.cartItemArr];
+    [self.navigationController pushViewController:confirmOrderVC animated:YES];
 }
 
 

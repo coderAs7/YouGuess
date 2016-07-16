@@ -38,9 +38,10 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 
 @property (nonatomic, strong) QGHReceiptAddressModel *defaultReceiptAddress;
 @property (nonatomic, assign) float mailPrice;
-@property (nonatomic, strong) NSMutableArray *productArr;
+//@property (nonatomic, strong) NSMutableArray *productArr;
 
 @property (nonatomic, strong) QGHProductDetailModel *productDetail;
+@property (nonatomic, strong) NSArray<QGHCartItem *> *cartItemArr;
 
 @end
 
@@ -53,8 +54,19 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     if (self) {
         _bussType = type;
         _productDetail = detail;
-        _productArr = [NSMutableArray array];
-        [_productArr addObject:detail];
+//        _productArr = [NSMutableArray array];
+//        [_productArr addObject:detail];
+    }
+    
+    return self;
+}
+
+
+- (instancetype)initWithCartItemArr:(NSArray<QGHCartItem *> *)cartItemArr {
+    self = [super init];
+    
+    if (self) {
+        _cartItemArr = cartItemArr;
     }
     
     return self;
@@ -84,6 +96,8 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     [self makeBottomView];
     
     [self fetchDefaultReceiptAddress];
+    
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%@", [self getSumPrice]];
 }
 
 
@@ -172,7 +186,17 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 
 
 - (void)fetchMailPrice {
-    [[MMHNetworkAdapter sharedAdapter] fetchMailPriceFrom:self goodsId:self.productDetail.product.goodsId province:self.defaultReceiptAddress.province succeededHandler:^(float mainPrice) {
+    NSString *goodsId = @"";
+    if (self.productDetail) {
+        goodsId = self.productDetail.product.goodsId;
+    } else {
+        for (QGHCartItem *item in self.cartItemArr) {
+            goodsId = [goodsId stringByAppendingString:item.good_id];
+            goodsId = [goodsId stringByAppendingString:@","];
+        }
+        goodsId = [goodsId substringToIndex:goodsId.length - 1];
+    }
+    [[MMHNetworkAdapter sharedAdapter] fetchMailPriceFrom:self goodsId:goodsId province:self.defaultReceiptAddress.province succeededHandler:^(float mainPrice) {
         self.mailPrice = mainPrice;
         self.mailPriceStandBy = YES;
         [self tryToHideProcessingView];
@@ -209,7 +233,11 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     if ([[self nameForSection:section] isEqualToString:@"地址"]) {
         return 1;
     } else if ([[self nameForSection:section] isEqualToString:@"商品"]) {
-        return self.productArr.count;
+        if (self.productDetail) {
+            return 1;
+        } else {
+            return self.cartItemArr.count;
+        }
     } else if ([[self nameForSection:section] isEqualToString:@"配送方式"]) {
         return 1;
     } else if ([[self nameForSection:section] isEqualToString:@"发货时间"]) {
@@ -235,7 +263,12 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"商品"]) {
         QGHOrderDetailProductCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHConfirmOrderProductCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell setProductDetailModel:self.productDetail];
+        if (self.productDetail) {
+            [cell setProductDetailModel:self.productDetail];
+        } else {
+            QGHCartItem *cartItem = self.cartItemArr[indexPath.row];
+            [cell setCartItem:cartItem];
+        }
         
         return cell;
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"配送方式"]) {
@@ -258,9 +291,9 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
         return cell;
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"价格"]) {
         QGHOrderDetailCommonCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHConfirmOrderCommonCellIdentifier forIndexPath:indexPath];
-        NSString *priceStr = [NSString stringWithFormat:@"¥%@", self.productDetail.product.min_price];
+//        NSString *priceStr = [NSString stringWithFormat:@"¥%@", self.productDetail.product.min_price];
         NSString *mailPriceStr = [NSString stringWithFormat:@"¥%g", self.mailPrice];
-        [cell setData:@[@{@"key": @"商品金额", @"value": priceStr}, @{@"key": @"运费", @"value": mailPriceStr}]];
+        [cell setData:@[@{@"key": @"商品金额", @"value": self.priceLabel.text}, @{@"key": @"运费", @"value": mailPriceStr}]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
@@ -308,9 +341,31 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 
 - (void)settleButtonAction {
     QGHToSettlementModel *toSettlementModel = [[QGHToSettlementModel alloc] init];
+    toSettlementModel.bussType = self.bussType;
     toSettlementModel.receiptId = self.defaultReceiptAddress.receiptAddressId;
-    toSettlementModel.autoOrder = @"1";
-    toSettlementModel.productArr = @[self.productDetail];
+    toSettlementModel.mailPrice = self.mailPrice;
+    if (self.productDetail) {
+        toSettlementModel.autoOrder = @"1";
+    }
+    
+    if ([toSettlementModel.autoOrder isEqualToString:@"1"]) {
+        if (toSettlementModel.bussType == QGHBussTypeNormal || toSettlementModel.bussType == QGHBussTypePurchase) {
+            toSettlementModel.productArr = @[self.productDetail];
+        } else if (toSettlementModel.bussType == QGHBussTypeAppoint) {
+            toSettlementModel.delivery = self.productDetail.product.appointment;
+        } else if (toSettlementModel.bussType == QGHBussTypePurchase) {
+            toSettlementModel.production_time = self.productDetail.product.production_time;
+        }
+    } else {
+        NSString *cardIds = @"";
+        for (QGHCartItem *item in self.cartItemArr) {
+            cardIds = [cardIds stringByAppendingString:item.itemId];
+            cardIds = [cardIds stringByAppendingString:@","];
+        }
+        cardIds = [cardIds substringToIndex:cardIds.length - 1];
+        toSettlementModel.cartItemIds = cardIds;
+    }
+    
     toSettlementModel.amount = [self.productDetail.product.min_price floatValue];
 //    toSettlementModel.delivery = 
     
@@ -328,6 +383,22 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 
 - (NSString *)nameForSection:(NSInteger)section {
     return self.dataSource[section];
+}
+
+
+- (NSString *)getSumPrice {
+    if (self.productDetail) {
+//        self.priceLabel.text = [NSString stringWithFormat:@"¥%@", self.productDetail.product.min_price];
+        return self.productDetail.product.min_price;
+    } else {
+        float sumPrice = 0;
+        for (QGHCartItem *item in self.cartItemArr) {
+            sumPrice += item.min_price;
+        }
+//        self.priceLabel.text = [NSString stringWithFormat:@"¥%g", sumPrice];
+        return [NSString stringWithFormat:@"%g", sumPrice];
+    }
+
 }
 
 

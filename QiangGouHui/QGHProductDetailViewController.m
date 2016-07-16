@@ -291,7 +291,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 
 - (void)addCartBtnAction {
     MMHProductSpecSelectionViewController *specVC = [[MMHProductSpecSelectionViewController alloc] initWithProductDetail:self.productDetailModel specSelectedHandler:^(QGHSKUSelectModel *selectedSpec) {
-        [[MMHNetworkAdapter sharedAdapter] addCartFrom:self goodsId:self.productDetailModel.product.goodsId count:selectedSpec.count price:self.productDetailModel.product.min_price skuId:self.productDetailModel.allSepcSelectedPrice.priceId succeededHandler:^{
+        [[MMHNetworkAdapter sharedAdapter] addCartFrom:self goodsId:self.productDetailModel.product.goodsId count:selectedSpec.count price:self.productDetailModel.product.discount_price skuId:self.productDetailModel.allSepcSelectedPrice.priceId succeededHandler:^{
             //TODO
         } failedHandler:^(NSError *error) {
             [self.view showTipsWithError:error];

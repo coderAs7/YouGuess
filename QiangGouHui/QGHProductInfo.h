@@ -20,8 +20,11 @@
 @property (nonatomic, copy) NSString *type; //1：普通，2：抢购，3:预约，4:定制
 @property (nonatomic, copy) NSString *purchase_num;
 @property (nonatomic, copy) NSString *img_path;
+@property (nonatomic, copy) NSString *appointment;
 @property (nonatomic, copy) NSString *production_time;
 @property (nonatomic, copy) NSString *area;
 @property (nonatomic, copy) NSString *min_price;
+@property (nonatomic, copy) NSString *original_price;
+@property (nonatomic, copy) NSString *discount_price;
 
 @end

@@ -11,6 +11,7 @@
 @interface QGHToSettlementModel : NSObject
 
 @property (nonatomic, copy) NSString *receiptId;
+@property (nonatomic, assign) float mailPrice;
 @property (nonatomic, copy) NSString *autoOrder;
 @property (nonatomic, assign) QGHBussType bussType;
 @property (nonatomic, strong) NSArray *productArr;

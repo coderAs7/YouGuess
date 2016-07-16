@@ -8,6 +8,8 @@
 
 #import "QGHOrderDetailProductCell.h"
 #import "QGHProductDetailModel.h"
+#import "QGHCartItem.h"
+
 
 @interface QGHOrderDetailProductCell ()
 
@@ -54,6 +56,16 @@
     self.colorLabel.text = @"";
     self.sizeLabel.text = @"";
     self.numLabel.text = [NSString stringWithFormat:@"x%ld", productDetailModel.skuSelectModel.count];
+}
+
+
+- (void)setCartItem:(QGHCartItem *)cartItem {
+    [self.productImage updateViewWithImageAtURL:cartItem.img_path];
+    self.nameLabel.text = cartItem.title;
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%g", cartItem.min_price];
+    self.colorLabel.text = cartItem.sku;
+    self.sizeLabel.text = @"";
+    self.numLabel.text = [NSString stringWithFormat:@"x%d", cartItem.count];
 }
 
 

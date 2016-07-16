@@ -8,9 +8,12 @@
 
 #import "BaseViewController.h"
 #import "QGHProductDetailModel.h"
+#import "QGHCartItem.h"
+
 
 @interface QGHConfirmOrderViewController : BaseViewController
 
 - (instancetype)initWithBussType:(QGHBussType)type productDetail:(QGHProductDetailModel *)productDetail;
+- (instancetype)initWithCartItemArr:(NSArray<QGHCartItem *> *)cartItemArr;
 
 @end

@@ -63,7 +63,7 @@
 
 
 - (void)setData:(QGHProductDetailModel *)model {
-    self.priceLabel.text = [NSString stringWithFormat:@"¥%@", model.product.min_price];
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%@", model.product.discount_price];
     [self.priceLabel sizeToFit];
     [self.priceLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
