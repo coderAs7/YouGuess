@@ -7,21 +7,16 @@
 //
 
 #import "QGHOrderListCell.h"
-#import "QGHOrderListItem.h"
+#import "QGHOrderProduct.h"
 
 
 @interface QGHOrderListCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *orderStatusLabel;
 @property (weak, nonatomic) IBOutlet UIView *productBackView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *colorLabel;
-@property (weak, nonatomic) IBOutlet UILabel *sizeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numLabel;
-@property (weak, nonatomic) IBOutlet UILabel *payPriceLabel;
-@property (weak, nonatomic) IBOutlet UIButton *button1;
-@property (weak, nonatomic) IBOutlet UIButton *button2;
 
 @property (nonatomic, strong) MMHImageView *productImage;
 @property (nonatomic, strong) UILabel *imageLabel;
@@ -35,7 +30,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.orderStatusLabel.textColor = RGBCOLOR(252, 43, 70);
+//    self.orderStatusLabel.textColor = RGBCOLOR(252, 43, 70);
     
     self.productBackView.backgroundColor = [UIColor clearColor];
     
@@ -59,15 +54,16 @@
         make.right.and.left.and.bottom.mas_equalTo(0);
         make.height.mas_equalTo(20);
     }];
+    _imageLabel.hidden = YES;
     
-    self.button1.backgroundColor = C20;
-    self.button1.layer.cornerRadius = 5;
-    [self.button1 setTitleColor:C21 forState:UIControlStateNormal];
-    [self.button1 addTarget:self action:@selector(button1Action) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.button2.backgroundColor = C20;
-    self.button2.layer.cornerRadius = 5;
-    [self.button2 setTitleColor:C21 forState:UIControlStateNormal];
+//    self.button1.backgroundColor = C20;
+//    self.button1.layer.cornerRadius = 5;
+//    [self.button1 setTitleColor:C21 forState:UIControlStateNormal];
+//    [self.button1 addTarget:self action:@selector(button1Action) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    self.button2.backgroundColor = C20;
+//    self.button2.layer.cornerRadius = 5;
+//    [self.button2 setTitleColor:C21 forState:UIControlStateNormal];
 }
 
 
@@ -75,6 +71,15 @@
     if ([self.delegate respondsToSelector:@selector(orderListCellDidClickButton1:)]) {
         [self.delegate orderListCellDidClickButton1:self];
     }
+}
+
+
+- (void)setProductItem:(QGHOrderProduct *)item {
+    [self.productImage updateViewWithImageAtURL:item.img_path];
+    self.nameLabel.text = item.good_name;
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%g", item.min_price];
+    self.colorLabel.text = item.sku;
+    self.numLabel.text = [NSString stringWithFormat:@"x%d", item.count];
 }
 
 

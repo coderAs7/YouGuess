@@ -203,10 +203,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             MMHProductDetailHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHProductDetailHeaderCellIdentifier forIndexPath:indexPath];
-            NSString *imageUrl = self.productDetailModel.product.img_path;
-            if (imageUrl.length) {
-                cell.imageArray = @[imageUrl];
-            }
+            cell.imageArray = self.productDetailModel.product.img_path;
             return cell;
         } else if (indexPath.row == 1) {
             QGHProductDetailPriceCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHProductDetailPriceCellIdentifier forIndexPath:indexPath];

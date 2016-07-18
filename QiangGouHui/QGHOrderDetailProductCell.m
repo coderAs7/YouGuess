@@ -9,6 +9,7 @@
 #import "QGHOrderDetailProductCell.h"
 #import "QGHProductDetailModel.h"
 #import "QGHCartItem.h"
+#import "QGHOrderProduct.h"
 
 
 @interface QGHOrderDetailProductCell ()
@@ -50,9 +51,9 @@
 
 
 - (void)setProductDetailModel:(QGHProductDetailModel *)productDetailModel {
-    [self.productImage updateViewWithImageAtURL:productDetailModel.product.img_path];
+    [self.productImage updateViewWithImageAtURL:productDetailModel.product.img_path.firstObject];
     self.nameLabel.text = productDetailModel.product.title;
-    self.priceLabel.text = [NSString stringWithFormat:@"¥%@", productDetailModel.product.min_price];
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%@", productDetailModel.product.discount_price];
     self.colorLabel.text = @"";
     self.sizeLabel.text = @"";
     self.numLabel.text = [NSString stringWithFormat:@"x%ld", productDetailModel.skuSelectModel.count];
@@ -66,6 +67,16 @@
     self.colorLabel.text = cartItem.sku;
     self.sizeLabel.text = @"";
     self.numLabel.text = [NSString stringWithFormat:@"x%d", cartItem.count];
+}
+
+
+- (void)setOrderProduct:(QGHOrderProduct *)orderProduct {
+    [self.productImage updateViewWithImageAtURL:orderProduct.img_path];
+    self.nameLabel.text = orderProduct.good_name;
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%g", orderProduct.min_price];
+    self.colorLabel.text = orderProduct.sku;
+    self.sizeLabel.text = @"";
+    self.numLabel.text = [NSString stringWithFormat:@"x%d", orderProduct.count];
 }
 
 

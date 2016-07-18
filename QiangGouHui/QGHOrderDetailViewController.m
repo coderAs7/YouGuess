@@ -11,6 +11,7 @@
 #import "MMHOrderInfoTableViewCell.h"
 #import "QGHOrderDetailProductCell.h"
 #import "QGHOrderDetailCommonCell.h"
+#import "MMHNetworkAdapter+Order.h"
 
 
 static NSString *const QGHOrderDetailAddressCellIdentifier = @"QGHOrderDetailAddressCellIdentifier";
@@ -22,6 +23,8 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
 
 @interface QGHOrderDetailViewController ()<UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, copy) NSString *orderId;
+
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *productDataSource;
 
@@ -29,10 +32,23 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
 @property (nonatomic, strong) UIImageView *timeImageView;
 @property (nonatomic, strong) UILabel *timeLabel;
 
+@property (nonatomic, strong) QGHOrderInfo *orderInfo;
+
 @end
 
 
 @implementation QGHOrderDetailViewController
+
+
+- (instancetype)initWithOrderId:(NSString *)orderId {
+    self = [super init];
+    
+    if (self) {
+        _orderId = orderId;
+    }
+    
+    return self;
+}
 
 
 - (void)viewDidLoad {
@@ -40,6 +56,8 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
 
     [self makeTableView];
     [self makeBottomView];
+    
+    [self fetchData];
 }
 
 
@@ -84,6 +102,16 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
 }
 
 
+- (void)fetchData {
+    [[MMHNetworkAdapter sharedAdapter] fetchOrderDetailFrom:self orderId:self.orderId succeededHandler:^(QGHOrderInfo *orderInfo) {
+        self.orderInfo = orderInfo;
+        [self.tableView reloadData];
+    } failedHandler:^(NSError *error) {
+        [self.view showTipsWithError:error];
+    }];
+}
+
+
 #pragma mark - UITalbeView DataSource and Delegate
 
 
@@ -110,20 +138,57 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         QGHOrderAddressCellTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHOrderDetailAddressCellIdentifier forIndexPath:indexPath];
+        cell.receiptAddressModel = self.orderInfo.receiptinfo;
         return cell;
     } else if (indexPath.section == 1) {
         QGHOrderDetailProductCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHOrderDetailProductCellIdentifier forIndexPath:indexPath];
+        cell.orderProduct = self.orderInfo.goodlist[indexPath.row];
+        
         return cell;
     } else if (indexPath.section == 2) {
         QGHOrderDetailCommonCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHOrderDetailExpressCellIdentifier forIndexPath:indexPath];
-        [cell setData:@[@{@"key": @"配送方式", @"value": @"快递配送"}]];
+        if (self.orderInfo.posttype) {
+            [cell setData:@[@{@"key": @"配送方式", @"value": self.orderInfo.posttype}]];
+        }
+        
         return cell;
     } else if (indexPath.section == 3) {
         QGHOrderDetailCommonCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHOrderDetailExpressCellIdentifier forIndexPath:indexPath];
-        [cell setData:@[@{@"key": @"商品金额", @"value": @"¥198"}, @{@"key": @"运费", @"value": @"¥10"}]];
+        NSString *productPrice = [NSString stringWithFormat:@"¥%g", self.orderInfo.amount];
+        NSString *postPrice = [NSString stringWithFormat:@"¥%g", self.orderInfo.postage];
+        [cell setData:@[@{@"key": @"商品金额", @"value": productPrice}, @{@"key": @"运费", @"value": postPrice}]];
+        
         return cell;
     } else {
         MMHOrderInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHOrderDetailInfoCellIdentifier forIndexPath:indexPath];
+        cell.orderNumber = self.orderInfo.order_no;
+        cell.orderingTime = self.orderInfo.create_time;
+        switch (self.orderInfo.status) {
+            case QGHOrderListItemStatusToPay:
+                cell.orderState = @"待付款";
+                break;
+            case QGHOrderListItemStatusToExpress:
+                cell.orderState = @"待发货";
+                break;
+            case QGHOrderListItemStatusToReceipt:
+                cell.orderState = @"待收货";
+                break;
+            case QGHOrderListItemStatusToComment:
+                cell.orderState = @"待评价";
+                break;
+            case QGHOrderListItemStatusFinish:
+                cell.orderState = @"已完成";
+                break;
+            case QGHOrderListItemStatusCancel:
+                cell.orderState = @"已取消";
+                break;
+            case QGHOrderListItemStatusRefund:
+                cell.orderState = @"退款退货";
+                break;
+            default:
+                break;
+        }
+        
         return cell;
     }
 }

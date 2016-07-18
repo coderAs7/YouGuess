@@ -14,6 +14,7 @@
 #import "MMHNetworkAdapter+Order.h"
 #import "QGHToSettlementModel.h"
 #import "MMHWXPayHandle.h"
+#import "QGHReceiptAddressViewController.h"
 
 
 static NSString *const QGHConfirmOrderAddressCellIdentifier = @"QGHConfirmOrderAddressCellIdentifier";
@@ -172,7 +173,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 
 - (void)fetchDefaultReceiptAddress {
     [self.view showProcessingView];
-    
+    self.defaultReceiptStandBy = NO;
     [[MMHNetworkAdapter sharedAdapter] fetchDefaultReceiptAddressFrom:self succeededHandler:^(QGHReceiptAddressModel *address) {
         self.defaultReceiptAddress = address;
         self.defaultReceiptStandBy = YES;
@@ -187,6 +188,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 
 - (void)fetchMailPrice {
     NSString *goodsId = @"";
+    self.mailPriceStandBy = NO;
     if (self.productDetail) {
         goodsId = self.productDetail.product.goodsId;
     } else {
@@ -303,6 +305,20 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        QGHReceiptAddressViewController *receiptAddressVC = [[QGHReceiptAddressViewController alloc] init];
+        receiptAddressVC.selectAddressBlock = ^(QGHReceiptAddressModel *address) {
+            self.defaultReceiptAddress = address;
+            [self.view showProcessingView];
+            [self fetchMailPrice];
+            [self.navigationController popToViewController:self animated:YES];
+        };
+        [self.navigationController pushViewController:receiptAddressVC animated:YES];
+    }
+}
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[self nameForSection:indexPath.section] isEqualToString:@"地址"]) {
         return 70;
@@ -366,7 +382,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
         toSettlementModel.cartItemIds = cardIds;
     }
     
-    toSettlementModel.amount = [self.productDetail.product.min_price floatValue];
+    toSettlementModel.amount = [[self getSumPrice] floatValue];
 //    toSettlementModel.delivery = 
     
     [[MMHNetworkAdapter sharedAdapter] sendRequestSettlementFrom:self parameters:[toSettlementModel parameters] succeededHandler:^(NSString *payId, NSString *orderNo) {
@@ -389,7 +405,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 - (NSString *)getSumPrice {
     if (self.productDetail) {
 //        self.priceLabel.text = [NSString stringWithFormat:@"¥%@", self.productDetail.product.min_price];
-        return self.productDetail.product.min_price;
+        return self.productDetail.product.discount_price;
     } else {
         float sumPrice = 0;
         for (QGHCartItem *item in self.cartItemArr) {

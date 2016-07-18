@@ -107,7 +107,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
 //    imageView.layer.borderColor = [[UIColor colorWithHexString:@"ebebeb"] CGColor];
 //    imageView.layer.borderWidth = 1.0f;
     [imageBackgroundView addSubview:imageView];
-    [imageView updateViewWithImageAtURL:self.productDetail.product.img_path];
+    [imageView updateViewWithImageAtURL:self.productDetail.product.img_path.firstObject];
     self.imageView = imageView;
     [imageView moveToCenterOfSuperview];
     
@@ -508,7 +508,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
     self.confirmButton.enabled = NO;
     
     if (self.productDetail.categorylist.count == 0 && self.productDetail.pricelist.count == 0) {
-        [self.priceLabel setSingleLineText:[NSString stringWithFormat:@"¥%@", self.productDetail.product.min_price]];
+        [self.priceLabel setSingleLineText:[NSString stringWithFormat:@"¥%@", self.productDetail.product.discount_price]];
         self.confirmButton.enabled = YES;
         return;
     }

@@ -86,6 +86,14 @@ static NSString *const QGHReceiptAddressCellIdentifier = @"QGHReceiptAddressCell
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.selectAddressBlock) {
+        QGHReceiptAddressModel *address = [self.receiptArr objectAtIndex:indexPath.section];
+        self.selectAddressBlock(address);
+    }
+}
+
+
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 128;
 }

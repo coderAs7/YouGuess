@@ -58,11 +58,11 @@
 - (void)callWeChatPay:(QGHWeChatPrePayModel *)prePayModel {
     PayReq *request = [[PayReq alloc] init];
     request.partnerId = prePayModel.partnerid;
-    request.prepayId = prePayModel.prepay_id;
+    request.prepayId = prePayModel.prepayid;
     request.package = @"Sign=WXPay";
-    request.nonceStr = prePayModel.nonceStr;
-    request.timeStamp = prePayModel.timeStamp;
-    request.sign = prePayModel.paySign;
+    request.nonceStr = prePayModel.noncestr;
+    request.timeStamp = prePayModel.timestamp;
+    request.sign = prePayModel.sign;
     [WXApi sendReq: request];
 }
 

@@ -9,6 +9,7 @@
 #ifndef QGHConstants_h
 #define QGHConstants_h
 
+#import <Foundation/Foundation.h>
 
 #define IS_IOS7_LATER   ([UIDevice currentDevice].systemVersion.floatValue > 6.99)
 #define IS_IOS8_LATER   ([UIDevice currentDevice].systemVersion.floatValue > 7.99)
@@ -50,5 +51,17 @@
 
 #define kNoneNetworkReachable       ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable)
 
+
+static NSString *const MMHAlipayNotification = @"MMHAlipayNotification"; /**< 支付宝支付通知 */
+
+//微信支付通知
+static NSString *const MMHWeChatPayFinishedNotification = @"MMHWeChatPayFinishedNotification"; /**< 微信支付通知 */
+static NSString *const MMHWeChatPayResponseKey = @"MMHWeChatPayResponseKey"; /**< 微信支付 response */
+
+
+typedef NS_ENUM(NSInteger, MMHPayWay) {
+    MMHPayWayAlipay,
+    MMHPayWayWeixin,
+};
 
 #endif /* QGHConstants_h */

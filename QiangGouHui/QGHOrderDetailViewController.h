@@ -10,4 +10,6 @@
 
 @interface QGHOrderDetailViewController : BaseViewController
 
+- (instancetype)initWithOrderId:(NSString *)orderId;
+
 @end

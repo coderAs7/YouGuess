@@ -7,7 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "QGHReceiptAddressModel.h"
 
 @interface QGHReceiptAddressViewController : BaseViewController
+
+@property (nonatomic, copy) void(^selectAddressBlock)(QGHReceiptAddressModel *address);
 
 @end

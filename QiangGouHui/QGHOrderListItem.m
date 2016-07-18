@@ -10,4 +10,21 @@
 
 @implementation QGHOrderListItem
 
+
+- (NSDictionary *)modelKeyJSONKeyMapper {
+    return @{@"orderId": @"id"};
+}
+
+
+- (instancetype)initWithJSONDict:(NSDictionary *)dict {
+    self = [super initWithJSONDict:dict];
+    
+    if (self) {
+        self.goodlist = [dict[@"goodlist"] modelArrayOfClass:[QGHOrderProduct class]];
+    }
+    
+    return self;
+}
+
+
 @end

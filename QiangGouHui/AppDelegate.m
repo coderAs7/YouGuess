@@ -75,12 +75,15 @@
     return YES;
 }
 
+
 - (void)onResp:(BaseResp *)resp {
     if ([resp isKindOfClass:[PayResp class]]) {
         PayResp *response = (PayResp *)resp;
         if (response.errCode == WXSuccess) {
-            NSLog(@"fuck pay success");
+            //回调成功调接口
         }
+        [[NSNotificationCenter defaultCenter] postNotificationName:MMHWeChatPayFinishedNotification object:nil userInfo:@{MMHWeChatPayResponseKey: resp}];
+        
     }
 }
 

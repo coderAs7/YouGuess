@@ -10,13 +10,13 @@
 
 @interface QGHWeChatPrePayModel : MMHFetchModel
 
-@property (nonatomic, copy) NSString *appId;
+@property (nonatomic, copy) NSString *appid;
 @property (nonatomic, copy) NSString *mch_id;
-@property (nonatomic, copy) NSString *paySign;
-@property (nonatomic, copy) NSString *nonceStr;
-@property (nonatomic, assign) UInt32 timeStamp;
-@property (nonatomic, copy) NSString *prepay_id;
-@property (nonatomic, copy) NSString *packages;
+@property (nonatomic, copy) NSString *sign;
+@property (nonatomic, copy) NSString *noncestr;
+@property (nonatomic, assign) UInt32 timestamp;
+@property (nonatomic, copy) NSString *prepayid;
+@property (nonatomic, copy) NSString *package;
 @property (nonatomic, copy) NSString *partnerid;
 
 @end

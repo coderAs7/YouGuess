@@ -11,6 +11,7 @@
 
 @class QGHProductDetailModel;
 @class QGHCartItem;
+@class QGHOrderProduct;
 
 
 @interface QGHOrderDetailProductCell : UITableViewCell
@@ -18,5 +19,7 @@
 @property (nonatomic, strong) QGHProductDetailModel *productDetailModel;
 
 @property (nonatomic, strong) QGHCartItem *cartItem;
+
+@property (nonatomic, strong) QGHOrderProduct *orderProduct;
 
 @end

@@ -53,4 +53,38 @@
 }
 
 
+- (void)fetchOrderListFrom:(id)requester status:(QGHOrderListItemStatus)status page:(NSInteger)page size:(NSInteger)size succeededHandler:(void(^)(NSArray<QGHOrderListItem *> *orderList))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    NSDictionary *parameters = @{@"userToken": [[MMHAccountSession currentSession] token], @"page": @(page), @"size": @(size), @"status": @(status)};
+    [engine postWithAPI:@"_invest_list_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        NSArray *orderList = [responseJSONObject[@"info"] modelArrayOfClass:[QGHOrderListItem class]];
+        succeededHandler(orderList);
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
+    }];
+}
+
+
+- (void)fetchOrderDetailFrom:(id)requester orderId:(NSString *)orderId succeededHandler:(void(^)(QGHOrderInfo *orderInfo))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    NSDictionary *parameters = @{@"userToken": [[MMHAccountSession currentSession] token], @"id": orderId};
+    [engine postWithAPI:@"_invest_info_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        QGHOrderInfo *orderInfo = [[QGHOrderInfo alloc] initWithJSONDict:[responseJSONObject objectForKey:@"info"]];
+        succeededHandler(orderInfo);
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
+    }];
+}
+
+
+- (void)paySuccessCallBack:(NSString *)orderNo {
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    [engine POST:@"http://121.14.38.35/callback.php" parameters:@{@"out_trade_no": orderNo} success:^(NSURLSessionDataTask *task, id responseObject) {
+        //nothing
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        //nothing
+    }];
+}
+
+
 @end

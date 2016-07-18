@@ -18,7 +18,7 @@
 #if TARGET_IPHONE_SIMULATOR
     
 #else
-    [WXApi registerApp:@"wx73ce0c7fa5af1828" withDescription:@"wxPay"];
+    [WXApi registerApp:@"wx73ce0c7fa5af1828" withDescription:@"weixin"];
 #endif
 }
 

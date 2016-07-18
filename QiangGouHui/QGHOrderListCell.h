@@ -10,6 +10,7 @@
 
 
 @class QGHOrderListCell;
+@class QGHOrderProduct;
 
 
 @protocol QGHOrderListCellDelegate <NSObject>
@@ -22,5 +23,6 @@
 @interface QGHOrderListCell : UITableViewCell
 
 @property (nonatomic, weak) id<QGHOrderListCellDelegate> delegate;
+@property (nonatomic, strong) QGHOrderProduct *productItem;
 
 @end
