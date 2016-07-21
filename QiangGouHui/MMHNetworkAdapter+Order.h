@@ -26,4 +26,9 @@
 
 - (void)paySuccessCallBack:(NSString *)orderNo;
 
+- (void)cancelOrderFrom:(id)requester orderId:(NSString *)orderId succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
+
+- (void)orderConfirmReceiptFrom:(id)requester order:(NSString *)orderId succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
+
+
 @end

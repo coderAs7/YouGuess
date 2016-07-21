@@ -178,7 +178,7 @@ static NSString *const MMHPayWayCellIdentifier = @"payWayCellIdentifier";
     [cell.contentView addSubview:title];
     
     UILabel *priceLabel = [[UILabel alloc] init];
-    priceLabel.textColor = C21;
+    priceLabel.textColor = C22;
     priceLabel.font = [UIFont boldSystemFontOfSize:15];
     [priceLabel setSingleLineText:[NSString stringWithFormat:@"￥%g", self.price]];
     [priceLabel setRight:kScreenWidth - 10];

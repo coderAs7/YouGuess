@@ -31,4 +31,6 @@ typedef NS_ENUM(NSInteger, QGHOrderListItemStatus) {
 @property (nonatomic, assign) QGHOrderListItemStatus status;
 @property (nonatomic, assign) int type;
 
+- (NSString *)getGoodsTitle;
+
 @end

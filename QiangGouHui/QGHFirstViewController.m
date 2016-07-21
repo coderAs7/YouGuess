@@ -20,6 +20,8 @@
 #import "QGHFirstPageGoodsList.h"
 #import "MMHAccountSession.h"
 #import <MJRefresh.h>
+#import "MMHSearchViewController.h"
+#import "MMHProductListViewController.h"
 
 
 static NSString *QGHBannerCellIdentifier = @"QGHBannerCellIdentifier";
@@ -372,7 +374,14 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 
 - (void)searchButtonAction {
-    //TODO
+    MMHSearchViewController *searchVC = [[MMHSearchViewController alloc] init];
+    searchVC.searchComplete = ^(MMHFilter *filter) {
+        MMHProductListViewController *productListViewController = [[MMHProductListViewController alloc] initWithFilter:filter];
+        [self.navigationController popViewControllerAnimated:NO];
+        [self.navigationController pushViewController:productListViewController animated:YES];
+    };
+    
+    [self.navigationController pushViewController:searchVC animated:YES];
 }
 
 

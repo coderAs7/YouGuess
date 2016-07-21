@@ -27,4 +27,17 @@
 }
 
 
+- (NSString *)getGoodsTitle {
+    __block NSString *title = @"";
+    [self.goodlist enumerateObjectsUsingBlock:^(QGHOrderProduct * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        title = [title stringByAppendingString:obj.good_name];
+        if (idx != self.goodlist.count - 1) {
+            [title stringByAppendingString:@"|"];
+        }
+    }];
+    
+    return title;
+}
+
+
 @end

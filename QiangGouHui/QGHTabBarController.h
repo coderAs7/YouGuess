@@ -10,9 +10,23 @@
 #import "MMHFloatingViewController.h"
 #import "MMHFloatingSettledViewController.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
+
+typedef NS_ENUM(NSInteger, QGHTabBarControllerViewControllerIndex) {
+    QGHTabBarControllerViewControllerIndexFirstPage,
+    QGHTabBarControllerViewControllerIndexChat,
+    QGHTabBarControllerViewControllerIndexCart,
+    QGHTabBarControllerViewControllerIndexPersonal,
+};
+
 @interface QGHTabBarController : UITabBarController <MMHFloatingSettledViewController>
 
 @property (nonatomic, strong, nullable) UIView *floatingBackgroundView;
 @property (nonatomic, strong, nullable) MMHFloatingViewController *floatingViewController;
 
++ (void)redirectToCenterWithController:(UIViewController *)controller;
+
 @end
+
+NS_ASSUME_NONNULL_END

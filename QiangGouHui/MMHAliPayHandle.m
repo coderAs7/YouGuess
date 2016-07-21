@@ -52,8 +52,6 @@
         fileMessage = @"没有单号";
     } else if (!payOrder.productName){
         fileMessage = @"没有商品名称";
-    } else if (!payOrder.productDescription){
-        fileMessage = @"没有商品描述";
     } else if (!payOrder.amount){
         fileMessage = @"没有商品价格";
     }
@@ -62,7 +60,7 @@
         return;
     }
     
-    NSString *appScheme = @"mamhao-alipay";
+    NSString *appScheme = @"QiangGouHui-alipay";
     
     //将商品信息拼接成字符串
     NSString *orderSpec = [payOrder description];

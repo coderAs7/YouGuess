@@ -14,6 +14,9 @@
 #import "MMHNetworkAdapter+Order.h"
 #import "QGHOrderList.h"
 #import "QGHOrderListBottomCell.h"
+#import "MMHPayWayViewController.h"
+#import "AppWebViewController.h"
+#import "MMHChatCustomerViewController.h"
 
 
 static NSString *const QGHOrderListTitleCellIdentifier = @"QGHOrderListTitleCellIdentifier";
@@ -27,11 +30,23 @@ static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCe
 @property (nonatomic, strong) MMHUnderlinedSegmentedControl *segmentList;
 @property (nonatomic, strong) UITableView *orderTableView;
 @property (nonatomic, strong) NSArray<QGHOrderList *> *orderListArr;
+@property (nonatomic, strong) NSArray *statusArr;
 
 @end
 
 
 @implementation QGHOrderListViewController
+
+
+- (instancetype)init {
+    self = [super init];
+    
+    if (self) {
+        _selectedStatus = QGHOrderListItemStatusAll;
+    }
+    
+    return self;
+}
 
 
 - (void)viewDidLoad {
@@ -43,6 +58,10 @@ static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCe
     [self makeTableView];
     
     [self fetchData];
+    
+    NSInteger selectedIndex = [self.statusArr indexOfObject:@(_selectedStatus)];
+    self.segmentList.selectedButtonIndex = selectedIndex;
+    [self.segmentList makeCurrentSelectionVisible];
 }
 
 
@@ -72,6 +91,7 @@ static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCe
 - (void)makeOrderListArr {
     NSMutableArray *orderListArr = [[NSMutableArray alloc] init];
     NSArray *statusArr = @[@(QGHOrderListItemStatusAll), @(QGHOrderListItemStatusToPay), @(QGHOrderListItemStatusToExpress), @(QGHOrderListItemStatusToReceipt), @(QGHOrderListItemStatusToComment), @(QGHOrderListItemStatusFinish), @(QGHOrderListItemStatusCancel), @(QGHOrderListItemStatusRefund)];
+    _statusArr = statusArr;
     for (NSNumber *statusNum in statusArr) {
         QGHOrderList *list = [[QGHOrderList alloc] initWithStatus:[statusNum integerValue]];
         list.delegate = self;
@@ -295,35 +315,71 @@ static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCe
 #pragma mark - QGHOrderListBottomCellDelegate
 
 
-- (void)orderListBottomCellToPay {
+- (void)orderListBottomCellToPay:(QGHOrderListBottomCell *)cell {
+    MMHPayWayViewController *payWayVC = [[MMHPayWayViewController alloc] initWithPayPrice:cell.item.amount orderNo:cell.item.order_no payWay:^(MMHPayWay payWay) {
+        [[MMHPayManager sharedInstance] goToPayManager:cell.item.order_no price:[NSString stringWithFormat:@"%g", cell.item.amount] productTitle:[cell.item getGoodsTitle] payWay:payWay invoker:self successHandler:^{
+            [self.navigationController popToViewController:self animated:YES];
+        } failHandler:^(NSString *error) {
+            [self.view showTips:error];
+            [self.navigationController popToViewController:self animated:YES];
+        }];
+    }];
+    [self.navigationController pushViewController:payWayVC animated:YES];
+}
+
+
+- (void)orderListBottomCellToCancel:(QGHOrderListBottomCell *)cell {
+    [[MMHNetworkAdapter sharedAdapter] cancelOrderFrom:self orderId:cell.item.orderId succeededHandler:^{
+        [self.view showTips:@"取消订单成功"];
+        [self fetchData];
+    } failedHandler:^(NSError *error) {
+        [self.view showTipsWithError:error];
+    }];
+}
+
+
+- (void)orderListBottomCellToPayApplyRefunding:(QGHOrderListBottomCell *)cell {
+    MMHChatCustomerViewController *customerVC = [[MMHChatCustomerViewController alloc] init];
+    [self.navigationController pushViewController:customerVC animated:YES];
+}
+
+
+- (void)orderListBottomCellToLookExpress:(QGHOrderListBottomCell *)cell {
+    NSString *webUrl = [NSString stringWithFormat:@"http://m.kuaidi100.com/index_all.html?type=%@&%@", cell.item.goodlist.firstObject.posttype, cell.item.goodlist.firstObject.postid];
+    AppWebViewController *webViewVC = [[AppWebViewController alloc] init];
+    webViewVC.webUrl = webUrl;
+    [self.navigationController pushViewController:webViewVC animated:YES];
+}
+
+
+- (void)orderListBottomCellToConfirmReceipt:(QGHOrderListBottomCell *)cell {
+    [[MMHNetworkAdapter sharedAdapter] orderConfirmReceiptFrom:self order:cell.item.orderId succeededHandler:^{
+        [self.view showTips:@"确认收货成功"];
+        [self fetchData];
+    } failedHandler:^(NSError *error) {
+        [self.view showTipsWithError:error];
+    }];
+}
+
+
+- (void)orderListBottomCellToComment:(QGHOrderListBottomCell *)cell {
 
 }
 
 
-- (void)orderListBottomCellToLookExpress {
-
+- (void)orderListBottomCellToRefundAndGoods:(QGHOrderListBottomCell *)cell {
+    MMHChatCustomerViewController *customerVC = [[MMHChatCustomerViewController alloc] init];
+    [self.navigationController pushViewController:customerVC animated:YES];
 }
 
 
-- (void)orderListBottomCellToConfirmReceipt {
-
-
-}
-
-
-- (void)orderListBottomCellToComment {
-
-
-}
-
-
-- (void)orderListBottomCellToPursueRefund {
-
-}
-
-
-- (void)orderListBottomCellToDeleteOrder {
-
+- (void)orderListBottomCellToDeleteOrder:(QGHOrderListBottomCell *)cell {
+    [[MMHNetworkAdapter sharedAdapter] cancelOrderFrom:self orderId:cell.item.orderId succeededHandler:^{
+        [self.view showTips:@"删除订单成功"];
+        [self fetchData];
+    } failedHandler:^(NSError *error) {
+        [self.view showTipsWithError:error];
+    }];
 }
 
 

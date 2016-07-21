@@ -105,6 +105,7 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
 - (void)fetchData {
     [[MMHNetworkAdapter sharedAdapter] fetchOrderDetailFrom:self orderId:self.orderId succeededHandler:^(QGHOrderInfo *orderInfo) {
         self.orderInfo = orderInfo;
+        self.title = [self getViewContollerTitle];
         [self.tableView reloadData];
     } failedHandler:^(NSError *error) {
         [self.view showTipsWithError:error];
@@ -124,7 +125,7 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
     if (section == 0) {
         return 1;
     } else if (section == 1) {
-        return 2;
+        return self.orderInfo.goodlist.count;
     } else if (section == 2) {
         return 1;
     } else if (section == 3) {
@@ -216,6 +217,39 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.00001;
+}
+
+
+- (NSString *)getViewContollerTitle {
+    switch (self.orderInfo.status) {
+        case QGHOrderListItemStatusAll:
+            return @"全部";
+            break;
+        case QGHOrderListItemStatusToPay:
+            return @"待付款";
+            break;
+        case QGHOrderListItemStatusToExpress:
+            return @"待发货";
+            break;
+        case QGHOrderListItemStatusToReceipt:
+            return @"待收货";
+            break;
+        case QGHOrderListItemStatusToComment:
+            return @"待评价";
+            break;
+        case QGHOrderListItemStatusFinish:
+            return @"已完成";
+            break;
+        case QGHOrderListItemStatusCancel:
+            return @"已取消";
+            break;
+        case QGHOrderListItemStatusRefund:
+            return @"退款退货";
+            break;
+        default:
+            return @"";
+            break;
+    }
 }
 
 

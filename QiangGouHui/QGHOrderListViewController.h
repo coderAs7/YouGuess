@@ -7,7 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "QGHOrderListItem.h"
 
 @interface QGHOrderListViewController : BaseViewController
+
+@property (nonatomic, assign) QGHOrderListItemStatus selectedStatus;
 
 @end

@@ -10,16 +10,19 @@
 
 
 @class QGHOrderListItem;
+@class QGHOrderListBottomCell;
 
 
 @protocol QGHOrderListBottomCellDelegate <NSObject>
 
-- (void)orderListBottomCellToPay;
-- (void)orderListBottomCellToLookExpress;
-- (void)orderListBottomCellToConfirmReceipt;
-- (void)orderListBottomCellToComment;
-- (void)orderListBottomCellToPursueRefund;
-- (void)orderListBottomCellToDeleteOrder;
+- (void)orderListBottomCellToPay:(QGHOrderListBottomCell *)cell;
+- (void)orderListBottomCellToCancel:(QGHOrderListBottomCell *)cell;
+- (void)orderListBottomCellToPayApplyRefunding:(QGHOrderListBottomCell *)cell;
+- (void)orderListBottomCellToLookExpress:(QGHOrderListBottomCell *)cell;
+- (void)orderListBottomCellToConfirmReceipt:(QGHOrderListBottomCell *)cell;
+- (void)orderListBottomCellToComment:(QGHOrderListBottomCell *)cell;
+- (void)orderListBottomCellToRefundAndGoods:(QGHOrderListBottomCell *)cell;
+- (void)orderListBottomCellToDeleteOrder:(QGHOrderListBottomCell *)cell;
 
 @end
 

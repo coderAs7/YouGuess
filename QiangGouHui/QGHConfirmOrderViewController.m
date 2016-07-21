@@ -15,6 +15,8 @@
 #import "QGHToSettlementModel.h"
 #import "MMHWXPayHandle.h"
 #import "QGHReceiptAddressViewController.h"
+#import "MMHPayWayViewController.h"
+#import "QGHOrderListViewController.h"
 
 
 static NSString *const QGHConfirmOrderAddressCellIdentifier = @"QGHConfirmOrderAddressCellIdentifier";
@@ -383,11 +385,18 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     }
     
     toSettlementModel.amount = [[self getSumPrice] floatValue];
-//    toSettlementModel.delivery = 
-    
+
+    __weak typeof(self) weakSelf = self;
     [[MMHNetworkAdapter sharedAdapter] sendRequestSettlementFrom:self parameters:[toSettlementModel parameters] succeededHandler:^(NSString *payId, NSString *orderNo) {
-        
-        [[MMHWXPayHandle wxPayHandle] sendPayWithOrder:orderNo];
+        MMHPayWayViewController *payWayVC = [[MMHPayWayViewController alloc] initWithPayPrice:[[weakSelf getSumPrice] floatValue] orderNo:orderNo payWay:^(MMHPayWay payWay) {
+            [[MMHPayManager sharedInstance] goToPayManager:orderNo price:[self getSumPrice] productTitle:[self getProductTitle] payWay:payWay invoker:weakSelf successHandler:^{
+                [self goToOrderList];
+            } failHandler:^(NSString *error) {
+                [self.view showTips:error];
+                [self goToOrderList];
+            }];
+        }];
+        [weakSelf.navigationController pushViewController:payWayVC animated:YES];
     } failedHandler:^(NSError *error) {
         [self.view showTipsWithError:error];
     }];
@@ -397,11 +406,17 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 #pragma mark - private methods
 
 
-- (NSString *)nameForSection:(NSInteger)section {
-    return self.dataSource[section];
+- (void)goToOrderList {
+    QGHOrderListViewController *listVC = [[QGHOrderListViewController alloc] init];
+    [QGHTabBarController redirectToCenterWithController:listVC];
 }
 
 
+- (NSString *)nameForSection:(NSInteger)section {
+    return self.dataSource[section];
+}
+//
+//
 - (NSString *)getSumPrice {
     if (self.productDetail) {
 //        self.priceLabel.text = [NSString stringWithFormat:@"¥%@", self.productDetail.product.min_price];
@@ -417,5 +432,22 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 
 }
 
+- (NSString *)getProductTitle {
+    if (self.productDetail) {
+        return self.productDetail.product.title;
+    } else if (self.cartItemArr.count > 0) {
+        __block NSString *productTitles = @"";
+        [self.cartItemArr enumerateObjectsUsingBlock:^(QGHCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            productTitles = [productTitles stringByAppendingString:obj.title];
+            if (idx != self.cartItemArr.count - 1) {
+                productTitles = [productTitles stringByAppendingString:@"|"];
+            }
+        }];
+        
+        return productTitles;
+    }
+    
+    return @"";
+}
 
 @end

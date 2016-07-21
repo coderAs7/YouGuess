@@ -8,7 +8,7 @@
 
 #import "MMHPayManager.h"
 #import "MMHWXPayHandle.h"
-//#import "MMHAliPayHandle.h"
+#import "MMHAliPayHandle.h"
 #import "MMHNetworkAdapter+Order.h"
 
 
@@ -50,7 +50,7 @@
 }
 
 
-- (void)goToPayManager:(NSString *)orderNo payWay:(MMHPayWay)payWay invoker:(UIViewController *)controller successHandler:(MMHPaySuccessHandler)successHandler failHandler:(MMHPayFailHandler)failHandler {
+- (void)goToPayManager:(NSString *)orderNo price:(NSString *)price productTitle:(NSString *)title payWay:(MMHPayWay)payWay invoker:(UIViewController *)controller successHandler:(MMHPaySuccessHandler)successHandler failHandler:(MMHPayFailHandler)failHandler {
     self.invoker = controller;
     self.orderNo = orderNo;
     self.successHandler = successHandler;
@@ -58,11 +58,10 @@
     switch (payWay) {
         case MMHPayWayAlipay:
             //支付宝支付
-//            [self weakUpAliPayWithPrice:payInfoModel.price orderNo:payInfoModel.orderBatchNo productName:payInfoModel.goodName productDesc:payInfoModel.desc];
+            [self weakUpAliPayWithPrice:price orderNo:orderNo productName:title];
             break;
         case MMHPayWayWeixin:
             //微信支付
-//            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(weChatPayFinished:) name:MMHWeChatPayFinishedNotification object:nil];
             [[MMHWXPayHandle wxPayHandle] sendPayWithOrder:self.orderNo];
             
             break;
@@ -99,14 +98,13 @@
 #pragma mark 唤起支付宝进行支付
 
 
-//-(void)weakUpAliPayWithPrice:(NSString *)price orderNo:(NSString *)orderNo productName:(NSString *)productName productDesc:(NSString *)productDesc {
-//    MMHPayOrderModel *payOrderModel = [[MMHPayOrderModel alloc]init];
-//    payOrderModel.amount = price;
-//    payOrderModel.tradeNO = orderNo;
-//    payOrderModel.productName = productName;
-//    payOrderModel.productDescription = productDesc;
-//    [MMHAliPayHandle goPayWithOrder:payOrderModel payType:self.payType];
-//}
+-(void)weakUpAliPayWithPrice:(NSString *)price orderNo:(NSString *)orderNo productName:(NSString *)productName {
+    MMHPayOrderModel *payOrderModel = [[MMHPayOrderModel alloc]init];
+    payOrderModel.amount = price;
+    payOrderModel.tradeNO = orderNo;
+    payOrderModel.productName = productName;
+    [MMHAliPayHandle goPayWithOrder:payOrderModel];
+}
 
 
 //微信支付通知
@@ -116,6 +114,7 @@
     switch ([resp errCode]) {
         case WXSuccess:{
             [[MMHNetworkAdapter sharedAdapter] paySuccessCallBack:self.orderNo];
+            self.successHandler();
         }
             break;
         case WXErrCodeCommon:{
@@ -147,50 +146,42 @@
         default:
             break;
     }
-//    if (![MMHTool isEmpty:error]) {
-//        self.failHandler(error);
-//    }
+    if (error.length > 0) {
+        self.failHandler(error);
+    }
 }
 
 
 #pragma mark 支付宝支付通知
 
 
-//-(void)aliPayNotification:(NSNotification *)note{
-//    NSString *resultOrderNo = [note.userInfo objectForKey:@"resultOrderNo"];
-//    if ([resultOrderNo isEqualToString:[MMHAliPayHandle alipayOrderNoShared].alipayOutTradeNo]){
-//        return;
-//    }
-//    
-//    if(resultOrderNo.length != 0) {
-//        [MMHAliPayHandle alipayOrderNoShared].alipayOutTradeNo = resultOrderNo;
-//    }
-//    
-//    NSString *payNotificationState = [note.userInfo objectForKey:@"resultStatus"];
-//    NSString *error;
-//    if([payNotificationState integerValue] == 6001){            // 【用户中途取消】
-//        error = @"用户中途取消";
-//    } else if ([payNotificationState integerValue] == 6002){    // 【网络连接出错】
-//        error = @"网络连接出错";
-//    } else if ([payNotificationState integerValue] == 4000){    // 【订单支付失败】
-//        error = @"订单支付失败";
-//    } else if ([payNotificationState integerValue] == 8000){     // 【订单正在处理中]
-//        error = @"订单正在处理中";
-//    } else if ([payNotificationState integerValue] == 9000){     // 【订单支付成功】
-//        __weak __typeof(self) weakSelf = self;
-//        [self lockOrderWithOrderNo:self.payInfoModel.orderBatchNo Type:4 succeddHandler:^{
-//            if (!weakSelf) {
-//                return ;
-//            }
-//            weakSelf.successHandler();
-//        } failedHandler:^(NSError *error) {
-//            weakSelf.successHandler();
-//        }];;
-//    }
-//    if (![MMHTool isEmpty:error]) {
-//        self.failHandler(error);
-//    }
-//}
+-(void)aliPayNotification:(NSNotification *)note{
+    NSString *resultOrderNo = [note.userInfo objectForKey:@"resultOrderNo"];
+    if ([resultOrderNo isEqualToString:[MMHAliPayHandle alipayOrderNoShared].alipayOutTradeNo]){
+        return;
+    }
+    
+    if(resultOrderNo.length != 0) {
+        [MMHAliPayHandle alipayOrderNoShared].alipayOutTradeNo = resultOrderNo;
+    }
+    
+    NSString *payNotificationState = [note.userInfo objectForKey:@"resultStatus"];
+    NSString *error;
+    if([payNotificationState integerValue] == 6001){            // 【用户中途取消】
+        error = @"用户中途取消";
+    } else if ([payNotificationState integerValue] == 6002){    // 【网络连接出错】
+        error = @"网络连接出错";
+    } else if ([payNotificationState integerValue] == 4000){    // 【订单支付失败】
+        error = @"订单支付失败";
+    } else if ([payNotificationState integerValue] == 8000){     // 【订单正在处理中]
+        error = @"订单正在处理中";
+    } else if ([payNotificationState integerValue] == 9000){     // 【订单支付成功】
+        self.successHandler();
+    }
+    if (error.length > 0) {
+        self.failHandler(error);
+    }
+}
 
 
 @end

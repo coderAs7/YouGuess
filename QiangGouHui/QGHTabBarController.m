@@ -12,6 +12,7 @@
 #import "QGHCartViewController.h"
 #import "QGHPersonalCenterViewController.h"
 #import "QGHNavigationController.h"
+#import "AppDelegate.h"
 
 
 @interface QGHTabBarController ()
@@ -40,6 +41,31 @@
     QGHNavigationController *personalCenterVCNav = [[QGHNavigationController alloc] initWithRootViewController:personalCenterVC];
     
     self.viewControllers = @[firstVCNav, chatVCNav, cartVCNav, personalCenterVCNav];
+}
+
+
++ (void)redirectToCenterWithController:(UIViewController *)controller {
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    QGHTabBarController *tabBarController = (QGHTabBarController *)delegate.window.rootViewController;
+    
+    for (NSInteger i = 0; i < tabBarController.viewControllers.count; i++) {
+        QGHNavigationController *navigationController = tabBarController.viewControllers[i];
+        if ([navigationController isKindOfClass:[UINavigationController class]]) {
+            if (i != QGHTabBarControllerViewControllerIndexPersonal) {
+                [navigationController popToRootViewControllerAnimated:NO];
+            }
+        }
+    }
+    
+    QGHNavigationController *personalCenterNavigationController = [tabBarController.viewControllers objectAtIndex:QGHTabBarControllerViewControllerIndexPersonal];
+    
+    QGHPersonalCenterViewController *personalViewController = personalCenterNavigationController.viewControllers.firstObject;
+    personalViewController.hidesBottomBarWhenPushed = NO;
+    controller.hidesBottomBarWhenPushed = YES;
+    NSArray *finalMamhaoViewControllers = @[personalViewController, controller];
+    [personalCenterNavigationController setViewControllers:finalMamhaoViewControllers animated:YES];
+    
+    [tabBarController setSelectedIndex:QGHTabBarControllerViewControllerIndexPersonal];
 }
 
 

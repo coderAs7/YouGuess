@@ -19,6 +19,6 @@ typedef void(^MMHPayFailHandler)(NSString *error);
 
 + (instancetype)sharedInstance;
 
-- (void)goToPayManager:(NSString *)orderNo payWay:(MMHPayWay)payWay invoker:(UIViewController *)controller successHandler:(MMHPaySuccessHandler)successHandler failHandler:(MMHPayFailHandler)failHandler;
+- (void)goToPayManager:(NSString *)orderNo price:(NSString *)price productTitle:(NSString *)title payWay:(MMHPayWay)payWay invoker:(UIViewController *)controller successHandler:(MMHPaySuccessHandler)successHandler failHandler:(MMHPayFailHandler)failHandler;
 
 @end

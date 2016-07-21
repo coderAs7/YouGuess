@@ -7,6 +7,7 @@
 //
 
 #import "MMHNetworkAdapter+Order.h"
+#import "QGHOrderListItem.h"
 
 
 @implementation MMHNetworkAdapter (Order)
@@ -83,6 +84,28 @@
         //nothing
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         //nothing
+    }];
+}
+
+
+- (void)cancelOrderFrom:(id)requester orderId:(NSString *)orderId succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    NSDictionary *parameters = @{@"userToken": [[MMHAccountSession currentSession] token], @"id": orderId, @"status": @(QGHOrderListItemStatusCancel)};
+    [engine postWithAPI:@"_change_order_status_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        succeededHandler();
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
+    }];
+}
+
+
+- (void)orderConfirmReceiptFrom:(id)requester order:(NSString *)orderId succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    NSDictionary *parameters = @{@"userToken": [[MMHAccountSession currentSession] token], @"id": orderId, @"status": @(QGHOrderListItemStatusToComment)};
+    [engine postWithAPI:@"_change_order_status_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        succeededHandler();
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
     }];
 }
 
