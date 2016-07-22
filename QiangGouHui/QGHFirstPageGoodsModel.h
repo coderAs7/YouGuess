@@ -13,10 +13,10 @@
 @property (nonatomic, copy) NSString *appointment;
 @property (nonatomic, copy) NSString *area;
 @property (nonatomic, assign) NSInteger create_time;
-@property (nonatomic, assign) NSInteger discount_price;
+@property (nonatomic, assign) float discount_price;
 @property (nonatomic, assign) NSInteger end_time;
 @property (nonatomic, copy) NSString *goodsId;
-@property (nonatomic, assign) NSInteger original_price;
+@property (nonatomic, assign) float original_price;
 @property (nonatomic, assign) NSInteger production_time;
 @property (nonatomic, assign) NSInteger range;
 @property (nonatomic, assign) NSInteger status;

@@ -7,6 +7,7 @@
 //
 
 #import "MMHPersonalCenterAllOrderCell.h"
+#import "QGHOrderNumModel.h"
 
 
 @interface MMHPersonalCenterAllOrderCellButton ()
@@ -37,7 +38,7 @@
         badge.textAlignment = NSTextAlignmentCenter;
         badge.font = [UIFont systemFontOfSize:9.0];
         badge.textColor = [UIColor whiteColor];
-        badge.backgroundColor = C21;
+        badge.backgroundColor = C22;
         badge.layer.cornerRadius = 6;
         badge.layer.masksToBounds = YES;
         [self addSubview:badge];
@@ -139,4 +140,14 @@
         [self.delegate didClickPersonalCenterAllOrderCellButton:index];
     }
 }
+
+
+- (void)updateOrderNumModel:(QGHOrderNumModel *)model {
+    self.buttons[0].badgeCount = model.waitpay;
+    self.buttons[1].badgeCount = model.receipt;
+    self.buttons[2].badgeCount = model.score;
+    self.buttons[3].badgeCount = model.refund;
+}
+
+
 @end

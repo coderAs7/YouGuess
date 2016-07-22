@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class QGHOrderNumModel;
+
+
 @interface MMHPersonalCenterAllOrderCellButton : UIButton
 
 @property (nonatomic, strong) NSString *imageName;
@@ -29,5 +32,6 @@
 @property (nonatomic, weak) id<MMHPersonalCenterAllOrderCellDelegate> delegate;
 
 //- (void)updateWithPersonalCenterInfoModel:(MMHPersonalCenterInfoModel *)model;
+- (void)updateOrderNumModel:(QGHOrderNumModel *)model;
 
 @end

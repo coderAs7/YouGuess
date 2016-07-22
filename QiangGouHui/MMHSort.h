@@ -20,16 +20,16 @@
 
 
 typedef NS_ENUM(NSInteger, MMHSortType) {
-    MMHSortTypeDefault = 0,
-    MMHSortTypeSales = 1,
-    MMHSortTypePrice = 2,
-    MMHSortTypeNew = 3,
+    MMHSortTypeDefault = 1,
+    MMHSortTypeSales = 2,
+    MMHSortTypePrice = 3,
+    MMHSortTypeNew = 4,
 };
 
 
 typedef NS_ENUM(NSInteger, MMHSortOrder) {
-    MMHSortOrderDescending = 0,
-    MMHSortOrderAscending = 1,
+    MMHSortOrderDescending = 1,
+    MMHSortOrderAscending = 2,
 
     MMHSortOrderIgnored = -1,
 };

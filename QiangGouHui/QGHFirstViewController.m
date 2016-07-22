@@ -255,7 +255,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
         
         if (list) {
             QGHFirstPageGoodsModel *product = [list itemAtIndex:indexPath.row];
-            QGHProductDetailVIewController *productDetailVC = [[QGHProductDetailVIewController alloc] initWithBussType:QGHBussTypeNormal goodsId:product.goodsId];
+            QGHProductDetailVIewController *productDetailVC = [[QGHProductDetailVIewController alloc] initWithBussType:product.type goodsId:product.goodsId];
             [self.navigationController pushViewController:productDetailVC animated:YES];
         }
         
@@ -377,7 +377,6 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     MMHSearchViewController *searchVC = [[MMHSearchViewController alloc] init];
     searchVC.searchComplete = ^(MMHFilter *filter) {
         MMHProductListViewController *productListViewController = [[MMHProductListViewController alloc] initWithFilter:filter];
-        [self.navigationController popViewControllerAnimated:NO];
         [self.navigationController pushViewController:productListViewController animated:YES];
     };
     

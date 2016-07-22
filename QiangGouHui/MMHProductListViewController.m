@@ -12,6 +12,7 @@
 //#import "MMHProductsCollectionFooterView.h"
 #import "QGHProductListCell.h"
 #import "MMHFilter.h"
+#import "QGHProductList.h"
 //#import "MMHProductList.h"
 //#import "MMHWebViewController.h"
 #import "MMHNetworkAdapter+Product.h"
@@ -29,6 +30,8 @@
 //#import "MMHProductSpecSelectionViewController.h"
 //#import "MMHNetworkAdapter+Cart.h"
 //#import "MMHNetworkAdapter+Center.h"
+#import "QGHProductDetailVIewController.h"
+#import "QGHFirstPageGoodsModel.h"
 
 
 static NSString * const QGHProductListCellIdentifier = @"QGHProductListCellIdentifier";
@@ -41,14 +44,14 @@ static NSString * const QGHProductListCellIdentifier = @"QGHProductListCellIdent
 
 @interface MMHProductListViewController ()<UITableViewDataSource, UITableViewDelegate, MMHFilterDelegate, MMHTimelineDelegate, UISearchBarDelegate, UITextFieldDelegate>
 
-@property (nonatomic, strong) UICollectionView *productsListCollectionView;
+//@property (nonatomic, strong) UICollectionView *productsListCollectionView;
 @property (nonatomic, strong) MMHFilter *filter;
 @property (nonatomic, assign) CGFloat headerViewHeight;
 @property (nonatomic, strong) UITextField *search;
 @property (nonatomic, strong) MMHSortView *sortView;
 @property (nonatomic, strong) UITableView *tableView;
 //@property (nonatomic, strong) MMHShoppingTipsModel *shoppingTipsModel;
-//@property (nonatomic, strong) MMHProductList *productList;
+@property (nonatomic, strong) QGHProductList *productList;
 @property (nonatomic, strong) UIBarButtonItem *favouriteBarButtonItem;
 
 @end
@@ -69,37 +72,21 @@ static NSString * const QGHProductListCellIdentifier = @"QGHProductListCellIdent
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    MMHProductList *productList = [[MMHProductList alloc] initWithFilter:self.filter];
-//    productList.delegate = self;
-//    self.productList = productList;
+    QGHProductList *productList = [[QGHProductList alloc] initWithFilter:self.filter];
+    productList.delegate = self;
+    self.productList = productList;
     [self pageSetting];
     [self createSortView];
     [self createTableView];
-    if (self.filter.module == MMHFilterModuleCategory) {
-//        [self sendRequestWithGetShoppingTips];
-    } else {
-        self.productsListCollectionView.y += CGRectGetMaxY(self.sortView.frame);
-        self.productsListCollectionView.height -= CGRectGetMaxY(self.sortView.frame);
-//        [self.productList refetch];
-    }
+    
+    [self.productList refetch];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-//    if ([self.productList numberOfItems] != 0) {
-//        if ([self.productList hasMoreItems]) {
-//            [self.productsListCollectionView addLegendFooterWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
-//        }
-//    }
-    
-//    if (self.filter.module == MMHFilterModuleSearching && self.search) {
-//        self.title = @"";
-//        [self.navigationController.navigationBar addSubview:self.search];
-//    } else {
-//        self.title = @"商品列表";
-//    }
+
     if (self.filter.module == MMHFilterModuleSearching && self.search) {
         self.title = @"";
         [self.navigationController.navigationBar addSubview:self.search];
@@ -112,14 +99,14 @@ static NSString * const QGHProductListCellIdentifier = @"QGHProductListCellIdent
 
 
 - (void)dealloc {
-    [self.productsListCollectionView removeFooter];
+    [self.tableView removeFooter];
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.search removeFromSuperview];
-    [self.productsListCollectionView removeFooter];
+    [self.tableView removeFooter];
 }
 
 
@@ -127,39 +114,20 @@ static NSString * const QGHProductListCellIdentifier = @"QGHProductListCellIdent
 
 
 - (void)pageSetting {
-//    if (self.filter.productListType == MMHProductListTypeBrand) {
-//        NSString *imageName;
-//        UIColor *favouriteTintColor;
-//        if (self.productList.isBrandCollected) {
-//            imageName = @"product_collection_hlt";
-//            favouriteTintColor = C21;
-//        }else{
-//            imageName = @"product_collection_nor";
-//            favouriteTintColor = C5;
-//        }
-//        UIBarButtonItem *filterBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"筛选" style:UIBarButtonItemStylePlain target:self action:@selector(handleFilter:)];
-//        self.favouriteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:imageName] style:UIBarButtonItemStylePlain target:self action:@selector(handleFavourite:)];
-//        _favouriteBarButtonItem.tintColor = favouriteTintColor;
-//        [self setRightNavigationBarButtonItems:@[filterBarButtonItem, _favouriteBarButtonItem]];
-//    }else{
-//        UIBarButtonItem *filterBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"筛选" style:UIBarButtonItemStylePlain target:self action:@selector(handleFilter:)];
-//        self.navigationItem.rightBarButtonItem = filterBarButtonItem;
-//    }
-    
     if (self.filter.module == MMHFilterModuleSearching) {
-        CGRect frame = CGRectMake(40, 8, self.view.bounds.size.width - 40 - 60, 28);
+        CGRect frame = CGRectMake(40, 8, self.view.bounds.size.width - 40 - 15, 28);
         UITextField *field = [[UITextField alloc] initWithFrame:frame];
         self.search = field;
         field.stringTag = @"searchInProductList";
+        field.backgroundColor = RGBCOLOR(247, 247, 247);
+        field.borderStyle = UITextBorderStyleNone;
+        field.clearButtonMode = UITextFieldViewModeAlways;
         field.delegate = self;
-        field.backgroundColor = [UIColor whiteColor];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake(10, 0, 34, 32);
         [button setImage:[UIImage imageNamed:@"seach_ic"] forState:UIControlStateNormal];
         field.leftView = button;
         field.layer.cornerRadius = MMHFloat(5);
-        field.layer.borderWidth = .5;
-        field.layer.borderColor = C2.CGColor;
         field.adjustsFontSizeToFitWidth = YES;
         field.leftViewMode = UITextFieldViewModeAlways;
         //weakSelf.navigationItem.titleView = field;
@@ -168,53 +136,9 @@ static NSString * const QGHProductListCellIdentifier = @"QGHProductListCellIdent
         field.placeholder = @"搜索商品/门店";
         field.font = F4;
         field.text = self.filter.keyword;
-        
-        //        [weekSelf leftBarButtonWithTitle:nil barNorImage:[UIImage imageNamed:@"basc_nav_back"] barHltImage:nil action:^{
-        ////            [field setHidden:YES];
-        ////            [field removeFromSuperview];;
-        //            [weekSelf.navigationController popViewControllerAnimated:YES];
-        //        }];
-        //        [weekSelf rightBarButtonWithTitle:nil barNorImage:[UIImage imageNamed:@"home_icon_scan"] barHltImage:nil action:^{
-        //            //扫码
-        //            MMHScanningViewController *scanViewController = [[MMHScanningViewController alloc] init];
-        //            [self pushViewController:scanViewController];
-        //        }];
     }
 }
 
-
-//- (void)handleFilter:(UIBarButtonItem *)sender{
-//        if ([self.filter hasFilterTerms]) {
-//                MMHFilterTermSelectionViewController *filterTermSelectionViewController = [[MMHFilterTermSelectionViewController alloc] initWithFilter:self.filter];
-//                [self.navigationController pushViewController:filterTermSelectionViewController animated:YES];
-//                [MMHLogbook logEventType:MMHBuriedPointTypeProductList];
-//        }
-//}
-
-
-//- (void)handleFavourite:(UIBarButtonItem *)sender{
-//    if (!self.productList.isBrandCollected) {
-//        [[MMHNetworkAdapter sharedAdapter] addCollectWithType:2 collectItemId:self.filter.brandID from:nil succeededHandler:^{
-//            [self animationWithCollectionWithButton:sender isCollection:YES];
-//            self.productList.isBrandCollected = YES;
-//            [self.productsListCollectionView showTips:@"收藏成功"];
-//        } failedHandler:^(NSError *error) {
-//            [self.productsListCollectionView showTips:@"收藏失败"];
-//        }];
-//    }else{
-//        //取消收藏
-//        [[MMHNetworkAdapter sharedAdapter] cancelCollectBrandWithBrandId:self.filter.brandID from:nil succeededHandler:^{
-//            [self animationWithCollectionWithButton:sender isCollection:NO];
-//            self.productList.isBrandCollected = NO;
-//            [self.productsListCollectionView showTips:@"取消收藏成功"];
-//            NSString *brandId = self.filter.brandID;
-//            [[NSNotificationCenter defaultCenter] postNotificationName:MMHProductListViewControllerCancleCollect object:brandId];
-//        } failedHandler:^(NSError *error) {
-//            [self.productsListCollectionView showTips:@"取消失败"];
-//        }];
-//    }
-//
-//}
 
 - (void)createTableView {
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
@@ -222,6 +146,7 @@ static NSString * const QGHProductListCellIdentifier = @"QGHProductListCellIdent
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [_tableView registerNib:[UINib nibWithNibName:@"QGHProductListCell" bundle:nil] forCellReuseIdentifier:QGHProductListCellIdentifier];
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:_tableView];
     
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -231,38 +156,6 @@ static NSString * const QGHProductListCellIdentifier = @"QGHProductListCellIdent
     }];
 }
 
-#pragma mark 动画
-
-//- (void)animationWithCollectionWithButton:(UIBarButtonItem *)collectionButton isCollection:(BOOL)isCollection {
-//    if (!isCollection) {
-//        collectionButton.tintColor = C5;
-//        [collectionButton setImage:[UIImage imageNamed:@"product_collection_nor"]];
-//    }
-//    else {
-//        collectionButton.tintColor = C20;
-//        [collectionButton setImage:[UIImage imageNamed:@"product_collection_hlt"]];
-//    }
-//    
-//}
-
-
-//- (void)createCollectionView {
-//    UICollectionViewFlowLayout *flowLayout= [[UICollectionViewFlowLayout alloc] init];
-//    
-//    self.productsListCollectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:flowLayout];
-//    self.productsListCollectionView.showsVerticalScrollIndicator = NO;
-//    self.productsListCollectionView.backgroundColor = C1;
-//    self.productsListCollectionView.delegate = self;
-//    self.productsListCollectionView.dataSource = self;
-//    self.productsListCollectionView.scrollsToTop = YES;
-//    self.productsListCollectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-//
-//    [self.productsListCollectionView registerClass:[MMHProductsCollectionViewCell class] forCellWithReuseIdentifier:MMHProductsCollectionCellIdentifier];
-//    [self.productsListCollectionView registerClass:[MMHProductsCollectionHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:MMHProductsCollectionHeaderViewIdentifier];
-//    [self.productsListCollectionView registerClass:[MMHProductsCollectionFooterView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:MMHProductsCollectionFooterViewIdentifier];
-//    
-//    [self.view addSubview:self.productsListCollectionView];
-//}
 
 - (void)searchReloadView:(MMHFilter *)filter {
     if (self.filter.module != MMHFilterModuleSearching) {
@@ -281,7 +174,7 @@ static NSString * const QGHProductListCellIdentifier = @"QGHProductListCellIdent
 //    self.productList = productList;
 //    [self.productList refetch];
     
-    [self.productsListCollectionView reloadData];
+    [self.tableView reloadData];
 }
 
 
@@ -312,16 +205,23 @@ static NSString * const QGHProductListCellIdentifier = @"QGHProductListCellIdent
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return [self.productList numberOfItems];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     QGHProductListCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHProductListCellIdentifier forIndexPath:indexPath];
+    cell.goods = [self.productList itemAtIndex:indexPath.row];
     
     return cell;
 }
 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    QGHFirstPageGoodsModel *product = [self.productList itemAtIndex:indexPath.row];
+    QGHProductDetailVIewController *productDetailVC = [[QGHProductDetailVIewController alloc] initWithBussType:product.type goodsId:product.goodsId];
+    [self.navigationController pushViewController:productDetailVC animated:YES];
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 145;
@@ -440,23 +340,15 @@ static NSString * const QGHProductListCellIdentifier = @"QGHProductListCellIdent
 
 
 - (void)filterDidChange:(MMHFilter *)filter {
-//    [self.productList refetch];
+    [self.productList refetch];
 }
 
 
 - (void)timelineDataRefetched:(MMHTimeline *)timeline {
     [self.view hideProcessingView];
-    [self.productsListCollectionView reloadData];
-    [self.productsListCollectionView setContentOffset:CGPointZero animated:YES];
-//    if (self.productList.isBrandCollected) {
-//        [self.favouriteBarButtonItem setImage:[UIImage imageNamed:@"product_collection_hlt"]];
-//        self.favouriteBarButtonItem.tintColor = C21;
-//        
-//    }
-//    else {
-//        [self.favouriteBarButtonItem setImage:[UIImage imageNamed:@"product_collection_nor"]];
-//         self.favouriteBarButtonItem.tintColor = C5;
-//    }
+    [self.tableView reloadData];
+    [self.tableView setContentOffset:CGPointZero animated:YES];
+
     if ([timeline numberOfItems] == 0) {
 //        [self showBlankViewOfType:MMHBlankViewTypeProductList belowView:nil];
     }
@@ -475,19 +367,19 @@ static NSString * const QGHProductListCellIdentifier = @"QGHProductListCellIdent
 
 - (void)timelineMoreDataFetched:(MMHTimeline *)timeline {
     [self.view hideProcessingView];
-    [self.productsListCollectionView reloadData];
-    [self.productsListCollectionView.mj_footer endRefreshing];
+    [self.tableView reloadData];
+    [self.tableView.mj_footer endRefreshing];
     if (![timeline hasMoreItems]) {
-        [self.productsListCollectionView.mj_footer endRefreshingWithNoMoreData];
-        [self.productsListCollectionView removeFooter];
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        [self.tableView removeFooter];
     }
 }
 
 
 - (void)timeline:(MMHTimeline *)timeline fetchingFailed:(NSError *)error {
     [self.view hideProcessingView];
-    [self.productsListCollectionView.mj_header endRefreshing];
-    [self.productsListCollectionView.mj_footer endRefreshing];
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
     [self.view showTipsWithError:error];
 }
 
@@ -522,17 +414,17 @@ static NSString * const QGHProductListCellIdentifier = @"QGHProductListCellIdent
 #pragma mark  - UIScrollViewDelegate
 
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    self.sortView.hidden = NO;
-    if (scrollView == self.productsListCollectionView) {
-        CGPoint point = scrollView.contentOffset;
-        if ((self.headerViewHeight - self.sortView.bounds.size.height) <= point.y) {
-//            self.sortView.alpha = (point.y) / (point.y + 20) * 0.9;
-        }
-        CGFloat y = self.headerViewHeight - self.sortView.bounds.size.height - point.y;
-        self.sortView.top = MAX(0.0f, y);
-    }
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    self.sortView.hidden = NO;
+//    if (scrollView == self.tableView) {
+//        CGPoint point = scrollView.contentOffset;
+//        if ((self.headerViewHeight - self.sortView.bounds.size.height) <= point.y) {
+////            self.sortView.alpha = (point.y) / (point.y + 20) * 0.9;
+//        }
+//        CGFloat y = self.headerViewHeight - self.sortView.bounds.size.height - point.y;
+//        self.sortView.top = MAX(0.0f, y);
+//    }
+//}
 
 
 - (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {

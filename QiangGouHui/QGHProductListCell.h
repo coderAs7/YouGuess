@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+
+@class QGHFirstPageGoodsModel;
+
+
 @interface QGHProductListCell : UITableViewCell
+
+@property (nonatomic, strong) QGHFirstPageGoodsModel *goods;
 
 @end

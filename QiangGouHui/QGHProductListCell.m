@@ -7,6 +7,7 @@
 //
 
 #import "QGHProductListCell.h"
+#import "QGHFirstPageGoodsModel.h"
 
 
 @interface QGHProductListCell()
@@ -22,6 +23,7 @@
 
 @implementation QGHProductListCell
 
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.imageBackView.backgroundColor = [UIColor clearColor];
@@ -33,12 +35,20 @@
         make.height.equalTo(self.imageBackView.mas_height);
         make.center.equalTo(self.imageBackView);
     }];
+    
+    self.titleLabel.textColor = C8;
+    self.priceLabel.textColor = C22;
+    self.oriPriceLabel.textColor = C6;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+- (void)setGoods:(QGHFirstPageGoodsModel *)goods {
+    [self.productImageView updateViewWithImageAtURL:goods.img_path];
+    self.titleLabel.text = goods.title;
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%g", goods.discount_price];
+    self.oriPriceLabel.text = [NSString stringWithFormat:@"¥%g", goods.original_price];
+    [self.oriPriceLabel addStrikethroughLine];
 }
+
 
 @end

@@ -13,13 +13,16 @@
 #import "QGHPersonalInfoViewController.h"
 #import "QGHOrderListViewController.h"
 #import "MMHAccountSession.h"
+#import "MMHNetworkAdapter+Personal.h"
+#import "QGHOrderListViewController.h"
+#import "MMHSettingViewController.h"
 
 
 static NSString *QGHPersonalCenterCommonCellIdentifier = @"QGHPersonalCenterCommonCellIdentifier";
 static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrderCellIdentifier";
 
 
-@interface QGHPersonalCenterViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface QGHPersonalCenterViewController ()<UITableViewDataSource, UITableViewDelegate, MMHPersonalCenterAllOrderCellDelegate>
 
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) UITableView *tableView;
@@ -27,6 +30,8 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
 @property (nonatomic, strong) UIView *personalView;
 @property (nonatomic, strong) MMHImageView *personalImage;
 @property (nonatomic, strong) UILabel *personalNameLabel;
+
+@property (nonatomic, strong) QGHOrderNumModel *numModel;
 
 @end
 
@@ -40,6 +45,8 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
     [self makeTableView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginNotification) name:MMHUserDidLoginNotification object:nil];
+    
+    [self fetchData];
 }
 
 
@@ -89,6 +96,20 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
 }
 
 
+- (void)fetchData {
+    if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
+        return;
+    }
+    
+    [[MMHNetworkAdapter sharedAdapter] fetchOrderNumFrom:self succeededHandler:^(QGHOrderNumModel *orderNum) {
+        self.numModel = orderNum;
+        [self.tableView reloadData];
+    } failedHandler:^(NSError *error) {
+        [self.view showTipsWithError:error];
+    }];
+}
+
+
 #pragma mark - UITalbeView DataSource and Delegate
 
 
@@ -116,6 +137,9 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
             return cell;
         } else {
             MMHPersonalCenterAllOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHPersonalCenterOrderCellIdentifier forIndexPath:indexPath];
+            cell.delegate = self;
+            [cell updateOrderNumModel:self.numModel];
+            
             return cell;
         }
     } else {
@@ -160,8 +184,41 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
             QGHOrderListViewController *orderListVC = [[QGHOrderListViewController alloc] init];
             [self.navigationController pushViewController:orderListVC animated:YES];
         }
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 1) {
+            MMHSettingViewController *settingVC = [[MMHSettingViewController alloc] init];
+            [self.navigationController pushViewController:settingVC animated:YES];
+        }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
+
+#pragma mark - MMHPersonalCenterAllOrderCellDelegate
+
+- (void)didClickPersonalCenterAllOrderCellButton:(NSInteger)index {
+    QGHOrderListItemStatus status;
+    switch (index) {
+        case 0:
+            status = QGHOrderListItemStatusToPay;
+            break;
+        case 1:
+            status = QGHOrderListItemStatusToReceipt;
+            break;
+        case 2:
+            status = QGHOrderListItemStatusToComment;
+            break;
+        case 3:
+            status = QGHOrderListItemStatusRefund;
+            break;
+        default:
+            return;
+    }
+    
+    QGHOrderListViewController *orderListVC = [[QGHOrderListViewController alloc] init];
+    orderListVC.selectedStatus = status;
+    
+    [QGHTabBarController redirectToCenterWithController:orderListVC];
 }
 
 

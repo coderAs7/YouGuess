@@ -7,6 +7,8 @@
 //
 
 #import "MMHNetworkAdapter+Search.h"
+#import "QGHFirstPageGoodsModel.h"
+
 
 @implementation MMHNetworkAdapter (Search)
 
@@ -28,9 +30,20 @@
 }
 
 
-//- (void)searchGoodFrom:(id)requester succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
-//    NSDictionary *parameters = [@""]
-//}
+- (void)searchGoodFrom:(id)requester keyword:(NSString *)keyword searchType:(MMHSortType)searchType sortOrder:(MMHSortOrder)sortOrder page:(NSInteger)page size:(NSInteger)size succeededHandler:(void(^)(NSArray<QGHFirstPageGoodsModel *> *productArr))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    if (sortOrder == MMHSortOrderIgnored) {
+        sortOrder = MMHSortOrderDescending;
+    }
+    NSDictionary *parameters = @{@"key": keyword, @"search_type": @(searchType), @"sort": @(sortOrder), @"page": @(page), @"size": @(size)};
+    
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    [engine postWithAPI:@"_search_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        NSArray *productArr = [responseJSONObject[@"info"] modelArrayOfClass:[QGHFirstPageGoodsModel class]];
+        succeededHandler(productArr);
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
+    }];
+}
 
 
 @end

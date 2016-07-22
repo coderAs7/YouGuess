@@ -398,8 +398,8 @@
         [array writeToFile:filePath atomically:YES];
     }
     
-//    MMHFilter *filter = [[MMHFilter alloc] initWithKeyword:keyword];
-//    self.searchComplete(filter);
+    MMHFilter *filter = [[MMHFilter alloc] initWithKeyword:keyword];
+    self.searchComplete(filter);
 }
 
 

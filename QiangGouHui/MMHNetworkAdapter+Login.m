@@ -27,4 +27,18 @@
 }
 
 
+- (void)logoutWithRequester:(id)requester succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    NSDictionary *parameters = @{@"userToken": [[MMHAccountSession currentSession] token]};
+    
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    [engine postWithAPI:@"_logout_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        [[MMHAccountSession currentSession] logoutWithCompletion:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:MMHUserDidLogoutNotification object:nil];
+        succeededHandler();
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
+    }];
+}
+
+
 @end
