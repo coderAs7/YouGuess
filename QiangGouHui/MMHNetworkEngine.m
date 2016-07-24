@@ -116,7 +116,7 @@
        success:^(NSURLSessionDataTask *task, id responseObject) {
            NSLog(@"===+++post with api: %@", api);
            NSLog(@"===+++post with parameters: %@", actualParameter);
-           NSLog(@"got response object: %@", responseObject);
+           NSLog(@"got response object: %@", [responseObject mmh_JSONString]);
            if (responseObject == nil) {
                //               NSError *error = [NSError errorWithDomain:MMHErrorDomain code:-1 userInfo:@{NSLocalizedDescriptionKey: @"未知错误"}];
                //               failedBlock(error);

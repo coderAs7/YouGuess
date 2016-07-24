@@ -16,6 +16,8 @@
 #import "QGHProductDetailWebViewCell.h"
 #import "MMHProductSpecSelectionViewController.h"
 #import "MMHNetworkAdapter+Cart.h"
+#import "MMHChatCustomerViewController.h"
+#import "QGHCommentListViewController.h"
 
 
 static NSString *const QGHProductDetailHeaderCellIdentifier = @"QGHProductDetailHeaderCellIdentifier";
@@ -79,7 +81,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     [_tableView registerClass:[QGHProductDetailPriceCell class] forCellReuseIdentifier:QGHProductDetailPriceCellIdentifier];
     [_tableView registerNib:[UINib nibWithNibName:@"QGHProductDetailInfoCell" bundle:nil] forCellReuseIdentifier:QGHProductDetailProductTitleCellIdentifier];
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:QGHProductDetailCommentTitleCellIdentifier];
-    [_tableView registerClass:[QGHProductDetailCommentCell class] forCellReuseIdentifier:QGHProductCommentCellIdentifier];
+    [_tableView registerNib:[UINib nibWithNibName:@"QGHProductDetailCommentCell" bundle:nil]forCellReuseIdentifier:QGHProductCommentCellIdentifier];
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:QGHProductDetailImageTitleCellIdentifier];
     [_tableView registerClass:[QGHProductDetailWebViewCell class] forCellReuseIdentifier:QGHProductDetailImageCellIdentifier];
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -105,6 +107,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     [customerServiceBtn setTitleColor:C7 forState:UIControlStateNormal];
     [customerServiceBtn setImageEdgeInsets:UIEdgeInsetsMake(-titleSize.height, titleSize.width, 0, 0)];
     [customerServiceBtn setTitleEdgeInsets:UIEdgeInsetsMake(image.size.height, -image.size.width, 0, 0)];
+    [customerServiceBtn addTarget:self action:@selector(customerServiceBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [_bottomView addSubview:customerServiceBtn];
     
     image = [UIImage imageNamed:@"pro_btn_shopping_n"];
@@ -115,8 +118,10 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     [cartBtn setTitle:title forState:UIControlStateNormal];
     cartBtn.titleLabel.font = F3;
     [cartBtn setTitleColor:C7 forState:UIControlStateNormal];
-    [cartBtn setImageEdgeInsets:UIEdgeInsetsMake(-titleSize.height, (titleSize.width - image.size.width), 0, 0)];
-    [cartBtn setTitleEdgeInsets:UIEdgeInsetsMake(image.size.height, -image.size.width, 0, 0)];
+    cartBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [cartBtn setImageEdgeInsets:UIEdgeInsetsMake(-titleSize.height, (75 - image.size.width) * 0.5, 0, 0)];
+    [cartBtn setTitleEdgeInsets:UIEdgeInsetsMake(image.size.height, 0, 0, 0)];
+    [cartBtn addTarget:self action:@selector(cartBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [_bottomView addSubview:cartBtn];
     
     if (self.bussType == QGHBussTypeAppoint && self.bussType == QGHBussTypeCustom) {
@@ -224,6 +229,8 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
             return cell;
         } else {
             QGHProductDetailCommentCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHProductCommentCellIdentifier forIndexPath:indexPath];
+            QGHProductDetailComment *comment = self.comments[indexPath.row - 1];
+            [cell setComment:comment];
             return cell;
         }
     } else {
@@ -242,6 +249,16 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
             return cell;
         }
     }
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        QGHCommentListViewController *commentListVC = [[QGHCommentListViewController alloc] initWithGoodsId:self.productDetailModel.product.goodsId];
+        [self.navigationController pushViewController:commentListVC animated:YES];
+    }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 
@@ -267,6 +284,20 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
             return self.productDetaiImageHeight;
         }
     }
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return 0.000001;
+    } else {
+        return 10;
+    }
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 0.000001;
 }
 
 
@@ -307,6 +338,17 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     }];
     QGHTabBarController *tabBarController = (QGHTabBarController *)self.tabBarController;
     [tabBarController presentFloatingViewController:specVC animated:YES];
+}
+
+
+- (void)customerServiceBtnAction {
+    MMHChatCustomerViewController *chatCustomerVC = [[MMHChatCustomerViewController alloc] init];
+    [self.navigationController pushViewController:chatCustomerVC animated:YES];
+}
+
+
+- (void)cartBtnAction {
+    [QGHTabBarController redirectToCart];
 }
 
 

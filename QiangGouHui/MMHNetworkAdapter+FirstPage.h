@@ -9,9 +9,12 @@
 #import "MMHNetworkAdapter.h"
 
 @class QGHFirstPageGoodsModel;
+@class QGHBanner;
 
 @interface MMHNetworkAdapter (FirstPage)
 
 - (void)fetchDataWithRequester:(id)requester bussType:(QGHBussType)type area:(NSString *)area page:(NSInteger)page size:(NSInteger)size succeededHandler:(void(^)(NSArray<QGHFirstPageGoodsModel *> *goodsArr))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
+
+- (void)fetchBannerFrom:(id)requester succeededHandler:(void(^)(NSArray<QGHBanner *> *bannerArr))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
 
 @end

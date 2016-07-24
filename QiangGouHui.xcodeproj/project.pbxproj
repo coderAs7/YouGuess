@@ -41,6 +41,11 @@
 		418DA23E1D4254FF008063B0 /* QGHOrderNumModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DA23D1D4254FF008063B0 /* QGHOrderNumModel.m */; };
 		418DA2411D42743F008063B0 /* MMHSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DA2401D42743F008063B0 /* MMHSettingViewController.m */; };
 		418DA2441D42761E008063B0 /* MMHTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DA2431D42761E008063B0 /* MMHTableViewCell.m */; };
+		418DA2471D43B1E5008063B0 /* MMHSuggestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DA2461D43B1E5008063B0 /* MMHSuggestViewController.m */; };
+		418DA24A1D43C4AC008063B0 /* QGHAboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DA2491D43C4AC008063B0 /* QGHAboutUsViewController.m */; };
+		418DA24D1D4468C0008063B0 /* QGHBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DA24C1D4468C0008063B0 /* QGHBanner.m */; };
+		418DA2501D44C98A008063B0 /* QGHCommentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DA24F1D44C98A008063B0 /* QGHCommentListViewController.m */; };
+		418DA2531D44CA7A008063B0 /* QGHCommentList.m in Sources */ = {isa = PBXBuildFile; fileRef = 418DA2521D44CA7A008063B0 /* QGHCommentList.m */; };
 		41B3F3F41CFC87010007195B /* MMHImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B3F3F31CFC87010007195B /* MMHImageView.m */; };
 		41B3F3F71CFC8A670007195B /* MMHAssistant.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B3F3F61CFC8A670007195B /* MMHAssistant.m */; };
 		41B3F3FC1CFC93940007195B /* UIView+StringTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B3F3FB1CFC93940007195B /* UIView+StringTag.m */; };
@@ -242,6 +247,16 @@
 		418DA2401D42743F008063B0 /* MMHSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHSettingViewController.m; sourceTree = "<group>"; };
 		418DA2421D42761E008063B0 /* MMHTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHTableViewCell.h; sourceTree = "<group>"; };
 		418DA2431D42761E008063B0 /* MMHTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHTableViewCell.m; sourceTree = "<group>"; };
+		418DA2451D43B1E5008063B0 /* MMHSuggestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHSuggestViewController.h; sourceTree = "<group>"; };
+		418DA2461D43B1E5008063B0 /* MMHSuggestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHSuggestViewController.m; sourceTree = "<group>"; };
+		418DA2481D43C4AC008063B0 /* QGHAboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHAboutUsViewController.h; sourceTree = "<group>"; };
+		418DA2491D43C4AC008063B0 /* QGHAboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHAboutUsViewController.m; sourceTree = "<group>"; };
+		418DA24B1D4468C0008063B0 /* QGHBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHBanner.h; sourceTree = "<group>"; };
+		418DA24C1D4468C0008063B0 /* QGHBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHBanner.m; sourceTree = "<group>"; };
+		418DA24E1D44C98A008063B0 /* QGHCommentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHCommentListViewController.h; sourceTree = "<group>"; };
+		418DA24F1D44C98A008063B0 /* QGHCommentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHCommentListViewController.m; sourceTree = "<group>"; };
+		418DA2511D44CA7A008063B0 /* QGHCommentList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHCommentList.h; sourceTree = "<group>"; };
+		418DA2521D44CA7A008063B0 /* QGHCommentList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHCommentList.m; sourceTree = "<group>"; };
 		41B3F3F21CFC87010007195B /* MMHImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHImageView.h; sourceTree = "<group>"; };
 		41B3F3F31CFC87010007195B /* MMHImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHImageView.m; sourceTree = "<group>"; };
 		41B3F3F51CFC8A670007195B /* MMHAssistant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHAssistant.h; sourceTree = "<group>"; };
@@ -946,6 +961,8 @@
 		41DA4ACF1D1595F300A8E42D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				418DA2451D43B1E5008063B0 /* MMHSuggestViewController.h */,
+				418DA2461D43B1E5008063B0 /* MMHSuggestViewController.m */,
 				418DA23F1D42743F008063B0 /* MMHSettingViewController.h */,
 				418DA2401D42743F008063B0 /* MMHSettingViewController.m */,
 				41DA4ACC1D1594BE00A8E42D /* QGHPersonalCenterViewController.h */,
@@ -954,6 +971,8 @@
 				411ADC471D1AC2F90050B8EB /* QGHPersonalInfoViewController.m */,
 				411ADC531D1C14AC0050B8EB /* QGHChangeNickNameViewController.h */,
 				411ADC541D1C14AC0050B8EB /* QGHChangeNickNameViewController.m */,
+				418DA2481D43C4AC008063B0 /* QGHAboutUsViewController.h */,
+				418DA2491D43C4AC008063B0 /* QGHAboutUsViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1118,6 +1137,8 @@
 				41DC07CC1D26BD1300DDC5DD /* QGHProductDetailVIewController.m */,
 				41FF28021D40F6B900BF2D22 /* MMHSearchViewController.h */,
 				41FF28031D40F6B900BF2D22 /* MMHSearchViewController.m */,
+				418DA24E1D44C98A008063B0 /* QGHCommentListViewController.h */,
+				418DA24F1D44C98A008063B0 /* QGHCommentListViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1199,6 +1220,8 @@
 				41DC08021D29623300DDC5DD /* QGHFirstPageGoodsModel.m */,
 				41DC08071D29687A00DDC5DD /* QGHFirstPageGoodsList.h */,
 				41DC08081D29687A00DDC5DD /* QGHFirstPageGoodsList.m */,
+				418DA24B1D4468C0008063B0 /* QGHBanner.h */,
+				418DA24C1D4468C0008063B0 /* QGHBanner.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1222,6 +1245,8 @@
 				41E87AA11D2E8F0C003A987E /* QGHSKUSelectModel.m */,
 				418DA2361D42434C008063B0 /* QGHProductList.h */,
 				418DA2371D42434C008063B0 /* QGHProductList.m */,
+				418DA2511D44CA7A008063B0 /* QGHCommentList.h */,
+				418DA2521D44CA7A008063B0 /* QGHCommentList.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1591,6 +1616,7 @@
 				41DC07ED1D28F74400DDC5DD /* MMHAccountSession.m in Sources */,
 				41348C2B1D412611006EC087 /* MMHSortView.m in Sources */,
 				41B3F3FC1CFC93940007195B /* UIView+StringTag.m in Sources */,
+				418DA2501D44C98A008063B0 /* QGHCommentListViewController.m in Sources */,
 				41DC07A31D1FBFB900DDC5DD /* QGHLogisticsDetailViewController.m in Sources */,
 				418DA2411D42743F008063B0 /* MMHSettingViewController.m in Sources */,
 				41B3F4061CFC98E70007195B /* BaseViewController.m in Sources */,
@@ -1643,11 +1669,13 @@
 				41FF281C1D41058600BF2D22 /* SearchingSuggestedKeywordCell.swift in Sources */,
 				41DC07971D1E810D00DDC5DD /* QGHOrderAddressCellTableViewCell.m in Sources */,
 				41FF27ED1D3D1A0E00BF2D22 /* MMHPayOrderModel.m in Sources */,
+				418DA2531D44CA7A008063B0 /* QGHCommentList.m in Sources */,
 				41FF281A1D41040F00BF2D22 /* SearchingSuggestedKeywordsManager.swift in Sources */,
 				41DC08131D2AA40600DDC5DD /* QGHProductDetailModel.m in Sources */,
 				41E87A871D2C0A0F003A987E /* QGHProductDetailScoreInfo.m in Sources */,
 				41E97F5E1D3536F100335C78 /* MMHWeChatAdapter.m in Sources */,
 				41DC07D21D27547000DDC5DD /* QGHConfirmOrderViewController.m in Sources */,
+				418DA24A1D43C4AC008063B0 /* QGHAboutUsViewController.m in Sources */,
 				4114A5BE1D411E6B00E53F88 /* MMHFilter.m in Sources */,
 				41E97F4F1D326F0A00335C78 /* MMHNetworkAdapter+Order.m in Sources */,
 				41BF0F9C1CFB4F6100FB23C2 /* AppDelegate.m in Sources */,
@@ -1655,6 +1683,7 @@
 				41B3F4091CFCA0830007195B /* QGHTabBarController.m in Sources */,
 				41FF27EC1D3D1A0E00BF2D22 /* MMHPayInfoModel.m in Sources */,
 				41DC08091D29687A00DDC5DD /* QGHFirstPageGoodsList.m in Sources */,
+				418DA24D1D4468C0008063B0 /* QGHBanner.m in Sources */,
 				41DA4AE21D16F31300A8E42D /* QGHChatViewController.m in Sources */,
 				411ADC3E1D1835370050B8EB /* QGHRegisterViewController.m in Sources */,
 				41FF27F41D3D1A0E00BF2D22 /* RSADataSigner.m in Sources */,
@@ -1694,6 +1723,7 @@
 				41DC07F91D2950E100DDC5DD /* CityListViewController.m in Sources */,
 				41DC07D81D27927500DDC5DD /* QGHCartCell.m in Sources */,
 				41BF0FB81CFB50D600FB23C2 /* QGHLocationManager.m in Sources */,
+				418DA2471D43B1E5008063B0 /* MMHSuggestViewController.m in Sources */,
 				41BEEB311D0F06FE00612F88 /* Stepper.swift in Sources */,
 				41DC07E21D28ABFD00DDC5DD /* MMHRequestSerializer.m in Sources */,
 				41FF27EF1D3D1A0E00BF2D22 /* DataSigner.m in Sources */,

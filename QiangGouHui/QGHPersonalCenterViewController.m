@@ -16,6 +16,7 @@
 #import "MMHNetworkAdapter+Personal.h"
 #import "QGHOrderListViewController.h"
 #import "MMHSettingViewController.h"
+#import "MMHChatCustomerViewController.h"
 
 
 static NSString *QGHPersonalCenterCommonCellIdentifier = @"QGHPersonalCenterCommonCellIdentifier";
@@ -24,7 +25,7 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
 
 @interface QGHPersonalCenterViewController ()<UITableViewDataSource, UITableViewDelegate, MMHPersonalCenterAllOrderCellDelegate>
 
-@property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) UIImageView *headerView;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIButton *loginButton;
 @property (nonatomic, strong) UIView *personalView;
@@ -45,6 +46,7 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
     [self makeTableView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginNotification) name:MMHUserDidLoginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutNotification) name:MMHUserDidLogoutNotification object:nil];
     
     [self fetchData];
 }
@@ -79,8 +81,9 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
 
 - (UIView *)personalCenterHeaderView {
     if (!_headerView) {
-        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), 220)];
-        _headerView.backgroundColor = [QGHAppearance themeColor];
+        _headerView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), 220)];
+        _headerView.userInteractionEnabled = YES;
+        _headerView.image = [UIImage imageNamed:@"geren_bg"];
         [_headerView addSubview:self.loginButton];
         [_headerView addSubview:self.personalView];
         if ([[MMHAccountSession currentSession] alreadyLoggedIn]) {
@@ -185,7 +188,10 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
             [self.navigationController pushViewController:orderListVC animated:YES];
         }
     } else if (indexPath.section == 1) {
-        if (indexPath.row == 1) {
+        if (indexPath.row == 0) {
+            MMHChatCustomerViewController *chatCustomerVC = [[MMHChatCustomerViewController alloc] init];
+            [self.navigationController pushViewController:chatCustomerVC animated:YES];
+        } else if (indexPath.row == 1) {
             MMHSettingViewController *settingVC = [[MMHSettingViewController alloc] init];
             [self.navigationController pushViewController:settingVC animated:YES];
         }
@@ -235,6 +241,11 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
 - (void)loginNotification {
     self.loginButton.hidden = YES;
     self.personalView.hidden = NO;
+}
+
+- (void)logoutNotification {
+    self.loginButton.hidden = NO;
+    self.personalView.hidden = YES;
 }
 
 #pragma mark - getters and setters

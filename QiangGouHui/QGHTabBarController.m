@@ -69,4 +69,20 @@
 }
 
 
++ (void)redirectToCart {
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    QGHTabBarController *tabBarController = (QGHTabBarController *)delegate.window.rootViewController;
+    
+    for (NSInteger i = 0; i < tabBarController.viewControllers.count; i++) {
+        QGHNavigationController *navigationController = tabBarController.viewControllers[i];
+        if ([navigationController isKindOfClass:[UINavigationController class]]) {
+            if (i != QGHTabBarControllerViewControllerIndexCart) {
+                [navigationController popToRootViewControllerAnimated:NO];
+            }
+        }
+    }
+    
+    [tabBarController setSelectedIndex:QGHTabBarControllerViewControllerIndexCart];
+}
+
 @end

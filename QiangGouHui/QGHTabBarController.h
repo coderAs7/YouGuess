@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, QGHTabBarControllerViewControllerIndex) {
 @property (nonatomic, strong, nullable) MMHFloatingViewController *floatingViewController;
 
 + (void)redirectToCenterWithController:(UIViewController *)controller;
++ (void)redirectToCart;
 
 @end
 

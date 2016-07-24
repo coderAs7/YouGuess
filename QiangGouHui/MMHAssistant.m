@@ -3069,3 +3069,36 @@ static const void *HttpRequestHUDKey = &HttpRequestHUDKey;
 
 
 @end
+
+
+@implementation UISearchBar (MamHao)
+
+
+- (void)setCustomBackgroundColor:(UIColor *)color {
+    for (UIView *view in self.subviews) {
+        if ([view isKindOfClass:NSClassFromString(@"UISearchBarBackground")] && SYSTEM_NUMBER <7.0)
+        {
+            [view removeFromSuperview];
+            break;
+        }
+        if ([view isKindOfClass:NSClassFromString(@"UISearchBarTextField")] && SYSTEM_NUMBER <7.0)
+        {
+            UITextField *textfield = (UITextField*)view;
+            textfield.clearButtonMode = UITextFieldViewModeWhileEditing;
+            textfield.backgroundColor = color;
+        }
+        if ([view isKindOfClass:NSClassFromString(@"UIView")] && view.subviews.count > 0 && SYSTEM_NUMBER >=7.0)
+        {
+            NSLog(@"%@",view.subviews);
+            [[view.subviews objectAtIndex:0] removeFromSuperview];
+            self.barTintColor = [UIColor whiteColor];
+            UITextField *textfield = [[[self.subviews firstObject] subviews] lastObject];
+            textfield.clearButtonMode = UITextFieldViewModeWhileEditing;
+            textfield.backgroundColor = color;
+            break;
+        }
+    }
+}
+
+
+@end

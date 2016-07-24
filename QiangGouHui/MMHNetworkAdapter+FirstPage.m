@@ -9,6 +9,7 @@
 #import "MMHNetworkAdapter+FirstPage.h"
 #import "MMHAccountSession.h"
 #import "QGHFirstPageGoodsModel.h"
+#import "QGHBanner.h"
 
 @implementation MMHNetworkAdapter (FirstPage)
 
@@ -20,6 +21,17 @@
             NSArray *data = [responseJSONObject objectForKey:@"info"];
             NSArray *goodsArr = [data modelArrayOfClass:[QGHFirstPageGoodsModel class]];
             succeededHandler(goodsArr);
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
+    }];
+}
+
+
+- (void)fetchBannerFrom:(id)requester succeededHandler:(void(^)(NSArray<QGHBanner *> *bannerArr))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    [engine postWithAPI:@"_active_index_001" parameters:@{} from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        NSArray *bannerArr = [responseJSONObject[@"info"] modelArrayOfClass:[QGHBanner class]];
+        succeededHandler(bannerArr);
     } failedBlock:^(NSError *error) {
         failedHandler(error);
     }];

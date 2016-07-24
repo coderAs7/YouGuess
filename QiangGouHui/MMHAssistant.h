@@ -560,3 +560,10 @@ typedef NS_ENUM(NSInteger, LESScreenMode) {
 + (BOOL)removeItemIfExistsAtPath:(NSString *)path error:(NSError **)error;
 
 @end
+
+
+@interface UISearchBar (QiangGouHui)
+
+- (void)setCustomBackgroundColor:(UIColor *)color;
+
+@end

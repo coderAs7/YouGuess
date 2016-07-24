@@ -7,6 +7,7 @@
 //
 
 #import "QGHBannerCell.h"
+#import "QGHBanner.h"
 
 
 @interface QGHBannerCell()<UIScrollViewDelegate>
@@ -34,12 +35,12 @@
         _scrollView.delegate = self;
         [self.contentView addSubview:_scrollView];
         
-        _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, MMHFloat(150) - 10 - 7, kScreenWidth, 7)];
+        _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 200 - 10 - 7, mmh_screen_width(), 7)];
         _pageControl.currentPageIndicatorTintColor = C20;
         _pageControl.pageIndicatorTintColor = [C2 colorWithAlphaComponent:0.5];
         _pageControl.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [_pageControl addTarget:self action:@selector(pageTurn:) forControlEvents:UIControlEventValueChanged];
-        [_scrollView addSubview:_pageControl];
+        [self.contentView addSubview:_pageControl];
     }
     
     return self;
@@ -61,6 +62,33 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSInteger pageIndex = (NSInteger)(scrollView.contentOffset.x / kScreenWidth);
     self.pageControl.currentPage = pageIndex;
+}
+
+
+- (void)setBannerArr:(NSArray<QGHBanner *> *)bannerArr {
+    _bannerArr = bannerArr;
+    [self.scrollView removeAllSubviews];
+    
+    for (int i = 0; i < self.bannerArr.count; ++i) {
+        MMHImageView *imageView = [[MMHImageView alloc] initWithFrame:CGRectMake(i * mmh_screen_width(), 0, mmh_screen_width(), self.scrollView.height)];
+        QGHBanner *banner = self.bannerArr[i];
+        [imageView updateViewWithImageAtURL:banner.img_url];
+        imageView.userInteractionEnabled = YES;
+        imageView.actionBlock = ^{
+            if ([self.delegate respondsToSelector:@selector(bannerCellDidClick:)]) {
+                [self.delegate bannerCellDidClick:banner];
+            }
+        };
+        [self.scrollView addSubview:imageView];
+    }
+    
+    self.scrollView.contentSize = CGSizeMake(mmh_screen_width() * bannerArr.count, self.scrollView.height);
+    
+    self.pageControl.numberOfPages = bannerArr.count;
+    [self.pageControl sizeToFit];
+    self.pageControl.height = 7;
+    self.pageControl.bottom = self.scrollView.height - 10;
+    self.pageControl.centerX = mmh_screen_width() * 0.5;
 }
 
 

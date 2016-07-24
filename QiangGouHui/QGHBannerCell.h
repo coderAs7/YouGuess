@@ -9,6 +9,19 @@
 #import <UIKit/UIKit.h>
 
 
+@class QGHBanner;
+
+
+@protocol QGHBannerCellDelegate <NSObject>
+
+- (void)bannerCellDidClick:(QGHBanner *)banner;
+
+@end
+
+
 @interface QGHBannerCell : UITableViewCell
+
+@property (nonatomic, weak) id<QGHBannerCellDelegate> delegate;
+@property (nonatomic, strong) NSArray<QGHBanner *> *bannerArr;
 
 @end

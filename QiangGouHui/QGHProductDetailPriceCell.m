@@ -35,16 +35,19 @@
         
         _oldpriceLabel = [[MMHDeleteLineLabel alloc] init];
         _oldpriceLabel.backgroundColor = [UIColor clearColor];
-        _oldpriceLabel.textColor = C4;
+        _oldpriceLabel.textColor = C6;
         _oldpriceLabel.font = F2;
         _oldpriceLabel.strikeThroughEnabled = YES;
-        _oldpriceLabel.strikeThroughColor = C4;
+        _oldpriceLabel.strikeThroughColor = C6;
         [self.contentView addSubview:_oldpriceLabel];
         
         _customLabel = [[UILabel alloc] init];
         _customLabel.backgroundColor = C20;
         _customLabel.textColor = C21;
         _customLabel.font = F3;
+        _customLabel.layer.cornerRadius = 4;
+        _customLabel.layer.masksToBounds = YES;
+        _customLabel.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:_customLabel];
         
         _timeTitleLabel = [[UILabel alloc] init];
@@ -68,6 +71,21 @@
     [self.priceLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(15);
         make.centerY.equalTo(self.contentView);
+    }];
+    
+    self.oldpriceLabel.text = [NSString stringWithFormat:@"¥%@", model.product.original_price];
+    [self.oldpriceLabel sizeToFit];
+    [self.oldpriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.priceLabel.mas_right).offset(12.5);
+        make.bottom.equalTo(self.priceLabel.mas_centerY).offset(-2.5);
+    }];
+    
+    self.customLabel.text = @"99人已预约";
+    [self.customLabel sizeToFit];
+    [self.customLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.oldpriceLabel.mas_left);
+        make.top.equalTo(self.oldpriceLabel.mas_bottom).offset(5);
+        make.width.mas_equalTo(self.customLabel.width + 8);
     }];
 }
 

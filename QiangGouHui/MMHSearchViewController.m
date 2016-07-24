@@ -162,6 +162,7 @@
         searchBar.placeholder = @"搜索商品/品牌";
         searchBar.delegate = self;
         searchBar.barTintColor = [QGHAppearance separatorColor];
+        [searchBar setCustomBackgroundColor:RGBCOLOR(247, 247, 247)];
         searchBar.searchBarStyle = UISearchBarStyleDefault;
         searchBar.showsCancelButton = NO;
         [searchBar becomeFirstResponder];

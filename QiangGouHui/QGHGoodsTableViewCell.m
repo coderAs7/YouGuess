@@ -47,7 +47,7 @@
     [self.goodsImg updateViewWithImageAtURL:model.img_path];
     self.nameLabel.text = model.title;
     self.desLabel.text = model.sub_title;
-    self.priceLabel.text = [NSString stringWithFormat:@"¥%ld", (long)model.original_price];
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%g", model.discount_price];
 }
 
 

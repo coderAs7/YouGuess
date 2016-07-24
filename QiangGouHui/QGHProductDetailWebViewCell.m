@@ -26,6 +26,8 @@
     if (self) {
         _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), 0)];
         _webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        _webView.scalesPageToFit = YES;
+        _webView.scrollView.bounces = NO;
         _webView.delegate = self;
         [self.contentView addSubview:_webView];
     }
@@ -36,7 +38,8 @@
 
 - (void)setProductDetailUrl:(NSString *)url {
     if (url.length > 0 && !self.loaded) {
-        [self.webView loadHTMLString:url baseURL:nil];
+        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
+        [self.webView loadRequest:request];
         self.loaded = YES;
     }
 }
@@ -52,6 +55,8 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     CGFloat webViewHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
     self.webView.height = webViewHeight;
+    self.webView.scrollView.size = CGSizeMake(self.webView.scrollView.width, webViewHeight);
+    self.webView.scrollView.contentSize = CGSizeMake(self.webView.scrollView.contentSize.width, webViewHeight);
     if ([self.delegate respondsToSelector:@selector(productDetailWebViewCellLoadedFinish:)]) {
         [self.delegate productDetailWebViewCellLoadedFinish:webViewHeight];
     }

@@ -134,7 +134,7 @@
     _getVerifyCodeButton.layer.masksToBounds = YES;
     _getVerifyCodeButton.titleLabel.font = F3;
     [_getVerifyCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
-    [_getVerifyCodeButton setTitleColor:C20 forState:UIControlStateNormal];
+    [_getVerifyCodeButton setTitleColor:C21 forState:UIControlStateNormal];
     [_getVerifyCodeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
     [_getVerifyCodeButton setBackgroundImage:[UIImage patternImageWithColor:[QGHAppearance themeColor]] forState:UIControlStateNormal];
     [_getVerifyCodeButton setBackgroundImage:[UIImage patternImageWithColor:C5] forState:UIControlStateDisabled];

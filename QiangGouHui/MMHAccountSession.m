@@ -142,7 +142,7 @@
     if (self.account) {
         return self.account.userToken;
     }
-    return nil;
+    return @"";
 }
 
 - (NSString *)avatar {

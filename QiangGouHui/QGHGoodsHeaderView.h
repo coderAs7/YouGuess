@@ -10,4 +10,8 @@
 
 @interface QGHGoodsHeaderView : UITableViewHeaderFooterView
 
+@property (weak, nonatomic, readonly) UIImageView *imageView;
+@property (weak, nonatomic, readonly) UILabel *label1;
+@property (weak, nonatomic, readonly) UILabel *label2;
+
 @end

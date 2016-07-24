@@ -11,9 +11,9 @@
 
 @interface QGHGoodsHeaderView ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *label1;
-@property (weak, nonatomic) IBOutlet UILabel *label2;
+@property (weak, nonatomic, readwrite) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic, readwrite) IBOutlet UILabel *label1;
+@property (weak, nonatomic, readwrite) IBOutlet UILabel *label2;
 @property (weak, nonatomic) IBOutlet UIView *verticalSeparator;
 
 @end

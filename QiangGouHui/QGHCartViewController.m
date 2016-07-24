@@ -165,6 +165,11 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
 }
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 10;
+}
+
+
 #pragma mark - QGHCartCellDelegate
 
 

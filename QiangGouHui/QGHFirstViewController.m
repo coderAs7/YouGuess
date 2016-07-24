@@ -22,6 +22,9 @@
 #import <MJRefresh.h>
 #import "MMHSearchViewController.h"
 #import "MMHProductListViewController.h"
+#import "QGHBanner.h"
+#import "AdView.h"
+#import "AppWebViewController.h"
 
 
 static NSString *QGHBannerCellIdentifier = @"QGHBannerCellIdentifier";
@@ -29,7 +32,7 @@ static NSString *QGHPurchaseItemCellIdentifier = @"QGHPurchaseItemCellIdentifier
 static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 
-@interface QGHFirstViewController ()<UITableViewDataSource, UITableViewDelegate, QGHSegmentedControlDelegate, MMHTimelineDelegate>
+@interface QGHFirstViewController ()<UITableViewDataSource, UITableViewDelegate, QGHSegmentedControlDelegate, MMHTimelineDelegate, QGHBannerCellDelegate>
 
 @property (nonatomic, strong) UILabel *locationLabel;
 @property (nonatomic, strong) QGHSegmentedControl *segmented;
@@ -38,6 +41,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 @property (nonatomic, strong) NSString *selectedCity;
 @property (nonatomic, assign) QGHBussType selectedFlag;
 
+@property (nonatomic, strong) NSArray<QGHBanner *> *bannerArr;
 @property (nonatomic, strong) QGHFirstPageGoodsList *purchaseList;
 @property (nonatomic, strong) QGHFirstPageGoodsList *appointList;
 @property (nonatomic, strong) QGHFirstPageGoodsList *customList;
@@ -65,6 +69,14 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     [self makeTableView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationChange) name:MMHCurrentLocationNotification object:nil];
+    
+    [self fetchBanner];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setBarTintColor:[QGHAppearance themeColor]];
 }
 
 
@@ -75,6 +87,13 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
         
         return;
     }
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
 }
 
 
@@ -145,6 +164,17 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 #pragma mark - network
 
+
+- (void)fetchBanner {
+    [[MMHNetworkAdapter sharedAdapter] fetchBannerFrom:self succeededHandler:^(NSArray<QGHBanner *> *bannerArr) {
+        self.bannerArr = bannerArr;
+        [self.tableView reloadData];
+    } failedHandler:^(NSError *error) {
+        //nothing to do
+    }];
+}
+
+
 - (void)fetchGoodsList {
     if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
         return;
@@ -205,6 +235,8 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     if ([[self nameForSection:indexPath.section] isEqualToString:@"banner"]) {
         QGHBannerCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHBannerCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.bannerArr = self.bannerArr;
+        cell.delegate = self;
         return cell;
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"推荐"]) {
         QGHRushPurchaseItemsCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHPurchaseItemCellIdentifier forIndexPath:indexPath];
@@ -272,6 +304,28 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
         QGHGoodsHeaderView *view = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headerViewIdentifier];
         if (!view) {
             view = (QGHGoodsHeaderView *)[[[NSBundle mainBundle] loadNibNamed:@"QGHGoodsHeaderView" owner:self options:nil] lastObject];
+        }
+        
+        switch (self.selectedFlag) {
+            case QGHBussTypePurchase:
+                if ([[self nameForSection:section] isEqualToString:@"推荐"]) {
+                    view.label1.text = @"大家都在抢";
+                    view.label2.text = @"下手完就没了";
+                } else {
+                    view.label1.text = @"周边都在抢";
+                    view.label2.text = @"发现身边的神奇";
+                }
+                break;
+            case QGHBussTypeAppoint:
+                view.label1.text = @"预约有惊喜";
+                view.label2.text = @"预约最新潮好货";
+                break;
+            case QGHBussTypeCustom:
+                view.label1.text = @"定制更个性";
+                view.label2.text = @"打造你的专属";
+                break;
+            default:
+                break;
         }
         
         return view;
@@ -354,6 +408,16 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 - (void)timeline:(MMHTimeline *)timeline itemsDeletedAtIndexes:(NSIndexSet *)indexes {
     [self.tableView reloadData];
+}
+
+
+#pragma mark - QGHBannerCellDelegate
+
+
+- (void)bannerCellDidClick:(QGHBanner *)banner {
+    AppWebViewController *appWebViewVC = [[AppWebViewController alloc] init];
+    appWebViewVC.webUrl = banner.target_url;
+    [self.navigationController pushViewController:appWebViewVC animated:YES];
 }
 
 

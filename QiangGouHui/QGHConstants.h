@@ -45,6 +45,7 @@
 
 
 
+#define SYSTEM_NUMBER [[[UIDevice currentDevice] systemVersion] floatValue]
 #define kSystemVersion              [[UIDevice currentDevice] systemVersion]
 #define kSystemVersionProiorToIOS6  ([kSystemVersion compare:@"6.0" options:NSNumericSearch range:NSMakeRange(0, 3)] == NSOrderedAscending)
 

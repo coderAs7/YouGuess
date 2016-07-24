@@ -33,6 +33,8 @@
 //#import "MMHAction.h"
 #import "MMHTableViewCell.h"
 #import "MMHNetworkAdapter+Login.h"
+#import "MMHSuggestViewController.h"
+#import "QGHAboutUsViewController.h"
 
 
 NSString *const MMHSettingViewControllerMMHTableViewCellIdentifier = @"MMHSettingViewControllerMMHTableViewCellIdentifier";
@@ -180,13 +182,14 @@ NSString *const MMHSettingViewControllerMMHTableViewCellIdentifier = @"MMHSettin
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if ([[self cellNameForIndexPath:indexPath] isEqualToString:@"重置支付密码"]){     // 设置
+    if ([[self cellNameForIndexPath:indexPath] isEqualToString:@"修改密码"]){     // 设置
         
-        
-    } else if ([[self cellNameForIndexPath:indexPath] isEqualToString:@"给妈妈好评分"]){
-        
-    } else if ([[self cellNameForIndexPath:indexPath] isEqualToString:@"关于妈妈好"]) {
-        
+    } else if ([[self cellNameForIndexPath:indexPath] isEqualToString:@"意见反馈"]){
+        MMHSuggestViewController *suggestVC = [[MMHSuggestViewController alloc] init];
+        [self.navigationController pushViewController:suggestVC animated:YES];
+    } else if ([[self cellNameForIndexPath:indexPath] isEqualToString:@"关于我们"]) {
+        QGHAboutUsViewController *aboutUsVC = [[QGHAboutUsViewController alloc] init];
+        [self.navigationController pushViewController:aboutUsVC animated:YES];
     }
 
 }
