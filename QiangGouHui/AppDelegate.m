@@ -11,6 +11,12 @@
 #import "QGHLocationManager.h"
 #import "MMHAccountSession.h"
 #import "MMHWeChatAdapter.h"
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKConnector/ShareSDKConnector.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import "WXApi.h"
+
 
 
 @interface AppDelegate ()<WXApiDelegate>
@@ -22,7 +28,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [MMHWeChatAdapter start];
-    [QGHLocationManager startLocation];
+    [self shareSDKConnectApp];
     [MMHAccountSession start];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -75,6 +81,31 @@
     return YES;
 }
 
+- (void)shareSDKConnectApp {
+    [ShareSDK registerApp:SHARESDK_APPID activePlatforms:@[@(SSDKPlatformTypeQQ),@(SSDKPlatformTypeWechat)] onImport:^(SSDKPlatformType platformType) {
+        switch (platformType) {
+            case SSDKPlatformTypeQQ:
+                [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
+                break;
+            case SSDKPlatformTypeWechat:
+                [ShareSDKConnector connectWeChat:[WXApi class]];
+                break;
+            default:
+                break;
+        }
+    } onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo) {
+        switch (platformType) {
+            case SSDKPlatformTypeQQ:
+                [appInfo SSDKSetupQQByAppId:QQ_APPID appKey:QQ_APPKEY authType:SSDKAuthTypeBoth];
+                break;
+            case SSDKPlatformTypeWechat:
+                [appInfo SSDKSetupWeChatByAppId:WECHAT_APPID appSecret:WECHAT_APPSECRET];
+                break;
+            default:
+                break;
+        }
+    }];
+}
 
 - (void)onResp:(BaseResp *)resp {
     if ([resp isKindOfClass:[PayResp class]]) {

@@ -21,6 +21,8 @@ typedef void(^MMHNetworkFailedHandler)(NSError *error);
 
 - (void)postWithAPI:(NSString *)api parameters:(NSDictionary *)parameters from:(id)requester responseObjectClass:(Class)responseObjectClass responseObjectKeyMap:(NSDictionary *)responseObjectKeyMap succeededBlock:(void (^)(id responseObject, id responseJSONObject))succeededBlock failedBlock:(MMHNetworkFailedHandler)failedBlock;
 
+- (void)postWithAPI:(NSString *)api parameters:(NSDictionary *)parameters image:(UIImage *)image from:(id)requester succeededBlock:(void (^)(id responseObject, id responseJSONObject))succeededBlock failedBlock:(MMHNetworkFailedHandler)failedBlock;
+
 @end
 
 

@@ -73,7 +73,7 @@ typedef NS_ENUM(NSInteger, MAUserTrackingMode)
 @property (nonatomic, assign, getter = isZoomEnabled) BOOL zoomEnabled;
 
 /**
- *  标识当前地图中心位置是否在中国范围内。此属性不是精确判断，不能用于边界区域。
+ *  标识当前地图中心位置是否在中国范围外。此属性不是精确判断，不能用于边界区域。
  */
 @property (nonatomic, readonly) BOOL isAbroad;
 

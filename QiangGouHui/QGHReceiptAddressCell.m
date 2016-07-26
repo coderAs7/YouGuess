@@ -60,6 +60,13 @@
 }
 
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    self.checkImage.hidden = !self.isSelected;
+}
+
+
 - (void)setReceiptAddressModel:(QGHReceiptAddressModel *)model {
     _receiptAddressModel = model;
     
@@ -89,7 +96,9 @@
 
 
 - (void)editButtonAction {
-
+    if ([self.delegate respondsToSelector:@selector(receiptAddressCellEditAddress:)]) {
+        [self.delegate receiptAddressCellEditAddress:self];
+    }
 }
 
 

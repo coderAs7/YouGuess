@@ -20,4 +20,12 @@ typedef NS_ENUM(NSInteger, QGHBussType) {
 
 #define kDefault_Token @"kDefault_Token"
 
+#define SHARESDK_APPID @"156a84fb094b8"
+
+#define WECHAT_APPID @"wx73ce0c7fa5af1828"
+#define WECHAT_APPSECRET @"4387c33d9a29182e713286c8f48fcf89"
+
+#define QQ_APPID @"1105370483"
+#define QQ_APPKEY @"fc99YIZYxpNHmoib"
+
 #endif /* QGHDefines_h */

@@ -7,7 +7,12 @@
 //
 
 #import "BaseViewController.h"
+#import "QGHReceiptAddressModel.h"
 
 @interface QGHAddAddressViewController : BaseViewController
+
+@property (nonatomic, strong) QGHReceiptAddressModel *transferAddressModel;
+@property (nonatomic, copy) void(^addressEditBlock)();
+@property (nonatomic, copy) void(^addAddressBlock)();
 
 @end

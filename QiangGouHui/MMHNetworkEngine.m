@@ -169,6 +169,55 @@
 }
 
 
+- (void)postWithAPI:(NSString *)api parameters:(NSDictionary *)parameters image:(UIImage *)image from:(id)requester succeededBlock:(void (^)(id responseObject, id responseJSONObject))succeededBlock failedBlock:(MMHNetworkFailedHandler)failedBlock {
+    NSMutableDictionary *mutableParameters = [parameters mutableCopy];
+    [mutableParameters addEntriesFromDictionary:@{@"apiCode": api}];
+    NSString *parametersJsonStr = [self parametersString:mutableParameters];
+    NSDictionary *actualParameter = @{@"json": parametersJsonStr};
+    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+    
+    [self POST:@"http://121.14.38.35/index.php" parameters:actualParameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//        [formData appendPartWithFormData:imageData name:@"image"];
+        [formData appendPartWithFileData:imageData name:@"download" fileName:@"image.jpg" mimeType:@"image/jpg"];
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"===+++post with api: %@", api);
+        NSLog(@"===+++post with parameters: %@", actualParameter);
+        NSLog(@"got response object: %@", [responseObject mmh_JSONString]);
+        if (responseObject == nil) {
+            //               NSError *error = [NSError errorWithDomain:MMHErrorDomain code:-1 userInfo:@{NSLocalizedDescriptionKey: @"未知错误"}];
+            //               failedBlock(error);
+        }
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSArray *allKeys = [responseObject allKeys];
+            if ([allKeys containsObject:@"error"] && [allKeys containsObject:@"error_code"]) {
+                NSError *error = [NSError errorWithDomain:@"MMHErrorDomain"
+                                                     code:[responseObject[@"error_code"] integerValue]
+                                                 userInfo:@{NSLocalizedDescriptionKey: responseObject[@"error"]}];
+                NSLog(@"got error: %@, request is: %@, parameters: %@", error, task.currentRequest, actualParameter);
+                //                   [MMHLogbook logErrorWithEventName:api error:error];
+                failedBlock(error);
+                return ;
+            }
+            if ([allKeys containsObject:@"error"] && [[responseObject objectForKey:@"error"] integerValue] != 0) {
+                NSError *error = [NSError errorWithDomain:@"MMHErrorDomain"
+                                                     code:[responseObject[@"error_code"] integerValue]
+                                                 userInfo:@{NSLocalizedDescriptionKey: responseObject[@"info"]}];
+                failedBlock(error);
+                return;
+            }
+        }
+        
+        succeededBlock(nil, responseObject);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"got error: %@, request is: %@, parameters: %@", error, task.currentRequest, actualParameter);
+        //        [MMHLogbook logErrorWithEventName:api error:error];
+        if (failedBlock){
+            failedBlock(error);
+        }
+    }];
+}
+
+
 - (NSString *)parametersString:(NSDictionary *)parameters {
     NSMutableDictionary *mutableParameters = [parameters mutableCopy];
 //    [mutableParameters removeObjectForKey:@"apiCode"];

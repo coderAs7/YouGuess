@@ -10,7 +10,6 @@
 #import "QGHCommonEditCell.h"
 #import "QGHCommonCellTableViewCell.h"
 #import "MMHSelectAddressView.h"
-#import "QGHAddAddressModel.h"
 #import "MMHNetworkAdapter+ReceiptAddress.h"
 
 
@@ -30,6 +29,7 @@ static NSString *const QGHAddAddressCommonCellIdentifier = @"QGHAddAddressCommon
 @property (nonatomic, weak) UITextField *phoneField;
 @property (nonatomic, weak) UITextField *addressField;
 
+
 @end
 
 
@@ -39,8 +39,19 @@ static NSString *const QGHAddAddressCommonCellIdentifier = @"QGHAddAddressCommon
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"我的收货地址";
-    self.addAddressModel = [[QGHAddAddressModel alloc] init];
-    
+    if (!self.transferAddressModel) {
+        self.transferAddressModel = [[QGHReceiptAddressModel alloc] init];
+        self.transferAddressModel.isdefault = @"2";
+    }
+//    self.addAddressModel = [[QGHAddAddressModel alloc] init];
+//    if (self.transferAddressModel) {
+//        self.addAddressModel.name = self.transferAddressModel.username;
+//        self.addAddressModel.phone = self.transferAddressModel.phone;
+//        self.addAddressModel.province = self.transferAddressModel.province;
+//        self.addAddressModel.city = self.transferAddressModel.city;
+//        self.addAddressModel.area = self.transferAddressModel.area;
+//        self.addAddressModel.isDefault = [self.transferAddressModel.isdefault isEqualToString:@"1"]? YES : NO;
+//    }
     [self makeTableView];
 }
 
@@ -105,6 +116,9 @@ static NSString *const QGHAddAddressCommonCellIdentifier = @"QGHAddAddressCommon
             cell.textField.delegate = self;
             cell.textField.tag = 1000;
             self.nameField = cell.textField;
+            if (self.transferAddressModel.username.length > 0) {
+                self.nameField.text = self.transferAddressModel.username;
+            }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         } else if (indexPath.row == 1) {
@@ -114,13 +128,19 @@ static NSString *const QGHAddAddressCommonCellIdentifier = @"QGHAddAddressCommon
             cell.textField.delegate = self;
             cell.textField.tag = 1001;
             self.phoneField = cell.textField;
+            if (self.transferAddressModel.phone > 0) {
+                self.phoneField.text = self.transferAddressModel.phone;
+            }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         } else if (indexPath.row == 2) {
             QGHCommonEditCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHAddAddressCommonCellIdentifier forIndexPath:indexPath];
             cell.title = @"地区";
             cell.placeHolder = @"省／市／区";
-            NSString *text = [NSString stringWithFormat:@"%@%@%@", self.addAddressModel.province, self.addAddressModel.city, self.addAddressModel.area];
+            NSString *text = @"";
+            if (self.transferAddressModel.province.length + self.transferAddressModel.city.length + self.transferAddressModel.area.length > 0) {
+                text = [NSString stringWithFormat:@"%@%@%@", self.transferAddressModel.province, self.transferAddressModel.city, self.transferAddressModel.area];
+            }
             cell.textField.text = text;
             cell.textField.userInteractionEnabled = NO;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -133,6 +153,9 @@ static NSString *const QGHAddAddressCommonCellIdentifier = @"QGHAddAddressCommon
             cell.textField.delegate = self;
             cell.textField.tag = 1002;
             self.addressField = cell.textField;
+            if (self.transferAddressModel.address > 0) {
+                cell.textField.text = self.transferAddressModel.address;
+            }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -145,6 +168,9 @@ static NSString *const QGHAddAddressCommonCellIdentifier = @"QGHAddAddressCommon
             _defaultSwitch = [[UISwitch alloc] init];
             [_defaultSwitch addTarget:self action:@selector(switchChangeAction) forControlEvents:UIControlEventValueChanged];
             cell.accessoryView = _defaultSwitch;
+            if (self.transferAddressModel.isdefault > 0) {
+                _defaultSwitch.on = [self.transferAddressModel.isdefault isEqualToString:@"1"] ? YES : NO;
+            }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
@@ -161,9 +187,9 @@ static NSString *const QGHAddAddressCommonCellIdentifier = @"QGHAddAddressCommon
     if (indexPath.section == 0 && indexPath.row == 2) {
         MMHSelectAddressView *selectAddressView = [[MMHSelectAddressView alloc] init];
         selectAddressView.callback = ^(NSString *province, NSString *city, NSString *area) {
-            self.addAddressModel.province = province;
-            self.addAddressModel.city = city;
-            self.addAddressModel.area = area;
+            self.transferAddressModel.province = province;
+            self.transferAddressModel.city = city;
+            self.transferAddressModel.area = area;
             [self.tableView reloadData];
         };
         [selectAddressView show];
@@ -184,20 +210,23 @@ static NSString *const QGHAddAddressCommonCellIdentifier = @"QGHAddAddressCommon
 #pragma mark - UITextFieldDelegate
 
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    NSString * toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     if (textField.tag == 1000) {
-        self.addAddressModel.name = toBeString;
+        self.transferAddressModel.username = textField.text;
     } else if (textField.tag == 1001) {
-        self.addAddressModel.phone = toBeString;
+        self.transferAddressModel.phone = textField.text;
     } else if (textField.tag == 1002) {
-        self.addAddressModel.address = toBeString;
+        self.transferAddressModel.address = textField.text;
     }
     
     [self updateConfirmState];
+}
 
-    return YES;
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.nameField resignFirstResponder];
+    [self.phoneField resignFirstResponder];
+    [self.addressField resignFirstResponder];
 }
 
 
@@ -206,12 +235,12 @@ static NSString *const QGHAddAddressCommonCellIdentifier = @"QGHAddAddressCommon
 
 - (void)updateConfirmState {
     BOOL enable = NO;
-    if (self.addAddressModel.name.length > 0 &&
-        self.addAddressModel.phone.length > 0 &&
-        self.addAddressModel.address.length > 0 &&
-        self.addAddressModel.province.length > 0 &&
-        self.addAddressModel.city.length > 0 &&
-        self.addAddressModel.area.length > 0) {
+    if (self.transferAddressModel.username.length > 0 &&
+        self.transferAddressModel.phone.length > 0 &&
+        self.transferAddressModel.address.length > 0 &&
+        self.transferAddressModel.province.length > 0 &&
+        self.transferAddressModel.city.length > 0 &&
+        self.transferAddressModel.area.length > 0) {
         enable = YES;
     }
     
@@ -222,23 +251,28 @@ static NSString *const QGHAddAddressCommonCellIdentifier = @"QGHAddAddressCommon
 #pragma mark - Actions
 
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self.nameField resignFirstResponder];
-    [self.phoneField resignFirstResponder];
-    [self.addressField resignFirstResponder];
-}
-
-
 - (void)switchChangeAction {
-    self.addAddressModel.isDefault = self.defaultSwitch.on;
+    self.transferAddressModel.isdefault = self.defaultSwitch.on ? @"1": @"2";
 }
 
 
 - (void)confirmButtonAction {
     [self.view showProcessingView];
-    [[MMHNetworkAdapter sharedAdapter] addOrModifyAddressFrom:self deliveryId:nil addAddressModel:self.addAddressModel succeededHandler:^{
+    [[MMHNetworkAdapter sharedAdapter] addOrModifyAddressFrom:self deliveryId:nil addAddressModel:self.transferAddressModel succeededHandler:^{
         [self.view hideProcessingView];
-        [self.view showTips:@"添加收货地址成功"];
+        if (self.addressEditBlock) {
+            [self.view showTips:@"修改收货地址成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                self.addressEditBlock();
+            });
+        } else {
+            [self.view showTips:@"添加收货地址成功"];
+            if (self.addAddressBlock) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    self.addAddressBlock();
+                });
+            }
+        }
         [self performSelector:@selector(popWithAnimation) withObject:nil afterDelay:1];
     } failedHandler:^(NSError *error) {
         [self.view hideProcessingView];

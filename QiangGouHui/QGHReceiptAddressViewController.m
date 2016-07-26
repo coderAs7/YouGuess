@@ -28,7 +28,17 @@ static NSString *const QGHReceiptAddressCellIdentifier = @"QGHReceiptAddressCell
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"选择地址";
+    
+    switch (self.type) {
+        case ReceiptAddressViewControllerTypeNormal:
+            self.title = @"收货地址";
+            break;
+        case ReceiptAddressViewControllerTypeSelect:
+            self.title = @"选择地址";
+            break;
+        default:
+            break;
+    }
     
     UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"header_add"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(addAddressAction)];
     self.navigationItem.rightBarButtonItem = shareItem;
@@ -140,11 +150,24 @@ static NSString *const QGHReceiptAddressCellIdentifier = @"QGHReceiptAddressCell
 }
 
 
+- (void)receiptAddressCellEditAddress:(QGHReceiptAddressCell *)cell {
+    QGHAddAddressViewController *addAddressVC = [[QGHAddAddressViewController alloc] init];
+    addAddressVC.transferAddressModel = cell.receiptAddressModel;
+    addAddressVC.addressEditBlock = ^{
+        [self.tableView reloadData];
+    };
+    [self.navigationController pushViewController:addAddressVC animated:YES];
+}
+
+
 #pragma mark - Actions
 
 
 - (void)addAddressAction {
     QGHAddAddressViewController *addAddressVC = [[QGHAddAddressViewController alloc] init];
+    addAddressVC.addAddressBlock = ^{
+        [self fetchData];
+    };
     [self.navigationController pushViewController:addAddressVC animated:YES];
 }
 

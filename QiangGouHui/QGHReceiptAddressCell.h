@@ -17,6 +17,7 @@
 
 - (void)receiptAddressCellSetDefaultAddress:(QGHReceiptAddressCell *)cell;
 - (void)receiptAddressCellDeleteAddress:(QGHReceiptAddressCell *)cell;
+- (void)receiptAddressCellEditAddress:(QGHReceiptAddressCell *)cell;
 
 @end
 
@@ -25,5 +26,6 @@
 
 @property (nonatomic, weak) id<QGHReceiptAddressCellDelegate> delegate;
 @property (nonatomic, strong) QGHReceiptAddressModel *receiptAddressModel;
+@property (nonatomic, assign) BOOL isSelected;
 
 @end

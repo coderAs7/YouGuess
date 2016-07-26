@@ -23,6 +23,6 @@
 
 - (void)deleteReceiptAddressFrom:(id)requester addressId:(NSString *)addressId succeededHandler:(void (^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
 
-- (void)addOrModifyAddressFrom:(id)requester deliveryId:(NSString *)deliveryId addAddressModel:(QGHAddAddressModel *)model succeededHandler:(void (^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
+- (void)addOrModifyAddressFrom:(id)requester deliveryId:(NSString *)deliveryId addAddressModel:(QGHReceiptAddressModel *)model succeededHandler:(void (^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
 
 @end

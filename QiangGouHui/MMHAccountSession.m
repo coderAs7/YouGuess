@@ -138,6 +138,24 @@
 }
 
 
+- (nullable NSString *)sex {
+    if (self.account) {
+        return self.account.sex;
+    }
+    
+    return @"1";
+}
+
+
+- (nullable NSString *)liveAddress {
+    if (self.account) {
+        return self.account.liveAddress;
+    }
+    
+    return @"";
+}
+
+
 - (NSString *)token {
     if (self.account) {
         return self.account.userToken;
@@ -162,6 +180,12 @@
         }
     }
     return @"";
+}
+
+
+- (void)saveAvatar:(NSString *)urlString {
+    self.account.avatar_url = urlString;
+    [self saveLastAccount:self.account];
 }
 
 
@@ -191,6 +215,14 @@
 //    
 //    return filePath;
 //}
+
+- (void)updatePersonalInfo:(QGHPersonalInfo *)personalInfo {
+    self.account.nickname = personalInfo.nickName;
+    self.account.sex = personalInfo.sex;
+    self.account.liveAddress = personalInfo.liveAddress;
+    self.account.avatar_url = personalInfo.avatarUrl;
+    [self saveLastAccount:self.account];
+}
 
 
 - (void)deleteFileAtPath:(NSString *)path {

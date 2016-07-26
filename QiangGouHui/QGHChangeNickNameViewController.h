@@ -8,7 +8,12 @@
 
 #import "BaseViewController.h"
 
+
+typedef void(^NickNameSelectBlock)(NSString *nickName);
+
 @interface QGHChangeNickNameViewController : BaseViewController
+
+@property (nonatomic, copy) NickNameSelectBlock callback;
 
 - (instancetype)initWithNickName:(NSString *)nickName;
 

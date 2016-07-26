@@ -47,6 +47,7 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginNotification) name:MMHUserDidLoginNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutNotification) name:MMHUserDidLogoutNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(personalInfoUpdateNotification) name:MMHUserPersonalInformationChangedNotification object:nil];
     
     [self fetchData];
 }
@@ -243,10 +244,18 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
     self.personalView.hidden = NO;
 }
 
+
 - (void)logoutNotification {
     self.loginButton.hidden = NO;
     self.personalView.hidden = YES;
 }
+
+
+- (void)personalInfoUpdateNotification {
+    [self.personalImage updateViewWithImageAtURL:[[MMHAccountSession currentSession] avatar]];
+    self.personalNameLabel.text = [[MMHAccountSession currentSession] nickname];
+}
+
 
 #pragma mark - getters and setters
 

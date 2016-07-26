@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "QGHPersonalInfo.h"
 
 @class MMHAccount;
 
@@ -29,12 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSString *)userId;
 - (nullable NSString *)username;
+- (nullable NSString *)sex;
+- (nullable NSString *)liveAddress;
 - (nullable NSString *)token;
 - (nullable NSString *)avatar;
 - (nullable NSString *)nickname;
 
 - (void)logoutWithCompletion:(void (^ __nullable)(BOOL succeeded))completion;
 
+- (void)updatePersonalInfo:(QGHPersonalInfo *)personalInfo;
 //- (void)updatePeronalInfoModel:(MMHPersonalInfoModel *)personalInfoModel;
 //- (void)updateMemberInfoWithMemberCenterInfo:(MMHMemberCenterInfoModel *)memberCenterInfo;
 //- (void)updatePersonInfoWithPerCenterInfo:(MMHPersonalCenterInfoModel *)personCenterInfo;

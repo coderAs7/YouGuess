@@ -65,7 +65,19 @@
     [_button setTitle:@"保存" forState:UIControlStateNormal];
     [_button setTitleColor:C21 forState:UIControlStateNormal];
     _button.top = _tipsLabel.bottom + 20;
+    [_button addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_button];
 }
+
+
+- (void)saveAction {
+    if (self.textField.text.length == 0) {
+        [self.view showTips:@"昵称不能为空！"];
+        return;
+    }
+    
+    self.callback(self.textField.text);
+}
+
 
 @end

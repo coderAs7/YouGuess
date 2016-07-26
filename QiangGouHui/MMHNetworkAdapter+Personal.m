@@ -47,4 +47,29 @@
 }
 
 
+- (void)uploadHeaderImageFrom:(id)requester image:(UIImage *)image succeededHandler:(void(^)(NSString *urlString))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    NSDictionary *parameters = @{@"userToken": [[MMHAccountSession currentSession] token]};
+    
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    [engine postWithAPI:@"_upload_001" parameters:parameters image:image from:requester succeededBlock:^(id responseObject, id responseJSONObject) {
+        NSString *urlString = responseJSONObject[@"info"][@"url"];
+        succeededHandler(urlString);
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
+    }];
+}
+
+
+- (void)savePersonalInfoFrom:(id)requester personalInfo:(QGHPersonalInfo *)personalInfo succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    NSDictionary *parameters = @{@"userToken": [[MMHAccountSession currentSession] token], @"sex": personalInfo.sex, @"nickname": personalInfo.nickName, @"liveAddress": personalInfo.liveAddress};
+    
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    [engine postWithAPI:@"_update_userinfo_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        succeededHandler();
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
+    }];
+}
+
+
 @end

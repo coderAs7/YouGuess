@@ -9,6 +9,7 @@
 #import "QGHLoginViewController.h"
 #import "QGHRegisterViewController.h"
 #import "MMHNetworkAdapter+Login.h"
+#import <ShareSDK/ShareSDK.h>
 
 
 @interface QGHLoginViewController ()
@@ -38,6 +39,8 @@
     [self makeForgetPasswordButton];
     
     [self makeStrollButton];
+    
+    [self makeThirdLoginViews];
 }
 
 
@@ -119,6 +122,91 @@
 }
 
 
+- (void)makeThirdLoginViews {
+    UIView *line1 = [[UIView alloc] init];
+    line1.backgroundColor = [QGHAppearance separatorColor];
+    [self.view addSubview:line1];
+    
+    UIView *line2 = [[UIView alloc] init];
+    line2.backgroundColor = [QGHAppearance separatorColor];
+    [self.view addSubview:line2];
+    
+    UILabel *thirdLoginTitle = [[UILabel alloc] init];
+    thirdLoginTitle.font = F3;
+    thirdLoginTitle.textColor = C6;
+    thirdLoginTitle.text = @"使用第三方帐号登录";
+    [self.view addSubview:thirdLoginTitle];
+    
+    [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(15);
+        make.bottom.mas_equalTo(-130);
+        make.height.mas_equalTo(0.5);
+    }];
+    
+    [thirdLoginTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(line1.mas_right).offset(10);
+        make.centerY.equalTo(line1.mas_centerY);
+        make.centerX.equalTo(self.view.mas_centerX);
+    }];
+    
+    [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(thirdLoginTitle.mas_right).offset(10);
+        make.centerY.equalTo(thirdLoginTitle.mas_centerY);
+        make.right.mas_equalTo(-15);
+        make.height.mas_equalTo(0.5);
+    }];
+    
+    UIButton *qqButton = [[UIButton alloc] init];
+    [qqButton setImage:[UIImage imageNamed:@"sns_icon_24"] forState:UIControlStateNormal];
+    [qqButton sizeToFit];
+    [qqButton addTarget:self action:@selector(qqButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:qqButton];
+    
+    UILabel *qqLabel = [[UILabel alloc] init];
+    qqLabel.text = @"QQ";
+    qqLabel.font = F3;
+    qqLabel.textColor = C6;
+    [qqLabel sizeToFit];
+    [self.view addSubview:qqLabel];
+    
+    UIButton *weChatButton = [[UIButton alloc] init];
+    [weChatButton setImage:[UIImage imageNamed:@"sns_icon_22"] forState:UIControlStateNormal];
+    [weChatButton sizeToFit];
+    [weChatButton addTarget:self action:@selector(weChatButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:weChatButton];
+    
+    UILabel *weChatLabel = [[UILabel alloc] init];
+    weChatLabel.text = @"微信";
+    weChatLabel.font = F3;
+    weChatLabel.textColor = C6;
+    [weChatLabel sizeToFit];
+    [self.view addSubview:weChatLabel];
+    
+    CGFloat originYOffset = (130 - qqButton.height - 10 - qqLabel.height) * 0.5;
+    CGFloat horizonalGap = (mmh_screen_width() - qqButton.width - weChatButton.width) / 3.0;
+    
+    [qqButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(line1.mas_bottom).offset(originYOffset);
+        make.left.mas_equalTo(horizonalGap);
+    }];
+    
+    [qqLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(qqButton.mas_centerX);
+        make.top.equalTo(qqButton.mas_bottom).offset(10);
+    }];
+    
+    [weChatButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(qqButton.mas_right).offset(horizonalGap);
+        make.top.equalTo(qqButton);
+    }];
+    
+    [weChatLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weChatButton.mas_bottom).offset(10);
+        make.centerX.equalTo(weChatButton.mas_centerX);
+    }];
+}
+
+
 #pragma mark - Actions
 
 
@@ -151,6 +239,28 @@
 
 - (void)strollButtonAction {
 
+}
+
+
+- (void)qqButtonAction {
+    [ShareSDK getUserInfo:SSDKPlatformTypeQQ onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+        if (state == SSDKResponseStateSuccess) {
+            
+        } else {
+        
+        }
+    }];
+}
+
+- (void)weChatButtonAction {
+    [ShareSDK getUserInfo:SSDKPlatformTypeWechat onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+        if (state == SSDKResponseStateSuccess) {
+            NSLog(@"fuck:%@", user.nickname);
+            
+        } else {
+            
+        }
+    }];
 }
 
 

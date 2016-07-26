@@ -7,7 +7,6 @@
 //
 
 #import "MMHNetworkAdapter+ReceiptAddress.h"
-#import "QGHAddAddressModel.h"
 
 
 @implementation MMHNetworkAdapter (ReceiptAddress)
@@ -63,9 +62,9 @@
 }
 
 
-- (void)addOrModifyAddressFrom:(id)requester deliveryId:(NSString *)deliveryId addAddressModel:(QGHAddAddressModel *)model succeededHandler:(void (^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+- (void)addOrModifyAddressFrom:(id)requester deliveryId:(NSString *)deliveryId addAddressModel:(QGHReceiptAddressModel *)model succeededHandler:(void (^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
     
-    NSMutableDictionary *parameters = [@{@"userToken": [[MMHAccountSession currentSession] token], @"province": [model.province clearSheng], @"city": [model.city clearShi], @"area": [model.area clearQu], @"address": model.address, @"phone": model.phone, @"username": model.name, @"isdefault": (model.isDefault) ? @"1" : @"2"} mutableCopy];
+    NSMutableDictionary *parameters = [@{@"userToken": [[MMHAccountSession currentSession] token], @"province": [model.province clearSheng], @"city": [model.city clearShi], @"area": [model.area clearQu], @"address": model.address, @"phone": model.phone, @"username": model.username, @"isdefault": model.isdefault} mutableCopy];
     if (deliveryId) {
         [parameters addEntriesFromDictionary:@{@"id": deliveryId}];
     }

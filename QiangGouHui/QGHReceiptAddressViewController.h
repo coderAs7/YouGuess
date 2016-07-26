@@ -9,8 +9,13 @@
 #import "BaseViewController.h"
 #import "QGHReceiptAddressModel.h"
 
+typedef NS_ENUM(NSInteger, ReceiptAddressViewControllerType) {
+    ReceiptAddressViewControllerTypeNormal,
+    ReceiptAddressViewControllerTypeSelect,
+};
+
 @interface QGHReceiptAddressViewController : BaseViewController
 
 @property (nonatomic, copy) void(^selectAddressBlock)(QGHReceiptAddressModel *address);
-
+@property (nonatomic, assign) ReceiptAddressViewControllerType type;
 @end
