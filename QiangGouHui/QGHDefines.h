@@ -17,6 +17,11 @@ typedef NS_ENUM(NSInteger, QGHBussType) {
 };
 
 
+typedef NS_ENUM(NSInteger, QGHLoginType) {
+    QGHLoginTypeNomal,
+    QGHLoginTypeQQ,
+    QGHLoginTypeWeChat,
+};
 
 #define kDefault_Token @"kDefault_Token"
 

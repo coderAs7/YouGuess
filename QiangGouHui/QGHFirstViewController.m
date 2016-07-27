@@ -125,13 +125,20 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     [_locationLabel sizeToFit];
     _locationLabel.width = 60;
     _locationLabel.userInteractionEnabled = YES;
+    
+    UIImage *triangle = [UIImage imageNamed:@"qgh_ic_dizhi"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:triangle];
+    imageView.right = 60;
+    imageView.bottom = _locationLabel.height;
+    [_locationLabel addSubview:imageView];
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(locationTapAction)];
     [_locationLabel addGestureRecognizer:tap];
 
     UIBarButtonItem *cityItem = [[UIBarButtonItem alloc] initWithCustomView:_locationLabel];
     self.navigationItem.leftBarButtonItem = cityItem;
     
-    UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"seach_ic"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonAction)];
+    UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"qgh_ic_sousuo"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonAction)];
     self.navigationItem.rightBarButtonItem = searchItem;
 }
 
@@ -311,18 +318,22 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
                 if ([[self nameForSection:section] isEqualToString:@"推荐"]) {
                     view.label1.text = @"大家都在抢";
                     view.label2.text = @"下手完就没了";
+                    view.imageView.image = [UIImage imageNamed:@"qgh_img_qianggou"];
                 } else {
                     view.label1.text = @"周边都在抢";
                     view.label2.text = @"发现身边的神奇";
+                    view.imageView.image = [UIImage imageNamed:@"qgh_img_zhoubian"];
                 }
                 break;
             case QGHBussTypeAppoint:
                 view.label1.text = @"预约有惊喜";
                 view.label2.text = @"预约最新潮好货";
+                view.imageView.image = [UIImage imageNamed:@"qgh_img_yuyue"];
                 break;
             case QGHBussTypeCustom:
                 view.label1.text = @"定制更个性";
                 view.label2.text = @"打造你的专属";
+                view.imageView.image = [UIImage imageNamed:@"qgh_img_dingzhi"];
                 break;
             default:
                 break;

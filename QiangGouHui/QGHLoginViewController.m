@@ -10,6 +10,8 @@
 #import "QGHRegisterViewController.h"
 #import "MMHNetworkAdapter+Login.h"
 #import <ShareSDK/ShareSDK.h>
+#import "MMHAccount.h"
+#import "QGHRegisterViewController.h"
 
 
 @interface QGHLoginViewController ()
@@ -245,22 +247,52 @@
 - (void)qqButtonAction {
     [ShareSDK getUserInfo:SSDKPlatformTypeQQ onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
         if (state == SSDKResponseStateSuccess) {
-            
+            MMHAccount *account = [[MMHAccount alloc] init];
+            account.userToken = user.credential.token;
+            account.userId = user.uid;
+            account.username = user.nickname;
+            account.nickname = user.nickname;
+            account.avatar_url = user.icon;
+            account.sex = (user.gender == SSDKGenderFemale) ? @"2" : @"1";
+            [[MMHAccountSession currentSession] accountDidLogin:account];
+            [[NSNotificationCenter defaultCenter] postNotificationName:MMHUserDidLoginNotification object:nil];
+            self.succeededHandler(account);
         } else {
-        
+            NSLog(@"微信登陆失败");
         }
     }];
 }
 
+
 - (void)weChatButtonAction {
     [ShareSDK getUserInfo:SSDKPlatformTypeWechat onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
         if (state == SSDKResponseStateSuccess) {
-            NSLog(@"fuck:%@", user.nickname);
-            
+            MMHAccount *account = [[MMHAccount alloc] init];
+            account.userToken = user.credential.token;
+            account.userId = user.uid;
+            account.username = user.nickname;
+            account.nickname = user.nickname;
+            account.avatar_url = user.icon;
+            account.sex = (user.gender == SSDKGenderFemale) ? @"2" : @"1";
+//            [[MMHAccountSession currentSession] accountDidLogin:account];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:MMHUserDidLoginNotification object:nil];
+//            self.succeededHandler(account);
+            [self bindPhone:account loginType:QGHLoginTypeWeChat];
         } else {
-            
+            NSLog(@"QQ登陆失败");
         }
     }];
+}
+
+
+- (void)bindPhone:(MMHAccount *)account loginType:(QGHLoginType)type {
+    QGHRegisterViewController *registerVC = [[QGHRegisterViewController alloc] initWithType:QGHRegisterViewTypeBindPhone];
+    registerVC.account = account;
+    registerVC.loginType = type;
+    registerVC.bindPhoneSuccessBlock = ^{
+        //TODO
+    };
+    [self.navigationController pushViewController:registerVC animated:YES];
 }
 
 

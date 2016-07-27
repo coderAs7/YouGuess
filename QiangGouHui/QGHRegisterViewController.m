@@ -8,6 +8,7 @@
 
 #import "QGHRegisterViewController.h"
 #import "QiangGouHui-Swift.h"
+#import "MMHNetworkAdapter+Login.h"
 
 
 @interface QGHRegisterViewController ()<VerificationCodeTimerDelegate, UITextFieldDelegate>
@@ -183,6 +184,7 @@
     [_commitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
     [_commitButton setBackgroundImage:[UIImage patternImageWithColor:[QGHAppearance themeColor]] forState:UIControlStateNormal];
     [_commitButton setBackgroundImage:[UIImage patternImageWithColor:C3] forState:UIControlStateDisabled];
+    [_commitButton addTarget:self action:@selector(commitButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_commitButton];
 }
 
@@ -276,5 +278,15 @@
 - (void)getVerifyCodeButtonAction {
     [[VerificationCodeTimer sharedTimer] start];
 }
+
+
+- (void)commitButtonAction {
+    [[MMHNetworkAdapter sharedAdapter] registerFrom:self loginType:self.loginType phone:self.telTextField.text pwd:self.pwdTextField.text verifyCode:self.verifyCodeTextField.text thirdId:self.account.userId thirdToken:self.account.userToken succeededHandler:^{
+        self.bindPhoneSuccessBlock();
+    } failedHandler:^(NSError *error) {
+        [self.view showTipsWithError:error];
+    }];
+}
+
 
 @end

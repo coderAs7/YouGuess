@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "MMHAccount.h"
 
 
 typedef NS_ENUM(NSInteger, QGHRegisterViewType) {
@@ -17,6 +18,10 @@ typedef NS_ENUM(NSInteger, QGHRegisterViewType) {
 
 
 @interface QGHRegisterViewController : BaseViewController
+
+@property (nonatomic, strong) MMHAccount *account;
+@property (nonatomic, assign) QGHLoginType loginType;
+@property (nonatomic, copy) void(^bindPhoneSuccessBlock)();
 
 - (instancetype)initWithType:(QGHRegisterViewType)type;
 
