@@ -210,12 +210,15 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
             status = QGHOrderListItemStatusToPay;
             break;
         case 1:
-            status = QGHOrderListItemStatusToReceipt;
+            status = QGHOrderListItemStatusToExpress;
             break;
         case 2:
-            status = QGHOrderListItemStatusToComment;
+            status = QGHOrderListItemStatusToReceipt;
             break;
         case 3:
+            status = QGHOrderListItemStatusToComment;
+            break;
+        case 4:
             status = QGHOrderListItemStatusRefund;
             break;
         default:

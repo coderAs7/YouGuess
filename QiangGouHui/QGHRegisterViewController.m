@@ -9,6 +9,7 @@
 #import "QGHRegisterViewController.h"
 #import "QiangGouHui-Swift.h"
 #import "MMHNetworkAdapter+Login.h"
+#import "PooCodeView.h"
 
 
 @interface QGHRegisterViewController ()<VerificationCodeTimerDelegate, UITextFieldDelegate>
@@ -17,11 +18,15 @@
 @property (nonatomic, strong) UIView *securityTipsView;
 @property (nonatomic, strong) UIView *inputView;
 @property (nonatomic, strong) UITextField *telTextField;
+@property (nonatomic, strong) UITextField *imageVerifyCodeTextField;
+@property (nonatomic, strong) PooCodeView *codeView;
 @property (nonatomic, strong) UITextField *verifyCodeTextField;
 @property (nonatomic, strong) UIButton *getVerifyCodeButton;
 @property (nonatomic, strong) UITextField *pwdTextField;
 @property (nonatomic, strong) UIButton *commitButton;
 @property (nonatomic, strong) UILabel *userProtocolLabel;
+
+@property (nonatomic, strong) NSArray *dataSource;
 
 @end
 
@@ -45,6 +50,13 @@
     
     self.view.backgroundColor = [QGHAppearance backgroundColor];
     
+    if (self.type == QGHRegisterViewTypeNormal) {
+        self.dataSource = @[@"电话", @"图形验证", @"验证码", @"密码"];
+    } else {
+        self.dataSource = @[@"电话", @"验证码", @"密码"];
+    }
+    
+    
     [self setNavigationBar];
     
     if (self.type == QGHRegisterViewTypeBindPhone) {
@@ -60,6 +72,8 @@
     
     [VerificationCodeTimer sharedTimer].delegate = self;
     [self updateVerifyCodeButtonState:[VerificationCodeTimer sharedTimer]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextChange) name:UITextFieldTextDidChangeNotification object:nil];
 }
 
 
@@ -118,7 +132,7 @@
         originY = 80;
     }
     
-    _inputView = [[UIView alloc] initWithFrame:CGRectMake(0, originY, mmh_screen_width(), 144)];
+    _inputView = [[UIView alloc] initWithFrame:CGRectMake(0, originY, mmh_screen_width(), 192)];
     _inputView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_inputView];
     
@@ -129,6 +143,34 @@
     UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(15, 96, mmh_screen_width() - 30, 1)];
     line2.backgroundColor = [QGHAppearance backgroundColor];
     [_inputView addSubview:line2];
+    
+    UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(15, 144, mmh_screen_width() - 30, 1)];
+    line3.backgroundColor = [QGHAppearance backgroundColor];
+    [_inputView addSubview:line3];
+    
+    _telTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 0, mmh_screen_width() - 30, 48)];
+    _telTextField.font = F4;
+    _telTextField.textColor = C7;
+    _telTextField.placeholder = @"请输入手机号";
+    _telTextField.clearButtonMode = UITextFieldViewModeAlways;
+    _telTextField.delegate = self;
+    [_inputView addSubview:_telTextField];
+    
+    _codeView = [[PooCodeView alloc] initWithFrame:CGRectMake(0, 0, 82, 32)];
+    [_codeView setRight:mmh_screen_width() - 15];
+    _codeView.centerY = line1.bottom + 24;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapClick)];
+    [_codeView addGestureRecognizer:tap];
+    [self.view addSubview:_codeView];
+    [_inputView addSubview:_codeView];
+    
+    _imageVerifyCodeTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 48, mmh_screen_width() - 45 - _codeView.width, 48)];
+    _imageVerifyCodeTextField.font = F4;
+    _imageVerifyCodeTextField.textColor = C7;
+    _imageVerifyCodeTextField.placeholder = @"请输入图形验证码";
+    _imageVerifyCodeTextField.clearButtonMode = UITextFieldViewModeAlways;
+    _imageVerifyCodeTextField.delegate = self;
+    [_inputView addSubview:_imageVerifyCodeTextField];
     
     _getVerifyCodeButton = [[UIButton alloc] init];
     _getVerifyCodeButton.layer.cornerRadius = 5;
@@ -143,19 +185,11 @@
     [_getVerifyCodeButton setWidth:_getVerifyCodeButton.width + 20];
     [_getVerifyCodeButton setHeight:32];
     _getVerifyCodeButton.right = mmh_screen_width() - 15;
-    _getVerifyCodeButton.centerY = _inputView.height * 0.5;
+    _getVerifyCodeButton.centerY = line2.bottom + 24;
     [_getVerifyCodeButton addTarget:self action:@selector(getVerifyCodeButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [_inputView addSubview:_getVerifyCodeButton];
     
-    _telTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 0, mmh_screen_width() - 30, 48)];
-    _telTextField.font = F4;
-    _telTextField.textColor = C7;
-    _telTextField.placeholder = @"请输入手机号";
-    _telTextField.clearButtonMode = UITextFieldViewModeAlways;
-    _telTextField.delegate = self;
-    [_inputView addSubview:_telTextField];
-    
-    _verifyCodeTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 48, mmh_screen_width() - 30, 48)];
+    _verifyCodeTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 96, mmh_screen_width() - 30, 48)];
     [_verifyCodeTextField setMaxX:_getVerifyCodeButton.left - 15];
     _verifyCodeTextField.font = F4;
     _verifyCodeTextField.textColor = C7;
@@ -163,7 +197,7 @@
     _verifyCodeTextField.delegate = self;
     [_inputView addSubview:_verifyCodeTextField];
     
-    _pwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 96, mmh_screen_width() - 30, 48)];
+    _pwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 144, mmh_screen_width() - 30, 48)];
     _pwdTextField.font = F4;
     _pwdTextField.textColor = C7;
     _pwdTextField.secureTextEntry = YES;
@@ -225,7 +259,9 @@
         self.getVerifyCodeButton.enabled = NO;
         [self.getVerifyCodeButton setTitle:[NSString stringWithFormat:@"还剩%d秒", (int)remainingTime] forState:UIControlStateNormal];
     } else {
-        self.getVerifyCodeButton.enabled = (self.telTextField.text.length == 11);
+        NSString *myVerifyCode = [self.imageVerifyCodeTextField.text lowercaseString];
+        NSString *targetVerifyCode = [self.codeView.changeString lowercaseString];
+        self.getVerifyCodeButton.enabled = (self.telTextField.text.length == 11) && ([myVerifyCode isEqualToString:targetVerifyCode]);
         [self.getVerifyCodeButton setTitle:@"发送验证码" forState:UIControlStateNormal];
     }
 }
@@ -234,33 +270,37 @@
 #pragma mark - UITextFieldDelegate
 
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    NSString *text = textField.text;
-    text = [text stringByReplacingCharactersInRange:range withString:string];
-    textField.text = text;
-    
+- (void)textFieldTextChange {
+    [self updateCommitButtonStatus];
+}
+
+
+- (void)updateCommitButtonStatus {
     if (self.telTextField.textLengh != 11) {
         self.getVerifyCodeButton.enabled = NO;
         self.commitButton.enabled = NO;
-        return false;
+        return;
     }
     
     [self updateVerifyCodeButtonState:[VerificationCodeTimer sharedTimer]];
     
-    if (self.verifyCodeTextField.textLengh != 6) {
+    if (self.verifyCodeTextField.textLengh != 4) {
         self.commitButton.enabled = NO;
-        return false;
+        return;
     }
     
     if (self.pwdTextField.textLengh == 0) {
         self.commitButton.enabled = NO;
-        return false;
+        return;
+    }
+    
+    if (self.imageVerifyCodeTextField.textLengh == 0) {
+        self.commitButton.enabled = NO;
+        return;
     }
     
     self.commitButton.enabled = YES;
-    return false;
 }
-
 
 #pragma mark - Actions
 
@@ -277,15 +317,32 @@
 
 - (void)getVerifyCodeButtonAction {
     [[VerificationCodeTimer sharedTimer] start];
-}
-
-
-- (void)commitButtonAction {
-    [[MMHNetworkAdapter sharedAdapter] registerFrom:self loginType:self.loginType phone:self.telTextField.text pwd:self.pwdTextField.text verifyCode:self.verifyCodeTextField.text thirdId:self.account.userId thirdToken:self.account.userToken succeededHandler:^{
-        self.bindPhoneSuccessBlock();
+    [[MMHNetworkAdapter sharedAdapter] sendRequestToGetVerifyCodeFrom:self phone:self.telTextField.text succeededHandler:^{
+        [self.view showTips:@"发送验证码成功"];
     } failedHandler:^(NSError *error) {
         [self.view showTipsWithError:error];
     }];
+}
+
+
+- (void)commitButtonAction {    
+    [[MMHNetworkAdapter sharedAdapter] registerFrom:self loginType:self.loginType phone:self.telTextField.text pwd:self.pwdTextField.text verifyCode:self.verifyCodeTextField.text thirdId:self.account.userId thirdToken:self.account.userToken succeededHandler:^(QGHRegisterModel *registerModel) {
+        if (self.loginType == QGHLoginTypeNomal) {
+            [self.view showTips:@"注册成功"];
+        } else {
+            [self.view showTips:@"绑定成功"];
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.bindPhoneSuccessBlock(registerModel);
+        });
+    } failedHandler:^(NSError *error) {
+        [self.view showTipsWithError:error];
+    }];
+}
+
+
+- (void)tapClick {
+    [_codeView changeCode];
 }
 
 

@@ -16,6 +16,7 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WXApi.h"
+#import "AppDelegate+EaseMob.h"
 
 
 
@@ -30,6 +31,7 @@
     [MMHWeChatAdapter start];
     [self shareSDKConnectApp];
     [MMHAccountSession start];
+    [self easemobApplication:application didFinishLaunchingWithOptions:launchOptions];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -37,6 +39,10 @@
     [QGHAppearance configureGlobalAppearancesWithWindow:self.window];
     QGHTabBarController *tabBarController = [[QGHTabBarController alloc] init];
     self.window.rootViewController = tabBarController;
+    
+    if ([[MMHAccountSession currentSession] alreadyLoggedIn]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:MMHUserDidLoginNotification object:nil];
+    }
     
     return YES;
 }

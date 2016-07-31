@@ -10,13 +10,24 @@
 #import "MMHAccount.h"
 #import "MMHAccountSession.h"
 
+
 @implementation MMHNetworkAdapter (Login)
 
 
-- (void)loginWithPhoneNumber:(NSString *)phoneNumber passCode:(NSString *)passCode from:(id)requester succeededHandler:(void(^)(MMHAccount *account))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
-    NSDictionary *parameters = @{@"username": phoneNumber, @"loginPass": passCode};
+- (void)loginWithPhoneNumber:(NSString *)phoneNumber passCode:(NSString *)passCode loginType:(QGHLoginType)type from:(id)requester succeededHandler:(void(^)(MMHAccount *account))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    NSDictionary *parameters =nil;
+    
+    if (type == QGHLoginTypeNomal) {
+        parameters = @{@"username": phoneNumber, @"loginPass": passCode};
+    } else if (type == QGHLoginTypeQQ) {
+        parameters = @{@"qq": phoneNumber, @"qqtoken": passCode};
+    } else if (type == QGHLoginTypeWeChat) {
+        parameters = @{@"wechat": phoneNumber, @"wechattoken": passCode};
+    }
+    
     MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
     [engine postWithAPI:@"_login_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        NSLog(@"fuck:%@", responseJSONObject);
         MMHAccount *account = [[MMHAccount alloc] initWithJSONDict:[responseJSONObject objectForKey:@"info"]];
         [[MMHAccountSession currentSession] accountDidLogin:account];
         [[NSNotificationCenter defaultCenter] postNotificationName:MMHUserDidLoginNotification object:nil];
@@ -53,7 +64,7 @@
 }
 
 
-- (void)registerFrom:(id)requester loginType:(QGHLoginType)type phone:(NSString *)phone pwd:(NSString *)pwd verifyCode:(NSString *)verifyCode thirdId:(NSString *)thirdId thirdToken:(NSString *)thirdToken succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+- (void)registerFrom:(id)requester loginType:(QGHLoginType)type phone:(NSString *)phone pwd:(NSString *)pwd verifyCode:(NSString *)verifyCode thirdId:(NSString *)thirdId thirdToken:(NSString *)thirdToken succeededHandler:(void(^)(QGHRegisterModel *registerModel))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
     NSMutableDictionary *parameters = [@{@"mobile": phone, @"loginPass": pwd, @"code": verifyCode} mutableCopy];
     NSDictionary *thirdLoginDict = nil;
     if (type == QGHLoginTypeQQ) {
@@ -68,6 +79,17 @@
     
     MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
     [engine postWithAPI:@"_register_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        QGHRegisterModel *registerModel = [[QGHRegisterModel alloc] initWithJSONDict:responseJSONObject[@"info"]];
+        succeededHandler(registerModel);
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
+    }];
+}
+
+
+- (void)sendRequestToGetVerifyCodeFrom:(id)requester phone:(NSString *)phone succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    [engine postWithAPI:@"_sms_002" parameters:@{@"mobile": phone} from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
         succeededHandler();
     } failedBlock:^(NSError *error) {
         failedHandler(error);

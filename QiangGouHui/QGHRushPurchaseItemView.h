@@ -7,7 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QGHFirstPageGoodsModel.h"
+
+
+@protocol  QGHRushPurchaseItemViewDelegate<NSObject>
+
+- (void)purchaseItemDidSelect:(QGHFirstPageGoodsModel *)goods;
+
+@end
+
 
 @interface QGHRushPurchaseItemView : UIView
+
+@property (nonatomic, weak) id<QGHRushPurchaseItemViewDelegate> delegate;
+
+- (void)setGoodsModel:(QGHFirstPageGoodsModel *)goods;
 
 @end

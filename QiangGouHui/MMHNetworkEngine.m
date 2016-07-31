@@ -108,6 +108,10 @@
     //    LZLog(@"post with api: %@", actualAPI);
     //    LZLog(@"post with parameters: %@", actualParameters);
     NSMutableDictionary *mutableParameters = [parameters mutableCopy];
+    NSString *userToken = [mutableParameters objectForKey:@"userToken"];
+    if (userToken && userToken.length == 0) {
+        [mutableParameters removeObjectForKey:@"userToken"];
+    }
     [mutableParameters addEntriesFromDictionary:@{@"apiCode": api}];
     NSString *parametersJsonStr = [self parametersString:mutableParameters];
     NSDictionary *actualParameter = @{@"json": parametersJsonStr};

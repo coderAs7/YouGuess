@@ -8,11 +8,12 @@
 
 #import "QGHTabBarController.h"
 #import "QGHFirstViewController.h"
-#import "QGHChatViewController.h"
+#import "QGHGroupListViewController.h"
 #import "QGHCartViewController.h"
 #import "QGHPersonalCenterViewController.h"
 #import "QGHNavigationController.h"
 #import "AppDelegate.h"
+#import "MMHAccountSession.h"
 
 
 @interface QGHTabBarController ()
@@ -30,7 +31,7 @@
     firstViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"qgh_tab_shouye_s"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     QGHNavigationController *firstVCNav = [[QGHNavigationController alloc] initWithRootViewController:firstViewController];
     
-    QGHChatViewController *chatVC = [[QGHChatViewController alloc] init];
+    QGHGroupListViewController *chatVC = [[QGHGroupListViewController alloc] init];
     chatVC.title = @"聊天";
     chatVC.tabBarItem.image = [[UIImage imageNamed:@"qgh_tab_reliao_n"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     chatVC.tabBarItem.selectedImage = [[UIImage imageNamed:@"qgh_tab_reliao_s"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -49,6 +50,52 @@
     QGHNavigationController *personalCenterVCNav = [[QGHNavigationController alloc] initWithRootViewController:personalCenterVC];
     
     self.viewControllers = @[firstVCNav, chatVCNav, cartVCNav, personalCenterVCNav];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSucceessNotification) name:MMHUserDidLoginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccessNotification) name:MMHUserDidLogoutNotification object:nil];
+}
+
+
+- (void)loginSucceessNotification {
+    [self loginIM];
+}
+
+
+- (void)logoutSuccessNotification {
+    [self logoutIM];
+}
+
+
+- (void)loginIM {
+    BOOL isAutoLogin = [EMClient sharedClient].isAutoLogin;
+    if (!isAutoLogin) {
+        [[EMClient sharedClient] asyncLoginWithUsername:[[MMHAccountSession currentSession] userId] password:[[MMHAccountSession currentSession] userId] success:^{
+            [[EMClient sharedClient].options setIsAutoLogin:YES];
+        } failure:^(EMError *aError) {
+            if (aError.code == EMErrorUserNotFound) {
+                [self registIM];
+            };
+        }];
+    }
+}
+
+
+- (void)logoutIM {
+    [[EMClient sharedClient] asyncLogout:YES success:^{
+        [[EMClient sharedClient].options setIsAutoLogin:NO];
+    } failure:^(EMError *aError) {
+        //Nothing to do
+    }];
+}
+
+
+- (void)registIM {
+    [[EMClient sharedClient] asyncRegisterWithUsername:[[MMHAccountSession currentSession] userId] password:[[MMHAccountSession currentSession] userId] success:^{
+        NSLog(@"注册成功");
+        [self loginIM];
+    } failure:^(EMError *aError) {
+        NSLog(@"注册失败");
+    }];
 }
 
 

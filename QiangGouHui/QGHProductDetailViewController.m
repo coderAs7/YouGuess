@@ -18,6 +18,12 @@
 #import "MMHNetworkAdapter+Cart.h"
 #import "MMHChatCustomerViewController.h"
 #import "QGHCommentListViewController.h"
+#import "QGHChatViewController.h"
+#import <ShareSDK/NSMutableDictionary+SSDKShare.h>
+#import <SDWebImageManager.h>
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKUI/ShareSDKUI.h>
+#import <ShareSDKUI/ShareSDK+SSUI.h>
 
 
 static NSString *const QGHProductDetailHeaderCellIdentifier = @"QGHProductDetailHeaderCellIdentifier";
@@ -41,6 +47,8 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 @property (nonatomic, strong) QGHProductDetailScoreInfo *scoreInfo;
 @property (nonatomic, strong) NSArray<QGHProductDetailComment *> *comments;
 
+@property (nonatomic, strong) NSMutableArray *dataSource;
+
 @end
 
 
@@ -63,8 +71,12 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     [super viewDidLoad];
     self.title = @"商品详情";
     
+    UIBarButtonItem *commentItem = [[UIBarButtonItem alloc] initWithTitle:@"评价" style:UIBarButtonItemStylePlain target:self action:@selector(commentAction)];
+    
     UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"xiangqing_share"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(shareAction)];
-    self.navigationItem.rightBarButtonItem = shareItem;
+    self.navigationItem.rightBarButtonItems = @[shareItem, commentItem];
+    
+    self.dataSource = [@[@"goods", @"goodsDes"] mutableCopy];
     
     [self makeTableView];
     [self makeBottomView];
@@ -163,9 +175,9 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 
 
 - (void)fetchData {
-    if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
-        return;
-    }
+//    if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
+//        return;
+//    }
     
     [[MMHNetworkAdapter sharedAdapter] fetchDataWithRequester:self goodsId:self.goodsId succeededHandler:^(QGHProductDetailModel *productDetailModel) {
         self.productDetailModel = productDetailModel;
@@ -178,9 +190,18 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     [[MMHNetworkAdapter sharedAdapter] fetchProductCommentsWithRequester:self goodsId:self.goodsId page:1 size:10 succeededHandler:^(QGHProductDetailScoreInfo *scoreInfo, NSArray<QGHProductDetailComment *> *commentArr) {
         self.scoreInfo = scoreInfo;
         self.comments = commentArr;
+        if (commentArr.count > 0) {
+            self.dataSource = [@[@"goods", @"comments", @"goodsDes"] mutableCopy];
+        }
+        [self.tableView reloadData];
     } failedHandler:^(NSError *error) {
-        [self.view showTipsWithError:error];
+//        [self.view showTipsWithError:error];
     }];
+}
+
+
+- (NSString *)nameForSection:(NSInteger)section {
+    return self.dataSource[section];
 }
 
 
@@ -188,14 +209,14 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return self.dataSource.count;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+    if ([[self nameForSection:section] isEqualToString:@"goods"]) {
         return 3;
-    } else if (section == 1) {
+    } else if ([[self nameForSection:section] isEqualToString:@"comments"]) {
         NSInteger count = (self.comments.count > 2) ? 2 : self.comments.count;
         return 1 + count;
     } else {
@@ -205,7 +226,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if ([[self nameForSection:indexPath.section] isEqualToString:@"goods"]) {
         if (indexPath.row == 0) {
             MMHProductDetailHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHProductDetailHeaderCellIdentifier forIndexPath:indexPath];
             cell.imageArray = self.productDetailModel.product.img_path;
@@ -219,7 +240,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
             [cell setData:self.productDetailModel];
             return cell;
         }
-    } else if (indexPath.section == 1) {
+    } else if ([[self nameForSection:indexPath.section] isEqualToString:@"comments"]) {
         if (indexPath.row == 0) {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHProductDetailCommentTitleCellIdentifier forIndexPath:indexPath];
             cell.textLabel.text = [NSString stringWithFormat:@"商品评价(%@条，%@好评率)", self.scoreInfo.count, self.scoreInfo.star];
@@ -263,7 +284,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if ([[self nameForSection:indexPath.section] isEqualToString:@"goods"]) {
         if (indexPath.row == 0) {
             return mmh_screen_width();
         } else if (indexPath.row == 1) {
@@ -271,7 +292,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
         } else {
             return 95;
         }
-    } else if (indexPath.section == 1) {
+    } else if ([[self nameForSection:indexPath.section] isEqualToString:@"comments"]) {
         if (indexPath.row == 0) {
             return 48;
         } else {
@@ -313,14 +334,44 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 
 
 - (void)shareAction {
+    NSString *imageUr = self.productDetailModel.product.img_path.firstObject;
+    if (imageUr.length == 0) {
+        return;
+    }
     
+    [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:imageUr] options:SDWebImageHighPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        //
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+        [self shareHandle:image];
+    }];
 }
 
+- (void)shareHandle:(UIImage *)image {
+//    UIImage *shareImage = [image scaledToFitSize:CGSizeMake(200, 200)];
+    NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/us/app/fen-xiang/id1138627393?l=zh&ls=1&mt=8"];
+    NSMutableDictionary *shareParameters = [NSMutableDictionary dictionary];
+    [shareParameters SSDKSetupWeChatParamsByText:self.productDetailModel.product.title title:@"芬想" url:url thumbImage:nil image:image musicFileURL:nil extInfo:nil fileData:nil emoticonData:nil type:SSDKContentTypeApp forPlatformSubType:SSDKPlatformSubTypeWechatSession];
+    [shareParameters SSDKSetupWeChatParamsByText:self.productDetailModel.product.title title:@"芬想" url:url thumbImage:nil image:image musicFileURL:nil extInfo:nil fileData:nil emoticonData:nil type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeWechatTimeline];
+    [shareParameters SSDKSetupQQParamsByText:self.productDetailModel.product.title title:@"芬想" url:url thumbImage:nil image:image type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeQQFriend];
+    [shareParameters SSDKSetupQQParamsByText:self.productDetailModel.product.title title:@"芬想" url:url thumbImage:nil image:image type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeQZone];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [ShareSDK showShareActionSheet:self.view items:nil shareParams:shareParameters onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+            //TODO
+        }];
+    });
+}
 
 - (void)addCartBtnAction {
+    if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
+        [self presentLoginViewControllerWithSucceededHandler:^{
+        }];
+        return;
+    }
+    
     MMHProductSpecSelectionViewController *specVC = [[MMHProductSpecSelectionViewController alloc] initWithProductDetail:self.productDetailModel specSelectedHandler:^(QGHSKUSelectModel *selectedSpec) {
         [[MMHNetworkAdapter sharedAdapter] addCartFrom:self goodsId:self.productDetailModel.product.goodsId count:selectedSpec.count price:self.productDetailModel.product.discount_price skuId:self.productDetailModel.allSepcSelectedPrice.priceId succeededHandler:^{
-            //TODO
+            [self.view showTips:@"加入购物车成功"];
         } failedHandler:^(NSError *error) {
             [self.view showTipsWithError:error];
         }];
@@ -332,6 +383,12 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 
 
 - (void)buyNowBtnAction {
+    if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
+        [self presentLoginViewControllerWithSucceededHandler:^{
+        }];
+        return;
+    }
+    
     MMHProductSpecSelectionViewController *specVC = [[MMHProductSpecSelectionViewController alloc] initWithProductDetail:self.productDetailModel specSelectedHandler:^(QGHSKUSelectModel *selectedSpec) {
         QGHConfirmOrderViewController *confirmOrderVC = [[QGHConfirmOrderViewController alloc] initWithBussType:QGHBussTypeNormal productDetail:self.productDetailModel];
         [self.navigationController pushViewController:confirmOrderVC animated:YES];
@@ -342,13 +399,34 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 
 
 - (void)customerServiceBtnAction {
-    MMHChatCustomerViewController *chatCustomerVC = [[MMHChatCustomerViewController alloc] init];
-    [self.navigationController pushViewController:chatCustomerVC animated:YES];
+    if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
+        [self presentLoginViewControllerWithSucceededHandler:^{
+        }];
+        return;
+    }
+    
+    QGHChatViewController *chatVC = [[QGHChatViewController alloc] initWithProductInfo:self.productDetailModel.product];
+    chatVC.chatType = QGHChatTypeChat;
+    [self.navigationController pushViewController:chatVC animated:YES];
+//    MMHChatCustomerViewController *chatCustomerVC = [[MMHChatCustomerViewController alloc] init];
+//    [self.navigationController pushViewController:chatCustomerVC animated:YES];
 }
 
 
 - (void)cartBtnAction {
     [QGHTabBarController redirectToCart];
+}
+
+
+- (void)commentAction {
+    if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
+        [self presentLoginViewControllerWithSucceededHandler:^{
+        }];
+        return;
+    }
+    
+    QGHCommentListViewController *commentListVC = [[QGHCommentListViewController alloc] initWithGoodsId:self.productDetailModel.product.goodsId];
+    [self.navigationController pushViewController:commentListVC animated:YES];
 }
 
 

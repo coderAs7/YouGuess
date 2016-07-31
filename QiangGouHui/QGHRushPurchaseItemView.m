@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *leftNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
+@property (nonatomic, strong) QGHFirstPageGoodsModel *goods;
 @end
 
 
@@ -46,17 +47,37 @@
     self.leftNumLabel.textColor = C6;
     
     self.nameLabel.textColor = [UIColor blackColor];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [self addGestureRecognizer:tap];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+
+- (void)setGoodsModel:(QGHFirstPageGoodsModel *)goods {
+    self.goods = goods;
     
-    if (self) {
-        
-        
+    [self.itemImg updateViewWithImageAtURL:goods.img_path];
+    self.numLabel.text = [NSString stringWithFormat:@"剩%ld件", goods.stock];
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%g", goods.discount_price];
+    self.oriPriceLabel.text = [NSString stringWithFormat:@"¥%g", goods.original_price];
+    [self.oriPriceLabel addStrikethroughLine];
+    self.leftNumLabel.text = [NSString stringWithFormat:@"剩%ld天", [self remainingDay:goods.end_time]];
+    self.nameLabel.text = goods.title;
+}
+
+
+- (NSInteger)remainingDay:(double)endTime {
+    NSDate *endDate = [NSDate dateWithTimeIntervalSince1970:endTime];
+    NSTimeInterval remainingSec = [endDate timeIntervalSinceDate:[NSDate date]];
+    NSInteger day = remainingSec / (3600 * 24);
+    return day;
+}
+
+
+- (void)tapAction {
+    if ([self.delegate respondsToSelector:@selector(purchaseItemDidSelect:)]) {
+        [self.delegate purchaseItemDidSelect:self.goods];
     }
-    
-    return self;
 }
 
 

@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EMSDK.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, EMClientDelegate, EMChatManagerDelegate>
+{
+    EMConnectionState _connectionState;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 

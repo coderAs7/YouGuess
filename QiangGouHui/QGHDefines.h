@@ -30,7 +30,11 @@ typedef NS_ENUM(NSInteger, QGHLoginType) {
 #define WECHAT_APPID @"wx73ce0c7fa5af1828"
 #define WECHAT_APPSECRET @"4387c33d9a29182e713286c8f48fcf89"
 
-#define QQ_APPID @"1105370483"
-#define QQ_APPKEY @"fc99YIZYxpNHmoib"
+#define QQ_APPID @"1105571354"
+#define QQ_APPKEY @"53XRwtOwQsWDBosu"
+
+#define EaseMob_key @"gzyinyi#fenxiang"
+#define EaseMob_push_production @"EaseMob_push_production"
+#define EaseMobPwd @"QiangGouHui123"
 
 #endif /* QGHDefines_h */

@@ -11,6 +11,7 @@ pod 'AMapSearch'
 pod 'HTHorizontalSelectionList', '0.4.7'
 pod 'MJRefresh'
 pod 'UICollectionViewLeftAlignedLayout', '0.0.3'
+#pod 'EaseMobSDK', '2.1.6'
 
 #pod 'ShareSDK3'
 #pod 'MOBFoundation'

@@ -213,7 +213,7 @@
 
 
 - (void)loginButtonAction {
-    [[MMHNetworkAdapter sharedAdapter] loginWithPhoneNumber:self.telTextField.text passCode:self.pwdTextField.text from:self succeededHandler:^(MMHAccount *account) {
+    [[MMHNetworkAdapter sharedAdapter] loginWithPhoneNumber:self.telTextField.text passCode:self.pwdTextField.text loginType:QGHLoginTypeNomal from:self succeededHandler:^(MMHAccount *account) {
         if (self.succeededHandler) {
             self.succeededHandler(account);
         }
@@ -254,11 +254,25 @@
             account.nickname = user.nickname;
             account.avatar_url = user.icon;
             account.sex = (user.gender == SSDKGenderFemale) ? @"2" : @"1";
-            [[MMHAccountSession currentSession] accountDidLogin:account];
-            [[NSNotificationCenter defaultCenter] postNotificationName:MMHUserDidLoginNotification object:nil];
-            self.succeededHandler(account);
+//            [[MMHAccountSession currentSession] accountDidLogin:account];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:MMHUserDidLoginNotification object:nil];
+//            self.succeededHandler(account);
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                [[MMHNetworkAdapter sharedAdapter] loginWithPhoneNumber:user.uid passCode:user.credential.token loginType:QGHLoginTypeQQ from:self succeededHandler:^(MMHAccount *account) {
+                    if (self.succeededHandler) {
+                        self.succeededHandler(account);
+                    }
+                    [self dismissViewControllerWithAnimation];
+                } failedHandler:^(NSError *error) {
+                    NSString *errorTips = [error localizedDescription];
+                    if ([errorTips isEqualToString:@"no_bind"]) {
+                        [self bindPhone:account loginType:QGHLoginTypeQQ];
+                    }
+                    [self.view showTipsWithError:error];
+                }];
+            });
         } else {
-            NSLog(@"微信登陆失败");
+            NSLog(@"QQ登陆失败");
         }
     }];
 }
@@ -277,9 +291,23 @@
 //            [[MMHAccountSession currentSession] accountDidLogin:account];
 //            [[NSNotificationCenter defaultCenter] postNotificationName:MMHUserDidLoginNotification object:nil];
 //            self.succeededHandler(account);
-            [self bindPhone:account loginType:QGHLoginTypeWeChat];
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                SSDKUser *thirdUser = user;
+                [[MMHNetworkAdapter sharedAdapter] loginWithPhoneNumber:user.uid passCode:user.credential.token loginType:QGHLoginTypeWeChat from:self succeededHandler:^(MMHAccount *account) {
+                    if (self.succeededHandler) {
+                        self.succeededHandler(account);
+                    }
+                    [self dismissViewControllerWithAnimation];
+                } failedHandler:^(NSError *error) {
+                    NSString *errorTips = [error localizedDescription];
+                    if ([errorTips isEqualToString:@"no_bind"]) {
+                        [self bindPhone:account loginType:QGHLoginTypeWeChat];
+                    }
+                    [self.view showTipsWithError:error];
+                }];
+            });
         } else {
-            NSLog(@"QQ登陆失败");
+            NSLog(@"微信登陆失败");
         }
     }];
 }
@@ -289,8 +317,8 @@
     QGHRegisterViewController *registerVC = [[QGHRegisterViewController alloc] initWithType:QGHRegisterViewTypeBindPhone];
     registerVC.account = account;
     registerVC.loginType = type;
-    registerVC.bindPhoneSuccessBlock = ^{
-        //TODO
+    registerVC.bindPhoneSuccessBlock = ^(QGHRegisterModel *registerModel) {
+        [self.navigationController popToViewController:self animated:YES];
     };
     [self.navigationController pushViewController:registerVC animated:YES];
 }

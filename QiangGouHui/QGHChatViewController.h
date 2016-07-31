@@ -2,12 +2,31 @@
 //  QGHChatViewController.h
 //  QiangGouHui
 //
-//  Created by 姚驰 on 16/6/19.
+//  Created by 姚驰 on 16/7/31.
 //  Copyright © 2016年 SoftBank. All rights reserved.
 //
 
-#import "BaseViewController.h"
+#import "EaseMessageViewController.h"
+#import "QGHProductInfo.h"
 
-@interface QGHChatViewController : BaseViewController
+typedef NS_ENUM(NSInteger, QGHChatType) {
+    QGHChatTypeChat,
+    QGHChatTypeGroup,
+};
+
+
+@protocol QGHChatViewControllerDelegate <NSObject>
+
+- (void)chatViewControllerLeaveGroupSuccess;
+
+@end
+
+
+@interface QGHChatViewController : EaseMessageViewController
+
+@property (nonatomic, weak) id<QGHChatViewControllerDelegate> chatDelegate;
+@property (nonatomic, assign) QGHChatType chatType;
+
+- (instancetype)initWithProductInfo:(QGHProductInfo *)info;
 
 @end

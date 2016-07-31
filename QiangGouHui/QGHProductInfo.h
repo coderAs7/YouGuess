@@ -26,5 +26,6 @@
 @property (nonatomic, copy) NSString *min_price;
 @property (nonatomic, copy) NSString *original_price;
 @property (nonatomic, copy) NSString *discount_price;
+@property (nonatomic, copy) NSString *supplier;
 
 @end

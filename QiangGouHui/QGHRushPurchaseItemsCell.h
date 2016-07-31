@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QGHFirstPageGoodsList.h"
+
 
 @interface QGHRushPurchaseItemsCell : UITableViewCell
 
-- (void)testFunc;
+- (void)setGoodList:(QGHFirstPageGoodsList *)goodList purchaseItemViewDelegate:(id)delegate;
 
 @end

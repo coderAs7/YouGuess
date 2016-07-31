@@ -107,10 +107,10 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         NSMutableArray *buttons = [NSMutableArray arrayWithCapacity:5];
-        NSArray *buttonImageNames = @[@"center_icon_obligation", @"center_icon_fahuo", @"center_icon_evaluation", @"center_icon_return"];
-        NSArray *buttonTitles = @[@"待付款", @"待收货", @"待评价", @"退款/售后"];
+        NSArray *buttonImageNames = @[@"center_icon_obligation", @"", @"center_icon_fahuo", @"center_icon_evaluation", @"center_icon_return"];
+        NSArray *buttonTitles = @[@"待付款",@"待发货", @"待收货", @"待评价", @"退款/售后"];
         
-        CGFloat buttonWidth = mmh_screen_width() / 4;
+        CGFloat buttonWidth = mmh_screen_width() / 5;
         for (int i = 0; i < buttonImageNames.count; ++i) {
             MMHPersonalCenterAllOrderCellButton *button = [[MMHPersonalCenterAllOrderCellButton alloc] initWithFrame:CGRectMake(i * buttonWidth, 0, buttonWidth, 70)];
             button.imageName = buttonImageNames[i];
@@ -144,9 +144,10 @@
 
 - (void)updateOrderNumModel:(QGHOrderNumModel *)model {
     self.buttons[0].badgeCount = model.waitpay;
-    self.buttons[1].badgeCount = model.receipt;
-    self.buttons[2].badgeCount = model.score;
-    self.buttons[3].badgeCount = model.refund;
+    self.buttons[1].badgeCount = model.delivery;
+    self.buttons[2].badgeCount = model.receipt;
+    self.buttons[3].badgeCount = model.score;
+    self.buttons[4].badgeCount = model.refund;
 }
 
 

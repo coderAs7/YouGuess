@@ -25,6 +25,7 @@
 #import "QGHBanner.h"
 #import "AdView.h"
 #import "AppWebViewController.h"
+#import "QGHRushPurchaseItemView.h"
 
 
 static NSString *QGHBannerCellIdentifier = @"QGHBannerCellIdentifier";
@@ -32,7 +33,7 @@ static NSString *QGHPurchaseItemCellIdentifier = @"QGHPurchaseItemCellIdentifier
 static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 
-@interface QGHFirstViewController ()<UITableViewDataSource, UITableViewDelegate, QGHSegmentedControlDelegate, MMHTimelineDelegate, QGHBannerCellDelegate>
+@interface QGHFirstViewController ()<UITableViewDataSource, UITableViewDelegate, QGHSegmentedControlDelegate, MMHTimelineDelegate, QGHBannerCellDelegate, QGHRushPurchaseItemViewDelegate>
 
 @property (nonatomic, strong) UILabel *locationLabel;
 @property (nonatomic, strong) QGHSegmentedControl *segmented;
@@ -183,9 +184,9 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 
 - (void)fetchGoodsList {
-    if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
-        return;
-    }
+//    if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
+//        return;
+//    }
     
     NSString *city = [[QGHLocationManager shareManager] currentCity];
     if (city.length == 0) {
@@ -248,7 +249,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"推荐"]) {
         QGHRushPurchaseItemsCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHPurchaseItemCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell testFunc];
+        [cell setGoodList:self.purchaseList purchaseItemViewDelegate:self];
         return cell;
     } else {
         QGHGoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHGoodsCellIdentifier forIndexPath:indexPath];
@@ -429,6 +430,15 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     AppWebViewController *appWebViewVC = [[AppWebViewController alloc] init];
     appWebViewVC.webUrl = banner.target_url;
     [self.navigationController pushViewController:appWebViewVC animated:YES];
+}
+
+
+#pragma mark - QGHRushPurchaseItemView
+
+
+- (void)purchaseItemDidSelect:(QGHFirstPageGoodsModel *)goods {
+    QGHProductDetailVIewController *productDetailVC = [[QGHProductDetailVIewController alloc] initWithBussType:goods.type goodsId:goods.goodsId];
+    [self.navigationController pushViewController:productDetailVC animated:YES];
 }
 
 
