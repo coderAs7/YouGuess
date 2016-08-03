@@ -107,7 +107,7 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         
         NSMutableArray *buttons = [NSMutableArray arrayWithCapacity:5];
-        NSArray *buttonImageNames = @[@"center_icon_obligation", @"", @"center_icon_fahuo", @"center_icon_evaluation", @"center_icon_return"];
+        NSArray *buttonImageNames = @[@"center_icon_obligation", @"qgh_receipt", @"center_icon_fahuo", @"center_icon_evaluation", @"center_icon_return"];
         NSArray *buttonTitles = @[@"待付款",@"待发货", @"待收货", @"待评价", @"退款/售后"];
         
         CGFloat buttonWidth = mmh_screen_width() / 5;

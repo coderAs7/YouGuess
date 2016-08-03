@@ -12,4 +12,6 @@
 @interface MMHNetworkAdapter (Chat)
 
 - (void)fetchGroupListFrom:(id)requester succeededHandler:(void(^)(NSArray<QGHGroupModel *> *groupArr))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
+
+
 @end

@@ -38,7 +38,8 @@
 
 - (void)setComment:(QGHProductDetailComment *)comment {
     self.commentLabel.text = comment.content;
-    self.nickNameLabel.text = comment.username;
+    NSString *secretName = [comment.username stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
+    self.nickNameLabel.text = secretName;
     [self setStartNum:comment.star];
 }
 

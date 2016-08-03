@@ -325,7 +325,20 @@
 }
 
 
-- (void)commitButtonAction {    
+- (void)commitButtonAction {
+    if (self.type == QGHRegisterViewTypeChangePwd) {
+        [[MMHNetworkAdapter sharedAdapter] resetPasswordFrom:self phone:self.telTextField.text pwd:self.pwdTextField.text verifyCode:self.verifyCodeTextField.text succeededHandler:^{
+            [self.view showTips:@"密码修改成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self.navigationController popViewControllerAnimated:YES];
+            });
+        } failedHandler:^(NSError *error) {
+            [self.view showTipsWithError:error];
+        }];
+        
+        return;
+    }
+    
     [[MMHNetworkAdapter sharedAdapter] registerFrom:self loginType:self.loginType phone:self.telTextField.text pwd:self.pwdTextField.text verifyCode:self.verifyCodeTextField.text thirdId:self.account.userId thirdToken:self.account.userToken succeededHandler:^(QGHRegisterModel *registerModel) {
         if (self.loginType == QGHLoginTypeNomal) {
             [self.view showTips:@"注册成功"];

@@ -8,6 +8,19 @@
 
 #import "QGHBanner.h"
 
+
 @implementation QGHBanner
+
+
+- (instancetype)initWithJSONDict:(NSDictionary *)dict {
+    self = [super initWithJSONDict:dict];
+    
+    if (self) {
+        self.type = [dict[@"type"] integerValue];
+    }
+    
+    return self;
+}
+
 
 @end

@@ -24,10 +24,11 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
-        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), 0)];
-        _webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), 300)];
+//        _webView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _webView.scalesPageToFit = YES;
         _webView.scrollView.bounces = NO;
+        _webView.scrollView.scrollEnabled = NO;
         _webView.delegate = self;
         [self.contentView addSubview:_webView];
     }
@@ -54,11 +55,12 @@
 //- (void)webViewDidStartLoad:(UIWebView *)webView;
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     CGFloat webViewHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"] floatValue];
-    self.webView.height = webViewHeight;
-    self.webView.scrollView.size = CGSizeMake(self.webView.scrollView.width, webViewHeight);
-    self.webView.scrollView.contentSize = CGSizeMake(self.webView.scrollView.contentSize.width, webViewHeight);
+    CGFloat webViewWidth = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetWidth"] floatValue];
+    CGFloat realHeight = (webViewHeight / webViewWidth) * mmh_screen_width();
+    self.webView.height = realHeight;
+    
     if ([self.delegate respondsToSelector:@selector(productDetailWebViewCellLoadedFinish:)]) {
-        [self.delegate productDetailWebViewCellLoadedFinish:webViewHeight];
+        [self.delegate productDetailWebViewCellLoadedFinish:realHeight];
     }
 }
 

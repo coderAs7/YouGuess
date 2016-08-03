@@ -141,7 +141,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     UIButton *settleButton = [[UIButton alloc] init];
     settleButton.backgroundColor = C20;
     [settleButton setTitleColor:C21 forState:UIControlStateNormal];
-    [settleButton setTitle:@"去结算" forState:UIControlStateNormal];
+    [settleButton setTitle:@"立即下单" forState:UIControlStateNormal];
     settleButton.titleLabel.font = F6;
     [settleButton addTarget:self action:@selector(settleButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [_bottom addSubview:settleButton];
@@ -384,7 +384,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
         toSettlementModel.cartItemIds = cardIds;
     }
     
-    toSettlementModel.amount = [[self getSumPrice] floatValue];
+    toSettlementModel.amount = [[self getSumPrice] floatValue] + self.mailPrice;
 
     __weak typeof(self) weakSelf = self;
     [[MMHNetworkAdapter sharedAdapter] sendRequestSettlementFrom:self parameters:[toSettlementModel parameters] succeededHandler:^(NSString *payId, NSString *orderNo) {

@@ -8,6 +8,7 @@
 
 #import "MMHChatCustomerViewController.h"
 //#import "AbstractViewController+Chatting.h"
+#import "QGHChatViewController.h"
 
 
 @interface MMHChatCustomerViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -173,6 +174,12 @@
 //        __weak MMHChatCustomerViewController *weakViewController = self;
 //        [MMHTool callCustomerServer:weakViewController.view phoneNumber:nil];
 //    }
+    if (indexPath.section == 0) {
+        QGHChatViewController *chatVC = [[QGHChatViewController alloc] initWithConversationChatter:@"kefu" conversationType:EMConversationTypeChat];
+        [self.navigationController pushViewController:chatVC animated:YES];
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://4008813879"]];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

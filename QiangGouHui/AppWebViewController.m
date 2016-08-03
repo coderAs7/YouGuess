@@ -27,6 +27,7 @@
     _webView.scrollView.bounces = NO;
     _webView.scrollView.showsHorizontalScrollIndicator = NO;
     _webView.scrollView.showsVerticalScrollIndicator = NO;
+    _webView.scalesPageToFit = YES;
     [_webView sizeToFit];
     
     if (_localHtmlString == nil) {

@@ -9,7 +9,7 @@
 import Foundation
 
 
-let VerificationCodeSendingInterval: NSTimeInterval = 10
+let VerificationCodeSendingInterval: NSTimeInterval = 60
 
 
 @objc protocol VerificationCodeTimerDelegate: NSObjectProtocol {

@@ -302,6 +302,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
         if (indexPath.row == 0) {
             return 43;
         } else {
+//            return 667;
             return self.productDetaiImageHeight;
         }
     }

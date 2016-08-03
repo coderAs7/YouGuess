@@ -83,6 +83,11 @@
 }
 
 
+- (void)fetchUserInfo {
+
+}
+
+
 #pragma mark - QGHGroupHandleViewControllerDelegate
 
 
@@ -159,6 +164,36 @@
                    withCellWidth:(CGFloat)cellWidth
 {
     return [QGHProductInfoMessageCell cellHeightWithModel:messageModel];
+}
+
+
+- (id<IMessageModel>)messageViewController:(EaseMessageViewController *)viewController
+                           modelForMessage:(EMMessage *)message
+{
+    id<IMessageModel> model = nil;
+    model = [[EaseMessageModel alloc] initWithMessage:message];
+    NSString *sender = message.from;
+    
+    if (model.isSender) {
+        model.nickname = [USER_DEFAULT objectForKey:DEFAULT_DoctorName];
+        model.avatarURLPath = [Public getPicUrlString:[[USER_DEFAULT objectForKey:DEFAULT_DoctorPhoto] integerValue] photoType:AvatarThumbnail];
+        model.avatarImage = [Public getGenderImage:[[USER_DEFAULT objectForKey:DEFAULT_DoctorGender] integerValue] role:1];
+    }else{
+        NSDictionary *ext = message.ext;
+        NSString *avatarURLPath = [Public blankString:[ext objectForKey:@"avatar"]];
+        NSString *name = [ext objectForKey:@"name"];
+        NSString *gender = [ext objectForKey:@"gender"];
+        if (ext == nil || ext.count == 0) {
+            model.nickname = @"患者";
+            model.avatarImage = [UIImage imageNamed:@"patient_boy"];
+        }else{
+            model.avatarURLPath = [Public getPicUrlString:[avatarURLPath integerValue] photoType:AvatarThumbnail];
+            model.nickname = name;
+            model.avatarImage = [Public getGenderImage:gender.integerValue role:2];
+        }
+    }
+    
+    return model;
 }
 
 

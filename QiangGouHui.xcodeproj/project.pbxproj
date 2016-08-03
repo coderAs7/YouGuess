@@ -3080,8 +3080,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fengdong chen (AN3B8C7Y87)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: fengdong chen (AN3B8C7Y87)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guangzhou softbank information technology co., LTD (HJB9HWVPB2)";
 				DEFINES_MODULE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3136,8 +3136,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: fengdong chen (AN3B8C7Y87)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: fengdong chen (AN3B8C7Y87)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guangzhou softbank information technology co., LTD (HJB9HWVPB2)";
 				DEFINES_MODULE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

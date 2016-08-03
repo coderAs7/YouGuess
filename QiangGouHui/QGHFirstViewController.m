@@ -318,7 +318,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
             case QGHBussTypePurchase:
                 if ([[self nameForSection:section] isEqualToString:@"推荐"]) {
                     view.label1.text = @"大家都在抢";
-                    view.label2.text = @"下手完就没了";
+                    view.label2.text = @"下手晚就没了";
                     view.imageView.image = [UIImage imageNamed:@"qgh_img_qianggou"];
                 } else {
                     view.label1.text = @"周边都在抢";
@@ -427,8 +427,10 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 
 - (void)bannerCellDidClick:(QGHBanner *)banner {
+//    QGHProductDetailVIewController *productDetailVC = [[QGHProductDetailVIewController alloc] initWithBussType:banner.type goodsId:banner.target_url];
+//    [self.navigationController pushViewController:productDetailVC animated:YES];
     AppWebViewController *appWebViewVC = [[AppWebViewController alloc] init];
-    appWebViewVC.webUrl = banner.target_url;
+    appWebViewVC.webUrl = @"http://121.14.38.35/Public/static/App/goodinfo148.html";
     [self.navigationController pushViewController:appWebViewVC animated:YES];
 }
 

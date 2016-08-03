@@ -292,7 +292,6 @@
 //            [[NSNotificationCenter defaultCenter] postNotificationName:MMHUserDidLoginNotification object:nil];
 //            self.succeededHandler(account);
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                SSDKUser *thirdUser = user;
                 [[MMHNetworkAdapter sharedAdapter] loginWithPhoneNumber:user.uid passCode:user.credential.token loginType:QGHLoginTypeWeChat from:self succeededHandler:^(MMHAccount *account) {
                     if (self.succeededHandler) {
                         self.succeededHandler(account);

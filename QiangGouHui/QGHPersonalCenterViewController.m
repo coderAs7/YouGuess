@@ -48,8 +48,6 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginNotification) name:MMHUserDidLoginNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutNotification) name:MMHUserDidLogoutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(personalInfoUpdateNotification) name:MMHUserPersonalInformationChangedNotification object:nil];
-    
-    [self fetchData];
 }
 
 
@@ -57,6 +55,7 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
     [super viewWillAppear:animated];
     
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    [self fetchData];
 }
 
 
@@ -150,7 +149,7 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
         if (indexPath.row == 0) {
             QGHCommonCellTableViewCell *cell =  [tableView dequeueReusableCellWithIdentifier:QGHPersonalCenterCommonCellIdentifier forIndexPath:indexPath];
             cell.title = @"在线客服";
-            cell.subTitle = @"400-400-400";
+            cell.subTitle = @"400-881-3879";
             
             return cell;
         } else {

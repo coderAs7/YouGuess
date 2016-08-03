@@ -19,7 +19,7 @@
     
     NSMutableArray *goodInfoArr = [NSMutableArray array];
     for (QGHProductDetailModel *product in self.productArr) {
-        NSMutableDictionary *goodInfoDict = [@{@"good_id": product.product.goodsId, @"count": @(product.skuSelectModel.count), @"price": product.product.min_price} mutableCopy];
+        NSMutableDictionary *goodInfoDict = [@{@"good_id": product.product.goodsId, @"count": @(product.skuSelectModel.count), @"price": product.product.discount_price} mutableCopy];
         if ([product isAllSpecSelected]) {
             QGHSKUPrice *skuPrice = [product allSepcSelectedPrice];
             [goodInfoDict addEntriesFromDictionary:@{@"sku": skuPrice.priceId}];
@@ -27,7 +27,7 @@
         [goodInfoArr addObject:goodInfoDict];
     }
     
-    parameters = [@{@"userToken": [[MMHAccountSession currentSession] token], @"receipt_id": self.receiptId, @"postage": [NSString stringWithFormat:@"%.1f", self.mailPrice]} mutableCopy];
+    parameters = [@{@"userToken": [[MMHAccountSession currentSession] token], @"receipt_id": self.receiptId, @"postage": [NSString stringWithFormat:@"%.1f", self.mailPrice], @"amount": @(self.amount)} mutableCopy];
     
     if ([self.autoOrder isEqualToString:@"1"]) {
         NSString *transferType;
