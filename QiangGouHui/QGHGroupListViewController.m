@@ -190,12 +190,24 @@ static NSString *const QGHGroupTitleCellIdentifier = @"QGHGroupTitleCellIdentifi
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         QGHGroupModel *model = self.myGroupArr[indexPath.row - 1];
-        QGHChatViewController *messageVC = [[QGHChatViewController alloc] initWithConversationChatter:model.room_id conversationType:EMConversationTypeGroupChat];
-        messageVC.title = model.nickname;
-        messageVC.chatType = QGHChatTypeGroup;
-        messageVC.chatDelegate = self;
-        messageVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:messageVC animated:YES];
+        
+        [[EMClient sharedClient].groupManager asyncFetchGroupInfo:model.room_id includeMembersList:YES success:^(EMGroup *aGroup) {
+            NSString *userIds = [NSString stringSeparateByCommaFromArray:aGroup.members];
+            [[MMHNetworkAdapter sharedAdapter] fetchGroupUserListFrom:self userIds:userIds succeededHandler:^(NSArray<QGHGroupUserModel *> *groupUserArr) {
+                QGHChatViewController *messageVC = [[QGHChatViewController alloc] initWithGroupId:model.room_id UserArr:groupUserArr];
+                messageVC.title = model.nickname;
+                messageVC.customChatType = QGHChatTypeGroup;
+                messageVC.chatDelegate = self;
+                messageVC.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:messageVC animated:YES];
+            } failedHandler:^(NSError *error) {
+                //nothing
+            }];
+        } failure:^(EMError *aError) {
+            //nothing
+        }];
+        
+        
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

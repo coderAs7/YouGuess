@@ -110,4 +110,15 @@
 }
 
 
+- (void)sendCommentForm:(id)requester orderId:(NSString *)orderId content:(NSString *)content star:(NSInteger)star succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    NSDictionary *parameters = @{@"userToken": [[MMHAccountSession currentSession] token], @"content": content, @"invest_id": orderId, @"star": @(star)};
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    [engine postWithAPI:@"_comment_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        succeededHandler();
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
+    }];
+}
+
+
 @end

@@ -8,6 +8,7 @@
 
 #import "EaseMessageViewController.h"
 #import "QGHProductInfo.h"
+#import "QGHGroupUserModel.h"
 
 typedef NS_ENUM(NSInteger, QGHChatType) {
     QGHChatTypeChat,
@@ -25,8 +26,9 @@ typedef NS_ENUM(NSInteger, QGHChatType) {
 @interface QGHChatViewController : EaseMessageViewController
 
 @property (nonatomic, weak) id<QGHChatViewControllerDelegate> chatDelegate;
-@property (nonatomic, assign) QGHChatType chatType;
+@property (nonatomic, assign) QGHChatType customChatType;
 
 - (instancetype)initWithProductInfo:(QGHProductInfo *)info;
+- (instancetype)initWithGroupId:(NSString *)groupId UserArr:(NSArray<QGHGroupUserModel *> *)userArr;
 
 @end

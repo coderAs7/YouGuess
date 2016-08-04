@@ -427,11 +427,11 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 
 - (void)bannerCellDidClick:(QGHBanner *)banner {
-//    QGHProductDetailVIewController *productDetailVC = [[QGHProductDetailVIewController alloc] initWithBussType:banner.type goodsId:banner.target_url];
-//    [self.navigationController pushViewController:productDetailVC animated:YES];
-    AppWebViewController *appWebViewVC = [[AppWebViewController alloc] init];
-    appWebViewVC.webUrl = @"http://121.14.38.35/Public/static/App/goodinfo148.html";
-    [self.navigationController pushViewController:appWebViewVC animated:YES];
+    QGHProductDetailVIewController *productDetailVC = [[QGHProductDetailVIewController alloc] initWithBussType:banner.type goodsId:banner.target_url];
+    [self.navigationController pushViewController:productDetailVC animated:YES];
+//    AppWebViewController *appWebViewVC = [[AppWebViewController alloc] init];
+//    appWebViewVC.webUrl = @"http://121.14.38.35/Public/static/App/goodinfo148.html";
+//    [self.navigationController pushViewController:appWebViewVC animated:YES];
 }
 
 

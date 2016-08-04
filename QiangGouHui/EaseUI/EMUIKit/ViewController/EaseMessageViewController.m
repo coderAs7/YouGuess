@@ -1985,4 +1985,11 @@
 }
 
 
+- (void)reloadConversation {
+    [self.messsagesSource removeAllObjects];
+    [self.dataArray removeAllObjects];
+    [self tableViewDidTriggerHeaderRefresh];
+}
+
+
 @end

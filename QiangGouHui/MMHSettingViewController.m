@@ -35,6 +35,7 @@
 #import "MMHNetworkAdapter+Login.h"
 #import "MMHSuggestViewController.h"
 #import "QGHAboutUsViewController.h"
+#import "QGHRegisterViewController.h"
 
 
 NSString *const MMHSettingViewControllerMMHTableViewCellIdentifier = @"MMHSettingViewControllerMMHTableViewCellIdentifier";
@@ -76,9 +77,9 @@ NSString *const MMHSettingViewControllerMMHTableViewCellIdentifier = @"MMHSettin
     self.title = @"设置";
     [self.view addSubview:self.tableView];
     if ([[MMHAccountSession currentSession] alreadyLoggedIn]) {
-        self.dataSourceArray = @[@[@"修改密码"], @[@"意见反馈", @"关于我们"]];
+        self.dataSourceArray = @[@[@"修改密码"], @[@"意见反馈", @"关于我们", @"检查版本"]];
     } else {
-        self.dataSourceArray = @[@[@"意见反馈", @"关于我们"]];
+        self.dataSourceArray = @[@[@"意见反馈", @"关于我们", @"检查版本"]];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginAction) name:MMHUserDidLoginNotification object:nil];
@@ -168,7 +169,9 @@ NSString *const MMHSettingViewControllerMMHTableViewCellIdentifier = @"MMHSettin
         [cell.titleLabel setSingleLineText:@"意见反馈"];
     } else if ([[self cellNameForIndexPath:indexPath] isEqualToString:@"关于我们"]){
         [cell.titleLabel setSingleLineText:@"关于我们"];
-       NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    } else if ([[self cellNameForIndexPath:indexPath] isEqualToString:@"检查版本"]) {
+        [cell.titleLabel setSingleLineText:@"检查版本"];
+        NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
         [cell.detailLabel setSingleLineText:[NSString stringWithFormat:@"V%@", version]];
     }
 
@@ -183,13 +186,16 @@ NSString *const MMHSettingViewControllerMMHTableViewCellIdentifier = @"MMHSettin
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if ([[self cellNameForIndexPath:indexPath] isEqualToString:@"修改密码"]){     // 设置
-        
+        QGHRegisterViewController *registerVC = [[QGHRegisterViewController alloc] initWithType:QGHRegisterViewTypeChangePwd];
+        [self.navigationController pushViewController:registerVC animated:YES];
     } else if ([[self cellNameForIndexPath:indexPath] isEqualToString:@"意见反馈"]){
         MMHSuggestViewController *suggestVC = [[MMHSuggestViewController alloc] init];
         [self.navigationController pushViewController:suggestVC animated:YES];
     } else if ([[self cellNameForIndexPath:indexPath] isEqualToString:@"关于我们"]) {
         QGHAboutUsViewController *aboutUsVC = [[QGHAboutUsViewController alloc] init];
         [self.navigationController pushViewController:aboutUsVC animated:YES];
+    } else if ([[self cellNameForIndexPath:indexPath] isEqualToString:@"检查版本"]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/fen-xiang/id1138627393?l=zh&ls=1&mt=8"]];
     }
 
 }

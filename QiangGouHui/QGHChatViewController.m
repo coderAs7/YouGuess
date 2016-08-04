@@ -11,11 +11,13 @@
 #import "QGHGroupHandleViewController.h"
 #import "EMClient.h"
 #import "QGHProductInfoMessageCell.h"
+#import "MMHNetworkAdapter+Chat.h"
 
 
-@interface QGHChatViewController ()<QGHGroupHandleViewControllerDelegate, EaseMessageViewControllerDelegate>
+@interface QGHChatViewController ()<QGHGroupHandleViewControllerDelegate, EaseMessageViewControllerDelegate, EaseMessageViewControllerDataSource>
 
 @property (nonatomic, strong) QGHProductInfo *productInfo;
+@property (nonatomic, strong) NSArray<QGHGroupUserModel *> *userArr;
 
 @end
 
@@ -35,6 +37,20 @@
     self = [self initWithConversationChatter:chatter conversationType:EMConversationTypeChat];
     if (self) {
         _productInfo = info;
+        self.delegate = self;
+        self.dataSource = self;
+    }
+    
+    return self;
+}
+
+
+- (instancetype)initWithGroupId:(NSString *)groupId UserArr:(NSArray<QGHGroupUserModel *> *)userArr {
+    self = [super initWithConversationChatter:groupId conversationType:EMConversationTypeGroupChat];
+    if (self) {
+        self.userArr = userArr;
+        self.delegate = self;
+        self.dataSource = self;
     }
     
     return self;
@@ -45,7 +61,6 @@
     [super viewDidLoad];
     
     self.showRefreshHeader = YES;
-    self.delegate = self;
     
     EaseEmotionManager *manager= [[EaseEmotionManager alloc] initWithType:EMEmotionDefault emotionRow:3 emotionCol:7 emotions:[EaseEmoji allEmoji]];
     [self.faceView setEmotionManagers:@[manager]];
@@ -54,6 +69,22 @@
     
     if (self.productInfo) {
         [self sendTextMessage:[self getProductInfoJson]];
+    }
+    
+    if (self.customChatType) {
+        [[EMClient sharedClient].groupManager asyncFetchGroupInfo:self.conversation.conversationId includeMembersList:YES success:^(EMGroup *aGroup) {
+            NSString *userIds = [NSString stringSeparateByCommaFromArray:aGroup.members];
+            [[MMHNetworkAdapter sharedAdapter] fetchGroupUserListFrom:self userIds:userIds succeededHandler:^(NSArray<QGHGroupUserModel *> *groupUserArr) {
+                self.userArr = groupUserArr;
+//                [self reloadConversation];
+                [self.tableView reloadData];
+            } failedHandler:^(NSError *error) {
+                //nothing
+            }];
+        } failure:^(EMError *aError) {
+            //nothing
+        }];
+        
     }
 }
 
@@ -66,7 +97,7 @@
                                                               action:@selector(popViewController)];
     self.navigationItem.leftBarButtonItems = @[goBackItem];
     
-    switch (self.chatType) {
+    switch (self.customChatType) {
         case QGHChatTypeChat: {
             UIBarButtonItem *clearItem = [[UIBarButtonItem alloc] initWithTitle:@"清除" style:UIBarButtonItemStylePlain target:self action:@selector(clearAction)];
             self.navigationItem.rightBarButtonItem = clearItem;
@@ -172,26 +203,24 @@
 {
     id<IMessageModel> model = nil;
     model = [[EaseMessageModel alloc] initWithMessage:message];
-    NSString *sender = message.from;
-    
-    if (model.isSender) {
-        model.nickname = [USER_DEFAULT objectForKey:DEFAULT_DoctorName];
-        model.avatarURLPath = [Public getPicUrlString:[[USER_DEFAULT objectForKey:DEFAULT_DoctorPhoto] integerValue] photoType:AvatarThumbnail];
-        model.avatarImage = [Public getGenderImage:[[USER_DEFAULT objectForKey:DEFAULT_DoctorGender] integerValue] role:1];
-    }else{
-        NSDictionary *ext = message.ext;
-        NSString *avatarURLPath = [Public blankString:[ext objectForKey:@"avatar"]];
-        NSString *name = [ext objectForKey:@"name"];
-        NSString *gender = [ext objectForKey:@"gender"];
-        if (ext == nil || ext.count == 0) {
-            model.nickname = @"患者";
-            model.avatarImage = [UIImage imageNamed:@"patient_boy"];
-        }else{
-            model.avatarURLPath = [Public getPicUrlString:[avatarURLPath integerValue] photoType:AvatarThumbnail];
-            model.nickname = name;
-            model.avatarImage = [Public getGenderImage:gender.integerValue role:2];
+    NSString *userId = message.from;
+
+
+    if (self.customChatType == QGHChatTypeGroup) {
+        for (QGHGroupUserModel *groupUser in self.userArr) {
+            if ([groupUser.userId isEqualToString:userId]) {
+                model.avatarURLPath = groupUser.avatar_url;
+                break;
+            }
+        }
+    } else {
+        if (model.isSender) {
+            model.avatarURLPath = [[MMHAccountSession currentSession] avatar];
+        } else {
+            model.avatarImage = [UIImage imageNamed:@"default_avatar"];
         }
     }
+    
     
     return model;
 }

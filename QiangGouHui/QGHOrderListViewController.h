@@ -13,4 +13,6 @@
 
 @property (nonatomic, assign) QGHOrderListItemStatus selectedStatus;
 
+- (void)fetchData;
+
 @end

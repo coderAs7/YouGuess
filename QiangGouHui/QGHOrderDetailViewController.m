@@ -12,6 +12,10 @@
 #import "QGHOrderDetailProductCell.h"
 #import "QGHOrderDetailCommonCell.h"
 #import "MMHNetworkAdapter+Order.h"
+#import "MMHPayWayViewController.h"
+#import "AppWebViewController.h"
+#import "MMHChatCustomerViewController.h"
+#import "QGHCommentViewController.h"
 
 
 static NSString *const QGHOrderDetailAddressCellIdentifier = @"QGHOrderDetailAddressCellIdentifier";
@@ -31,6 +35,9 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) UIImageView *timeImageView;
 @property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UIButton *button1;
+@property (nonatomic, strong) UIButton *button2;
+
 
 @property (nonatomic, strong) QGHOrderInfo *orderInfo;
 
@@ -99,6 +106,23 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
         make.height.mas_equalTo(48);
         make.bottom.mas_equalTo(0);
     }];
+    
+    
+    _button1 = [[UIButton alloc] init];
+    [_button1 setTitleColor:C21 forState:UIControlStateNormal];
+    _button1.backgroundColor = C20;
+    _button1.layer.cornerRadius = 3;
+    _button1.titleLabel.font = F4;
+    [_button1 addTarget:self action:@selector(button1Action) forControlEvents:UIControlEventTouchUpInside];
+    [_bottomView addSubview:_button1];
+    
+    _button2 = [[UIButton alloc] init];
+    [_button2 setTitleColor:C21 forState:UIControlStateNormal];
+    _button2.backgroundColor = C20;
+    _button2.layer.cornerRadius = 5;
+    _button2.titleLabel.font = F4;
+    [_button2 addTarget:self action:@selector(button2Action) forControlEvents:UIControlEventTouchUpInside];
+    [_bottomView addSubview:_button2];
 }
 
 
@@ -107,8 +131,71 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
         self.orderInfo = orderInfo;
         self.title = [self getViewContollerTitle];
         [self.tableView reloadData];
+        [self updateBottomViewButtons];
     } failedHandler:^(NSError *error) {
         [self.view showTipsWithError:error];
+    }];
+}
+
+
+- (void)updateBottomViewButtons {
+    switch (self.orderInfo.status) {
+        case QGHOrderListItemStatusToPay:
+            self.button1.hidden = NO;
+            self.button2.hidden = NO;
+            [self.button1 setTitle:@"立即支付" forState:UIControlStateNormal];
+            [self.button2 setTitle:@"取消订单" forState:UIControlStateNormal];
+            break;
+        case QGHOrderListItemStatusToExpress:
+            self.button1.hidden = YES;
+            self.button2.hidden = NO;
+            [self.button2 setTitle:@"申请退款 " forState:UIControlStateNormal];
+            break;
+        case QGHOrderListItemStatusToReceipt:
+            self.button1.hidden = NO;
+            self.button2.hidden = NO;
+            [self.button1 setTitle:@"查看物流" forState:UIControlStateNormal];
+            [self.button2 setTitle:@"确认收货" forState:UIControlStateNormal];
+            break;
+        case QGHOrderListItemStatusToComment:
+            self.button1.hidden = YES;
+            self.button2.hidden = NO;
+            [self.button2 setTitle:@"立即评价" forState:UIControlStateNormal];
+            break;
+        case QGHOrderListItemStatusFinish:
+            self.button1.hidden = YES;
+            self.button2.hidden = NO;
+            [self.button2 setTitle:@"退款退货" forState:UIControlStateNormal];
+            break;
+        case QGHOrderListItemStatusCancel:
+            self.button1.hidden = YES;
+            self.button2.hidden = NO;
+            [self.button2 setTitle:@"删除订单" forState:UIControlStateNormal];
+            break;
+        case QGHOrderListItemStatusRefund:
+            self.button1.hidden = YES;
+            self.button2.hidden = YES;
+            //            [self.button2 setTitle:@"追踪退款退货" forState:UIControlStateNormal];
+            break;
+        default:
+            break;
+    }
+    
+    CGFloat button1TitleWidth = [self.button1.titleLabel.text sizeWithFont:self.button1.titleLabel.font constrainedToWidth:CGFLOAT_MAX lineCount:1].width;
+    CGFloat button2TitleWidth = [self.button2.titleLabel.text sizeWithFont:self.button2.titleLabel.font constrainedToWidth:CGFLOAT_MAX lineCount:1].width;
+    
+    [self.button2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.view).offset(-5);
+        make.centerY.equalTo(self.bottomView);
+        make.height.mas_equalTo(32);
+        make.width.mas_equalTo(button2TitleWidth + 24);
+    }];
+    
+    [self.button1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.button2.mas_left).offset(-10);
+        make.centerY.equalTo(self.bottomView);
+        make.height.mas_equalTo(32);
+        make.width.mas_equalTo(button1TitleWidth + 24);
     }];
 }
 
@@ -148,9 +235,9 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
         return cell;
     } else if (indexPath.section == 2) {
         QGHOrderDetailCommonCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHOrderDetailExpressCellIdentifier forIndexPath:indexPath];
-        if (self.orderInfo.posttype) {
-            [cell setData:@[@{@"key": @"配送方式", @"value": self.orderInfo.posttype}]];
-        }
+//        if (self.orderInfo.posttype) {
+        [cell setData:@[@{@"key": @"配送方式", @"value": @"快递配送"}]];
+//        }
         
         return cell;
     } else if (indexPath.section == 3) {
@@ -252,5 +339,88 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
     }
 }
 
+
+#pragma mark - Actions
+
+
+- (void)button1Action {
+    switch (self.orderInfo.status) {
+        case QGHOrderListItemStatusToPay: {
+            MMHPayWayViewController *payWayVC = [[MMHPayWayViewController alloc] initWithPayPrice:self.orderInfo.amount orderNo:self.orderInfo.order_no payWay:^(MMHPayWay payWay) {
+                [[MMHPayManager sharedInstance] goToPayManager:self.orderInfo.order_no price:[NSString stringWithFormat:@"%g", self.orderInfo.amount] productTitle:@"抢购惠订单" payWay:payWay invoker:self successHandler:^{
+                    if ([self.delegate respondsToSelector:@selector(orderDetailViewControllerHandleOrder)]) {
+                        [self.delegate orderDetailViewControllerHandleOrder];
+                    }
+                } failHandler:^(NSString *error) {
+                    [self.view showTips:error];
+                    [self.navigationController popToViewController:self animated:YES];
+                }];
+            }];
+            [self.navigationController pushViewController:payWayVC animated:YES];
+            break;
+        }
+        case QGHOrderListItemStatusToReceipt: {
+            NSString *webUrl = [NSString stringWithFormat:@"http://m.kuaidi100.com/index_all.html?type=%@&%@", self.orderInfo.goodlist.firstObject.posttype, self.orderInfo.goodlist.firstObject.postid];
+            AppWebViewController *webViewVC = [[AppWebViewController alloc] init];
+            webViewVC.webUrl = webUrl;
+            [self.navigationController pushViewController:webViewVC animated:YES];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+
+- (void)button2Action {
+    switch (self.orderInfo.status) {
+        case QGHOrderListItemStatusToPay: {
+            [[MMHNetworkAdapter sharedAdapter] cancelOrderFrom:self orderId:self.orderInfo.orderId succeededHandler:^{
+                [self.view showTips:@"取消订单成功"];
+                if ([self.delegate respondsToSelector:@selector(orderDetailViewControllerHandleOrder)]) {
+                    [self.delegate orderDetailViewControllerHandleOrder];
+                }
+            } failedHandler:^(NSError *error) {
+                [self.view showTipsWithError:error];
+            }];
+            break;
+        }
+        case QGHOrderListItemStatusToExpress: {
+            MMHChatCustomerViewController *customerVC = [[MMHChatCustomerViewController alloc] init];
+            [self.navigationController pushViewController:customerVC animated:YES];
+        }
+        case QGHOrderListItemStatusToReceipt: {
+            [[MMHNetworkAdapter sharedAdapter] orderConfirmReceiptFrom:self order:self.orderInfo.orderId succeededHandler:^{
+                [self.view showTips:@"确认收货成功"];
+                if ([self.delegate respondsToSelector:@selector(orderDetailViewControllerHandleOrder)]) {
+                    [self.delegate orderDetailViewControllerHandleOrder];
+                }
+            } failedHandler:^(NSError *error) {
+                [self.view showTipsWithError:error];
+            }];
+        }
+        case QGHOrderListItemStatusToComment: {
+            QGHCommentViewController *commentVC = [[QGHCommentViewController alloc] initWithProduct:self.orderInfo.goodlist.firstObject orderId:self.orderInfo.orderId];
+            [self.navigationController pushViewController:commentVC animated:YES];
+            break;
+        }
+        case QGHOrderListItemStatusFinish: {
+            MMHChatCustomerViewController *customerVC = [[MMHChatCustomerViewController alloc] init];
+            [self.navigationController pushViewController:customerVC animated:YES];
+        }
+        case QGHOrderListItemStatusCancel: {
+            [[MMHNetworkAdapter sharedAdapter] cancelOrderFrom:self orderId:self.orderInfo.orderId succeededHandler:^{
+                [self.view showTips:@"删除订单成功"];
+                if ([self.delegate respondsToSelector:@selector(orderDetailViewControllerHandleOrder)]) {
+                    [self.delegate orderDetailViewControllerHandleOrder];
+                }
+            } failedHandler:^(NSError *error) {
+                [self.view showTipsWithError:error];
+            }];
+        }
+        default:
+            break;
+    }
+}
 
 @end

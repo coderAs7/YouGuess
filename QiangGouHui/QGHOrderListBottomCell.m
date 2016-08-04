@@ -99,7 +99,7 @@
     }];
     
     [self.button1 mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.button1.left).offset(-10);
+        make.right.equalTo(self.button2.mas_left).offset(-10);
         make.centerY.equalTo(self.contentView);
         make.height.mas_equalTo(32);
         make.width.mas_equalTo(button1TitleWidth + 24);

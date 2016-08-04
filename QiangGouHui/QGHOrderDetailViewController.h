@@ -8,7 +8,15 @@
 
 #import "BaseViewController.h"
 
+@protocol QGHOrderDetailViewControllerDelegate <NSObject>
+
+- (void)orderDetailViewControllerHandleOrder;
+
+@end
+
 @interface QGHOrderDetailViewController : BaseViewController
+
+@property (nonatomic, weak) id<QGHOrderDetailViewControllerDelegate> delegate;
 
 - (instancetype)initWithOrderId:(NSString *)orderId;
 

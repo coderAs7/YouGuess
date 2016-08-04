@@ -10,4 +10,13 @@
 
 @implementation QGHPersonalInfo
 
+- (NSString *)liveAddress {
+    if (!_liveAddress) {
+        return @"";
+    }
+    
+    return _liveAddress;
+}
+
+
 @end

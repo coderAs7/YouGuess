@@ -420,7 +420,14 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 - (NSString *)getSumPrice {
     if (self.productDetail) {
 //        self.priceLabel.text = [NSString stringWithFormat:@"¥%@", self.productDetail.product.min_price];
-        return self.productDetail.product.discount_price;
+        float sumPrice = 0;
+        if (self.productDetail.skuSelectModel) {
+            sumPrice += [[self.productDetail allSepcSelectedPrice].discount_price floatValue];
+            return [NSString stringWithFormat:@"%g", sumPrice];
+        } else {
+            return self.productDetail.product.discount_price;
+        }
+        
     } else {
         float sumPrice = 0;
         for (QGHCartItem *item in self.cartItemArr) {

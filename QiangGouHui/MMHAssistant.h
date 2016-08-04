@@ -164,6 +164,8 @@ extern NSString *MMHPathDocumentsAppendingPathComponent(NSString *pathComponent)
 - (NSString *)clearShi;
 - (NSString *)clearQu;
 
+- (NSString *)nonnullString;
+
 @end
 
 

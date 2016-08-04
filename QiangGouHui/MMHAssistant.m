@@ -851,6 +851,15 @@ NSString *MMHPathDocumentsAppendingPathComponent(NSString *pathComponent) {
 }
 
 
+- (NSString *)nonnullString {
+    if (self == nil || [self isKindOfClass:[NSNull class]]) {
+        return @"";
+    }
+    
+    return self;
+}
+
+
 @end
 
 

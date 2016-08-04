@@ -22,4 +22,15 @@
 }
 
 
+- (void)fetchGroupUserListFrom:(id)requester userIds:(NSString *)userIds succeededHandler:(void(^)(NSArray<QGHGroupUserModel *> *groupUserArr))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    [engine postWithAPI:@"_getuserdata_001" parameters:@{@"userToken": [[MMHAccountSession currentSession] token], @"userids": userIds} from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        NSArray *userArr = [responseJSONObject[@"info"] modelArrayOfClass:[QGHGroupUserModel class]];
+        succeededHandler(userArr);
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
+    }];
+}
+
+
 @end

@@ -520,7 +520,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
     
 //    if (![self.specFilter isCurrentSelectionAvailableForSale]) {
     QGHSKUPrice *price = [self.productDetail allSepcSelectedPrice];
-    if (price) {
+    if (price && price.stock != 0) {
         [self.priceLabel setSingleLineText:[NSString stringWithFormat:@"¥%@", price.discount_price]];
         self.confirmButton.enabled = YES;
     } else {

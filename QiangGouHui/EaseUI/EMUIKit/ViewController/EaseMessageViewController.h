@@ -202,4 +202,6 @@ shouldSendHasReadAckForMessage:(EMMessage *)message
 
 - (void)removeAllMessages;
 
+- (void)reloadConversation;
+
 @end

@@ -407,7 +407,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     }
     
     QGHChatViewController *chatVC = [[QGHChatViewController alloc] initWithProductInfo:self.productDetailModel.product];
-    chatVC.chatType = QGHChatTypeChat;
+    chatVC.customChatType = QGHChatTypeChat;
     [self.navigationController pushViewController:chatVC animated:YES];
 //    MMHChatCustomerViewController *chatCustomerVC = [[MMHChatCustomerViewController alloc] init];
 //    [self.navigationController pushViewController:chatCustomerVC animated:YES];

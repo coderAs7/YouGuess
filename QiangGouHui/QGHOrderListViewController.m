@@ -17,6 +17,7 @@
 #import "MMHPayWayViewController.h"
 #import "AppWebViewController.h"
 #import "MMHChatCustomerViewController.h"
+#import "QGHCommentViewController.h"
 
 
 static NSString *const QGHOrderListTitleCellIdentifier = @"QGHOrderListTitleCellIdentifier";
@@ -24,7 +25,7 @@ static NSString *const QGHOrderListCellIdentifier = @"QGHOrderListCellIdentifier
 static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCellIdentifier";
 
 
-@interface QGHOrderListViewController ()<UITableViewDataSource, UITableViewDelegate, HTHorizontalSelectionListDelegate, HTHorizontalSelectionListDataSource, QGHOrderListCellDelegate, MMHTimelineDelegate, QGHOrderListBottomCellDelegate>
+@interface QGHOrderListViewController ()<UITableViewDataSource, UITableViewDelegate, HTHorizontalSelectionListDelegate, HTHorizontalSelectionListDataSource, QGHOrderListCellDelegate, MMHTimelineDelegate, QGHOrderListBottomCellDelegate, QGHOrderDetailViewControllerDelegate>
 
 @property (nonatomic, strong) NSArray *segmentItemArray;
 @property (nonatomic, strong) MMHUnderlinedSegmentedControl *segmentList;
@@ -214,6 +215,7 @@ static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCe
     
     if (indexPath.row != 0 && indexPath.row != item.goodlist.count + 1) {
         QGHOrderDetailViewController *orderDetailVC = [[QGHOrderDetailViewController alloc] initWithOrderId:item.orderId];
+        orderDetailVC.delegate = self;
         [self.navigationController pushViewController:orderDetailVC animated:YES];
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
@@ -363,7 +365,8 @@ static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCe
 
 
 - (void)orderListBottomCellToComment:(QGHOrderListBottomCell *)cell {
-
+    QGHCommentViewController *commentVC = [[QGHCommentViewController alloc] initWithProduct:cell.item.goodlist.firstObject orderId:cell.item.orderId];
+    [self.navigationController pushViewController:commentVC animated:YES];
 }
 
 
@@ -380,6 +383,15 @@ static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCe
     } failedHandler:^(NSError *error) {
         [self.view showTipsWithError:error];
     }];
+}
+
+
+#pragma mark - QGHOrderDetailViewControllerDelegate
+
+
+- (void)orderDetailViewControllerHandleOrder {
+    [self fetchData];
+    [self.navigationController popToViewController:self animated:YES];
 }
 
 

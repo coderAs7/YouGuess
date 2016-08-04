@@ -53,7 +53,11 @@
 - (void)setProductDetailModel:(QGHProductDetailModel *)productDetailModel {
     [self.productImage updateViewWithImageAtURL:productDetailModel.product.img_path.firstObject];
     self.nameLabel.text = productDetailModel.product.title;
-    self.priceLabel.text = [NSString stringWithFormat:@"¥%@", productDetailModel.product.discount_price];
+    NSString *priceStr = [productDetailModel allSepcSelectedPrice].discount_price;
+    if (!priceStr) {
+        priceStr = productDetailModel.product.discount_price;
+    }
+    self.priceLabel.text = [NSString stringWithFormat:@"¥%@", priceStr];
     self.colorLabel.text = @"";
     self.sizeLabel.text = @"";
     self.numLabel.text = [NSString stringWithFormat:@"x%ld", productDetailModel.skuSelectModel.count];
