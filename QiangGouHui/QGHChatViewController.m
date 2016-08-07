@@ -86,6 +86,10 @@
         }];
         
     }
+    
+    if (self.transferOrderNo) {
+        [self sendTextMessage:[NSString stringWithFormat:@"用户申请退款 (订单号%@)", self.transferOrderNo]];
+    }
 }
 
 

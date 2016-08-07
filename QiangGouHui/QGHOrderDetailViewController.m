@@ -360,7 +360,9 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
             break;
         }
         case QGHOrderListItemStatusToReceipt: {
-            NSString *webUrl = [NSString stringWithFormat:@"http://m.kuaidi100.com/index_all.html?type=%@&%@", self.orderInfo.goodlist.firstObject.posttype, self.orderInfo.goodlist.firstObject.postid];
+            NSString *encodedValue = [self.orderInfo.posttype stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString *webUrl = [NSString stringWithFormat:@"http://m.kuaidi100.com/index_all.html?type=%@&postid=%@", encodedValue, self.orderInfo.postid];
+            
             AppWebViewController *webViewVC = [[AppWebViewController alloc] init];
             webViewVC.webUrl = webUrl;
             [self.navigationController pushViewController:webViewVC animated:YES];
@@ -387,6 +389,7 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
         }
         case QGHOrderListItemStatusToExpress: {
             MMHChatCustomerViewController *customerVC = [[MMHChatCustomerViewController alloc] init];
+            customerVC.transferOrderNo = self.orderInfo.order_no;
             [self.navigationController pushViewController:customerVC animated:YES];
         }
         case QGHOrderListItemStatusToReceipt: {
@@ -406,6 +409,7 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
         }
         case QGHOrderListItemStatusFinish: {
             MMHChatCustomerViewController *customerVC = [[MMHChatCustomerViewController alloc] init];
+            customerVC.transferOrderNo = self.orderInfo.order_no;
             [self.navigationController pushViewController:customerVC animated:YES];
         }
         case QGHOrderListItemStatusCancel: {

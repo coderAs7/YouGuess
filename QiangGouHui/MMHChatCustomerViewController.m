@@ -9,7 +9,7 @@
 #import "MMHChatCustomerViewController.h"
 //#import "AbstractViewController+Chatting.h"
 #import "QGHChatViewController.h"
-
+#import "MMHAccountSession.h"
 
 @interface MMHChatCustomerViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -175,8 +175,17 @@
 //        [MMHTool callCustomerServer:weakViewController.view phoneNumber:nil];
 //    }
     if (indexPath.section == 0) {
-        QGHChatViewController *chatVC = [[QGHChatViewController alloc] initWithProductInfo:nil];
-        [self.navigationController pushViewController:chatVC animated:YES];
+        if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
+            [self presentLoginViewControllerWithSucceededHandler:^{
+                QGHChatViewController *chatVC = [[QGHChatViewController alloc] initWithProductInfo:nil];
+                chatVC.transferOrderNo = self.transferOrderNo;
+                [self.navigationController pushViewController:chatVC animated:YES];
+            }];
+        } else {
+            QGHChatViewController *chatVC = [[QGHChatViewController alloc] initWithProductInfo:nil];
+            chatVC.transferOrderNo = self.transferOrderNo;
+            [self.navigationController pushViewController:chatVC animated:YES];
+        }
     } else {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://4008813879"]];
     }

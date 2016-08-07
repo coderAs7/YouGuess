@@ -27,6 +27,7 @@ typedef NS_ENUM(NSInteger, QGHChatType) {
 
 @property (nonatomic, weak) id<QGHChatViewControllerDelegate> chatDelegate;
 @property (nonatomic, assign) QGHChatType customChatType;
+@property (nonatomic, copy) NSString *transferOrderNo;
 
 - (instancetype)initWithProductInfo:(QGHProductInfo *)info;
 - (instancetype)initWithGroupId:(NSString *)groupId UserArr:(NSArray<QGHGroupUserModel *> *)userArr;

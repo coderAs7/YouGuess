@@ -242,8 +242,12 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
         }
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"comments"]) {
         if (indexPath.row == 0) {
+            NSString *star = [NSString stringWithFormat:@"%g", [self.scoreInfo.star floatValue]];
+            if ([star rangeOfString:@"."].location != NSNotFound) {
+                star = [NSString stringWithFormat:@"%.2f", [self.scoreInfo.star floatValue]];
+            }
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHProductDetailCommentTitleCellIdentifier forIndexPath:indexPath];
-            cell.textLabel.text = [NSString stringWithFormat:@"商品评价(%@条，%@好评率)", self.scoreInfo.count, self.scoreInfo.star];
+            cell.textLabel.text = [NSString stringWithFormat:@"商品评价(%@条，%@好评率)", self.scoreInfo.count, star];
             cell.textLabel.font = F5;
             cell.textLabel.textColor = C8;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

@@ -243,10 +243,12 @@ static NSString *const QGHPersonalInfoCommonCellIdentifier = @"QGHPersonalInfoCo
 - (void)takeSex {
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"选择图片来源" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"帅哥" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //TODO
+        self.personalInfo.sex = @"1";
+        [self.tableView reloadData];
     }];
     UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"美女" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //TODO
+        self.personalInfo.sex = @"2";
+        [self.tableView reloadData];
     }];
     UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         //TODO

@@ -56,6 +56,7 @@
 //}
 
 - (void)callWeChatPay:(QGHWeChatPrePayModel *)prePayModel {
+#if !TARGET_IPHONE_SIMULATOR
     PayReq *request = [[PayReq alloc] init];
     request.partnerId = prePayModel.partnerid;
     request.prepayId = prePayModel.prepayid;
@@ -64,6 +65,7 @@
     request.timeStamp = prePayModel.timestamp;
     request.sign = prePayModel.sign;
     [WXApi sendReq: request];
+#endif
 }
 
 

@@ -30,6 +30,9 @@ typedef NS_ENUM(NSInteger, QGHOrderListItemStatus) {
 @property (nonatomic, strong) NSArray<QGHOrderProduct *> *goodlist;
 @property (nonatomic, assign) QGHOrderListItemStatus status;
 @property (nonatomic, assign) int type;
+@property (nonatomic, copy) NSString *postid;
+@property (nonatomic, copy) NSString *posttype;
+
 
 - (NSString *)getGoodsTitle;
 

@@ -35,12 +35,12 @@
 }
 
 
-- (void)fetchAboutUsFrom:(id)requester succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+- (void)fetchAboutUsFrom:(id)requester succeededHandler:(void(^)(NSString *aboutUsStr))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
     NSDictionary *parameters = @{@"userToken": [[MMHAccountSession currentSession] token]};
     
     MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
     [engine postWithAPI:@"_help_002" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
-        succeededHandler();
+        succeededHandler([responseJSONObject objectForKey:@"info"]);
     } failedBlock:^(NSError *error) {
         failedHandler(error);
     }];
@@ -66,6 +66,17 @@
     MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
     [engine postWithAPI:@"_update_userinfo_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
         succeededHandler();
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
+    }];
+}
+
+
+- (void)checkVersion:(id)requester succeededHandler:(void(^)(NSString *version))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    NSDictionary *parameters = @{@"platform": @(102)};
+    
+    [[MMHNetworkEngine sharedEngine] postWithAPI:@"_app_check_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        succeededHandler([responseJSONObject[@"info"] objectForKey:@"app_version"]);
     } failedBlock:^(NSError *error) {
         failedHandler(error);
     }];

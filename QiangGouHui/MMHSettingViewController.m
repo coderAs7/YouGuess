@@ -36,6 +36,7 @@
 #import "MMHSuggestViewController.h"
 #import "QGHAboutUsViewController.h"
 #import "QGHRegisterViewController.h"
+#import "MMHNetworkAdapter+Personal.h"
 
 
 NSString *const MMHSettingViewControllerMMHTableViewCellIdentifier = @"MMHSettingViewControllerMMHTableViewCellIdentifier";
@@ -195,7 +196,16 @@ NSString *const MMHSettingViewControllerMMHTableViewCellIdentifier = @"MMHSettin
         QGHAboutUsViewController *aboutUsVC = [[QGHAboutUsViewController alloc] init];
         [self.navigationController pushViewController:aboutUsVC animated:YES];
     } else if ([[self cellNameForIndexPath:indexPath] isEqualToString:@"检查版本"]) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/fen-xiang/id1138627393?l=zh&ls=1&mt=8"]];
+        [[MMHNetworkAdapter sharedAdapter] checkVersion:self succeededHandler:^(NSString *version) {
+            NSString *localVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+            if ([localVersion compare:version] == NSOrderedAscending) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/fen-xiang/id1138627393?l=zh&ls=1&mt=8"]];
+            } else {
+                [self.view showTips:@"已经是最新版本"];
+            }
+        } failedHandler:^(NSError *error) {
+            [self.view showTipsWithError:error];
+        }];
     }
 
 }

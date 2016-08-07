@@ -121,6 +121,7 @@
     }];
 }
 
+#if !TARGET_IPHONE_SIMULATOR
 - (void)onResp:(BaseResp *)resp {
     if ([resp isKindOfClass:[PayResp class]]) {
         PayResp *response = (PayResp *)resp;
@@ -131,6 +132,6 @@
         
     }
 }
-
+#endif
 
 @end

@@ -70,7 +70,7 @@
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
-    [self showHudInView:self.view hint:@""];
+//    [self showHudInView:self.view hint:@""];
 
 }
 

@@ -149,6 +149,7 @@
     [_inputView addSubview:line3];
     
     _telTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 0, mmh_screen_width() - 30, 48)];
+    _telTextField.keyboardType = UIKeyboardTypeNumberPad;
     _telTextField.font = F4;
     _telTextField.textColor = C7;
     _telTextField.placeholder = @"请输入手机号";
@@ -191,6 +192,7 @@
     
     _verifyCodeTextField = [[UITextField alloc] initWithFrame:CGRectMake(15, 96, mmh_screen_width() - 30, 48)];
     [_verifyCodeTextField setMaxX:_getVerifyCodeButton.left - 15];
+    _verifyCodeTextField.keyboardType = UIKeyboardTypeNumberPad;
     _verifyCodeTextField.font = F4;
     _verifyCodeTextField.textColor = C7;
     _verifyCodeTextField.placeholder = @"请输入验证码";
@@ -358,5 +360,9 @@
     [_codeView changeCode];
 }
 
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
 
 @end

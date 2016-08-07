@@ -22,6 +22,7 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
 @property (nonatomic, strong) NSMutableArray<QGHCartItem *> *cartItemArr;
 @property (nonatomic, strong) UILabel *sumLabel;
 @property (nonatomic, strong) UIButton *allSelectButton;
+@property (nonatomic, strong) UIButton *buyNowButton;
 
 @end
 
@@ -36,7 +37,11 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
     [self makeTableView];
     [self makeBottomView];
     
-    [self fetchData];
+//    if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
+//        [self presentLoginViewControllerWithSucceededHandler:^{
+//            [self fetchData];
+//        }];
+//    }
 }
 
 
@@ -92,12 +97,15 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
     
     
     UIButton *buyNowButton = [[UIButton alloc] initWithFrame:CGRectMake(mmh_screen_width() - 110, 0, 110, 48)];
-    buyNowButton.backgroundColor = C20;
+//    buyNowButton.backgroundColor = C20;
+    [buyNowButton setBackgroundImage:[UIImage patternImageWithColor:C20] forState:UIControlStateNormal];
+    [buyNowButton setBackgroundImage:[UIImage patternImageWithColor:C5] forState:UIControlStateDisabled];
     [buyNowButton setTitle:@"立即购买" forState:UIControlStateNormal];
     [buyNowButton setTitleColor:C21 forState:UIControlStateNormal];
     buyNowButton.titleLabel.font = F5;
     [buyNowButton addTarget:self action:@selector(buyNowButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:buyNowButton];
+    self.buyNowButton = buyNowButton;
     
     _sumLabel = [[UILabel alloc] init];
     _sumLabel.font = F3;
@@ -130,6 +138,11 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
         [self.tableView reloadData];
         [self.allSelectButton setImage:[UIImage imageNamed:@"dizhi_xuanzhong"] forState:UIControlStateNormal];
         [self setSumLabelValue];
+        if (itemArr.count == 0) {
+            self.buyNowButton.enabled = NO;
+        } else {
+            self.buyNowButton.enabled = YES;
+        }
     } failedHandler:^(NSError *error) {
         [self.view showTipsWithError:error];
     }];

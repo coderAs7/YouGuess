@@ -53,7 +53,7 @@
         UIImageView *starView = [[UIImageView alloc] initWithImage:star];
         starView.frame = CGRectMake(i * (star.size.width + 6), (22 - star.size.height) * 0.5, star.size.width, star.size.height);
         [self.starBackView addSubview:starView];
-        originX = CGRectGetMaxX(self.starBackView.frame) + 6;
+        originX = CGRectGetMaxX(starView.frame) + 6;
     }
     
     for (NSInteger i = 0; i < 5 - num; ++i) {

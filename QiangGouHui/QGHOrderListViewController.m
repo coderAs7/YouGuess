@@ -342,12 +342,14 @@ static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCe
 
 - (void)orderListBottomCellToPayApplyRefunding:(QGHOrderListBottomCell *)cell {
     MMHChatCustomerViewController *customerVC = [[MMHChatCustomerViewController alloc] init];
+    customerVC.transferOrderNo = cell.item.order_no;
     [self.navigationController pushViewController:customerVC animated:YES];
 }
 
 
 - (void)orderListBottomCellToLookExpress:(QGHOrderListBottomCell *)cell {
-    NSString *webUrl = [NSString stringWithFormat:@"http://m.kuaidi100.com/index_all.html?type=%@&%@", cell.item.goodlist.firstObject.posttype, cell.item.goodlist.firstObject.postid];
+    NSString *encodedValue = [cell.item.posttype stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *webUrl = [NSString stringWithFormat:@"http://m.kuaidi100.com/index_all.html?type=%@&postid=%@", encodedValue, cell.item.postid];
     AppWebViewController *webViewVC = [[AppWebViewController alloc] init];
     webViewVC.webUrl = webUrl;
     [self.navigationController pushViewController:webViewVC animated:YES];
@@ -372,6 +374,7 @@ static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCe
 
 - (void)orderListBottomCellToRefundAndGoods:(QGHOrderListBottomCell *)cell {
     MMHChatCustomerViewController *customerVC = [[MMHChatCustomerViewController alloc] init];
+    customerVC.transferOrderNo = cell.item.order_no;
     [self.navigationController pushViewController:customerVC animated:YES];
 }
 

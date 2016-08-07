@@ -11,7 +11,7 @@
 @interface QGHOrderNumModel : MMHFetchModel
 
 @property (nonatomic, assign) NSInteger waitpay;
-@property (nonatomic, assign) NSInteger delivery;
+@property (nonatomic, assign) NSInteger deliver;
 @property (nonatomic, assign) NSInteger receipt;
 @property (nonatomic, assign) NSInteger score;
 @property (nonatomic, assign) NSInteger refund;

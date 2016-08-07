@@ -16,7 +16,7 @@
 #import "MMHAccountSession.h"
 
 
-@interface QGHTabBarController ()
+@interface QGHTabBarController ()<UITabBarControllerDelegate>
 
 @end
 
@@ -24,6 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.delegate = self;
     
     QGHFirstViewController *firstViewController = [[QGHFirstViewController alloc] init];
     firstViewController.title = @"首页";
@@ -139,5 +141,25 @@
     
     [tabBarController setSelectedIndex:QGHTabBarControllerViewControllerIndexCart];
 }
+
+
+#pragma mark - UITabBarControllerDelegate
+
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController NS_AVAILABLE_IOS(3_0) {
+    NSInteger index = [tabBarController.viewControllers indexOfObject:viewController];
+    if (index == QGHTabBarControllerViewControllerIndexCart || index == QGHTabBarControllerViewControllerIndexPersonal) {
+        if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
+            QGHNavigationController *navVC = (QGHNavigationController *)tabBarController.selectedViewController;
+            [(BaseViewController *)navVC.topViewController presentLoginViewControllerWithSucceededHandler:^{
+                //nothing
+            }];
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
 
 @end

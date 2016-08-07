@@ -115,6 +115,7 @@ static NSString *const QGHAddAddressCommonCellIdentifier = @"QGHAddAddressCommon
             cell.placeHolder = @"收货人姓名";
             cell.textField.delegate = self;
             cell.textField.tag = 1000;
+            cell.textField.keyboardType = UIKeyboardTypeDefault;
             self.nameField = cell.textField;
             if (self.transferAddressModel.username.length > 0) {
                 self.nameField.text = self.transferAddressModel.username;
@@ -127,6 +128,7 @@ static NSString *const QGHAddAddressCommonCellIdentifier = @"QGHAddAddressCommon
             cell.placeHolder = @"请输入联系电话";
             cell.textField.delegate = self;
             cell.textField.tag = 1001;
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             self.phoneField = cell.textField;
             if (self.transferAddressModel.phone > 0) {
                 self.phoneField.text = self.transferAddressModel.phone;
@@ -143,6 +145,7 @@ static NSString *const QGHAddAddressCommonCellIdentifier = @"QGHAddAddressCommon
             }
             cell.textField.text = text;
             cell.textField.userInteractionEnabled = NO;
+            cell.textField.keyboardType = UIKeyboardTypeDefault;
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
@@ -152,6 +155,7 @@ static NSString *const QGHAddAddressCommonCellIdentifier = @"QGHAddAddressCommon
             cell.placeHolder = @"具体的详细地址（如街道、门牌号）";
             cell.textField.delegate = self;
             cell.textField.tag = 1002;
+            cell.textField.keyboardType = UIKeyboardTypeDefault;
             self.addressField = cell.textField;
             if (self.transferAddressModel.address > 0) {
                 cell.textField.text = self.transferAddressModel.address;
@@ -257,6 +261,11 @@ static NSString *const QGHAddAddressCommonCellIdentifier = @"QGHAddAddressCommon
 
 
 - (void)confirmButtonAction {
+    if (self.transferAddressModel.phone.length != 11) {
+        [self.view showTips:@"请输入正确的手机号码"];
+        return;
+    }
+    
     [self.view showProcessingView];
     [[MMHNetworkAdapter sharedAdapter] addOrModifyAddressFrom:self deliveryId:nil addAddressModel:self.transferAddressModel succeededHandler:^{
         [self.view hideProcessingView];

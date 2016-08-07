@@ -144,7 +144,7 @@
 
 - (void)updateOrderNumModel:(QGHOrderNumModel *)model {
     self.buttons[0].badgeCount = model.waitpay;
-    self.buttons[1].badgeCount = model.delivery;
+    self.buttons[1].badgeCount = model.deliver;
     self.buttons[2].badgeCount = model.receipt;
     self.buttons[3].badgeCount = model.score;
     self.buttons[4].badgeCount = model.refund;

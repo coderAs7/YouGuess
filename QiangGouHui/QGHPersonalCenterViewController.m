@@ -48,6 +48,12 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginNotification) name:MMHUserDidLoginNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutNotification) name:MMHUserDidLogoutNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(personalInfoUpdateNotification) name:MMHUserPersonalInformationChangedNotification object:nil];
+    
+//    if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
+//        [self presentLoginViewControllerWithSucceededHandler:^{
+//            [self fetchData];
+//        }];
+//    }
 }
 
 
@@ -184,16 +190,27 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            QGHOrderListViewController *orderListVC = [[QGHOrderListViewController alloc] init];
-            [self.navigationController pushViewController:orderListVC animated:YES];
+            if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
+                [self presentLoginViewControllerWithSucceededHandler:^{
+                }];
+            } else {
+                QGHOrderListViewController *orderListVC = [[QGHOrderListViewController alloc] init];
+                [self.navigationController pushViewController:orderListVC animated:YES];
+            }
         }
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             MMHChatCustomerViewController *chatCustomerVC = [[MMHChatCustomerViewController alloc] init];
             [self.navigationController pushViewController:chatCustomerVC animated:YES];
         } else if (indexPath.row == 1) {
-            MMHSettingViewController *settingVC = [[MMHSettingViewController alloc] init];
-            [self.navigationController pushViewController:settingVC animated:YES];
+            if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
+                [self presentLoginViewControllerWithSucceededHandler:^{
+                }];
+            } else {
+                MMHSettingViewController *settingVC = [[MMHSettingViewController alloc] init];
+                [self.navigationController pushViewController:settingVC animated:YES];
+            }
+            
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -203,6 +220,12 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
 #pragma mark - MMHPersonalCenterAllOrderCellDelegate
 
 - (void)didClickPersonalCenterAllOrderCellButton:(NSInteger)index {
+    if (![[MMHAccountSession currentSession] alreadyLoggedIn]) {
+        [self presentLoginViewControllerWithSucceededHandler:^{
+        }];
+        return;
+    }
+    
     QGHOrderListItemStatus status;
     switch (index) {
         case 0:
@@ -250,6 +273,8 @@ static NSString *QGHPersonalCenterOrderCellIdentifier = @"QGHPersonalCenterOrder
 - (void)logoutNotification {
     self.loginButton.hidden = NO;
     self.personalView.hidden = YES;
+    self.numModel = nil;
+    [self.tableView reloadData];
 }
 
 

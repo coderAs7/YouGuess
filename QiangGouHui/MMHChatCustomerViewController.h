@@ -10,4 +10,6 @@
 
 @interface MMHChatCustomerViewController : BaseViewController
 
+@property (nonatomic, copy) NSString *transferOrderNo;
+
 @end

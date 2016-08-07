@@ -16,10 +16,12 @@
 
 - (void)sendSuggestionFrom:(id)requester content:(NSString *)content succeededHandler:(void(^)())succeededHandler failHandler:(MMHNetworkFailedHandler)failedHandler;
 
-- (void)fetchAboutUsFrom:(id)requester succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
+- (void)fetchAboutUsFrom:(id)requester succeededHandler:(void(^)(NSString *aboutUsStr))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
 
 - (void)uploadHeaderImageFrom:(id)requester image:(UIImage *)image succeededHandler:(void(^)(NSString *urlString))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
 
 - (void)savePersonalInfoFrom:(id)requester personalInfo:(QGHPersonalInfo *)personalInfo succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
+
+- (void)checkVersion:(id)requester succeededHandler:(void(^)(NSString *version))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
 
 @end
