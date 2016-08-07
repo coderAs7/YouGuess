@@ -195,7 +195,11 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
 //    [self.specFilter selectDefaultIndexes];
     [self updateViews];
     
-    self.contentView.height = 88 + self.collectionView.collectionViewLayout.collectionViewContentSize.height + 120;
+    CGFloat totalHeight = 88 + self.collectionView.collectionViewLayout.collectionViewContentSize.height + 120;
+    self.contentView.height = MIN(totalHeight, [[UIScreen mainScreen] applicationFrame].size.height * 0.75f);
+    
+    self.collectionView.height = self.contentView.height - 88 - 120;
+    
     [self.confirmView setBottom:self.contentView.height];
 }
 

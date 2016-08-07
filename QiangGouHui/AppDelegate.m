@@ -10,17 +10,17 @@
 #import "QGHTabBarController.h"
 #import "QGHLocationManager.h"
 #import "MMHAccountSession.h"
-#import "MMHWeChatAdapter.h"
+//#import "MMHWeChatAdapter.h"
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
-#import "WXApi.h"
+//#import "WXApi.h"
 #import "AppDelegate+EaseMob.h"
 #import <AlipaySDK/AlipaySDK.h>
 
 
-@interface AppDelegate ()<WXApiDelegate>
+@interface AppDelegate ()/*<WXApiDelegate>*/
 
 @end
 
@@ -28,7 +28,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [MMHWeChatAdapter start];
+//    [MMHWeChatAdapter start];
     [self shareSDKConnectApp];
     [MMHAccountSession start];
     [self easemobApplication:application didFinishLaunchingWithOptions:launchOptions];
@@ -72,9 +72,9 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary*)options {
 
-    if ([MMHWeChatAdapter shouldHandleOpenURL:url]) {
-        return [MMHWeChatAdapter handleOpenURL:url delegate:self];
-    }
+//    if ([MMHWeChatAdapter shouldHandleOpenURL:url]) {
+//        return [MMHWeChatAdapter handleOpenURL:url delegate:self];
+//    }
     
     if ([url.host isEqualToString:@"safepay"]) {
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
@@ -102,7 +102,7 @@
                 [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
                 break;
             case SSDKPlatformTypeWechat:
-                [ShareSDKConnector connectWeChat:[WXApi class]];
+//                [ShareSDKConnector connectWeChat:[WXApi class]];
                 break;
             default:
                 break;
