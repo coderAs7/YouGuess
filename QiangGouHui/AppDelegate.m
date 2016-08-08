@@ -28,7 +28,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-//    [MMHWeChatAdapter start];
+    [MMHWeChatAdapter start];
     [self shareSDKConnectApp];
     [MMHAccountSession start];
     [self easemobApplication:application didFinishLaunchingWithOptions:launchOptions];
@@ -72,9 +72,9 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary*)options {
 
-//    if ([MMHWeChatAdapter shouldHandleOpenURL:url]) {
-//        return [MMHWeChatAdapter handleOpenURL:url delegate:self];
-//    }
+    if ([MMHWeChatAdapter shouldHandleOpenURL:url]) {
+        return [MMHWeChatAdapter handleOpenURL:url delegate:self];
+    }
     
     if ([url.host isEqualToString:@"safepay"]) {
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {

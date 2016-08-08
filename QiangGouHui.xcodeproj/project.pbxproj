@@ -32,6 +32,7 @@
 		4159554B1D04685D00AC2BD4 /* QGHFirstBannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 415955491D04685D00AC2BD4 /* QGHFirstBannerCell.xib */; };
 		415955511D046DC800AC2BD4 /* QGHRushPurchaseItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 415955501D046DC800AC2BD4 /* QGHRushPurchaseItemView.m */; };
 		415955551D046F5000AC2BD4 /* QHGRushPurchaseItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 415955541D046F5000AC2BD4 /* QHGRushPurchaseItemView.xib */; };
+		415E47EA1D58EAA400047080 /* ShareSDKUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 415E47E91D58EAA400047080 /* ShareSDKUI.bundle */; };
 		41682BA71D57016800B1F85E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41682BA61D57016800B1F85E /* SystemConfiguration.framework */; };
 		41682BB61D570D2A00B1F85E /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41682BB11D570D2A00B1F85E /* libWeChatSDK.a */; };
 		41682BB71D570D2A00B1F85E /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 41682BB21D570D2A00B1F85E /* README.txt */; };
@@ -168,7 +169,6 @@
 		41A084D51D47997500073DED /* QGHPersonalInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A084D41D47997500073DED /* QGHPersonalInfo.m */; };
 		41A084EB1D47B58E00073DED /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A084D71D47B58E00073DED /* ShareSDK.framework */; };
 		41A084EC1D47B58E00073DED /* ShareSDKExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A084DA1D47B58E00073DED /* ShareSDKExtension.framework */; };
-		41A084ED1D47B58E00073DED /* ShareSDKUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41A084DB1D47B58E00073DED /* ShareSDKUI.bundle */; };
 		41A084EE1D47B58E00073DED /* ShareSDKUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A084DC1D47B58E00073DED /* ShareSDKUI.framework */; };
 		41A084EF1D47B58E00073DED /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A084DF1D47B58E00073DED /* TencentOpenAPI.framework */; };
 		41A084F01D47B58E00073DED /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41A084E01D47B58E00073DED /* TencentOpenApi_IOS_Bundle.bundle */; };
@@ -363,6 +363,7 @@
 		4159554F1D046DC800AC2BD4 /* QGHRushPurchaseItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHRushPurchaseItemView.h; sourceTree = "<group>"; };
 		415955501D046DC800AC2BD4 /* QGHRushPurchaseItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHRushPurchaseItemView.m; sourceTree = "<group>"; };
 		415955541D046F5000AC2BD4 /* QHGRushPurchaseItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QHGRushPurchaseItemView.xib; sourceTree = "<group>"; };
+		415E47E91D58EAA400047080 /* ShareSDKUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKUI.bundle; sourceTree = "<group>"; };
 		41682BA61D57016800B1F85E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		41682BB11D570D2A00B1F85E /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		41682BB21D570D2A00B1F85E /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
@@ -680,7 +681,6 @@
 		41A084D41D47997500073DED /* QGHPersonalInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHPersonalInfo.m; sourceTree = "<group>"; };
 		41A084D71D47B58E00073DED /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
 		41A084DA1D47B58E00073DED /* ShareSDKExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKExtension.framework; sourceTree = "<group>"; };
-		41A084DB1D47B58E00073DED /* ShareSDKUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKUI.bundle; sourceTree = "<group>"; };
 		41A084DC1D47B58E00073DED /* ShareSDKUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKUI.framework; sourceTree = "<group>"; };
 		41A084DF1D47B58E00073DED /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		41A084E01D47B58E00073DED /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
@@ -1813,8 +1813,8 @@
 		41A084D91D47B58E00073DED /* Optional */ = {
 			isa = PBXGroup;
 			children = (
+				415E47E91D58EAA400047080 /* ShareSDKUI.bundle */,
 				41A084DA1D47B58E00073DED /* ShareSDKExtension.framework */,
-				41A084DB1D47B58E00073DED /* ShareSDKUI.bundle */,
 				41A084DC1D47B58E00073DED /* ShareSDKUI.framework */,
 			);
 			path = Optional;
@@ -2677,7 +2677,6 @@
 				419568E01D4C68270079D988 /* MWPhotoBrowser.bundle in Resources */,
 				41348C281D41227E006EC087 /* QGHProductListCell.xib in Resources */,
 				41E97F3A1D31F61500335C78 /* area.plist in Resources */,
-				41A084ED1D47B58E00073DED /* ShareSDKUI.bundle in Resources */,
 				41682BBE1D570D6300B1F85E /* read_me.txt in Resources */,
 				41682BB71D570D2A00B1F85E /* README.txt in Resources */,
 				41BF0FA71CFB4F6100FB23C2 /* LaunchScreen.storyboard in Resources */,
@@ -2685,6 +2684,7 @@
 				41A084F41D47B58E00073DED /* ShareSDK.bundle in Resources */,
 				41DC07CA1D26B0ED00DDC5DD /* QGHProductDetailInfoCell.xib in Resources */,
 				41DC07F61D2950C400DDC5DD /* citydict.plist in Resources */,
+				415E47EA1D58EAA400047080 /* ShareSDKUI.bundle in Resources */,
 				4186F82C1D3B3874004B91A9 /* QGHOrderListBottomCell.xib in Resources */,
 				41E97F451D31FA4C00335C78 /* QGHCommonEditCell.xib in Resources */,
 				41DC079D1D1FA36400DDC5DD /* QGHOrderDetailProductCell.xib in Resources */,

@@ -184,8 +184,21 @@
     [weChatLabel sizeToFit];
     [self.view addSubview:weChatLabel];
     
+    UIButton *weiboButton = [[UIButton alloc] init];
+    [weiboButton setImage:[UIImage imageNamed:@"sns_icon_2"] forState:UIControlStateNormal];
+    [weiboButton sizeToFit];
+    [weiboButton addTarget:self action:@selector(weiboButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:weiboButton];
+    
+    UILabel *weiboLabel = [[UILabel alloc] init];
+    weiboLabel.text = @"微博";
+    weiboLabel.font = F3;
+    weiboLabel.textColor = C6;
+    [weiboLabel sizeToFit];
+    [self.view addSubview:weiboLabel];
+    
     CGFloat originYOffset = (130 - qqButton.height - 10 - qqLabel.height) * 0.5;
-    CGFloat horizonalGap = (mmh_screen_width() - qqButton.width - weChatButton.width) / 3.0;
+    CGFloat horizonalGap = (mmh_screen_width() - qqButton.width - weChatButton.width - weiboButton.width) / 4.0;
     
     [qqButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(line1.mas_bottom).offset(originYOffset);
@@ -205,6 +218,16 @@
     [weChatLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weChatButton.mas_bottom).offset(10);
         make.centerX.equalTo(weChatButton.mas_centerX);
+    }];
+    
+    [weiboButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(weChatButton.mas_right).offset(horizonalGap);
+        make.top.equalTo(weChatButton);
+    }];
+    
+    [weiboLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weiboButton.mas_bottom).offset(10);
+        make.centerX.equalTo(weiboButton.mas_centerX);
     }];
 }
 
@@ -309,6 +332,11 @@
             NSLog(@"微信登陆失败");
         }
     }];
+}
+
+
+- (void)weiboButtonAction {
+    //TODO
 }
 
 
