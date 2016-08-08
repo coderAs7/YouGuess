@@ -351,7 +351,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"推荐"]) {
         return 270;
     } else {
-        return 245;
+        return mmh_screen_width() * 640 / 960 + 95;
     }
 }
 
