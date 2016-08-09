@@ -116,7 +116,7 @@
     NSString *parametersJsonStr = [self parametersString:mutableParameters];
     NSDictionary *actualParameter = @{@"json": parametersJsonStr};
     
-    [self POST:@"http://121.14.38.35/index.php" parameters:actualParameter
+    [self POST:@"http://121.46.23.143/index.php" parameters:actualParameter
        success:^(NSURLSessionDataTask *task, id responseObject) {
            NSLog(@"===+++post with api: %@", api);
            NSLog(@"===+++post with parameters: %@", actualParameter);

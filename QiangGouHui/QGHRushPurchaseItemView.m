@@ -61,16 +61,27 @@
     self.priceLabel.text = [NSString stringWithFormat:@"¥%g", goods.discount_price];
     self.oriPriceLabel.text = [NSString stringWithFormat:@"¥%g", goods.original_price];
     [self.oriPriceLabel addStrikethroughLine];
-    self.leftNumLabel.text = [NSString stringWithFormat:@"剩%ld天", [self remainingDay:goods.end_time]];
+    self.leftNumLabel.text = [self remainingDay:goods.end_time];
     self.nameLabel.text = goods.title;
 }
 
 
-- (NSInteger)remainingDay:(double)endTime {
+- (NSString *)remainingDay:(double)endTime {
     NSDate *endDate = [NSDate dateWithTimeIntervalSince1970:endTime];
     NSTimeInterval remainingSec = [endDate timeIntervalSinceDate:[NSDate date]];
-    NSInteger day = remainingSec / (3600 * 24);
-    return day;
+    
+    NSString *remainingStr = nil;
+    if (remainingSec > 3600 * 24) {
+        NSInteger day = remainingSec / (3600 * 24);
+        remainingStr = [NSString stringWithFormat:@"剩%ld天", day];
+    } else {
+        NSInteger hour = remainingSec / 3600;
+        NSInteger minute = ((NSInteger)remainingSec % 3600) / 60;
+        
+        remainingStr = [NSString stringWithFormat:@"剩%ld:%ld", hour, minute];
+    }
+    
+    return remainingStr;
 }
 
 

@@ -191,7 +191,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
         self.scoreInfo = scoreInfo;
         self.comments = commentArr;
         if (commentArr.count > 0) {
-            self.dataSource = [@[@"goods", @"comments", @"goodsDes"] mutableCopy];
+            self.dataSource = [@[@"goods", @"goodsDes", @"comments"] mutableCopy];
         }
         [self.tableView reloadData];
     } failedHandler:^(NSError *error) {
@@ -290,7 +290,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[self nameForSection:indexPath.section] isEqualToString:@"goods"]) {
         if (indexPath.row == 0) {
-            return mmh_screen_width();
+            return mmh_screen_width() * 640 / 960;
         } else if (indexPath.row == 1) {
             return 50;
         } else {

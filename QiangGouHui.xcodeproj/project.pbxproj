@@ -2645,7 +2645,7 @@
 				TargetAttributes = {
 					41BF0F931CFB4F6100FB23C2 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = CHT2NUC8Q9;
+						DevelopmentTeam = HJB9HWVPB2;
 					};
 				};
 			};
@@ -3118,7 +3118,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Guangzhou softbank information technology co., LTD (HJB9HWVPB2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guangzhou softbank information technology co., LTD (HJB9HWVPB2)";
 				DEFINES_MODULE = NO;
 				ENABLE_BITCODE = NO;
@@ -3163,7 +3163,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.softbank.qianggouhui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "246c5d97-5d63-49f7-a91d-f71e7427405b";
+				PROVISIONING_PROFILE = "72fe8663-7c86-4837-b391-6f369ffe816a";
 				SWIFT_OBJC_BRIDGING_HEADER = "QiangGouHui/QiangGouHui-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -3175,7 +3175,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Guangzhou softbank information technology co., LTD (HJB9HWVPB2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guangzhou softbank information technology co., LTD (HJB9HWVPB2)";
 				DEFINES_MODULE = NO;
 				ENABLE_BITCODE = NO;
@@ -3220,7 +3220,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.softbank.qianggouhui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "246c5d97-5d63-49f7-a91d-f71e7427405b";
+				PROVISIONING_PROFILE = "72fe8663-7c86-4837-b391-6f369ffe816a";
 				SWIFT_OBJC_BRIDGING_HEADER = "QiangGouHui/QiangGouHui-Bridging-Header.h";
 			};
 			name = Release;

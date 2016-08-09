@@ -38,7 +38,7 @@
     // 创建ScrollView
     self.productImageViewScrollView = [[UIScrollView alloc] init];
     self.productImageViewScrollView.backgroundColor = [QGHAppearance backgroundColor];
-    self.productImageViewScrollView.frame = CGRectMake(0, 0, kScreenBounds.size.width, MMHFloat(375));
+    self.productImageViewScrollView.frame = CGRectMake(0, 0, kScreenBounds.size.width, mmh_screen_width() * 640 / 960);
     self.productImageViewScrollView.bounces = YES;
     self.productImageViewScrollView.showsHorizontalScrollIndicator = NO;
     self.productImageViewScrollView.showsVerticalScrollIndicator = NO;
@@ -89,7 +89,7 @@
                 MMHImageView *productImageView = [[MMHImageView alloc] init];
                 productImageView.backgroundColor = [UIColor clearColor];
                 productImageView.stringTag = @"productImageView";
-                productImageView.frame = CGRectMake(0 + i * kScreenBounds.size.width, 0,kScreenBounds.size.width, MMHFloat(375));
+                productImageView.frame = CGRectMake(0 + i * kScreenBounds.size.width, 0,kScreenBounds.size.width, mmh_screen_width() * 640 / 960);
                 [self.productImageViewScrollView addSubview:productImageView];
                 //[productImageView updateViewWithImageAtURL:[imageArray objectAtIndex:i]];
                 [productImageView updateViewWithImageAtURL:[imageArray objectAtIndex:i] withQuality:80 finishBlock:nil];
