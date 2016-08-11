@@ -9,6 +9,7 @@
 #import "QGHBannerCell.h"
 #import "QGHBanner.h"
 
+#define BANNER_HEIGHT (mmh_screen_width() * 640 / 960)
 
 @interface QGHBannerCell()<UIScrollViewDelegate>
 
@@ -27,16 +28,16 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
-        _defaultImage = [[MMHImageView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), 200)];
+        _defaultImage = [[MMHImageView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), BANNER_HEIGHT)];
         [self.contentView addSubview:_defaultImage];
         
-        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), 200)];
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), BANNER_HEIGHT)];
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.pagingEnabled = YES;
         _scrollView.delegate = self;
         [self.contentView addSubview:_scrollView];
         
-        _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 200 - 10 - 7, mmh_screen_width(), 7)];
+        _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, BANNER_HEIGHT - 10 - 7, mmh_screen_width(), 7)];
         _pageControl.currentPageIndicatorTintColor = C20;
         _pageControl.pageIndicatorTintColor = [C2 colorWithAlphaComponent:0.5];
         _pageControl.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;

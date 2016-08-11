@@ -34,7 +34,7 @@
     static NSString *partner = @"2088221830605320";
     static NSString *seller = @"gz_ruanyin@126.com";
     
-    payOrder.notifyURL = @"http://121.14.38.35/callback.php";
+    payOrder.notifyURL = @"http://121.46.23.143/callback.php";
     payOrder.partner = partner;
     payOrder.seller = seller;
     payOrder.service = @"mobile.securitypay.pay";

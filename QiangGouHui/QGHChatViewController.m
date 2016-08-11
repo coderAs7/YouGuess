@@ -214,12 +214,14 @@
         for (QGHGroupUserModel *groupUser in self.userArr) {
             if ([groupUser.userId isEqualToString:userId]) {
                 model.avatarURLPath = groupUser.avatar_url;
+                model.nickname = groupUser.nickname;
                 break;
             }
         }
     } else {
         if (model.isSender) {
             model.avatarURLPath = [[MMHAccountSession currentSession] avatar];
+            model.nickname = [[MMHAccountSession currentSession] nickname];
         } else {
             model.avatarImage = [UIImage imageNamed:@"default_avatar"];
         }

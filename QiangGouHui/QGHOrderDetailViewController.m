@@ -167,11 +167,11 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
             self.button2.hidden = NO;
             [self.button2 setTitle:@"退款退货" forState:UIControlStateNormal];
             break;
-        case QGHOrderListItemStatusCancel:
-            self.button1.hidden = YES;
-            self.button2.hidden = NO;
-            [self.button2 setTitle:@"删除订单" forState:UIControlStateNormal];
-            break;
+//        case QGHOrderListItemStatusCancel:
+//            self.button1.hidden = YES;
+//            self.button2.hidden = NO;
+//            [self.button2 setTitle:@"删除订单" forState:UIControlStateNormal];
+//            break;
         case QGHOrderListItemStatusRefund:
             self.button1.hidden = YES;
             self.button2.hidden = YES;
@@ -267,9 +267,9 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
             case QGHOrderListItemStatusFinish:
                 cell.orderState = @"已完成";
                 break;
-            case QGHOrderListItemStatusCancel:
-                cell.orderState = @"已取消";
-                break;
+//            case QGHOrderListItemStatusCancel:
+//                cell.orderState = @"已取消";
+//                break;
             case QGHOrderListItemStatusRefund:
                 cell.orderState = @"退款退货";
                 break;
@@ -327,9 +327,9 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
         case QGHOrderListItemStatusFinish:
             return @"已完成";
             break;
-        case QGHOrderListItemStatusCancel:
-            return @"已取消";
-            break;
+//        case QGHOrderListItemStatusCancel:
+//            return @"已取消";
+//            break;
         case QGHOrderListItemStatusRefund:
             return @"退款退货";
             break;
@@ -391,6 +391,7 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
             MMHChatCustomerViewController *customerVC = [[MMHChatCustomerViewController alloc] init];
             customerVC.transferOrderNo = self.orderInfo.order_no;
             [self.navigationController pushViewController:customerVC animated:YES];
+            break;
         }
         case QGHOrderListItemStatusToReceipt: {
             [[MMHNetworkAdapter sharedAdapter] orderConfirmReceiptFrom:self order:self.orderInfo.orderId succeededHandler:^{
@@ -401,6 +402,7 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
             } failedHandler:^(NSError *error) {
                 [self.view showTipsWithError:error];
             }];
+            break;
         }
         case QGHOrderListItemStatusToComment: {
             QGHCommentViewController *commentVC = [[QGHCommentViewController alloc] initWithProduct:self.orderInfo.goodlist.firstObject orderId:self.orderInfo.orderId];
@@ -411,17 +413,18 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
             MMHChatCustomerViewController *customerVC = [[MMHChatCustomerViewController alloc] init];
             customerVC.transferOrderNo = self.orderInfo.order_no;
             [self.navigationController pushViewController:customerVC animated:YES];
+            break;
         }
-        case QGHOrderListItemStatusCancel: {
-            [[MMHNetworkAdapter sharedAdapter] cancelOrderFrom:self orderId:self.orderInfo.orderId succeededHandler:^{
-                [self.view showTips:@"删除订单成功"];
-                if ([self.delegate respondsToSelector:@selector(orderDetailViewControllerHandleOrder)]) {
-                    [self.delegate orderDetailViewControllerHandleOrder];
-                }
-            } failedHandler:^(NSError *error) {
-                [self.view showTipsWithError:error];
-            }];
-        }
+//        case QGHOrderListItemStatusCancel: {
+//            [[MMHNetworkAdapter sharedAdapter] cancelOrderFrom:self orderId:self.orderInfo.orderId succeededHandler:^{
+//                [self.view showTips:@"删除订单成功"];
+//                if ([self.delegate respondsToSelector:@selector(orderDetailViewControllerHandleOrder)]) {
+//                    [self.delegate orderDetailViewControllerHandleOrder];
+//                }
+//            } failedHandler:^(NSError *error) {
+//                [self.view showTipsWithError:error];
+//            }];
+//        }
         default:
             break;
     }

@@ -421,17 +421,18 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     if (self.productDetail) {
 //        self.priceLabel.text = [NSString stringWithFormat:@"¥%@", self.productDetail.product.min_price];
         float sumPrice = 0;
-        if (self.productDetail.skuSelectModel) {
-            sumPrice += [[self.productDetail allSepcSelectedPrice].discount_price floatValue];
+        if (self.productDetail.skuSelectModel.selectedSKUIds.count > 0) {
+            sumPrice += [[self.productDetail allSepcSelectedPrice].discount_price floatValue] * self.productDetail.skuSelectModel.count;
             return [NSString stringWithFormat:@"%g", sumPrice];
         } else {
-            return self.productDetail.product.discount_price;
+            sumPrice = [self.productDetail.product.discount_price floatValue] * self.productDetail.skuSelectModel.count;
+            return [NSString stringWithFormat:@"%g", sumPrice];
         }
         
     } else {
         float sumPrice = 0;
         for (QGHCartItem *item in self.cartItemArr) {
-            sumPrice += item.min_price;
+            sumPrice += item.min_price * item.count;
         }
 //        self.priceLabel.text = [NSString stringWithFormat:@"¥%g", sumPrice];
         return [NSString stringWithFormat:@"%g", sumPrice];

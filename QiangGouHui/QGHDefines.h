@@ -10,7 +10,7 @@
 #define QGHDefines_h
 
 typedef NS_ENUM(NSInteger, QGHBussType) {
-    QGHBussTypeNormal,
+    QGHBussTypeNormal = 0,
     QGHBussTypePurchase,
     QGHBussTypeAppoint,
     QGHBussTypeCustom,

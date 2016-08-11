@@ -7,6 +7,7 @@
 //
 
 #import "CityListViewController.h"
+#import "QGHLocationManager.h"
 
 @interface CityListViewController ()
 
@@ -19,7 +20,7 @@
     self = [super init];
     if (self) {
         // Custom initialization
-        self.arrayHotCity = [NSMutableArray arrayWithObjects:@"杭州", @"上海", @"深圳", @"太原", @"成都", @"阜阳", nil];
+        self.arrayHotCity = [NSMutableArray arrayWithObjects:@"北京", @"上海", @"广州", @"深圳", @"杭州", @"成都", nil];
         self.keys = [NSMutableArray array];
         self.arrayCitys = [NSMutableArray array];
     }
@@ -52,14 +53,17 @@
     headerView.backgroundColor = [UIColor whiteColor];
     
     UILabel *label = [[UILabel alloc] init];
-    label.text = [NSString stringWithFormat:@"您当前定位的城市：%@", self.selectedCity];
+    label.text = [NSString stringWithFormat:@"您当前定位的城市：%@", [[QGHLocationManager shareManager] currentCity]];
     label.font = F5;
     label.textColor = [UIColor blackColor];
     [label sizeToFit];
     label.x = 15;
     label.centerY = 22;
-    
     [headerView addSubview:label];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(locationCityTap)];
+    [headerView addGestureRecognizer:tap];
+    
     
     [self.view addSubview:headerView];
 }
@@ -77,35 +81,72 @@
     //添加热门城市
     NSString *strHot = @"热";
     [self.keys insertObject:strHot atIndex:0];
-    [self.cities setObject:_arrayHotCity forKey:strHot];
+//    [self.cities setObject:_arrayHotCity forKey:strHot];
 }
 
 #pragma mark - tableView
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    NSString *key = [_keys objectAtIndex:section];
+    if ([key rangeOfString:@"热"].location != NSNotFound) {
+        return 125 + 20 + 12;
+    }
+    
     return 20.0;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
-    bgView.backgroundColor = [QGHAppearance backgroundColor];
-    
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(13, 0, 250, 20)];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.textColor = [UIColor blackColor];
-    titleLabel.font = [UIFont systemFontOfSize:12];
-    
     NSString *key = [_keys objectAtIndex:section];
     if ([key rangeOfString:@"热"].location != NSNotFound) {
-        titleLabel.text = @"热门城市";
-    }
-    else
+        UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), 0)];
+
+        
+        UILabel *hotCityTitle = [[UILabel alloc] init];
+        hotCityTitle.text = @"热门城市";
+        hotCityTitle.font = F2;
+        hotCityTitle.textColor = C7;
+        [hotCityTitle sizeToFit];
+        hotCityTitle.x = 15;
+        hotCityTitle.y = 20;
+        hotCityTitle.height = 12;
+        [contentView addSubview:hotCityTitle];
+        
+        CGFloat bottom = 0;
+        
+        CGFloat buttonWidth = (mmh_screen_width() - 15 - 4 * 15) / 3;
+        for (int i = 0; i < self.arrayHotCity.count; ++i) {
+            NSString *city = self.arrayHotCity[i];
+            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(15 + (i % 3) * (15 + buttonWidth) , 20 + 12 + 15 + (i / 3) * (40 + 15), buttonWidth, 40)];
+            button.backgroundColor = [UIColor whiteColor];
+            [button setTitle:city forState:UIControlStateNormal];
+            [button setTitleColor:C8 forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont systemFontOfSize:16];
+            button.layer.borderColor = C6.CGColor;
+            button.layer.borderWidth = 1;
+            [button addTarget:self action:@selector(hotCityButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+            [contentView addSubview:button];
+            bottom = button.bottom;
+        }
+        
+        bottom += 15;
+        
+        contentView.height = bottom;
+        
+        return contentView;
+    } else {
+        UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
+        bgView.backgroundColor = [QGHAppearance backgroundColor];
+        
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(13, 0, 250, 20)];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.textColor = [UIColor blackColor];
+        titleLabel.font = [UIFont systemFontOfSize:12];
         titleLabel.text = key;
-    
-    [bgView addSubview:titleLabel];
-    
-    return bgView;
+        [bgView addSubview:titleLabel];
+        
+        return bgView;
+    }
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
@@ -140,7 +181,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         [cell.textLabel setTextColor:[UIColor blackColor]];
-        cell.textLabel.font = [UIFont systemFontOfSize:18];
+        cell.textLabel.font = [UIFont systemFontOfSize:16];
     }
     NSString *city = [[_cities objectForKey:key] objectAtIndex:indexPath.row];
     if ([city hasSuffix:@"市"]) {
@@ -163,10 +204,14 @@
 }
 
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)locationCityTap {
+    self.selectCityBlock([[QGHLocationManager shareManager] currentCity]);
 }
+
+
+- (void)hotCityButtonAction:(UIButton *)sender {
+    self.selectCityBlock(sender.titleLabel.text);
+}
+
 
 @end

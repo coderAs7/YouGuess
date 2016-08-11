@@ -152,6 +152,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     [_tableView registerClass:[QGHBannerCell class] forCellReuseIdentifier:QGHBannerCellIdentifier];
     [_tableView registerClass:[QGHRushPurchaseItemsCell class] forCellReuseIdentifier:QGHPurchaseItemCellIdentifier];
     [_tableView registerNib:[UINib nibWithNibName:@"QGHGoodsTableViewCell" bundle:nil] forCellReuseIdentifier:QGHGoodsCellIdentifier];
+    [_tableView addLegendHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshAction)];
     [self.view addSubview:_tableView];
 }
 
@@ -347,7 +348,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[self nameForSection:indexPath.section] isEqualToString:@"banner"]) {
-        return 200;
+        return mmh_screen_width() * 640 / 960;
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"推荐"]) {
         return 270;
     } else {
@@ -390,6 +391,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 - (void)timelineDataRefetched:(MMHTimeline *)timeline {
     [self.view hideProcessingView];
     [self.tableView reloadData];
+    [self.tableView.mj_header endRefreshing];
     if ([timeline hasMoreItems]) {
         [self.tableView addLegendFooterWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
     }
@@ -449,7 +451,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 - (void)locationTapAction {
     CityListViewController *cityListVC = [[CityListViewController alloc] init];
-    cityListVC.selectedCity = self.selectedCity;
+//    cityListVC.selectedCity = self.selectedCity;
     cityListVC.selectCityBlock = ^(NSString *city) {
         [self.locationLabel setText:city];
         self.selectedCity = city;
@@ -474,7 +476,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 - (void)locationChange {
     NSString *city = [[QGHLocationManager shareManager] currentCity];
     if (city.length > 0) {
-        self.selectedCity = city;
+//        self.selectedCity = city;
         [self.locationLabel setText:city];
         [self fetchGoodsList];
     }
@@ -494,7 +496,25 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
             break;
         default:
             break;
-    }}
+    }
+}
+
+
+- (void)refreshAction {
+    switch (self.selectedFlag) {
+        case QGHBussTypePurchase:
+            [self.purchaseList refetch];
+            break;
+        case QGHBussTypeAppoint:
+            [self.appointList refetch];
+            break;
+        case QGHBussTypeCustom:
+            [self.customList refetch];
+            break;
+        default:
+            break;
+    }
+}
 
 
 @end

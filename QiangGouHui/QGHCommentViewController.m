@@ -60,7 +60,7 @@
     [self.view addSubview:_titleLabel];
     
     _starView = [[CWStarRateView alloc] initWithFrame:CGRectMake(165, _titleLabel.bottom + 15, mmh_screen_width() - 45 - 135, 30) numberOfStars:5];
-    _starView.scorePercent = 0;
+    _starView.scorePercent = 5;
     _starView.allowIncompleteStar = NO;
     [self.view addSubview:_starView];
     
@@ -78,7 +78,7 @@
     
     _subButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 80, 32)];
     _subButton.right = mmh_screen_width() - 15;
-    _subButton.bottom = self.view.height - 15 - 64;
+    _subButton.top = _backView.bottom + 15;
     [_subButton setTitleColor:C21 forState:UIControlStateNormal];
     _subButton.backgroundColor = C20;
     _subButton.layer.cornerRadius = 3;

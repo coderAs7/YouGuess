@@ -74,11 +74,11 @@
             self.button2.hidden = NO;
             [self.button2 setTitle:@"退款退货" forState:UIControlStateNormal];
             break;
-        case QGHOrderListItemStatusCancel:
-            self.button1.hidden = YES;
-            self.button2.hidden = NO;
-            [self.button2 setTitle:@"删除订单" forState:UIControlStateNormal];
-            break;
+//        case QGHOrderListItemStatusCancel:
+//            self.button1.hidden = YES;
+//            self.button2.hidden = NO;
+//            [self.button2 setTitle:@"删除订单" forState:UIControlStateNormal];
+//            break;
         case QGHOrderListItemStatusRefund:
             self.button1.hidden = YES;
             self.button2.hidden = YES;
@@ -152,11 +152,11 @@
                 [self.delegate orderListBottomCellToRefundAndGoods:self];
             }
             break;
-        case QGHOrderListItemStatusCancel:
-            if ([self.delegate respondsToSelector:@selector(orderListBottomCellToDeleteOrder:)]) {
-                [self.delegate orderListBottomCellToDeleteOrder:self];
-            }
-            break;
+//        case QGHOrderListItemStatusCancel:
+//            if ([self.delegate respondsToSelector:@selector(orderListBottomCellToDeleteOrder:)]) {
+//                [self.delegate orderListBottomCellToDeleteOrder:self];
+//            }
+//            break;
         default:
             break;
     }

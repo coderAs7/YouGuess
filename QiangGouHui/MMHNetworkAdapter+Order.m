@@ -80,7 +80,7 @@
 
 - (void)paySuccessCallBack:(NSString *)orderNo {
     MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
-    [engine POST:@"http://121.14.38.35/callback.php" parameters:@{@"out_trade_no": orderNo} success:^(NSURLSessionDataTask *task, id responseObject) {
+    [engine POST:@"http://121.46.23.143/callback.php" parameters:@{@"out_trade_no": orderNo} success:^(NSURLSessionDataTask *task, id responseObject) {
         //nothing
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         //nothing

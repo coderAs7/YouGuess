@@ -205,6 +205,11 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
         [self.view hideProcessingView];
         [self.cartItemArr removeObject:cell.cartItem];
         [self.tableView reloadData];
+        if (self.cartItemArr.count == 0) {
+            self.buyNowButton.enabled = NO;
+        } else {
+            self.buyNowButton.enabled = YES;
+        }
     } failedHandler:^(NSError *error) {
         [self.view hideProcessingView];
         [self.view showTipsWithError:error];

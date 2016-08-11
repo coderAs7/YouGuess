@@ -76,7 +76,7 @@ static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCe
     self.segmentList.selectionIndicatorColor = RGBCOLOR(254, 204, 47);
     self.segmentList.bottomTrimColor = [UIColor colorWithHexString:@"dcdcdc"];
     [self.segmentList setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-    self.segmentItemArray = @[@" 全部 ", @" 待付款 ", @" 待发货 ", @" 待收货 ", @" 待评价 ", @"已完成 ", @"已取消", @" 退款退货 "];
+    self.segmentItemArray = @[@" 全部 ", @" 待付款 ", @" 待发货 ", @" 待收货 ", @" 待评价 ", @"已完成 ", @" 退款退货 "];
     [self.view addSubview:self.segmentList];
     
     [self.segmentList mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -91,7 +91,7 @@ static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCe
 
 - (void)makeOrderListArr {
     NSMutableArray *orderListArr = [[NSMutableArray alloc] init];
-    NSArray *statusArr = @[@(QGHOrderListItemStatusAll), @(QGHOrderListItemStatusToPay), @(QGHOrderListItemStatusToExpress), @(QGHOrderListItemStatusToReceipt), @(QGHOrderListItemStatusToComment), @(QGHOrderListItemStatusFinish), @(QGHOrderListItemStatusCancel), @(QGHOrderListItemStatusRefund)];
+    NSArray *statusArr = @[@(QGHOrderListItemStatusAll), @(QGHOrderListItemStatusToPay), @(QGHOrderListItemStatusToExpress), @(QGHOrderListItemStatusToReceipt), @(QGHOrderListItemStatusToComment), @(QGHOrderListItemStatusFinish), @(QGHOrderListItemStatusRefund)];
     _statusArr = statusArr;
     for (NSNumber *statusNum in statusArr) {
         QGHOrderList *list = [[QGHOrderList alloc] initWithStatus:[statusNum integerValue]];
@@ -176,9 +176,9 @@ static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCe
             case QGHOrderListItemStatusFinish:
                 statusStr = @"已完成";
                 break;
-            case QGHOrderListItemStatusCancel:
-                statusStr = @"已取消";
-                break;
+//            case QGHOrderListItemStatusCancel:
+//                statusStr = @"已取消";
+//                break;
             case QGHOrderListItemStatusRefund:
                 statusStr = @"退款退货";
                 break;

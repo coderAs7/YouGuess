@@ -49,6 +49,10 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
+@property (nonatomic, strong) UIButton *addCartBtn;
+@property (nonatomic, strong) UIButton *buyNowBtn;
+@property (nonatomic, strong) UIButton *appointNowBtn;
+
 @end
 
 
@@ -59,7 +63,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     self = [super init];
     
     if (self) {
-        _bussType = type;
+        _bussType = (QGHBussType)type;
         _goodsId = goodsId;
     }
     
@@ -136,30 +140,38 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     [cartBtn addTarget:self action:@selector(cartBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [_bottomView addSubview:cartBtn];
     
-    if (self.bussType == QGHBussTypeAppoint && self.bussType == QGHBussTypeCustom) {
-        UIButton *appointBtn = [[UIButton alloc] initWithFrame:CGRectMake(150, 0, mmh_screen_width() - 150, 75)];
-        appointBtn.backgroundColor = C20;
-        [appointBtn setTitle:@"立即预约" forState:UIControlStateNormal];
-        [appointBtn setTitleColor:C21 forState:UIControlStateNormal];
-        appointBtn.titleLabel.font = F6;
-        [_bottomView addSubview:appointBtn];
-    } else {
-        UIButton *addCartBtn = [[UIButton alloc] initWithFrame:CGRectMake(150, 0, (mmh_screen_width() - 150) * 0.5, 48)];
-        addCartBtn.backgroundColor = C20;
-        [addCartBtn setTitle:@"加入购物车" forState:UIControlStateNormal];
-        [addCartBtn setTitleColor:C21 forState:UIControlStateNormal];
-        addCartBtn.titleLabel.font = F6;
-        [addCartBtn addTarget:self action:@selector(addCartBtnAction) forControlEvents:UIControlEventTouchUpInside];
-        [_bottomView addSubview:addCartBtn];
-        
-        UIButton *buyNowBtn = [[UIButton alloc] initWithFrame:CGRectMake(addCartBtn.right, 0, (mmh_screen_width() - 150) * 0.5, 48)];
-        buyNowBtn.backgroundColor = RGBCOLOR(252, 43, 70);
-        [buyNowBtn setTitle:@"立即购买" forState:UIControlStateNormal];
-        [buyNowBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        buyNowBtn.titleLabel.font = F6;
-        [buyNowBtn addTarget:self action:@selector(buyNowBtnAction) forControlEvents:UIControlEventTouchUpInside];
-        [_bottomView addSubview:buyNowBtn];
+    switch (self.bussType) {
+        case QGHBussTypeAppoint:
+        case QGHBussTypeCustom: {
+            UIButton *appointBtn = [[UIButton alloc] initWithFrame:CGRectMake(150, 0, mmh_screen_width() - 150, 48)];
+            appointBtn.backgroundColor = C20;
+            [appointBtn setTitle:@"立即预约" forState:UIControlStateNormal];
+            [appointBtn setTitleColor:C21 forState:UIControlStateNormal];
+            appointBtn.titleLabel.font = F6;
+            [appointBtn addTarget:self action:@selector(buyNowBtnAction) forControlEvents:UIControlEventTouchUpInside];
+            [_bottomView addSubview:appointBtn];
+            break;
+        }
+        default: {
+            UIButton *addCartBtn = [[UIButton alloc] initWithFrame:CGRectMake(150, 0, (mmh_screen_width() - 150) * 0.5, 48)];
+            addCartBtn.backgroundColor = C20;
+            [addCartBtn setTitle:@"加入购物车" forState:UIControlStateNormal];
+            [addCartBtn setTitleColor:C21 forState:UIControlStateNormal];
+            addCartBtn.titleLabel.font = F6;
+            [addCartBtn addTarget:self action:@selector(addCartBtnAction) forControlEvents:UIControlEventTouchUpInside];
+            [_bottomView addSubview:addCartBtn];
+            
+            UIButton *buyNowBtn = [[UIButton alloc] initWithFrame:CGRectMake(addCartBtn.right, 0, (mmh_screen_width() - 150) * 0.5, 48)];
+            buyNowBtn.backgroundColor = RGBCOLOR(252, 43, 70);
+            [buyNowBtn setTitle:@"立即购买" forState:UIControlStateNormal];
+            [buyNowBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            buyNowBtn.titleLabel.font = F6;
+            [buyNowBtn addTarget:self action:@selector(buyNowBtnAction) forControlEvents:UIControlEventTouchUpInside];
+            [_bottomView addSubview:buyNowBtn];
+            break;
+        }
     }
+   
     [_bottomView addTopSeparatorLine];
     [self.view addSubview:_bottomView];
     
@@ -278,7 +290,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1 && indexPath.row == 0) {
+    if ([[self nameForSection:indexPath.section] isEqualToString:@"comments"] && indexPath.row == 0) {
         QGHCommentListViewController *commentListVC = [[QGHCommentListViewController alloc] initWithGoodsId:self.productDetailModel.product.goodsId];
         [self.navigationController pushViewController:commentListVC animated:YES];
     }

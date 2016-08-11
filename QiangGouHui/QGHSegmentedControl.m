@@ -9,7 +9,7 @@
 #import "QGHSegmentedControl.h"
 
 
-#define BUTTON_WIDTH 50
+#define BUTTON_WIDTH 60
 #define BUTTON_HEIGHT 24
 
 
@@ -33,7 +33,7 @@
         for (NSInteger i = 0; i < arr.count; ++i) {
             NSString *title = arr[i];
             UIButton *button = [self makeButtonWithTitle:title];
-            [button setX:50 * i];
+            [button setX:BUTTON_WIDTH * i];
             if (i == 0) {
                 button.selected = YES;
             }
