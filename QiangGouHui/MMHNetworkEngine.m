@@ -180,7 +180,7 @@
     NSDictionary *actualParameter = @{@"json": parametersJsonStr};
     NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
     
-    [self POST:@"http://121.14.38.35/index.php" parameters:actualParameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [self POST:@"http://121.46.23.143/index.php" parameters:actualParameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 //        [formData appendPartWithFormData:imageData name:@"image"];
         [formData appendPartWithFileData:imageData name:@"download" fileName:@"image.jpg" mimeType:@"image/jpg"];
     } success:^(NSURLSessionDataTask *task, id responseObject) {

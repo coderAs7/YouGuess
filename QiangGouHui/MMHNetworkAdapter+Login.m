@@ -23,8 +23,11 @@
         parameters = @{@"qq": phoneNumber, @"qqtoken": passCode};
     } else if (type == QGHLoginTypeWeChat) {
         parameters = @{@"wechat": phoneNumber, @"wechattoken": passCode};
+    } else if (type == QGHLoginTypeWeibo) {
+        parameters = @{@"weibo": phoneNumber, @"weibotoken": passCode};
     }
     
+    NSLog(@"ni da ye:%@", parameters);
     MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
     [engine postWithAPI:@"_login_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
         NSLog(@"fuck:%@", responseJSONObject);
@@ -71,6 +74,8 @@
         thirdLoginDict = @{@"qq": thirdId, @"qqtoken": thirdToken};
     } else if (type == QGHLoginTypeWeChat) {
         thirdLoginDict = @{@"wechat": thirdId, @"wechattoken": thirdToken};
+    } else if (type == QGHLoginTypeWeibo) {
+        thirdLoginDict = @{@"weibo": thirdId, @"weibotoken": thirdToken};
     }
     if (thirdLoginDict) {
         [parameters addEntriesFromDictionary:thirdLoginDict];
@@ -79,6 +84,7 @@
     
     MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
     [engine postWithAPI:@"_register_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        NSLog(@"fuck:%@", responseJSONObject);
         QGHRegisterModel *registerModel = [[QGHRegisterModel alloc] initWithJSONDict:responseJSONObject[@"info"]];
         succeededHandler(registerModel);
     } failedBlock:^(NSError *error) {

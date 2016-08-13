@@ -48,9 +48,19 @@
 				<string>tencent1105571354</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>weibo</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wb2731126139</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2016081100</string>
+	<string>2016081300</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>tel</string>

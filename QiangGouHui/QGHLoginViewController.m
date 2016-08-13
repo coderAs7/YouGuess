@@ -336,7 +336,36 @@
 
 
 - (void)weiboButtonAction {
-    //TODO
+    [ShareSDK getUserInfo:SSDKPlatformTypeSinaWeibo onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+        if (state == SSDKResponseStateSuccess) {
+            MMHAccount *account = [[MMHAccount alloc] init];
+            account.userToken = user.credential.token;
+            account.userId = user.uid;
+            account.username = user.nickname;
+            account.nickname = user.nickname;
+            account.avatar_url = user.icon;
+            account.sex = (user.gender == SSDKGenderFemale) ? @"2" : @"1";
+            //            [[MMHAccountSession currentSession] accountDidLogin:account];
+            //            [[NSNotificationCenter defaultCenter] postNotificationName:MMHUserDidLoginNotification object:nil];
+            //            self.succeededHandler(account);
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                [[MMHNetworkAdapter sharedAdapter] loginWithPhoneNumber:user.uid passCode:user.credential.token loginType:QGHLoginTypeWeibo from:self succeededHandler:^(MMHAccount *account) {
+                    if (self.succeededHandler) {
+                        self.succeededHandler(account);
+                    }
+                    [self dismissViewControllerWithAnimation];
+                } failedHandler:^(NSError *error) {
+                    NSString *errorTips = [error localizedDescription];
+                    if ([errorTips isEqualToString:@"no_bind"]) {
+                        [self bindPhone:account loginType:QGHLoginTypeWeChat];
+                    }
+                    [self.view showTipsWithError:error];
+                }];
+            });
+        } else {
+            NSLog(@"微博登陆失败");
+        }
+    }];
 }
 
 

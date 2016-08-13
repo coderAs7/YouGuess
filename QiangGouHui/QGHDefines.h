@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, QGHLoginType) {
     QGHLoginTypeNomal,
     QGHLoginTypeQQ,
     QGHLoginTypeWeChat,
+    QGHLoginTypeWeibo,
 };
 
 #define kDefault_Token @"kDefault_Token"
@@ -32,6 +33,9 @@ typedef NS_ENUM(NSInteger, QGHLoginType) {
 
 #define QQ_APPID @"1105571354"
 #define QQ_APPKEY @"53XRwtOwQsWDBosu"
+
+#define WEIBO_APPKEY @"2731126139"
+#define WEIBO_APPSECRET @"b82b1ce17abd27040be4d5916b5b6625"
 
 #define EaseMob_key @"gzyinyi#fenxiang"
 #define EaseMob_push_production @"EaseMob_push_production"

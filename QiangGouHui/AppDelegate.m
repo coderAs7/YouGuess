@@ -16,6 +16,7 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WXApi.h"
+#import "WeiboSDK.h"
 #import "AppDelegate+EaseMob.h"
 #import <AlipaySDK/AlipaySDK.h>
 
@@ -96,13 +97,16 @@
 
 
 - (void)shareSDKConnectApp {
-    [ShareSDK registerApp:SHARESDK_APPID activePlatforms:@[@(SSDKPlatformTypeQQ),@(SSDKPlatformTypeWechat)] onImport:^(SSDKPlatformType platformType) {
+    [ShareSDK registerApp:SHARESDK_APPID activePlatforms:@[@(SSDKPlatformTypeQQ),@(SSDKPlatformTypeWechat), @(SSDKPlatformTypeSinaWeibo)] onImport:^(SSDKPlatformType platformType) {
         switch (platformType) {
             case SSDKPlatformTypeQQ:
                 [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
                 break;
             case SSDKPlatformTypeWechat:
                 [ShareSDKConnector connectWeChat:[WXApi class]];
+                break;
+            case SSDKPlatformTypeSinaWeibo:
+                [ShareSDKConnector connectWeibo:[WeiboSDK class]];
                 break;
             default:
                 break;
@@ -114,6 +118,13 @@
                 break;
             case SSDKPlatformTypeWechat:
                 [appInfo SSDKSetupWeChatByAppId:WECHAT_APPID appSecret:WECHAT_APPSECRET];
+                break;
+            case SSDKPlatformTypeSinaWeibo:
+                //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
+                [appInfo SSDKSetupSinaWeiboByAppKey:WEIBO_APPKEY
+                                          appSecret:WEIBO_APPSECRET
+                                        redirectUri:@"http://www.sharesdk.cn"
+                                           authType:SSDKAuthTypeBoth];
                 break;
             default:
                 break;
