@@ -252,12 +252,16 @@
 
 - (void)rightBarButtonItemAction {
     [self presentRegisterViewControllerWithSucceededHandler:^{
+        [self.navigationController popToViewController:self animated:YES];
     }];
 }
 
 
 - (void)forgetButonAction {
     QGHRegisterViewController *forgetPwdVC = [[QGHRegisterViewController alloc] initWithType:QGHRegisterViewTypeChangePwd];
+    forgetPwdVC.bindPhoneSuccessBlock = ^(QGHRegisterModel *registerModel) {
+        [self.navigationController popToViewController:self animated:YES];
+    };
     [self.navigationController pushViewController:forgetPwdVC animated:YES];
 }
 

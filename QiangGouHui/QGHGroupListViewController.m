@@ -194,6 +194,12 @@ static NSString *const QGHGroupTitleCellIdentifier = @"QGHGroupTitleCellIdentifi
         [[EMClient sharedClient].groupManager asyncFetchGroupInfo:model.room_id includeMembersList:YES success:^(EMGroup *aGroup) {
             NSString *userIds = [NSString stringSeparateByCommaFromArray:aGroup.members];
             [[MMHNetworkAdapter sharedAdapter] fetchGroupUserListFrom:self userIds:userIds succeededHandler:^(NSArray<QGHGroupUserModel *> *groupUserArr) {
+                for (UIViewController *controller in self.navigationController.viewControllers) {
+                    if ([controller isKindOfClass:[QGHChatViewController class]]) {
+                        return;
+                    }
+                }
+                
                 QGHChatViewController *messageVC = [[QGHChatViewController alloc] initWithGroupId:model.room_id UserArr:groupUserArr];
                 messageVC.title = model.nickname;
                 messageVC.customChatType = QGHChatTypeGroup;

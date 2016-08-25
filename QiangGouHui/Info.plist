@@ -60,7 +60,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2016081300</string>
+	<string>2016082200</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>tel</string>
@@ -100,7 +100,7 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>请点击[允许]访问。</string>
+	<string>App将保持您的更新您的定位，以便获得最新的商品信息</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>请点击[允许]访问。</string>
 	<key>UILaunchStoryboardName</key>

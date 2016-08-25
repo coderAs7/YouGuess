@@ -358,6 +358,11 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 
 
 - (void)settleButtonAction {
+    if (self.defaultReceiptAddress.receiptAddressId.length == 0) {
+        [self.view showTips:@"请选择收货地址"];
+        return;
+    }
+    
     QGHToSettlementModel *toSettlementModel = [[QGHToSettlementModel alloc] init];
     toSettlementModel.bussType = self.bussType;
     toSettlementModel.receiptId = self.defaultReceiptAddress.receiptAddressId;

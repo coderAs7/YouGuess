@@ -98,7 +98,7 @@
         UILabel *priceLabel = [[UILabel alloc] init];
         priceLabel.textColor = C22;
         priceLabel.font = F3;
-        priceLabel.text = [NSString stringWithFormat:@"¥%@", product.price];
+        priceLabel.text = [NSString stringWithFormat:@"¥%g", product.price.floatValue];
         [productInfoView addSubview:priceLabel];
         
         [imageView mas_makeConstraints:^(MASConstraintMaker *make) {

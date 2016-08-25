@@ -116,7 +116,7 @@
     NSString *parametersJsonStr = [self parametersString:mutableParameters];
     NSDictionary *actualParameter = @{@"json": parametersJsonStr};
     
-    [self POST:@"http://121.46.23.143/index.php" parameters:actualParameter
+    [self POST:@"http://gzyinyi.com/index.php" parameters:actualParameter
        success:^(NSURLSessionDataTask *task, id responseObject) {
            NSLog(@"===+++post with api: %@", api);
            NSLog(@"===+++post with parameters: %@", actualParameter);
@@ -180,7 +180,7 @@
     NSDictionary *actualParameter = @{@"json": parametersJsonStr};
     NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
     
-    [self POST:@"http://121.46.23.143/index.php" parameters:actualParameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [self POST:@"http://gzyinyi.com/index.php" parameters:actualParameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
 //        [formData appendPartWithFormData:imageData name:@"image"];
         [formData appendPartWithFileData:imageData name:@"download" fileName:@"image.jpg" mimeType:@"image/jpg"];
     } success:^(NSURLSessionDataTask *task, id responseObject) {

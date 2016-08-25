@@ -2682,7 +2682,7 @@
 				TargetAttributes = {
 					41BF0F931CFB4F6100FB23C2 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = HJB9HWVPB2;
+						DevelopmentTeam = 44PJ65JH8R;
 					};
 				};
 			};
@@ -3202,7 +3202,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.softbank.qianggouhui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "72fe8663-7c86-4837-b391-6f369ffe816a";
+				PROVISIONING_PROFILE = "246c5d97-5d63-49f7-a91d-f71e7427405b";
 				SWIFT_OBJC_BRIDGING_HEADER = "QiangGouHui/QiangGouHui-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -3260,7 +3260,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.softbank.qianggouhui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "72fe8663-7c86-4837-b391-6f369ffe816a";
+				PROVISIONING_PROFILE = "246c5d97-5d63-49f7-a91d-f71e7427405b";
 				SWIFT_OBJC_BRIDGING_HEADER = "QiangGouHui/QiangGouHui-Bridging-Header.h";
 			};
 			name = Release;
