@@ -14,4 +14,16 @@
     return @{@"goodsId": @"id"};
 }
 
+
+- (instancetype)initWithJSONDict:(NSDictionary *)dict {
+    self = [super initWithJSONDict:dict];
+    
+    if (self) {
+        self.discount_price = [NSString stringWithFormat:@"%g", [[dict objectForKey:@"discount_price"] floatValue]];
+    }
+    
+    return self;
+}
+
+
 @end
