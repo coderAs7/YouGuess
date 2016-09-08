@@ -24,6 +24,10 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDKUI.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
+#import "QGHProductPicViewController.h"
+
+
+#define FOOTER_JUMP_VIEW_HEIGHT 50
 
 
 static NSString *const QGHProductDetailHeaderCellIdentifier = @"QGHProductDetailHeaderCellIdentifier";
@@ -53,6 +57,8 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 @property (nonatomic, strong) UIButton *buyNowBtn;
 @property (nonatomic, strong) UIButton *appointNowBtn;
 
+@property (nonatomic, strong) QGHProductPicViewController *productPicViewController;
+@property (nonatomic, strong) UIView *footerJumpView;
 @end
 
 
@@ -84,7 +90,18 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     
     [self makeTableView];
     [self makeBottomView];
+    [self makeProductPicViewController];
     [self fetchData];
+}
+
+
+- (void)makeProductPicViewController {
+    if (!self.productDetailModel) {
+        _productPicViewController = [[QGHProductPicViewController alloc] init];
+        _productPicViewController.view.frame = CGRectMake(0, self.view.height, mmh_screen_width(), self.view.height);
+        [self addChildViewController:_productPicViewController];
+        [self.view addSubview:_productPicViewController.view];
+    }
 }
 
 
@@ -100,7 +117,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     [_tableView registerNib:[UINib nibWithNibName:@"QGHProductDetailCommentCell" bundle:nil]forCellReuseIdentifier:QGHProductCommentCellIdentifier];
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:QGHProductDetailImageTitleCellIdentifier];
     [_tableView registerClass:[QGHProductDetailWebViewCell class] forCellReuseIdentifier:QGHProductDetailImageCellIdentifier];
-    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    _tableView.tableFooterView = [self createFooterJumpView];
     [self.view addSubview:_tableView];
     
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -183,6 +200,29 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 }
 
 
+- (UIView *)createFooterJumpView {
+    UIView *footerJumpView = [[UIView alloc] initWithFrame:CGRectMake(0, self.tableView.contentSize.height, kScreenWidth, FOOTER_JUMP_VIEW_HEIGHT)];
+    
+    UIImageView *toUpImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"product_ic_toup"]];
+    UILabel *toUpTip = [[UILabel alloc] init];
+    toUpTip.textAlignment = NSTextAlignmentLeft;
+    toUpTip.font = F3;
+    toUpTip.textColor = C7;
+    [toUpTip setSingleLineText:@"上拉查看图文详情"];
+    [toUpImg setCenterY:footerJumpView.height * 0.5];
+    [toUpTip setCenterY:toUpImg.centerY];
+    CGFloat width = toUpImg.width + 5 + toUpTip.width;
+    [toUpImg setX:(kScreenWidth - width) * 0.5];
+    [toUpTip attachToRightSideOfView:toUpImg byDistance:5];
+    [footerJumpView addSubview:toUpImg];
+    [footerJumpView addSubview:toUpTip];
+    self.footerJumpView = footerJumpView;
+    //[self.productDetailTableView addSubview:footerJumpView];
+    
+    //[self.productDetailTableView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:NULL];
+    return footerJumpView;
+}
+
 #pragma mark - network
 
 
@@ -194,6 +234,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     [[MMHNetworkAdapter sharedAdapter] fetchDataWithRequester:self goodsId:self.goodsId succeededHandler:^(QGHProductDetailModel *productDetailModel) {
         self.productDetailModel = productDetailModel;
         [self.tableView reloadData];
+        [self.productPicViewController setProductDetailUrl:self.productDetailModel.product.info];
     } failedHandler:^(NSError *error) {
         [self.view showTipsWithError:error];
     }];
@@ -203,7 +244,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
         self.scoreInfo = scoreInfo;
         self.comments = commentArr;
         if (commentArr.count > 0) {
-            self.dataSource = [@[@"goods", @"goodsDes", @"comments"] mutableCopy];
+            self.dataSource = [@[@"goods", @"comments", @"goodsDes"] mutableCopy];
         }
         [self.tableView reloadData];
     } failedHandler:^(NSError *error) {
@@ -339,6 +380,12 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 }
 
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (scrollView.height - (scrollView.contentSize.height - scrollView.contentOffset.y) > 30) {
+        [self showProductPicViewController];
+    }
+}
+
 #pragma mark - QGHProductDetailWebViewCellDelegate
 
 
@@ -346,6 +393,15 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     self.productDetaiImageHeight = webViewContentHeight;
     [self.tableView reloadData];
 }
+
+
+- (void)showProductPicViewController {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.tableView.y = -self.view.size.height;
+        self.productPicViewController.view.y = 0;
+    }];
+}
+
 
 #pragma mark - Action
 

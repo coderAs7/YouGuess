@@ -49,6 +49,8 @@
 		41682BBD1D570D6300B1F85E /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 41682BB91D570D6300B1F85E /* libWeChatSDK.a */; };
 		41682BBE1D570D6300B1F85E /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 41682BBA1D570D6300B1F85E /* read_me.txt */; };
 		417843151D52356C00567D4D /* QGHGroupUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 417843141D52356C00567D4D /* QGHGroupUserModel.m */; };
+		418288571D81A7FA00F5F8A5 /* QGHProductPicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 418288561D81A7FA00F5F8A5 /* QGHProductPicViewController.m */; };
+		4182885A1D81B85F00F5F8A5 /* MMHProductDetailPullDownHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 418288591D81B85F00F5F8A5 /* MMHProductDetailPullDownHeaderView.m */; };
 		4186F8241D3A95D2004B91A9 /* QGHOrderProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 4186F8231D3A95D2004B91A9 /* QGHOrderProduct.m */; };
 		4186F8271D3AA076004B91A9 /* QGHOrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4186F8261D3AA076004B91A9 /* QGHOrderList.m */; };
 		4186F82C1D3B3874004B91A9 /* QGHOrderListBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4186F82A1D3B3874004B91A9 /* QGHOrderListBottomCell.xib */; };
@@ -399,6 +401,10 @@
 		41682BBC1D570D6300B1F85E /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		417843131D52356C00567D4D /* QGHGroupUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHGroupUserModel.h; sourceTree = "<group>"; };
 		417843141D52356C00567D4D /* QGHGroupUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHGroupUserModel.m; sourceTree = "<group>"; };
+		418288551D81A7FA00F5F8A5 /* QGHProductPicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductPicViewController.h; sourceTree = "<group>"; };
+		418288561D81A7FA00F5F8A5 /* QGHProductPicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductPicViewController.m; sourceTree = "<group>"; };
+		418288581D81B85F00F5F8A5 /* MMHProductDetailPullDownHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHProductDetailPullDownHeaderView.h; sourceTree = "<group>"; };
+		418288591D81B85F00F5F8A5 /* MMHProductDetailPullDownHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHProductDetailPullDownHeaderView.m; sourceTree = "<group>"; };
 		4186F8221D3A95D2004B91A9 /* QGHOrderProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHOrderProduct.h; sourceTree = "<group>"; };
 		4186F8231D3A95D2004B91A9 /* QGHOrderProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHOrderProduct.m; sourceTree = "<group>"; };
 		4186F8251D3AA076004B91A9 /* QGHOrderList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHOrderList.h; sourceTree = "<group>"; };
@@ -2261,6 +2267,8 @@
 		41DC07AD1D2004A000DDC5DD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				418288581D81B85F00F5F8A5 /* MMHProductDetailPullDownHeaderView.h */,
+				418288591D81B85F00F5F8A5 /* MMHProductDetailPullDownHeaderView.m */,
 				41348C291D412611006EC087 /* MMHSortView.h */,
 				41348C2A1D412611006EC087 /* MMHSortView.m */,
 				41348C2C1D4128B5006EC087 /* MMHSortViewItem.h */,
@@ -2314,6 +2322,8 @@
 				41FF28031D40F6B900BF2D22 /* MMHSearchViewController.m */,
 				418DA24E1D44C98A008063B0 /* QGHCommentListViewController.h */,
 				418DA24F1D44C98A008063B0 /* QGHCommentListViewController.m */,
+				418288551D81A7FA00F5F8A5 /* QGHProductPicViewController.h */,
+				418288561D81A7FA00F5F8A5 /* QGHProductPicViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2682,7 +2692,7 @@
 				TargetAttributes = {
 					41BF0F931CFB4F6100FB23C2 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 44PJ65JH8R;
+						DevelopmentTeam = CHT2NUC8Q9;
 					};
 				};
 			};
@@ -2828,6 +2838,7 @@
 				41DA4ACE1D1594BE00A8E42D /* QGHPersonalCenterViewController.m in Sources */,
 				41DC08191D2AA43800DDC5DD /* QGHSKUPrice.m in Sources */,
 				419568FB1D4C68270079D988 /* EaseMessageCell.m in Sources */,
+				418288571D81A7FA00F5F8A5 /* QGHProductPicViewController.m in Sources */,
 				419568C41D4C68270079D988 /* EMSDWebImageCompat.m in Sources */,
 				41BEEB351D0F086100612F88 /* QGHCartViewController.m in Sources */,
 				41E87A981D2D4103003A987E /* ProductSpecSelectionHeaderView.swift in Sources */,
@@ -2945,6 +2956,7 @@
 				4195691E1D4DCA510079D988 /* QGHGroupHandleViewController.m in Sources */,
 				41FF28181D40FC8300BF2D22 /* MMHNetworkAdapter+Search.m in Sources */,
 				41E87A961D2D40A3003A987E /* ProductSpecSelectionCell.swift in Sources */,
+				4182885A1D81B85F00F5F8A5 /* MMHProductDetailPullDownHeaderView.m in Sources */,
 				419568EF1D4C68270079D988 /* EaseEmotionEscape.m in Sources */,
 				41DC07C91D26B0ED00DDC5DD /* QGHProductDetailInfoCell.m in Sources */,
 				411ADC411D184D6D0050B8EB /* VerificationCodeTimer.swift in Sources */,
