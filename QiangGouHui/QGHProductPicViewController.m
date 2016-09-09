@@ -10,7 +10,7 @@
 #import "MMHProductDetailPullDownHeaderView.h"
 
 
-@interface QGHProductPicViewController ()
+@interface QGHProductPicViewController ()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
 
@@ -26,6 +26,7 @@
     _webView.backgroundColor = [QGHAppearance backgroundColor];
     _webView.scalesPageToFit = YES;
     [_webView.scrollView addSubview:[self pullDownView]];
+    _webView.scrollView.delegate = self;
     [self.view addSubview:_webView];
 }
 
@@ -42,6 +43,15 @@
     pullDownView.tip = @"下拉返回商品详情";
     
     return pullDownView;
+}
+
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (scrollView.contentOffset.y < -50) {
+        if ([self.delegate respondsToSelector:@selector(scrollToTopBack)]) {
+            [self.delegate scrollToTopBack];
+        }
+    }
 }
 
 

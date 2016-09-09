@@ -124,23 +124,32 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
         _locationLabel.text = @"定位";
     }
     [_locationLabel sizeToFit];
-    _locationLabel.width = 60;
-    _locationLabel.userInteractionEnabled = YES;
     
     UIImage *triangle = [UIImage imageNamed:@"qgh_ic_dizhi"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:triangle];
-    imageView.right = 60;
-    imageView.bottom = _locationLabel.height;
     [_locationLabel addSubview:imageView];
+    
+    NSString *testStr = @"定位";
+    _locationLabel.width = [testStr boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: F3} context:nil].size.width + 5 + imageView.width;
+    _locationLabel.userInteractionEnabled = YES;
+    
+    
+    imageView.right = _locationLabel.right;
+    imageView.bottom = _locationLabel.height;
+    
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(locationTapAction)];
     [_locationLabel addGestureRecognizer:tap];
 
     UIBarButtonItem *cityItem = [[UIBarButtonItem alloc] initWithCustomView:_locationLabel];
-    self.navigationItem.leftBarButtonItem = cityItem;
+    
+    UIBarButtonItem *classifyItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"fx_ic_fenlei"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(classifyItemAction)];
+    self.navigationItem.leftBarButtonItems = @[classifyItem, cityItem];
     
     UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"qgh_ic_sousuo"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonAction)];
-    self.navigationItem.rightBarButtonItem = searchItem;
+    
+    UIBarButtonItem *messageItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"fx_ic_xiaoxi"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(messageItemAction)];
+    self.navigationItem.rightBarButtonItems = @[messageItem, searchItem];
 }
 
 
@@ -447,6 +456,16 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 
 #pragma mark - Actions
+
+
+- (void)classifyItemAction {
+    //
+}
+
+
+- (void)messageItemAction {
+    //
+}
 
 
 - (void)locationTapAction {

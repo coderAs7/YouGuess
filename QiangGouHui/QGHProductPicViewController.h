@@ -9,7 +9,7 @@
 #import "BaseViewController.h"
 
 
-@protocol QGHProductPicViewController <NSObject>
+@protocol QGHProductPicViewControllerDelegate <NSObject>
 
 - (void)scrollToTopBack;
 
@@ -17,6 +17,8 @@
 
 
 @interface QGHProductPicViewController : BaseViewController
+
+@property (nonatomic, weak) id<QGHProductPicViewControllerDelegate> delegate;
 
 - (void)setProductDetailUrl:(NSString *)url;
 

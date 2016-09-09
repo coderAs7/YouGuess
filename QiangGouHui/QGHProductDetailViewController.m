@@ -39,7 +39,7 @@ static NSString *const QGHProductDetailImageTitleCellIdentifier = @"QGHProductDe
 static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailImageCellIdentifier";
 
 
-@interface QGHProductDetailVIewController ()<UITableViewDelegate, UITableViewDataSource, QGHProductDetailWebViewCellDelegate>
+@interface QGHProductDetailVIewController ()<UITableViewDelegate, UITableViewDataSource, QGHProductDetailWebViewCellDelegate, QGHProductPicViewControllerDelegate>
 
 @property (nonatomic, assign) QGHBussType bussType;
 @property (nonatomic, strong) NSString *goodsId;
@@ -99,6 +99,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     if (!self.productDetailModel) {
         _productPicViewController = [[QGHProductPicViewController alloc] init];
         _productPicViewController.view.frame = CGRectMake(0, self.view.height, mmh_screen_width(), self.view.height);
+        _productPicViewController.delegate = self;
         [self addChildViewController:_productPicViewController];
         [self.view addSubview:_productPicViewController.view];
     }
@@ -399,6 +400,17 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     [UIView animateWithDuration:0.3 animations:^{
         self.tableView.y = -self.view.size.height;
         self.productPicViewController.view.y = 0;
+    }];
+}
+
+
+#pragma mark - QGHProductPicViewControllerDelegate
+
+
+- (void)scrollToTopBack {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.tableView.y = 0;
+        self.productPicViewController.view.y = self.view.height;
     }];
 }
 
