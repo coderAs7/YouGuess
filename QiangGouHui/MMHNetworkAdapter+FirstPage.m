@@ -10,6 +10,8 @@
 #import "MMHAccountSession.h"
 #import "QGHFirstPageGoodsModel.h"
 #import "QGHBanner.h"
+#import "QGHClassificationItem.h"
+
 
 @implementation MMHNetworkAdapter (FirstPage)
 
@@ -32,6 +34,51 @@
     [engine postWithAPI:@"_active_index_001" parameters:@{} from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
         NSArray *bannerArr = [responseJSONObject[@"info"] modelArrayOfClass:[QGHBanner class]];
         succeededHandler(bannerArr);
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
+    }];
+}
+
+
+- (void)fetchClassficationFrom:(id)requester succeededHandler:(void(^)(NSArray<QGHClassificationItem *> *itemArr))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    [engine postWithAPI:@"_goodstype_list_001" parameters:@{} from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        NSArray *dataArr = responseJSONObject[@"info"];
+        NSMutableArray *itemArr = [NSMutableArray array];
+        for (NSDictionary *dataDict in dataArr) {
+            QGHClassificationItem *topItem = [[QGHClassificationItem alloc] initWithJSONDict:dataDict];
+            NSArray *twoSubArr = [dataDict objectForKey:@"two_sub_type"];
+            if (twoSubArr) {
+                topItem.canUnfold = YES;
+            }
+            topItem.isUnfold = NO;
+            topItem.level = 0;
+            
+            NSMutableArray *twoItemArr = [NSMutableArray array];
+            for (NSDictionary *twoSubDic in twoSubArr) {
+                QGHClassificationItem *twoItem = [[QGHClassificationItem alloc] initWithJSONDict:twoSubDic];
+                NSArray *threeSubArr = [twoSubDic objectForKey:@"three_sub_type"];
+                if (threeSubArr) {
+                    twoItem.canUnfold = YES;
+                }
+                twoItem.isUnfold = NO;
+                twoItem.level = 1;
+                
+                NSMutableArray *threeItemArr = [NSMutableArray array];
+                for (NSDictionary *threeSubDic in threeSubArr) {
+                    QGHClassificationItem *threeItem = [[QGHClassificationItem alloc] initWithJSONDict:threeSubDic];
+                    threeItem.canUnfold = NO;
+                    threeItem.isUnfold = NO;
+                    threeItem.level = 2;
+                    [threeItemArr addObject:threeItem];
+                }
+                twoItem.itemArr = threeItemArr;
+                [twoItemArr addObject:twoItem];
+            }
+            topItem.itemArr = twoItemArr;
+            [itemArr addObject:topItem];
+        }
+        succeededHandler(itemArr);
     } failedBlock:^(NSError *error) {
         failedHandler(error);
     }];

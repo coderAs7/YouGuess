@@ -51,6 +51,9 @@
 		417843151D52356C00567D4D /* QGHGroupUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 417843141D52356C00567D4D /* QGHGroupUserModel.m */; };
 		418288571D81A7FA00F5F8A5 /* QGHProductPicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 418288561D81A7FA00F5F8A5 /* QGHProductPicViewController.m */; };
 		4182885A1D81B85F00F5F8A5 /* MMHProductDetailPullDownHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 418288591D81B85F00F5F8A5 /* MMHProductDetailPullDownHeaderView.m */; };
+		4182885D1D84201900F5F8A5 /* QGHFirstSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4182885C1D84201900F5F8A5 /* QGHFirstSlideViewController.m */; };
+		418288601D84216400F5F8A5 /* QGHClassificationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4182885F1D84216400F5F8A5 /* QGHClassificationItem.m */; };
+		418288631D844B1E00F5F8A5 /* QGHClassificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 418288621D844B1E00F5F8A5 /* QGHClassificationCell.m */; };
 		4186F8241D3A95D2004B91A9 /* QGHOrderProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 4186F8231D3A95D2004B91A9 /* QGHOrderProduct.m */; };
 		4186F8271D3AA076004B91A9 /* QGHOrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4186F8261D3AA076004B91A9 /* QGHOrderList.m */; };
 		4186F82C1D3B3874004B91A9 /* QGHOrderListBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4186F82A1D3B3874004B91A9 /* QGHOrderListBottomCell.xib */; };
@@ -405,6 +408,12 @@
 		418288561D81A7FA00F5F8A5 /* QGHProductPicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductPicViewController.m; sourceTree = "<group>"; };
 		418288581D81B85F00F5F8A5 /* MMHProductDetailPullDownHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHProductDetailPullDownHeaderView.h; sourceTree = "<group>"; };
 		418288591D81B85F00F5F8A5 /* MMHProductDetailPullDownHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHProductDetailPullDownHeaderView.m; sourceTree = "<group>"; };
+		4182885B1D84201900F5F8A5 /* QGHFirstSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHFirstSlideViewController.h; sourceTree = "<group>"; };
+		4182885C1D84201900F5F8A5 /* QGHFirstSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHFirstSlideViewController.m; sourceTree = "<group>"; };
+		4182885E1D84216400F5F8A5 /* QGHClassificationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHClassificationItem.h; sourceTree = "<group>"; };
+		4182885F1D84216400F5F8A5 /* QGHClassificationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHClassificationItem.m; sourceTree = "<group>"; };
+		418288611D844B1E00F5F8A5 /* QGHClassificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHClassificationCell.h; sourceTree = "<group>"; };
+		418288621D844B1E00F5F8A5 /* QGHClassificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHClassificationCell.m; sourceTree = "<group>"; };
 		4186F8221D3A95D2004B91A9 /* QGHOrderProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHOrderProduct.h; sourceTree = "<group>"; };
 		4186F8231D3A95D2004B91A9 /* QGHOrderProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHOrderProduct.m; sourceTree = "<group>"; };
 		4186F8251D3AA076004B91A9 /* QGHOrderList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHOrderList.h; sourceTree = "<group>"; };
@@ -1264,6 +1273,8 @@
 			children = (
 				4159553F1D04639900AC2BD4 /* QGHFirstViewController.h */,
 				415955401D04639900AC2BD4 /* QGHFirstViewController.m */,
+				4182885B1D84201900F5F8A5 /* QGHFirstSlideViewController.h */,
+				4182885C1D84201900F5F8A5 /* QGHFirstSlideViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1289,6 +1300,8 @@
 				41BEEB2D1D0EF84A00612F88 /* QGHGoodsHeaderView.xib */,
 				41DA4AE31D16FDEF00A8E42D /* QGHSegmentedControl.h */,
 				41DA4AE41D16FDEF00A8E42D /* QGHSegmentedControl.m */,
+				418288611D844B1E00F5F8A5 /* QGHClassificationCell.h */,
+				418288621D844B1E00F5F8A5 /* QGHClassificationCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2407,6 +2420,8 @@
 				41DC08081D29687A00DDC5DD /* QGHFirstPageGoodsList.m */,
 				418DA24B1D4468C0008063B0 /* QGHBanner.h */,
 				418DA24C1D4468C0008063B0 /* QGHBanner.m */,
+				4182885E1D84216400F5F8A5 /* QGHClassificationItem.h */,
+				4182885F1D84216400F5F8A5 /* QGHClassificationItem.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2846,6 +2861,7 @@
 				41FF280F1D40F83600BF2D22 /* MMHSearchBar.m in Sources */,
 				419567401D4C4AF10079D988 /* QGHGroupModel.m in Sources */,
 				41DC077B1D1E581C00DDC5DD /* QGHOrderListCell.m in Sources */,
+				418288601D84216400F5F8A5 /* QGHClassificationItem.m in Sources */,
 				419568DA1D4C68270079D988 /* PSTCollectionViewLayout.m in Sources */,
 				419568D21D4C68270079D988 /* UIView+EMWebCacheOperation.m in Sources */,
 				4195689C1D4C68270079D988 /* EMCDDeviceManager+Microphone.m in Sources */,
@@ -2906,6 +2922,7 @@
 				415955411D04639900AC2BD4 /* QGHFirstViewController.m in Sources */,
 				419568D41D4C68270079D988 /* PSTCollectionView.m in Sources */,
 				4186F82F1D3B3B48004B91A9 /* QGHOrderListBottomCell.m in Sources */,
+				4182885D1D84201900F5F8A5 /* QGHFirstSlideViewController.m in Sources */,
 				419568BF1D4C68270079D988 /* MWTapDetectingImageView.m in Sources */,
 				41DC07F01D28F79E00DDC5DD /* MMHAccount.m in Sources */,
 				41FF281C1D41058600BF2D22 /* SearchingSuggestedKeywordCell.swift in Sources */,
@@ -2998,6 +3015,7 @@
 				41FF28011D3E875400BF2D22 /* MMHChatCustomerViewController.m in Sources */,
 				418DA2441D42761E008063B0 /* MMHTableViewCell.m in Sources */,
 				419568E21D4C68270079D988 /* EaseConversationModel.m in Sources */,
+				418288631D844B1E00F5F8A5 /* QGHClassificationCell.m in Sources */,
 				41DC08061D29679800DDC5DD /* MMHTimeline.m in Sources */,
 				41FF28041D40F6B900BF2D22 /* MMHSearchViewController.m in Sources */,
 				419569031D4C68270079D988 /* EaseBubbleView+Voice.m in Sources */,

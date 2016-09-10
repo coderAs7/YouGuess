@@ -26,6 +26,7 @@
 #import "AdView.h"
 #import "AppWebViewController.h"
 #import "QGHRushPurchaseItemView.h"
+#import "QGHFirstSlideViewController.h"
 
 
 static NSString *QGHBannerCellIdentifier = @"QGHBannerCellIdentifier";
@@ -51,6 +52,8 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 @property (nonatomic, strong) NSArray *appointDataSource;
 @property (nonatomic, strong) NSArray *customDataSource;
 
+@property (nonatomic, strong) QGHFirstSlideViewController *slideVC;
+
 @end
 
 
@@ -72,6 +75,11 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(locationChange) name:MMHCurrentLocationNotification object:nil];
     
     [self fetchBanner];
+    
+    _slideVC = [[QGHFirstSlideViewController alloc] init];
+    _slideVC.view.frame = CGRectMake(-mmh_screen_width(), 0, mmh_screen_width(), self.view.bounds.size.height);
+    [self addChildViewController:_slideVC];
+    [self.view addSubview:_slideVC.view];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -459,7 +467,13 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 
 - (void)classifyItemAction {
-    //
+    [UIView animateWithDuration:0.5 animations:^{
+        if (self.slideVC.view.x < 0) {
+            self.slideVC.view.x = 0;
+        } else {
+            self.slideVC.view.x = -mmh_screen_width();
+        }
+    }];
 }
 
 
