@@ -10,6 +10,7 @@
 #import "QiangGouHui-Swift.h"
 #import "MMHNetworkAdapter+Login.h"
 #import "PooCodeView.h"
+#import "AppWebViewController.h"
 
 
 @interface QGHRegisterViewController ()<VerificationCodeTimerDelegate, UITextFieldDelegate>
@@ -27,6 +28,8 @@
 @property (nonatomic, strong) UILabel *userProtocolLabel;
 
 @property (nonatomic, strong) NSArray *dataSource;
+
+@property (nonatomic, assign) BOOL agreeUserProtocol;
 
 @end
 
@@ -211,7 +214,7 @@
 
 - (void)makeCommitButton {
     _commitButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 0, mmh_screen_width() - 30, 48)];
-    [_commitButton attachToBottomSideOfView:_inputView byDistance:30];
+    [_commitButton attachToBottomSideOfView:_inputView byDistance:40];
     _commitButton.layer.cornerRadius = 5;
     _commitButton.layer.masksToBounds = YES;
     _commitButton.titleLabel.font = F8;
@@ -219,8 +222,9 @@
     [_commitButton setTitleColor:C21 forState:UIControlStateNormal];
     [_commitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
     [_commitButton setBackgroundImage:[UIImage patternImageWithColor:[QGHAppearance themeColor]] forState:UIControlStateNormal];
-    [_commitButton setBackgroundImage:[UIImage patternImageWithColor:C3] forState:UIControlStateDisabled];
+    [_commitButton setBackgroundImage:[UIImage patternImageWithColor:C5] forState:UIControlStateDisabled];
     [_commitButton addTarget:self action:@selector(commitButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    _commitButton.enabled = NO;
     [self.view addSubview:_commitButton];
 }
 
@@ -228,17 +232,28 @@
 - (void)makeUserProtocolLabel {
     _userProtocolLabel = [[UILabel alloc] init];
     _userProtocolLabel.font = F4;
-    _userProtocolLabel.textColor = [UIColor lightGrayColor];
-    NSString *colorString = @"《用户服务协议》";
-    NSString *string = [NSString stringWithFormat:@"点击提交，即表示您接受%@", colorString];
-    NSRange colorStringRange = [string rangeOfString:colorString];
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-    [attributedString addAttributes:@{NSForegroundColorAttributeName: [QGHAppearance themeColor]} range:colorStringRange];
-    _userProtocolLabel.attributedText = attributedString;
+    _userProtocolLabel.textColor = [UIColor colorWithHexString:@"ff2640"];
+//    NSString *colorString = @"《用户服务协议》";
+//    NSString *string = [NSString stringWithFormat:@"点击提交，即表示您接受%@", colorString];
+//    NSRange colorStringRange = [string rangeOfString:colorString];
+//    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+//    [attributedString addAttributes:@{NSForegroundColorAttributeName: [QGHAppearance themeColor]} range:colorStringRange];
+    _userProtocolLabel.text = @"我已阅读芬想用户协议";
     [_userProtocolLabel sizeToFit];
-    _userProtocolLabel.y = _commitButton.bottom + 18;
+    _userProtocolLabel.y = _inputView.bottom + 10;
     _userProtocolLabel.centerX = mmh_screen_width() * 0.5;
+    _userProtocolLabel.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(userProtocolLabelTapAction)];
+    [_userProtocolLabel addGestureRecognizer:tap];
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    [button setImage:[UIImage imageNamed:@"car_icon_frame"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(agreeUserProtocol:) forControlEvents:UIControlEventTouchUpInside];
+    button.centerY = _userProtocolLabel.centerY;
+    button.right = _userProtocolLabel.left - 5;
+    
     [self.view addSubview:_userProtocolLabel];
+    [self.view addSubview:button];
 }
 
 
@@ -297,6 +312,11 @@
     }
     
     if (self.imageVerifyCodeTextField.textLengh == 0) {
+        self.commitButton.enabled = NO;
+        return;
+    }
+    
+    if (!self.agreeUserProtocol) {
         self.commitButton.enabled = NO;
         return;
     }
@@ -362,6 +382,25 @@
 
 - (void)tapClick {
     [_codeView changeCode];
+}
+
+
+- (void)agreeUserProtocol:(UIButton *)sender {
+    if (self.agreeUserProtocol) {
+        [sender setImage:[UIImage imageNamed:@"car_icon_frame"] forState:UIControlStateNormal];
+    } else {
+        [sender setImage:[UIImage imageNamed:@"car_icon_dagou"] forState:UIControlStateNormal];
+    }
+    
+    self.agreeUserProtocol = !self.agreeUserProtocol;
+    [self updateCommitButtonStatus];
+}
+
+
+- (void)userProtocolLabelTapAction {
+    AppWebViewController *web = [[AppWebViewController alloc] init];
+    web.webUrl = @"http://121.46.23.143/Public/static/active/activeinfo2.html";
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 

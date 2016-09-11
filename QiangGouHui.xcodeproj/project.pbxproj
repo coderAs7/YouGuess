@@ -54,6 +54,10 @@
 		4182885D1D84201900F5F8A5 /* QGHFirstSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4182885C1D84201900F5F8A5 /* QGHFirstSlideViewController.m */; };
 		418288601D84216400F5F8A5 /* QGHClassificationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4182885F1D84216400F5F8A5 /* QGHClassificationItem.m */; };
 		418288631D844B1E00F5F8A5 /* QGHClassificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 418288621D844B1E00F5F8A5 /* QGHClassificationCell.m */; };
+		418288661D857F5000F5F8A5 /* QGHMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 418288651D857F5000F5F8A5 /* QGHMessageListViewController.m */; };
+		4182886A1D8584E300F5F8A5 /* QGHMessageListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 418288681D8584E300F5F8A5 /* QGHMessageListCell.m */; };
+		4182886B1D8584E300F5F8A5 /* QGHMessageListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 418288691D8584E300F5F8A5 /* QGHMessageListCell.xib */; };
+		4182886E1D858F4800F5F8A5 /* QGHConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4182886D1D858F4800F5F8A5 /* QGHConversation.m */; };
 		4186F8241D3A95D2004B91A9 /* QGHOrderProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = 4186F8231D3A95D2004B91A9 /* QGHOrderProduct.m */; };
 		4186F8271D3AA076004B91A9 /* QGHOrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = 4186F8261D3AA076004B91A9 /* QGHOrderList.m */; };
 		4186F82C1D3B3874004B91A9 /* QGHOrderListBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4186F82A1D3B3874004B91A9 /* QGHOrderListBottomCell.xib */; };
@@ -414,6 +418,13 @@
 		4182885F1D84216400F5F8A5 /* QGHClassificationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHClassificationItem.m; sourceTree = "<group>"; };
 		418288611D844B1E00F5F8A5 /* QGHClassificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHClassificationCell.h; sourceTree = "<group>"; };
 		418288621D844B1E00F5F8A5 /* QGHClassificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHClassificationCell.m; sourceTree = "<group>"; };
+		418288641D857F5000F5F8A5 /* QGHMessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHMessageListViewController.h; sourceTree = "<group>"; };
+		418288651D857F5000F5F8A5 /* QGHMessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHMessageListViewController.m; sourceTree = "<group>"; };
+		418288671D8584E300F5F8A5 /* QGHMessageListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHMessageListCell.h; sourceTree = "<group>"; };
+		418288681D8584E300F5F8A5 /* QGHMessageListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHMessageListCell.m; sourceTree = "<group>"; };
+		418288691D8584E300F5F8A5 /* QGHMessageListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QGHMessageListCell.xib; sourceTree = "<group>"; };
+		4182886C1D858F4800F5F8A5 /* QGHConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHConversation.h; sourceTree = "<group>"; };
+		4182886D1D858F4800F5F8A5 /* QGHConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHConversation.m; sourceTree = "<group>"; };
 		4186F8221D3A95D2004B91A9 /* QGHOrderProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHOrderProduct.h; sourceTree = "<group>"; };
 		4186F8231D3A95D2004B91A9 /* QGHOrderProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHOrderProduct.m; sourceTree = "<group>"; };
 		4186F8251D3AA076004B91A9 /* QGHOrderList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHOrderList.h; sourceTree = "<group>"; };
@@ -1326,6 +1337,8 @@
 				419569261D4E096E0079D988 /* QGHMessageProductModel.m */,
 				417843131D52356C00567D4D /* QGHGroupUserModel.h */,
 				417843141D52356C00567D4D /* QGHGroupUserModel.m */,
+				4182886C1D858F4800F5F8A5 /* QGHConversation.h */,
+				4182886D1D858F4800F5F8A5 /* QGHConversation.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1339,6 +1352,8 @@
 				4195691A1D4DAF5C0079D988 /* QGHChatViewController.m */,
 				4195691C1D4DCA510079D988 /* QGHGroupHandleViewController.h */,
 				4195691D1D4DCA510079D988 /* QGHGroupHandleViewController.m */,
+				418288641D857F5000F5F8A5 /* QGHMessageListViewController.h */,
+				418288651D857F5000F5F8A5 /* QGHMessageListViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1900,6 +1915,9 @@
 				419569161D4C89910079D988 /* QGHGroupCell.xib */,
 				419569221D4E06C60079D988 /* QGHProductInfoMessageCell.h */,
 				419569231D4E06C60079D988 /* QGHProductInfoMessageCell.m */,
+				418288671D8584E300F5F8A5 /* QGHMessageListCell.h */,
+				418288681D8584E300F5F8A5 /* QGHMessageListCell.m */,
+				418288691D8584E300F5F8A5 /* QGHMessageListCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2707,7 +2725,7 @@
 				TargetAttributes = {
 					41BF0F931CFB4F6100FB23C2 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = CHT2NUC8Q9;
+						DevelopmentTeam = HJB9HWVPB2;
 					};
 				};
 			};
@@ -2752,6 +2770,7 @@
 				41E97F451D31FA4C00335C78 /* QGHCommonEditCell.xib in Resources */,
 				41DC079D1D1FA36400DDC5DD /* QGHOrderDetailProductCell.xib in Resources */,
 				41B6C13C1D53A8AF0070B9F2 /* b27_icon_star_gray@2x.png in Resources */,
+				4182886B1D8584E300F5F8A5 /* QGHMessageListCell.xib in Resources */,
 				419569181D4C89910079D988 /* QGHGroupCell.xib in Resources */,
 				4159554B1D04685D00AC2BD4 /* QGHFirstBannerCell.xib in Resources */,
 				411ADC691D1C2BA20050B8EB /* QGHReceiptAddressCell.xib in Resources */,
@@ -2872,6 +2891,7 @@
 				419569081D4C68270079D988 /* EaseTextView.m in Sources */,
 				41FF280E1D40F83600BF2D22 /* MMHHeaderCollectionReusableView.m in Sources */,
 				411ADC631D1C26000050B8EB /* MMHFetchModel.m in Sources */,
+				4182886E1D858F4800F5F8A5 /* QGHConversation.m in Sources */,
 				419568FC1D4C68270079D988 /* EaseMessageTimeCell.m in Sources */,
 				419568BC1D4C68270079D988 /* MWGridViewController.m in Sources */,
 				41B6C1361D539FB20070B9F2 /* QGHCommentViewController.m in Sources */,
@@ -2935,6 +2955,7 @@
 				41FF281A1D41040F00BF2D22 /* SearchingSuggestedKeywordsManager.swift in Sources */,
 				41DC08131D2AA40600DDC5DD /* QGHProductDetailModel.m in Sources */,
 				41E87A871D2C0A0F003A987E /* QGHProductDetailScoreInfo.m in Sources */,
+				4182886A1D8584E300F5F8A5 /* QGHMessageListCell.m in Sources */,
 				41E97F5E1D3536F100335C78 /* MMHWeChatAdapter.m in Sources */,
 				41DC07D21D27547000DDC5DD /* QGHConfirmOrderViewController.m in Sources */,
 				419568A01D4C68270079D988 /* amrFileCodec.mm in Sources */,
@@ -3053,6 +3074,7 @@
 				41C64C721D181C0300E22E5B /* QGHLoginViewController.m in Sources */,
 				41DC081F1D2BFC8E00DDC5DD /* QGHProductDetailWebViewCell.m in Sources */,
 				419568F21D4C68270079D988 /* EaseConversationListViewController.m in Sources */,
+				418288661D857F5000F5F8A5 /* QGHMessageListViewController.m in Sources */,
 				415955511D046DC800AC2BD4 /* QGHRushPurchaseItemView.m in Sources */,
 				4186F8241D3A95D2004B91A9 /* QGHOrderProduct.m in Sources */,
 				41DC07721D1E566F00DDC5DD /* QGHOrderListViewController.m in Sources */,
@@ -3187,7 +3209,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guangzhou softbank information technology co., LTD (HJB9HWVPB2)";
 				DEFINES_MODULE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3230,9 +3252,9 @@
 					"$(PROJECT_DIR)/QiangGouHui/openSDK1.7.2",
 					"$(PROJECT_DIR)/QiangGouHui/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.softbank.qianggouhui2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.softbank.qianggouhui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "72fe8663-7c86-4837-b391-6f369ffe816a";
 				SWIFT_OBJC_BRIDGING_HEADER = "QiangGouHui/QiangGouHui-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -3245,7 +3267,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Guangzhou softbank information technology co., LTD (HJB9HWVPB2)";
 				DEFINES_MODULE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3288,9 +3310,9 @@
 					"$(PROJECT_DIR)/QiangGouHui/openSDK1.7.2",
 					"$(PROJECT_DIR)/QiangGouHui/ShareSDK/Support/PlatformSDK/SinaWeiboSDK",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.softbank.qianggouhui2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.softbank.qianggouhui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "72fe8663-7c86-4837-b391-6f369ffe816a";
 				SWIFT_OBJC_BRIDGING_HEADER = "QiangGouHui/QiangGouHui-Bridging-Header.h";
 			};
 			name = Release;

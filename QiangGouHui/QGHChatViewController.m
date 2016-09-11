@@ -25,6 +25,18 @@
 @implementation QGHChatViewController
 
 
+- (instancetype)initWithConversationChatter:(NSString *)conversationChatter conversationType:(EMConversationType)conversationType {
+    self = [super initWithConversationChatter:conversationChatter conversationType:conversationType];
+    
+    if (self) {
+        self.delegate = self;
+        self.dataSource = self;
+    }
+    
+    return self;
+}
+
+
 - (instancetype)initWithProductInfo:(QGHProductInfo *)info {
     if(![[EMClient sharedClient] isConnected] || ![[EMClient sharedClient] isLoggedIn]){
         return nil;

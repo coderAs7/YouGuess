@@ -40,6 +40,9 @@
         [self.contentView addSubview:_nameLabel];
         
         _arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sg_ic_down_up"]];
+        CGRect frame = _arrow.frame;
+        frame.size = CGSizeMake(frame.size.width * 0.5, frame.size.height * 0.5);
+        _arrow.frame = frame;
         [self.contentView addSubview:_arrow];
 //        [_arrow mas_makeConstraints:^(MASConstraintMaker *make) {
 //            make.centerY.equalTo(self.contentView);

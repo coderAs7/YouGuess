@@ -27,6 +27,8 @@
 #import "AppWebViewController.h"
 #import "QGHRushPurchaseItemView.h"
 #import "QGHFirstSlideViewController.h"
+#import "QGHMessageListViewController.h"
+#import "EMClient.h"
 
 
 static NSString *QGHBannerCellIdentifier = @"QGHBannerCellIdentifier";
@@ -55,6 +57,8 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 @property (nonatomic, strong) QGHFirstSlideViewController *slideVC;
 @property (nonatomic, strong) NSString *selectedGoodsType;
 
+@property (nonatomic, strong) UILabel *messageBadge;
+
 @end
 
 
@@ -66,7 +70,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     
     self.selectedFlag = QGHBussTypePurchase;
     
-    _purchaseDataSource = @[@"banner", @"推荐", @"商品"];
+    _purchaseDataSource = @[@"banner", @"商品"];
     _appointDataSource = @[@"banner", @"商品"];
     _customDataSource = @[@"banner", @"商品"];
     
@@ -87,7 +91,8 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.navigationController.navigationBar setBarTintColor:[QGHAppearance themeColor]];
+//    [self.navigationController.navigationBar setBarTintColor:[QGHAppearance themeColor]];
+    [self updateUnreadMessageNum];
 }
 
 
@@ -158,7 +163,22 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     
     UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"qgh_ic_sousuo"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonAction)];
     
-    UIBarButtonItem *messageItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"fx_ic_xiaoxi"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(messageItemAction)];
+    UIButton *messageButton = [[UIButton alloc] init];
+    [messageButton setImage:[UIImage imageNamed:@"fx_ic_xiaoxi"] forState:UIControlStateNormal];
+    [messageButton addTarget:self action:@selector(messageItemAction) forControlEvents:UIControlEventTouchUpInside];
+    [messageButton sizeToFit];
+    
+    _messageBadge = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 14, 14)];
+    _messageBadge.textAlignment = NSTextAlignmentCenter;
+    _messageBadge.font = F0;
+    _messageBadge.textColor = [UIColor whiteColor];
+    _messageBadge.backgroundColor = [UIColor redColor];
+    _messageBadge.layer.cornerRadius = 7;
+    _messageBadge.layer.masksToBounds = YES;
+    _messageBadge.center = CGPointMake(messageButton.width, 0);
+    [messageButton addSubview:_messageBadge];
+    
+    UIBarButtonItem *messageItem = [[UIBarButtonItem alloc] initWithCustomView:messageButton];
     self.navigationItem.rightBarButtonItems = @[messageItem, searchItem];
 }
 
@@ -227,14 +247,35 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 }
 
 
+- (void)updateUnreadMessageNum {
+    NSArray *conversations = [[EMClient sharedClient].chatManager loadAllConversationsFromDB];
+    NSInteger num = 0;
+    for (EMConversation *conversation in conversations) {
+        num += [conversation unreadMessagesCount];
+    }
+    
+    if (num > 0) {
+        self.messageBadge.hidden = NO;
+        self.messageBadge.text = [NSString stringWithFormat:@"%ld", num];
+    } else {
+        self.messageBadge.hidden = YES;
+    }
+}
+
+
 #pragma mark - UITalbeView DataSource and Delegate
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.selectedFlag == QGHBussTypePurchase) {
-        return 3;
-    } else {
-        return 2;
+    switch (self.selectedFlag) {
+        case QGHBussTypePurchase:
+            return _purchaseDataSource.count;
+        case QGHBussTypeAppoint:
+            return _appointDataSource.count;
+        case QGHBussTypeCustom:
+            return _customDataSource.count;
+        default:
+            return 0;
     }
 }
 
@@ -489,7 +530,12 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 
 - (void)messageItemAction {
-    //
+    if(![[EMClient sharedClient] isConnected] || ![[EMClient sharedClient] isLoggedIn]){
+        return;
+    }
+    
+    QGHMessageListViewController *messageListVC = [[QGHMessageListViewController alloc] init];
+    [self.navigationController pushViewController:messageListVC animated:YES];
 }
 
 

@@ -323,7 +323,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
         } else {
             QGHProductDetailWebViewCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHProductDetailImageCellIdentifier forIndexPath:indexPath];
             cell.delegate = self;
-            [cell setProductDetailUrl:self.productDetailModel.product.info];
+            [cell setProductDetailUrl:self.productDetailModel.product.desc];
             
             return cell;
         }
