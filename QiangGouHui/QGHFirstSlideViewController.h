@@ -8,6 +8,17 @@
 
 #import "BaseViewController.h"
 
-@interface QGHFirstSlideViewController : BaseViewController
+
+@protocol QGHFirstSlideViewControllerDelegate <NSObject>
+
+- (void)slideViewControllerSelectType:(NSString *)goodstype;
 
 @end
+
+
+@interface QGHFirstSlideViewController : BaseViewController
+
+@property (nonatomic, weak) id<QGHFirstSlideViewControllerDelegate> delegate;
+
+@end
+

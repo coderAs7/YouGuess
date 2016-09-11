@@ -10,6 +10,6 @@
 
 @interface QGHFirstPageGoodsList : MMHTimeline
 
-- (instancetype)initWithFlag:(NSInteger)flag city:(NSString *)city;
+- (instancetype)initWithFlag:(NSInteger)flag city:(NSString *)city goodstype:(NSString *)goodstype;
 
 @end

@@ -16,9 +16,12 @@
 @implementation MMHNetworkAdapter (FirstPage)
 
 
-- (void)fetchDataWithRequester:(id)requester bussType:(QGHBussType)type area:(NSString *)area page:(NSInteger)page size:(NSInteger)size succeededHandler:(void(^)(NSArray<QGHFirstPageGoodsModel *> *goodsArr))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
-        NSDictionary *parameters = @{@"userToken": [[MMHAccountSession currentSession] token], @"type": @(type), @"area": area, @"page": @(page), @"size": @(size)};
-        MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+- (void)fetchDataWithRequester:(id)requester goodstype:(NSString *)goodstype bussType:(QGHBussType)type area:(NSString *)area page:(NSInteger)page size:(NSInteger)size succeededHandler:(void(^)(NSArray<QGHFirstPageGoodsModel *> *goodsArr))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    NSMutableDictionary *parameters = [@{@"userToken": [[MMHAccountSession currentSession] token], @"type": @(type), @"area": area, @"page": @(page), @"size": @(size)} mutableCopy];
+    if (goodstype.length > 0) {
+        [parameters addEntriesFromDictionary:@{@"goodstype": goodstype}];
+    }
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
     [engine postWithAPI:@"_goods_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:@{@"goodsId": @"id"} succeededBlock:^(id responseObject, id responseJSONObject) {
             NSArray *data = [responseJSONObject objectForKey:@"info"];
             NSArray *goodsArr = [data modelArrayOfClass:[QGHFirstPageGoodsModel class]];

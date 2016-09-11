@@ -36,7 +36,7 @@
         
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.font = F3;
-        _nameLabel.textColor = C6;
+        _nameLabel.textColor = C8;
         [self.contentView addSubview:_nameLabel];
         
         _arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sg_ic_down_up"]];
