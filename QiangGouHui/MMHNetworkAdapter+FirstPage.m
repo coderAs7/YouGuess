@@ -17,7 +17,7 @@
 
 
 - (void)fetchDataWithRequester:(id)requester goodstype:(NSString *)goodstype bussType:(QGHBussType)type area:(NSString *)area page:(NSInteger)page size:(NSInteger)size succeededHandler:(void(^)(NSArray<QGHFirstPageGoodsModel *> *goodsArr))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
-    NSMutableDictionary *parameters = [@{@"userToken": [[MMHAccountSession currentSession] token], @"type": @(type), @"area": area, @"page": @(page), @"size": @(size)} mutableCopy];
+    NSMutableDictionary *parameters = [@{@"userToken": [[MMHAccountSession currentSession] token], @"type": @(type), @"area": [QGHPublic notBlankString:area], @"page": @(page), @"size": @(size)} mutableCopy];
     if (goodstype.length > 0) {
         [parameters addEntriesFromDictionary:@{@"goodstype": goodstype}];
     }

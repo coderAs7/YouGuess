@@ -29,6 +29,7 @@
 #import "QGHFirstSlideViewController.h"
 #import "QGHMessageListViewController.h"
 #import "EMClient.h"
+#import "QGHProductSubClassViewController.h"
 
 
 static NSString *QGHBannerCellIdentifier = @"QGHBannerCellIdentifier";
@@ -509,9 +510,11 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 #pragma mark - QGHFirstSlideViewControllerDelegate
 
 
-- (void)slideViewControllerSelectType:(NSString *)goodstype {
+- (void)slideViewControllerSelectType:(NSString *)goodstype title:(NSString *)title {
     self.selectedGoodsType = goodstype;
-    [self fetchGoodsList];
+    QGHProductSubClassViewController *productSubClassVC = [[QGHProductSubClassViewController alloc] initWithSelectedGoodsType:self.selectedGoodsType selectedArea:self.selectedCity];
+    productSubClassVC.title = title;
+    [self.navigationController pushViewController:productSubClassVC animated:YES];
 }
 
 

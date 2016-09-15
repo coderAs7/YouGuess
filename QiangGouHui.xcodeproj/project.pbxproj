@@ -21,6 +21,8 @@
 		411ADC691D1C2BA20050B8EB /* QGHReceiptAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 411ADC671D1C2BA20050B8EB /* QGHReceiptAddressCell.xib */; };
 		411ADC6C1D1C32610050B8EB /* QGHReceiptAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC6B1D1C32610050B8EB /* QGHReceiptAddressCell.m */; };
 		411ADC701D1C473B0050B8EB /* QGHReceiptAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 411ADC6F1D1C473B0050B8EB /* QGHReceiptAddressViewController.m */; };
+		41319FED1D8A77B20053EF47 /* QGHPublic.m in Sources */ = {isa = PBXBuildFile; fileRef = 41319FEC1D8A77B20053EF47 /* QGHPublic.m */; };
+		41319FF01D8A7A6A0053EF47 /* QGHProductSubClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41319FEF1D8A7A6A0053EF47 /* QGHProductSubClassViewController.m */; };
 		4131A7091D5DF901006F60E4 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4131A6E71D5DF901006F60E4 /* ShareSDK.framework */; };
 		4131A70A1D5DF901006F60E4 /* ShareSDKExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4131A6EA1D5DF901006F60E4 /* ShareSDKExtension.framework */; };
 		4131A70B1D5DF901006F60E4 /* ShareSDKUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4131A6EB1D5DF901006F60E4 /* ShareSDKUI.bundle */; };
@@ -355,6 +357,10 @@
 		411ADC6B1D1C32610050B8EB /* QGHReceiptAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHReceiptAddressCell.m; sourceTree = "<group>"; };
 		411ADC6E1D1C473B0050B8EB /* QGHReceiptAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHReceiptAddressViewController.h; sourceTree = "<group>"; };
 		411ADC6F1D1C473B0050B8EB /* QGHReceiptAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHReceiptAddressViewController.m; sourceTree = "<group>"; };
+		41319FEB1D8A77B20053EF47 /* QGHPublic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHPublic.h; sourceTree = "<group>"; };
+		41319FEC1D8A77B20053EF47 /* QGHPublic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHPublic.m; sourceTree = "<group>"; };
+		41319FEE1D8A7A6A0053EF47 /* QGHProductSubClassViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QGHProductSubClassViewController.h; sourceTree = "<group>"; };
+		41319FEF1D8A7A6A0053EF47 /* QGHProductSubClassViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QGHProductSubClassViewController.m; sourceTree = "<group>"; };
 		4131A6E71D5DF901006F60E4 /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
 		4131A6EA1D5DF901006F60E4 /* ShareSDKExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKExtension.framework; sourceTree = "<group>"; };
 		4131A6EB1D5DF901006F60E4 /* ShareSDKUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKUI.bundle; sourceTree = "<group>"; };
@@ -1286,6 +1292,8 @@
 				415955401D04639900AC2BD4 /* QGHFirstViewController.m */,
 				4182885B1D84201900F5F8A5 /* QGHFirstSlideViewController.h */,
 				4182885C1D84201900F5F8A5 /* QGHFirstSlideViewController.m */,
+				41319FEE1D8A7A6A0053EF47 /* QGHProductSubClassViewController.h */,
+				41319FEF1D8A7A6A0053EF47 /* QGHProductSubClassViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2097,6 +2105,8 @@
 				41DC07BD1D26A48500DDC5DD /* QGHDefines.h */,
 				41DC080A1D2A945B00DDC5DD /* MMHPullToRefresh.h */,
 				41DC080B1D2A945B00DDC5DD /* MMHPullToRefresh.m */,
+				41319FEB1D8A77B20053EF47 /* QGHPublic.h */,
+				41319FEC1D8A77B20053EF47 /* QGHPublic.m */,
 			);
 			name = Utilites;
 			sourceTree = "<group>";
@@ -2937,6 +2947,7 @@
 				41DC078A1D1E782E00DDC5DD /* QGHOrderDetailViewController.m in Sources */,
 				41BEEB2C1D0EF82400612F88 /* QGHGoodsHeaderView.m in Sources */,
 				419568C81D4C68270079D988 /* EMSDWebImageManager.m in Sources */,
+				41319FED1D8A77B20053EF47 /* QGHPublic.m in Sources */,
 				41DC07831D1E683600DDC5DD /* QGHOrderListItem.m in Sources */,
 				4195689F1D4C68270079D988 /* EMCDDeviceManagerBase.m in Sources */,
 				415955411D04639900AC2BD4 /* QGHFirstViewController.m in Sources */,
@@ -3051,6 +3062,7 @@
 				41BEEB311D0F06FE00612F88 /* Stepper.swift in Sources */,
 				41DC07E21D28ABFD00DDC5DD /* MMHRequestSerializer.m in Sources */,
 				41FF27EF1D3D1A0E00BF2D22 /* DataSigner.m in Sources */,
+				41319FF01D8A7A6A0053EF47 /* QGHProductSubClassViewController.m in Sources */,
 				419568BD1D4C68270079D988 /* MWPhoto.m in Sources */,
 				419568981D4C68270079D988 /* EaseUI.m in Sources */,
 				41DC080F1D2AA25400DDC5DD /* MMHNetworkAdapter+Product.m in Sources */,

@@ -20,5 +20,6 @@
 #import "QGHDefines.h"
 #import "MMHPullToRefresh.h"
 #import "QGHTabBarController.h"
+#import "QGHPublic.h"
 
 #endif

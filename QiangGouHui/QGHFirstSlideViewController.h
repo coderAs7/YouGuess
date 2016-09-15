@@ -11,7 +11,7 @@
 
 @protocol QGHFirstSlideViewControllerDelegate <NSObject>
 
-- (void)slideViewControllerSelectType:(NSString *)goodstype;
+- (void)slideViewControllerSelectType:(NSString *)goodstype title:(NSString *)title;
 
 @end
 
