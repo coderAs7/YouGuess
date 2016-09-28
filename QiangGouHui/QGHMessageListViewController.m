@@ -76,6 +76,7 @@
         QGHConversation *qghConversation = [[QGHConversation alloc] init];
         qghConversation.conversationID = conversation.conversationId;
         qghConversation.message = conversation.latestMessage;
+        qghConversation.unReadMsgCount = [conversation unreadMessagesCount];
         
         for (QGHGroupModel *group in self.allGroupArr) {
             if ([group.room_id isEqualToString:conversation.conversationId]) {

@@ -132,4 +132,15 @@
 }
                                                                                      
 
+- (void)refundOrderFrom:(id)requester orderId:(NSString *)orderId succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    NSDictionary *parameters = @{@"userToken": [[MMHAccountSession currentSession] token], @"id": orderId, @"status": @(QGHOrderListItemStatusRefund)};
+    [engine postWithAPI:@"_change_order_status_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        succeededHandler();
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
+    }];
+}
+
+
 @end

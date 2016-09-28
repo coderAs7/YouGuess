@@ -35,6 +35,7 @@
     [self shareSDKConnectApp];
     [MMHAccountSession start];
     [self easemobApplication:application didFinishLaunchingWithOptions:launchOptions];
+    [self initPush:application launchOptions:launchOptions];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -48,6 +49,42 @@
     }
     
     return YES;
+}
+
+
+#pragma mark 初始化推送
+- (void)initPush:(UIApplication *)application launchOptions:(NSDictionary *)launchOptions
+{
+    
+    if([application respondsToSelector:@selector(registerUserNotificationSettings:)])
+    {
+        UIUserNotificationType notificationTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
+    
+#if !TARGET_IPHONE_SIMULATOR
+    //iOS8 注册APNS
+    if ([application respondsToSelector:@selector(registerForRemoteNotifications)]) {
+        [application registerForRemoteNotifications];
+    }else{
+        UIRemoteNotificationType notificationTypes = UIRemoteNotificationTypeBadge |
+        UIRemoteNotificationTypeSound |
+        UIRemoteNotificationTypeAlert;
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
+    }
+#endif
+}
+
+
+#pragma mark 处理本地推送
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    //判断app是否在后台 然后处理一个本地通知
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateInactive
+        || [UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+//        [self handleLocalNotification:notification];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

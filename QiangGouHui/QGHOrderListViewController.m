@@ -373,9 +373,19 @@ static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCe
 
 
 - (void)orderListBottomCellToRefundAndGoods:(QGHOrderListBottomCell *)cell {
-    MMHChatCustomerViewController *customerVC = [[MMHChatCustomerViewController alloc] init];
-    customerVC.transferOrderNo = cell.item.order_no;
-    [self.navigationController pushViewController:customerVC animated:YES];
+    [self.view showProcessingView];
+    [[MMHNetworkAdapter sharedAdapter] refundOrderFrom:self orderId:cell.item.orderId succeededHandler:^{
+        [self.view hideProcessingView];
+        [self.view showTips:@"申请退款退货成功"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            MMHChatCustomerViewController *customerVC = [[MMHChatCustomerViewController alloc] init];
+            customerVC.transferOrderNo = cell.item.order_no;
+            [self.navigationController pushViewController:customerVC animated:YES];
+        });
+    } failedHandler:^(NSError *error) {
+        [self.view hideProcessingView];
+        [self.view showTipsWithError:error];
+    }];
 }
 
 

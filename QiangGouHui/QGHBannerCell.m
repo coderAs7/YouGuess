@@ -9,7 +9,7 @@
 #import "QGHBannerCell.h"
 #import "QGHBanner.h"
 
-#define BANNER_HEIGHT (mmh_screen_width() * 640 / 960)
+#define BANNER_HEIGHT (mmh_screen_width() * 540 / 1080)
 
 @interface QGHBannerCell()<UIScrollViewDelegate>
 

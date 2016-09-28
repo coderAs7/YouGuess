@@ -92,16 +92,16 @@
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateInactive
         || [UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
         id<IMessageModel> model = [[EaseMessageModel alloc] initWithMessage:aMessages.lastObject];
-        NSDictionary *messageExt = ((EMMessage *)aMessages.lastObject).ext;
-        NSString *name = [messageExt objectForKey:@"name"];
+        NSString *name = [(EMMessage *)aMessages.lastObject from];
         //        NSDictionary *apns = [messageExt objectForKey:@"em_apns_ext"];
         NSString *content;
+        NSLog(@"fuck:%d", model.bodyType);
         if (model.bodyType == EMMessageBodyTypeImage) {
             content = [NSString stringWithFormat:@"%@ 在讨论组中发了一张图片",name];
         }else if(model.bodyType == EMMessageBodyTypeVoice){
             content = [NSString stringWithFormat:@"%@ 在讨论组中发了一段语音",name];
         }else{
-            if([content rangeOfString:@"img:"].location != NSNotFound){
+            if([content hasPrefix:@"img:"]){
                 content = [NSString stringWithFormat:@"%@ 在讨论组中发了一张图片",name];
             }else{
                 content = [NSString stringWithFormat:@"%@:%@",name, model.text];
@@ -109,7 +109,7 @@
         }
         
         UILocalNotification *notifi = [[UILocalNotification alloc] init];
-        notifi.fireDate = [NSDate new];
+        notifi.fireDate = [NSDate date];
         notifi.repeatInterval = 0;
         notifi.applicationIconBadgeNumber = 1;
         notifi.soundName = UILocalNotificationDefaultSoundName;

@@ -16,5 +16,6 @@
 @property (nonatomic, copy) NSString *conversationImgUrl;
 @property (nonatomic, strong) UIImage *conversationImg;
 @property (nonatomic, strong) EMMessage *message;
+@property (nonatomic, assign) NSInteger unReadMsgCount;
 
 @end

@@ -85,7 +85,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     
     UIBarButtonItem *commentItem = [[UIBarButtonItem alloc] initWithTitle:@"评价" style:UIBarButtonItemStylePlain target:self action:@selector(commentAction)];
     
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 16, 16)];
     [shareButton setImage:[UIImage imageNamed:@"fenxiang_ugly"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
     

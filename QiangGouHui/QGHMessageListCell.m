@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @property (nonatomic, strong) MMHImageView *msgImageView;
+@property (weak, nonatomic) IBOutlet UILabel *badge;
 
 @end
 
@@ -72,6 +73,13 @@
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:conversation.message.localTime];
     NSString *dateStr = [date stringRepresentationWithDateFormat:@"MM-dd HH:mm"];
     self.timeLabel.text = dateStr;
+    
+    if (conversation.unReadMsgCount > 0) {
+        self.badge.hidden = NO;
+        self.badge.text = [NSString stringWithFormat:@"%ld", conversation.unReadMsgCount];
+    } else {
+        self.badge.hidden = YES;
+    }
 }
 
 

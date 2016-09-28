@@ -33,5 +33,6 @@
 - (void)sendCommentForm:(id)requester orderId:(NSString *)orderId content:(NSString *)content star:(NSInteger)star succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
 
 - (void)delayReceiptTime:(id)requester orderNo:(NSString *)orderNo succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
-                                                                                     
+
+- (void)refundOrderFrom:(id)requester orderId:(NSString *)orderId succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
 @end
