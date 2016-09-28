@@ -103,6 +103,7 @@
     
     for (int i = 0; i < self.bannerArr.count; ++i) {
         MMHImageView *imageView = [[MMHImageView alloc] initWithFrame:CGRectMake(i * mmh_screen_width(), 0, mmh_screen_width(), self.scrollView.height)];
+        imageView.defaultContentMode = UIViewContentModeScaleToFill;
         QGHBanner *banner = self.bannerArr[i];
         [imageView updateViewWithImageAtURL:banner.img_url];
         imageView.userInteractionEnabled = YES;
