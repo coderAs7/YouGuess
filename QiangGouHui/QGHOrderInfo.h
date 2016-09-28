@@ -25,5 +25,6 @@
 @property (nonatomic, strong) QGHReceiptAddressModel *receiptinfo;
 @property (nonatomic, copy) NSString *posttype;
 @property (nonatomic, copy) NSString *postid;
+@property (nonatomic, copy) NSString *express_time;
 
 @end

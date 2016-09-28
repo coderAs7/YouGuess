@@ -15,7 +15,9 @@
 #import <ShareSDKConnector/ShareSDKConnector.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
+#if !TARGET_IPHONE_SIMULATOR
 #import "WXApi.h"
+#endif
 #import "WeiboSDK.h"
 #import "AppDelegate+EaseMob.h"
 #import <AlipaySDK/AlipaySDK.h>
@@ -102,9 +104,11 @@
             case SSDKPlatformTypeQQ:
                 [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
                 break;
+#if !TARGET_IPHONE_SIMULATOR
             case SSDKPlatformTypeWechat:
                 [ShareSDKConnector connectWeChat:[WXApi class]];
                 break;
+#endif
             case SSDKPlatformTypeSinaWeibo:
                 [ShareSDKConnector connectWeibo:[WeiboSDK class]];
                 break;
@@ -116,9 +120,11 @@
             case SSDKPlatformTypeQQ:
                 [appInfo SSDKSetupQQByAppId:QQ_APPID appKey:QQ_APPKEY authType:SSDKAuthTypeBoth];
                 break;
+#if !TARGET_IPHONE_SIMULATOR
             case SSDKPlatformTypeWechat:
                 [appInfo SSDKSetupWeChatByAppId:WECHAT_APPID appSecret:WECHAT_APPSECRET];
                 break;
+#endif
             case SSDKPlatformTypeSinaWeibo:
                 //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
                 [appInfo SSDKSetupSinaWeiboByAppKey:WEIBO_APPKEY

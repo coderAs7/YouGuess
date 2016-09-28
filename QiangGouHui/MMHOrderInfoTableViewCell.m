@@ -107,7 +107,7 @@
 
 - (void)setCloudPickShopName:(NSString *)cloudPickShopName {
     _cloudPickShopName = cloudPickShopName;
-    [self.cloudPickShopNameLabel setSingleLineText:[NSString stringWithFormat:@"订单来源:%@",cloudPickShopName]];
+    [self.cloudPickShopNameLabel setSingleLineText:[NSString stringWithFormat:@"自动收货时间:%@",cloudPickShopName]];
 }
 
 //+ (CGFloat)cellHeightWithorderDetailModel:(MMHOrderDetailModel *)orderDetailModel {

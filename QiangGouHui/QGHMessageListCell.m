@@ -63,7 +63,10 @@
     } else {
         text = model.text;
     }
-    NSString *content = [NSString stringWithFormat:@"%@:%@", model.nickname, text];
+    NSString *content = @"";
+    if (model.nickname.length != 0 && text.length != 0) {
+        content = [NSString stringWithFormat:@"%@:%@", model.nickname, text];
+    }
     self.latestMsgLabel.text = content;
     
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:conversation.message.localTime];

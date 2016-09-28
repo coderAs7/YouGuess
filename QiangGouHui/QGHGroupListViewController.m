@@ -188,7 +188,7 @@ static NSString *const QGHGroupTitleCellIdentifier = @"QGHGroupTitleCellIdentifi
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == 0 && indexPath.row != 0) {
         QGHGroupModel *model = self.myGroupArr[indexPath.row - 1];
         
         [[EMClient sharedClient].groupManager asyncFetchGroupInfo:model.room_id includeMembersList:YES success:^(EMGroup *aGroup) {

@@ -9,7 +9,7 @@
 #import "QGHSegmentedControl.h"
 
 
-#define BUTTON_WIDTH 60
+#define BUTTON_WIDTH 50
 #define BUTTON_HEIGHT 24
 
 

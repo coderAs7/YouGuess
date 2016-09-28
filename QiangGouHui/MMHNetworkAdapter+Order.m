@@ -78,11 +78,11 @@
 }
 
 
-- (void)paySuccessCallBack:(NSString *)orderNo {
+- (void)paySuccessCallBack:(NSString *)orderNo price:(NSString *)price {
     MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
-    [engine POST:@"http://121.46.23.143/callback.php" parameters:@{@"out_trade_no": orderNo} success:^(NSURLSessionDataTask *task, id responseObject) {
+    [engine POST:@"http://121.46.23.143/callback.php" parameters:@{@"out_trade_no": orderNo, @"price": price} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         //nothing
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         //nothing
     }];
 }
@@ -120,5 +120,16 @@
     }];
 }
 
+
+- (void)delayReceiptTime:(id)requester orderNo:(NSString *)orderNo succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler {
+    NSDictionary *parameters = @{@"userToken": [[MMHAccountSession currentSession] token], @"invest_id": orderNo};
+    MMHNetworkEngine *engine = [MMHNetworkEngine sharedEngine];
+    [engine postWithAPI:@"_change_express_time_001" parameters:parameters from:requester responseObjectClass:nil responseObjectKeyMap:nil succeededBlock:^(id responseObject, id responseJSONObject) {
+        succeededHandler();
+    } failedBlock:^(NSError *error) {
+        failedHandler(error);
+    }];
+}
+                                                                                     
 
 @end

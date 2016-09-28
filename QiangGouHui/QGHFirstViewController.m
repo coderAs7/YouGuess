@@ -159,7 +159,11 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
     UIBarButtonItem *cityItem = [[UIBarButtonItem alloc] initWithCustomView:_locationLabel];
     
-    UIBarButtonItem *classifyItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"fx_ic_fenlei"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(classifyItemAction)];
+    UIButton *classifyButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 35, 35)];
+    [classifyButton setImage:[UIImage imageNamed:@"fenlei_ugly"] forState:UIControlStateNormal];
+    [classifyButton addTarget:self action:@selector(classifyItemAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *classifyItem = [[UIBarButtonItem alloc] initWithCustomView:classifyButton];
     self.navigationItem.leftBarButtonItems = @[classifyItem, cityItem];
     
     UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"qgh_ic_sousuo"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonAction)];
@@ -490,8 +494,15 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 
 - (void)bannerCellDidClick:(QGHBanner *)banner {
-    QGHProductDetailVIewController *productDetailVC = [[QGHProductDetailVIewController alloc] initWithBussType:banner.type goodsId:banner.target_url];
-    [self.navigationController pushViewController:productDetailVC animated:YES];
+    if ([banner.typeid isEqualToString:@"0"]) {
+        QGHProductDetailVIewController *productDetailVC = [[QGHProductDetailVIewController alloc] initWithBussType:banner.type goodsId:banner.target_url];
+        [self.navigationController pushViewController:productDetailVC animated:YES];
+    } else {
+        QGHProductSubClassViewController *productSubClassVC = [[QGHProductSubClassViewController alloc] initWithSelectedGoodsType:banner.typeid selectedArea:self.selectedCity];
+        productSubClassVC.title = banner.typename;
+        [self.navigationController pushViewController:productSubClassVC animated:YES];
+    }
+    
 //    AppWebViewController *appWebViewVC = [[AppWebViewController alloc] init];
 //    appWebViewVC.webUrl = @"http://121.14.38.35/Public/static/App/goodinfo148.html";
 //    [self.navigationController pushViewController:appWebViewVC animated:YES];

@@ -13,5 +13,7 @@
 @property (nonatomic, copy) NSString *img_url;
 @property (nonatomic, copy) NSString *target_url;
 @property (nonatomic, assign) QGHBussType type;
+@property (nonatomic, copy) NSString *typeid;
+@property (nonatomic, copy) NSString *typename;
 
 @end

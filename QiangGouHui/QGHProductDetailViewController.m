@@ -25,6 +25,8 @@
 #import <ShareSDKUI/ShareSDKUI.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
 #import "QGHProductPicViewController.h"
+#import "EMSDK.h"
+#import "MMHAccountSession.h"
 
 
 #define FOOTER_JUMP_VIEW_HEIGHT 50
@@ -83,7 +85,11 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     
     UIBarButtonItem *commentItem = [[UIBarButtonItem alloc] initWithTitle:@"评价" style:UIBarButtonItemStylePlain target:self action:@selector(commentAction)];
     
-    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"xiangqing_share"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(shareAction)];
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [shareButton setImage:[UIImage imageNamed:@"fenxiang_ugly"] forState:UIControlStateNormal];
+    [shareButton addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *shareItem = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
     self.navigationItem.rightBarButtonItems = @[shareItem, commentItem];
     
     self.dataSource = [@[@"goods", @"goodsDes"] mutableCopy];
@@ -98,7 +104,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 - (void)makeProductPicViewController {
     if (!self.productDetailModel) {
         _productPicViewController = [[QGHProductPicViewController alloc] init];
-        _productPicViewController.view.frame = CGRectMake(0, self.view.height, mmh_screen_width(), self.view.height);
+        _productPicViewController.view.frame = CGRectMake(0, self.view.height, mmh_screen_width(), self.view.height - 48);
         _productPicViewController.delegate = self;
         [self addChildViewController:_productPicViewController];
         [self.view addSubview:_productPicViewController.view];
@@ -193,7 +199,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     [_bottomView addTopSeparatorLine];
     [self.view addSubview:_bottomView];
     
-    [_bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.and.bottom.mas_equalTo(0);
         make.width.mas_equalTo(mmh_screen_width());
         make.height.mas_equalTo(48);
@@ -235,7 +241,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     [[MMHNetworkAdapter sharedAdapter] fetchDataWithRequester:self goodsId:self.goodsId succeededHandler:^(QGHProductDetailModel *productDetailModel) {
         self.productDetailModel = productDetailModel;
         [self.tableView reloadData];
-        [self.productPicViewController setProductDetailUrl:self.productDetailModel.product.info];
+        [self.productPicViewController setProductDetailUrl:self.productDetailModel.product.desc];
     } failedHandler:^(NSError *error) {
         [self.view showTipsWithError:error];
     }];
@@ -323,7 +329,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
         } else {
             QGHProductDetailWebViewCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHProductDetailImageCellIdentifier forIndexPath:indexPath];
             cell.delegate = self;
-            [cell setProductDetailUrl:self.productDetailModel.product.desc];
+            [cell setProductDetailUrl:self.productDetailModel.product.info];
             
             return cell;
         }
@@ -412,6 +418,14 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
         self.tableView.y = 0;
         self.productPicViewController.view.y = self.view.height;
     }];
+    
+    [self.view addSubview:_bottomView];
+    
+    [_bottomView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.and.bottom.mas_equalTo(0);
+        make.width.mas_equalTo(mmh_screen_width());
+        make.height.mas_equalTo(48);
+    }];
 }
 
 
@@ -477,6 +491,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     MMHProductSpecSelectionViewController *specVC = [[MMHProductSpecSelectionViewController alloc] initWithProductDetail:self.productDetailModel specSelectedHandler:^(QGHSKUSelectModel *selectedSpec) {
         QGHConfirmOrderViewController *confirmOrderVC = [[QGHConfirmOrderViewController alloc] initWithBussType:QGHBussTypeNormal productDetail:self.productDetailModel];
         [self.navigationController pushViewController:confirmOrderVC animated:YES];
+        [self sendPurchaseMessage];
     }];
     QGHTabBarController *tabBarController = (QGHTabBarController *)self.tabBarController;
     [tabBarController presentFloatingViewController:specVC animated:YES];
@@ -512,6 +527,21 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     
     QGHCommentListViewController *commentListVC = [[QGHCommentListViewController alloc] initWithGoodsId:self.productDetailModel.product.goodsId];
     [self.navigationController pushViewController:commentListVC animated:YES];
+}
+
+
+#pragma mark - private methods
+
+
+- (void)sendPurchaseMessage {
+    NSString *msg = [NSString stringWithFormat:@"用户%@购买商品：%@", [[MMHAccountSession currentSession] userId], self.productDetailModel.product.title];
+    NSString *chatter = self.productDetailModel.product.supplier;
+    if (chatter.length == 0) {
+        chatter = @"kefu";
+    }
+    EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:msg];
+    EMMessage *message = [[EMMessage alloc] initWithConversationID:chatter from:[[EMClient sharedClient] currentUsername] to:chatter body:body ext:nil];
+    [[EMClient sharedClient].chatManager asyncSendMessage:message progress:nil completion:nil];
 }
 
 

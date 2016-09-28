@@ -24,7 +24,7 @@
 
 - (void)fetchOrderDetailFrom:(id)requester orderId:(NSString *)orderId succeededHandler:(void(^)(QGHOrderInfo *orderInfo))succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
 
-- (void)paySuccessCallBack:(NSString *)orderNo;
+- (void)paySuccessCallBack:(NSString *)orderNo price:(NSString *)price;
 
 - (void)cancelOrderFrom:(id)requester orderId:(NSString *)orderId succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
 
@@ -32,4 +32,6 @@
 
 - (void)sendCommentForm:(id)requester orderId:(NSString *)orderId content:(NSString *)content star:(NSInteger)star succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
 
+- (void)delayReceiptTime:(id)requester orderNo:(NSString *)orderNo succeededHandler:(void(^)())succeededHandler failedHandler:(MMHNetworkFailedHandler)failedHandler;
+                                                                                     
 @end

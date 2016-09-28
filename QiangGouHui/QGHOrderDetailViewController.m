@@ -35,6 +35,7 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) UIImageView *timeImageView;
 @property (nonatomic, strong) UILabel *timeLabel;
+@property (nonatomic, strong) UIButton *button0;
 @property (nonatomic, strong) UIButton *button1;
 @property (nonatomic, strong) UIButton *button2;
 
@@ -108,6 +109,14 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
     }];
     
     
+    _button0 = [[UIButton alloc] init];
+    [_button0 setTitleColor:C21 forState:UIControlStateNormal];
+    _button0.backgroundColor = C20;
+    _button0.layer.cornerRadius = 3;
+    _button0.titleLabel.font = F4;
+    [_button0 addTarget:self action:@selector(button0Action) forControlEvents:UIControlEventTouchUpInside];
+    [_bottomView addSubview:_button0];
+    
     _button1 = [[UIButton alloc] init];
     [_button1 setTitleColor:C21 forState:UIControlStateNormal];
     _button1.backgroundColor = C20;
@@ -141,28 +150,34 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
 - (void)updateBottomViewButtons {
     switch (self.orderInfo.status) {
         case QGHOrderListItemStatusToPay:
+            self.button0.hidden = YES;
             self.button1.hidden = NO;
             self.button2.hidden = NO;
             [self.button1 setTitle:@"立即支付" forState:UIControlStateNormal];
             [self.button2 setTitle:@"取消订单" forState:UIControlStateNormal];
             break;
         case QGHOrderListItemStatusToExpress:
+            self.button0.hidden = YES;
             self.button1.hidden = YES;
             self.button2.hidden = NO;
             [self.button2 setTitle:@"申请退款 " forState:UIControlStateNormal];
             break;
         case QGHOrderListItemStatusToReceipt:
+            self.button0.hidden = NO;
             self.button1.hidden = NO;
             self.button2.hidden = NO;
+            [self.button0 setTitle:@"延长收货" forState:UIControlStateNormal];
             [self.button1 setTitle:@"查看物流" forState:UIControlStateNormal];
             [self.button2 setTitle:@"确认收货" forState:UIControlStateNormal];
             break;
         case QGHOrderListItemStatusToComment:
+            self.button0.hidden = YES;
             self.button1.hidden = YES;
             self.button2.hidden = NO;
             [self.button2 setTitle:@"立即评价" forState:UIControlStateNormal];
             break;
         case QGHOrderListItemStatusFinish:
+            self.button0.hidden = YES;
             self.button1.hidden = YES;
             self.button2.hidden = NO;
             [self.button2 setTitle:@"退款退货" forState:UIControlStateNormal];
@@ -173,6 +188,7 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
 //            [self.button2 setTitle:@"删除订单" forState:UIControlStateNormal];
 //            break;
         case QGHOrderListItemStatusRefund:
+            self.button0.hidden = YES;
             self.button1.hidden = YES;
             self.button2.hidden = YES;
             //            [self.button2 setTitle:@"追踪退款退货" forState:UIControlStateNormal];
@@ -181,6 +197,7 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
             break;
     }
     
+    CGFloat button0TitleWidth = [self.button0.titleLabel.text sizeWithFont:self.button0.titleLabel.font constrainedToWidth:CGFLOAT_MAX lineCount:1].width;
     CGFloat button1TitleWidth = [self.button1.titleLabel.text sizeWithFont:self.button1.titleLabel.font constrainedToWidth:CGFLOAT_MAX lineCount:1].width;
     CGFloat button2TitleWidth = [self.button2.titleLabel.text sizeWithFont:self.button2.titleLabel.font constrainedToWidth:CGFLOAT_MAX lineCount:1].width;
     
@@ -196,6 +213,13 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
         make.centerY.equalTo(self.bottomView);
         make.height.mas_equalTo(32);
         make.width.mas_equalTo(button1TitleWidth + 24);
+    }];
+    
+    [self.button0 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.button1.mas_left).offset(-10);
+        make.centerY.equalTo(self.bottomView);
+        make.height.mas_equalTo(32);
+        make.width.mas_equalTo(button0TitleWidth + 24);
     }];
 }
 
@@ -260,6 +284,9 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
                 break;
             case QGHOrderListItemStatusToReceipt:
                 cell.orderState = @"待收货";
+                if (self.orderInfo.express_time.length > 0) {
+                    cell.cloudPickShopName = self.orderInfo.express_time;
+                }
                 break;
             case QGHOrderListItemStatusToComment:
                 cell.orderState = @"待评价";
@@ -341,6 +368,17 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
 
 
 #pragma mark - Actions
+
+
+- (void)button0Action {
+    if (self.orderInfo.status == QGHOrderListItemStatusToReceipt) {
+        [[MMHNetworkAdapter sharedAdapter] delayReceiptTime:self orderNo:self.orderInfo.order_no succeededHandler:^{
+            [self.view showTips:@"延长收货成功"];
+        } failedHandler:^(NSError *error) {
+            [self.view showTipsWithError:error];
+        }];
+    }
+}
 
 
 - (void)button1Action {

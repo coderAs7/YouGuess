@@ -65,7 +65,7 @@
 }
 
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error {
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     self.webView.height = 0;
     if ([self.delegate respondsToSelector:@selector(productDetailWebViewCellLoadedFinish:)]) {
         [self.delegate productDetailWebViewCellLoadedFinish:0];

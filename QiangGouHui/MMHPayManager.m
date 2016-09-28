@@ -15,6 +15,7 @@
 @interface MMHPayManager ()
 
 @property (nonatomic, copy) NSString *orderNo;
+@property (nonatomic, copy) NSString *price;
 @property (nonatomic, strong) UIViewController *invoker;
 @property (nonatomic, copy) MMHPayFailHandler failHandler;
 @property (nonatomic, copy) MMHPaySuccessHandler successHandler;
@@ -53,6 +54,7 @@
 - (void)goToPayManager:(NSString *)orderNo price:(NSString *)price productTitle:(NSString *)title payWay:(MMHPayWay)payWay invoker:(UIViewController *)controller successHandler:(MMHPaySuccessHandler)successHandler failHandler:(MMHPayFailHandler)failHandler {
     self.invoker = controller;
     self.orderNo = orderNo;
+    self.price = price;
     self.successHandler = successHandler;
     self.failHandler = failHandler;
     switch (payWay) {
@@ -113,7 +115,7 @@
     NSString *error = nil;
     switch ([resp errCode]) {
         case WXSuccess:{
-            [[MMHNetworkAdapter sharedAdapter] paySuccessCallBack:self.orderNo];
+            [[MMHNetworkAdapter sharedAdapter] paySuccessCallBack:self.orderNo price:self.price];
             self.successHandler();
         }
             break;

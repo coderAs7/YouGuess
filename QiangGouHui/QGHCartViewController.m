@@ -122,7 +122,7 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
 - (void)setSumLabelValue {
     float sumPrice = 0;
     for (QGHCartItem *item in self.cartItemArr) {
-        sumPrice += item.min_price;
+        sumPrice += item.min_price * item.count;
     }
     
 //    self.sumLabel.text = [NSString stringWithFormat:@"合计：%g", sumPrice];
@@ -192,6 +192,7 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
         [self.view hideProcessingView];
         cell.cartItem.count = (int)newValue;
         [self.tableView reloadData];
+        [self setSumLabelValue];
     } failedHandler:^(NSError *error) {
         [self.view hideProcessingView];
         [self.view showTipsWithError:error];

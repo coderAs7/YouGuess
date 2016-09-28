@@ -22,14 +22,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), self.view.bounds.size.height - 64)];
+    _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), self.view.bounds.size.height - 64 - 48)];
     _webView.backgroundColor = [QGHAppearance backgroundColor];
     _webView.scalesPageToFit = YES;
     [_webView.scrollView addSubview:[self pullDownView]];
     _webView.scrollView.delegate = self;
     [self.view addSubview:_webView];
 }
-
 
 - (void)setProductDetailUrl:(NSString *)url {
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:url]];

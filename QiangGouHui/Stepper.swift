@@ -61,7 +61,7 @@ class Stepper: UIControl {
         decreaseButton.backgroundColor = UIColor(hexString: "f6f6f6")
         decreaseButton.setImage(UIImage(named: "pro_icon_down_h"), forState: .Normal)
         decreaseButton.setImage(UIImage(named: "pro_icon_down_d"), forState: .Disabled)
-        decreaseButton.addTarget(self, action: Selector("decrease:"), forControlEvents: .TouchUpInside)
+        decreaseButton.addTarget(self, action: #selector(Stepper.decrease(_:)), forControlEvents: .TouchUpInside)
         self.addSubview(decreaseButton)
         self.decreaseButton = decreaseButton
         
@@ -71,7 +71,7 @@ class Stepper: UIControl {
         increaseButton.backgroundColor = UIColor(hexString: "f6f6f6")
         increaseButton.setImage(UIImage(named: "pro_icon_add_h"), forState: .Normal)
         increaseButton.setImage(UIImage(named: "pro_icon_add_d"), forState: .Disabled)
-        increaseButton.addTarget(self, action: Selector("increase:"), forControlEvents: .TouchUpInside)
+        increaseButton.addTarget(self, action: #selector(Stepper.increase(_:)), forControlEvents: .TouchUpInside)
         self.addSubview(increaseButton)
         self.increaseButton = increaseButton
         
