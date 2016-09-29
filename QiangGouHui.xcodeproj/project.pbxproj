@@ -2737,6 +2737,7 @@
 				TargetAttributes = {
 					41BF0F931CFB4F6100FB23C2 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = HJB9HWVPB2;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -3232,7 +3233,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HJB9HWVPB2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

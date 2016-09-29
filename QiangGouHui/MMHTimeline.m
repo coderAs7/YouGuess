@@ -119,7 +119,12 @@
         if (fetchedItems.count < self.pageSize) {
             weakSelf.allItemsFetched = YES;
         }
-        [weakSelf.items appendUniqueObjectsFromArray:fetchedItems];
+        if (page != 0) {
+            [weakSelf.items appendUniqueObjectsFromArray:fetchedItems];
+        } else {
+            weakSelf.items = [fetchedItems mutableCopy];
+        }
+        
         weakSelf.nextPage = page + 1;
         if ([delegate respondsToSelector:@selector(timelineMoreDataFetched:)]) {
             [delegate timelineMoreDataFetched:weakSelf];

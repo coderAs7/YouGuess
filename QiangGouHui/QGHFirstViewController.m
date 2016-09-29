@@ -413,7 +413,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[self nameForSection:indexPath.section] isEqualToString:@"banner"]) {
-        return mmh_screen_width() * 640 / 960;
+        return mmh_screen_width() * 540 / 1080;
     } else if ([[self nameForSection:indexPath.section] isEqualToString:@"推荐"]) {
         return 270;
     } else {

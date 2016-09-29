@@ -40,11 +40,11 @@
     self.delLabel.textColor = C8;
     self.editLabel.textColor = C8;
     
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(0);
-        make.width.mas_equalTo(mmh_screen_width());
-        make.bottom.equalTo(self.defaultImage).offset(15);
-    }];
+//    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(0);
+//        make.width.mas_equalTo(mmh_screen_width());
+//        make.bottom.equalTo(self.defaultImage).offset(15);
+//    }];
     
     self.defaultImage.userInteractionEnabled = YES;
     UITapGestureRecognizer *defaultTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(defaultButtonAction)];
