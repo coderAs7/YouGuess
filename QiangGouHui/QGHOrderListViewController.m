@@ -420,4 +420,14 @@ static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCe
 }
 
 
+- (void)orderDetailViewControllerRefundOrderSuccess:(NSString *)orderNo {
+    [self fetchData];
+    [self.navigationController popToViewController:self animated:NO];
+    
+    MMHChatCustomerViewController *customerVC = [[MMHChatCustomerViewController alloc] init];
+    customerVC.transferOrderNo = orderNo;
+    [self.navigationController pushViewController:customerVC animated:YES];
+}
+
+
 @end

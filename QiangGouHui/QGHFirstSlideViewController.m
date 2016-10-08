@@ -127,4 +127,9 @@
 }
 
 
+- (void)reloadData {
+    [self fetchData];
+}
+
+
 @end

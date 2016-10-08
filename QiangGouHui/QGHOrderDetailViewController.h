@@ -11,6 +11,7 @@
 @protocol QGHOrderDetailViewControllerDelegate <NSObject>
 
 - (void)orderDetailViewControllerHandleOrder;
+- (void)orderDetailViewControllerRefundOrderSuccess:(NSString *)orderNo;
 
 @end
 

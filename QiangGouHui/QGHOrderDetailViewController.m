@@ -426,9 +426,18 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
             break;
         }
         case QGHOrderListItemStatusToExpress: {
-            MMHChatCustomerViewController *customerVC = [[MMHChatCustomerViewController alloc] init];
-            customerVC.transferOrderNo = self.orderInfo.order_no;
-            [self.navigationController pushViewController:customerVC animated:YES];
+            [[MMHNetworkAdapter sharedAdapter] refundOrderFrom:self orderId:self.orderInfo.orderId succeededHandler:^{
+                [self.view hideProcessingView];
+                [self.view showTips:@"申请退款退货成功"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    if ([self.delegate respondsToSelector:@selector(orderDetailViewControllerRefundOrderSuccess:)]) {
+                        [self.delegate orderDetailViewControllerRefundOrderSuccess:self.orderInfo.order_no];
+                    }
+                });
+            } failedHandler:^(NSError *error) {
+                [self.view hideProcessingView];
+                [self.view showTipsWithError:error];
+            }];
             break;
         }
         case QGHOrderListItemStatusToReceipt: {

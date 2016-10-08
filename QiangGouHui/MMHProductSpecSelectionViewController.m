@@ -166,6 +166,9 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
         quantityStepper.delegate = self;
         [self.confirmView addSubview:quantityStepper];
         self.quantityStepper = quantityStepper;
+        if (self.productDetail.skuSelectModel.count > 0) {
+            self.quantityStepper.value = self.productDetail.skuSelectModel.count;
+        }
         
         UILabel *quantityTipsLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 0.0f, 100.0f, 0.0f)];
         quantityTipsLabel.font = F6;

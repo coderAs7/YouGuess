@@ -618,6 +618,8 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
         default:
             break;
     }
+    
+    [self.slideVC reloadData];
 }
 
 

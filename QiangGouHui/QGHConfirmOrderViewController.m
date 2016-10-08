@@ -99,8 +99,6 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     [self makeBottomView];
     
     [self fetchDefaultReceiptAddress];
-    
-    self.priceLabel.text = [NSString stringWithFormat:@"¥%@", [self getSumPrice]];
 }
 
 
@@ -203,6 +201,9 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     [[MMHNetworkAdapter sharedAdapter] fetchMailPriceFrom:self goodsId:goodsId province:self.defaultReceiptAddress.province succeededHandler:^(float mainPrice) {
         self.mailPrice = mainPrice;
         self.mailPriceStandBy = YES;
+        
+        float sumPrice = [[self getSumPrice] floatValue] + self.mailPrice;
+        self.priceLabel.text = [NSString stringWithFormat:@"¥%g", sumPrice];
         [self tryToHideProcessingView];
     } failedHandler:^(NSError *error) {
         [self.view showTipsWithError:error];
@@ -297,7 +298,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
         QGHOrderDetailCommonCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHConfirmOrderCommonCellIdentifier forIndexPath:indexPath];
 //        NSString *priceStr = [NSString stringWithFormat:@"¥%@", self.productDetail.product.min_price];
         NSString *mailPriceStr = [NSString stringWithFormat:@"¥%g", self.mailPrice];
-        [cell setData:@[@{@"key": @"商品金额", @"value": self.priceLabel.text}, @{@"key": @"运费", @"value": mailPriceStr}]];
+        [cell setData:@[@{@"key": @"商品金额", @"value": [self getSumPrice]}, @{@"key": @"运费", @"value": mailPriceStr}]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
@@ -389,11 +390,11 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
         toSettlementModel.cartItemIds = cardIds;
     }
     
-    toSettlementModel.amount = [[self getSumPrice] floatValue] + self.mailPrice;
+    toSettlementModel.amount = [[self getSumPrice] floatValue];
 
     __weak typeof(self) weakSelf = self;
     [[MMHNetworkAdapter sharedAdapter] sendRequestSettlementFrom:self parameters:[toSettlementModel parameters] succeededHandler:^(NSString *payId, NSString *orderNo) {
-        MMHPayWayViewController *payWayVC = [[MMHPayWayViewController alloc] initWithPayPrice:[[weakSelf getSumPrice] floatValue] orderNo:orderNo payWay:^(MMHPayWay payWay) {
+        MMHPayWayViewController *payWayVC = [[MMHPayWayViewController alloc] initWithPayPrice:[[weakSelf getSumPrice] floatValue] + self.mailPrice orderNo:orderNo payWay:^(MMHPayWay payWay) {
             [[MMHPayManager sharedInstance] goToPayManager:orderNo price:[self getSumPrice] productTitle:[self getProductTitle] payWay:payWay invoker:weakSelf successHandler:^{
                 [self goToOrderList];
             } failHandler:^(NSString *error) {

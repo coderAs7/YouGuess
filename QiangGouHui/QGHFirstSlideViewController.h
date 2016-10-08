@@ -20,5 +20,7 @@
 
 @property (nonatomic, weak) id<QGHFirstSlideViewControllerDelegate> delegate;
 
+- (void)reloadData;
+
 @end
 

@@ -101,6 +101,13 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 }
 
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self fetchData];
+}
+
+
 - (void)makeProductPicViewController {
     if (!self.productDetailModel) {
         _productPicViewController = [[QGHProductPicViewController alloc] init];
@@ -488,10 +495,11 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
         return;
     }
     
+    __weak typeof(self) weakSelf = self;
     MMHProductSpecSelectionViewController *specVC = [[MMHProductSpecSelectionViewController alloc] initWithProductDetail:self.productDetailModel specSelectedHandler:^(QGHSKUSelectModel *selectedSpec) {
         QGHConfirmOrderViewController *confirmOrderVC = [[QGHConfirmOrderViewController alloc] initWithBussType:QGHBussTypeNormal productDetail:self.productDetailModel];
-        [self.navigationController pushViewController:confirmOrderVC animated:YES];
-        [self sendPurchaseMessage];
+        [weakSelf.navigationController pushViewController:confirmOrderVC animated:YES];
+        [weakSelf sendPurchaseMessage];
     }];
     QGHTabBarController *tabBarController = (QGHTabBarController *)self.tabBarController;
     [tabBarController presentFloatingViewController:specVC animated:YES];
