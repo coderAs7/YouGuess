@@ -455,6 +455,10 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 - (void)shareHandle:(UIImage *)image {
 //    UIImage *shareImage = [image scaledToFitSize:CGSizeMake(200, 200)];
     NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/us/app/fen-xiang/id1138627393?l=zh&ls=1&mt=8"];
+    if (self.productDetailModel.product.shareurl.length > 0) {
+        url = [NSURL URLWithString:self.productDetailModel.product.shareurl];
+    }
+    
     NSMutableDictionary *shareParameters = [NSMutableDictionary dictionary];
     [shareParameters SSDKSetupWeChatParamsByText:self.productDetailModel.product.title title:@"芬想" url:url thumbImage:nil image:image musicFileURL:nil extInfo:nil fileData:nil emoticonData:nil type:SSDKContentTypeApp forPlatformSubType:SSDKPlatformSubTypeWechatSession];
     [shareParameters SSDKSetupWeChatParamsByText:self.productDetailModel.product.title title:@"芬想" url:url thumbImage:nil image:image musicFileURL:nil extInfo:nil fileData:nil emoticonData:nil type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeWechatTimeline];

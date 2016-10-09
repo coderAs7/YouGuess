@@ -30,5 +30,6 @@
 @property (nonatomic, assign) NSInteger stock;
 @property (nonatomic, assign) double end_time;
 @property (nonatomic, copy) NSString *desc;
+@property (nonatomic, copy) NSString *shareurl;
 
 @end
