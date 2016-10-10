@@ -265,6 +265,8 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     } else {
         self.messageBadge.hidden = YES;
     }
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = num;
 }
 
 

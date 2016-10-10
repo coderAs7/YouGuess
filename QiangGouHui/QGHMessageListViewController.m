@@ -128,6 +128,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     QGHConversation *conversation = self.qghConversations[indexPath.row];
     NSString *conversationId = conversation.conversationID;
+    conversation.unReadMsgCount = 0;
+    [tableView reloadData];
+    
     if (conversation.message.chatType == EMChatTypeChat) {
         QGHChatViewController *messageVC = [[QGHChatViewController alloc] initWithConversationChatter:conversationId conversationType:EMConversationTypeChat];
         messageVC.customChatType = QGHChatTypeChat;
