@@ -3338,8 +3338,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.softbank.qianggouhui;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "72fe8663-7c86-4837-b391-6f369ffe816a";
-				PROVISIONING_PROFILE_SPECIFIER = "QiangGouHui Distribution";
+				PROVISIONING_PROFILE = "15260862-4321-4af8-b3c8-2561ca7533bf";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: com.softbank.qianggouhui";
 				SWIFT_OBJC_BRIDGING_HEADER = "QiangGouHui/QiangGouHui-Bridging-Header.h";
 				SWIFT_VERSION = 2.3;
 			};

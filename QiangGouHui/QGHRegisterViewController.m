@@ -316,7 +316,7 @@
         return;
     }
     
-    if (!self.agreeUserProtocol) {
+    if (self.type == QGHRegisterViewTypeNormal && !self.agreeUserProtocol) {
         self.commitButton.enabled = NO;
         return;
     }
