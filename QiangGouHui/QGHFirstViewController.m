@@ -621,6 +621,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
             break;
     }
     
+    [self fetchBanner];
     [self.slideVC reloadData];
 }
 

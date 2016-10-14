@@ -18,7 +18,7 @@
 @property (nonatomic, assign) float amount;
 @property (nonatomic, copy) NSString *delivery;
 @property (nonatomic, copy) NSString *production_time;
-
+@property (nonatomic, copy) NSString *note;
 @property (nonatomic, copy) NSString *cartItemIds;
 
 - (NSDictionary *)parameters;

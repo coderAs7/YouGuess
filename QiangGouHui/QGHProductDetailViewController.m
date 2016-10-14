@@ -462,7 +462,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     }
     
     NSMutableDictionary *shareParameters = [NSMutableDictionary dictionary];
-    [shareParameters SSDKSetupWeChatParamsByText:self.productDetailModel.product.title title:@"芬想" url:url thumbImage:nil image:image musicFileURL:nil extInfo:nil fileData:nil emoticonData:nil type:SSDKContentTypeApp forPlatformSubType:SSDKPlatformSubTypeWechatSession];
+    [shareParameters SSDKSetupWeChatParamsByText:self.productDetailModel.product.title title:@"芬想" url:url thumbImage:nil image:image musicFileURL:nil extInfo:nil fileData:nil emoticonData:nil type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeWechatSession];
     [shareParameters SSDKSetupWeChatParamsByText:self.productDetailModel.product.title title:@"芬想" url:url thumbImage:nil image:image musicFileURL:nil extInfo:nil fileData:nil emoticonData:nil type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeWechatTimeline];
     [shareParameters SSDKSetupQQParamsByText:self.productDetailModel.product.title title:@"芬想" url:url thumbImage:nil image:image type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeQQFriend];
     [shareParameters SSDKSetupQQParamsByText:self.productDetailModel.product.title title:@"芬想" url:url thumbImage:nil image:image type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeQZone];

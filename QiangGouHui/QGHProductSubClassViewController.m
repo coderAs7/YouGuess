@@ -114,13 +114,13 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     _purchaseList.delegate = self;
     [_purchaseList refetch];
     
-    _appointList = [[QGHFirstPageGoodsList alloc] initWithFlag:2 city:city goodstype:self.selectedGoodsType];
-    _appointList.delegate = self;
-    [_appointList refetch];
+//    _appointList = [[QGHFirstPageGoodsList alloc] initWithFlag:2 city:city goodstype:self.selectedGoodsType];
+//    _appointList.delegate = self;
+//    [_appointList refetch];
     
-    _customList = [[QGHFirstPageGoodsList alloc] initWithFlag:3 city:city goodstype:self.selectedGoodsType];
-    _customList.delegate = self;
-    [_customList refetch];
+//    _customList = [[QGHFirstPageGoodsList alloc] initWithFlag:3 city:city goodstype:self.selectedGoodsType];
+//    _customList.delegate = self;
+//    [_customList refetch];
 }
 
 

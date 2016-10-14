@@ -27,7 +27,7 @@
         [goodInfoArr addObject:goodInfoDict];
     }
     
-    parameters = [@{@"userToken": [[MMHAccountSession currentSession] token], @"receipt_id": self.receiptId, @"postage": [NSString stringWithFormat:@"%.1f", self.mailPrice], @"amount": @(self.amount)} mutableCopy];
+    parameters = [@{@"userToken": [[MMHAccountSession currentSession] token], @"receipt_id": self.receiptId, @"postage": [NSString stringWithFormat:@"%.1f", self.mailPrice], @"amount": @(self.amount), @"note": self.note} mutableCopy];
     
     if ([self.autoOrder isEqualToString:@"1"]) {
         NSString *transferType;

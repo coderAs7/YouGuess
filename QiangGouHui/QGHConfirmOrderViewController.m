@@ -27,7 +27,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 //static NSString *const QGHConfirmOrderInfoCellIdentifier = @"QGHConfirmOrderInfoCellIdentifier";
 
 
-@interface QGHConfirmOrderViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface QGHConfirmOrderViewController ()<UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 
 @property (nonatomic, assign) QGHBussType bussType;
 @property (nonatomic, strong) NSArray *dataSource;
@@ -35,6 +35,9 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIView *bottom;
 @property (nonatomic, strong) UILabel *priceLabel;
+
+@property (nonatomic, strong) UILabel *placeholderLabel;
+@property (nonatomic, strong) UITextView *textView;
 
 @property (nonatomic, assign) BOOL defaultReceiptStandBy;
 @property (nonatomic, assign) BOOL mailPriceStandBy;
@@ -99,6 +102,9 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     [self makeBottomView];
     
     [self fetchDefaultReceiptAddress];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardDidHideNotification object:nil];
 }
 
 
@@ -110,7 +116,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     [_tableView registerNib:[UINib nibWithNibName:@"QGHOrderAddressCellTableViewCell" bundle:nil] forCellReuseIdentifier:QGHConfirmOrderAddressCellIdentifier];
     [_tableView registerNib:[UINib nibWithNibName:@"QGHOrderDetailProductCell" bundle:nil] forCellReuseIdentifier:QGHConfirmOrderProductCellIdentifier];
     [_tableView registerClass:[QGHOrderDetailCommonCell class] forCellReuseIdentifier:QGHConfirmOrderCommonCellIdentifier];
-    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    _tableView.tableFooterView = [self footerView];
     [self.view addSubview:_tableView];
     
     [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -119,6 +125,30 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     }];
 }
 
+
+- (UIView *)footerView {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mmh_screen_width(), 100)];
+    
+    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, mmh_screen_width() - 20, 80)];
+    textView.backgroundColor = [UIColor whiteColor];
+    textView.layer.cornerRadius = 4;
+//    textView.placeholder = @"预约商品，海外直购需要提供客户身份信息，请输入身份证号码";
+    textView.font = F3;
+    textView.delegate = self;
+    [view addSubview:textView];
+    self.textView = textView;
+    
+    UILabel *placeholder = [[UILabel alloc] initWithFrame:CGRectMake(5, 10, textView.width - 10, 0)];
+    placeholder.numberOfLines = 0;
+    placeholder.textColor = C6;
+    placeholder.font = F3;
+    placeholder.text = @"预约商品，海外直购需要提供客户身份信息，请输入身份证号码";
+    [placeholder sizeToFit];
+    [textView addSubview:placeholder];
+    self.placeholderLabel = placeholder;
+    
+    return view;
+}
 
 - (void)makeBottomView {
     _bottom = [[UIView alloc] init];
@@ -355,6 +385,28 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
 }
 
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.textView resignFirstResponder];
+}
+
+
+#pragma mark - UITextViewDelegate
+
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    self.placeholderLabel.hidden = YES;
+}
+
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if (textView.text.length == 0) {
+        self.placeholderLabel.hidden = NO;
+    } else {
+        self.placeholderLabel.hidden = YES;
+    }
+}
+
+
 #pragma mark - Actions
 
 
@@ -368,6 +420,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     toSettlementModel.bussType = self.bussType;
     toSettlementModel.receiptId = self.defaultReceiptAddress.receiptAddressId;
     toSettlementModel.mailPrice = self.mailPrice;
+    toSettlementModel.note = self.textView.text;
     if (self.productDetail) {
         toSettlementModel.autoOrder = @"1";
     }
@@ -408,6 +461,49 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     }];
 }
 
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    NSDictionary *userInfo = [notification userInfo];
+    NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
+    
+//    CGFloat keyboardTop = keyboardRect.origin.y;
+    //    CGRect newTextViewFrame = self.suggestedKeywordsView.frame;
+    //    newTextViewFrame.size.height = keyboardTop - self.view.bounds.origin.y;
+    
+    NSNumber *duration = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSNumber *curve = [userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:duration.doubleValue];
+    [UIView setAnimationCurve:curve.intValue];
+    
+    [self.tableView setMaxY:self.tableView.bounds.size.height - keyboardRect.size.height + 48];
+    
+    [UIView commitAnimations];
+    
+    [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentSize.height - self.tableView.height) animated:NO];
+}
+
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    NSDictionary* userInfo = [notification userInfo];
+    NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
+    
+    NSNumber *duration = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    NSNumber *curve = [userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:duration.doubleValue];
+    [UIView setAnimationCurve:curve.intValue];
+    
+    [self.tableView setMaxY:self.view.bounds.size.height - 48];
+    
+    [UIView commitAnimations];
+}
 
 #pragma mark - private methods
 
