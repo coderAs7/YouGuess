@@ -17,5 +17,6 @@
 @property (nonatomic, assign) BOOL canUnfold;
 @property (nonatomic, assign) BOOL isUnfold;
 @property (nonatomic, assign) NSInteger level;
+@property (nonatomic, assign) QGHBussType type;
 
 @end

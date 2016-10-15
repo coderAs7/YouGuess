@@ -55,6 +55,20 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     [self createSegment];
     [self makeTableView];
     [self fetchGoodsList];
+
+    switch (self.type) {
+        case QGHBussTypePurchase:
+            [self.segmentList setSelectedButtonIndex:0 animated:NO];
+            break;
+        case QGHBussTypeAppoint:
+            [self.segmentList setSelectedButtonIndex:1 animated:NO];
+            break;
+        case QGHBussTypeCustom:
+            [self.segmentList setSelectedButtonIndex:2 animated:NO];
+            break;
+        default:
+            break;
+    }
 }
 
 
