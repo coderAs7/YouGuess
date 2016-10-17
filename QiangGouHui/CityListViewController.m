@@ -53,7 +53,13 @@
     headerView.backgroundColor = [UIColor whiteColor];
     
     UILabel *label = [[UILabel alloc] init];
-    label.text = [NSString stringWithFormat:@"您当前定位的城市：%@", [[QGHLocationManager shareManager] currentCity]];
+    NSString *cityStr = nil;
+    if (self.selectedCity.length > 0) {
+        cityStr = self.selectedCity;
+    } else {
+        cityStr = [[QGHLocationManager shareManager] currentCity];
+    }
+    label.text = [NSString stringWithFormat:@"您当前定位的城市：%@", cityStr];
     label.font = F5;
     label.textColor = [UIColor blackColor];
     [label sizeToFit];

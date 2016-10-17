@@ -36,13 +36,13 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 @implementation QGHProductSubClassViewController
 
 
-- (instancetype)initWithSelectedGoodsType:(NSString *)selectedGoodsType selectedArea:(NSString *)area {
+- (instancetype)initWithSelectedGoodsType:(NSString *)selectedGoodsType selectedArea:(NSString *)area bussType:(QGHBussType)bussType {
     self = [super init];
     
     if (self) {
         _selectedGoodsType = selectedGoodsType;
         _selectedCity = area;
-        _selectedFlag = QGHBussTypePurchase;
+        _selectedFlag = bussType;
     }
     
     return self;
@@ -54,9 +54,8 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     
     [self createSegment];
     [self makeTableView];
-    [self fetchGoodsList];
 
-    switch (self.type) {
+    switch (self.selectedFlag) {
         case QGHBussTypePurchase:
             [self.segmentList setSelectedButtonIndex:0 animated:NO];
             break;
@@ -69,6 +68,8 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
         default:
             break;
     }
+    
+    [self fetchGoodsList];
 }
 
 
@@ -128,13 +129,13 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     _purchaseList.delegate = self;
     [_purchaseList refetch];
     
-//    _appointList = [[QGHFirstPageGoodsList alloc] initWithFlag:2 city:city goodstype:self.selectedGoodsType];
-//    _appointList.delegate = self;
-//    [_appointList refetch];
+    _appointList = [[QGHFirstPageGoodsList alloc] initWithFlag:2 city:city goodstype:self.selectedGoodsType];
+    _appointList.delegate = self;
+    [_appointList refetch];
     
-//    _customList = [[QGHFirstPageGoodsList alloc] initWithFlag:3 city:city goodstype:self.selectedGoodsType];
-//    _customList.delegate = self;
-//    [_customList refetch];
+    _customList = [[QGHFirstPageGoodsList alloc] initWithFlag:3 city:city goodstype:self.selectedGoodsType];
+    _customList.delegate = self;
+    [_customList refetch];
 }
 
 

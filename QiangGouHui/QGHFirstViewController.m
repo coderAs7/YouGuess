@@ -500,7 +500,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
         QGHProductDetailVIewController *productDetailVC = [[QGHProductDetailVIewController alloc] initWithBussType:banner.type goodsId:banner.target_url];
         [self.navigationController pushViewController:productDetailVC animated:YES];
     } else {
-        QGHProductSubClassViewController *productSubClassVC = [[QGHProductSubClassViewController alloc] initWithSelectedGoodsType:banner.typeid selectedArea:self.selectedCity];
+        QGHProductSubClassViewController *productSubClassVC = [[QGHProductSubClassViewController alloc] initWithSelectedGoodsType:banner.typeid selectedArea:self.selectedCity bussType:banner.type];
         productSubClassVC.title = banner.typename;
         [self.navigationController pushViewController:productSubClassVC animated:YES];
     }
@@ -523,10 +523,9 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 #pragma mark - QGHFirstSlideViewControllerDelegate
 
 
-- (void)slideViewControllerSelectType:(NSString *)goodstype title:(NSString *)title {
-    self.selectedGoodsType = goodstype;
-    QGHProductSubClassViewController *productSubClassVC = [[QGHProductSubClassViewController alloc] initWithSelectedGoodsType:self.selectedGoodsType selectedArea:self.selectedCity];
-    productSubClassVC.title = title;
+- (void)slideViewControllerSelectItem:(QGHClassificationItem *)item {
+    QGHProductSubClassViewController *productSubClassVC = [[QGHProductSubClassViewController alloc] initWithSelectedGoodsType:self.selectedGoodsType selectedArea:self.selectedCity bussType:item.type];
+    productSubClassVC.title = item.name;
     [self.navigationController pushViewController:productSubClassVC animated:YES];
 }
 
@@ -557,7 +556,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 - (void)locationTapAction {
     CityListViewController *cityListVC = [[CityListViewController alloc] init];
-//    cityListVC.selectedCity = self.selectedCity;
+    cityListVC.selectedCity = self.selectedCity;
     cityListVC.selectCityBlock = ^(NSString *city) {
         [self.locationLabel setText:city];
         self.selectedCity = city;

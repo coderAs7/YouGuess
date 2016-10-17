@@ -242,6 +242,7 @@
         }
         [self dismissViewControllerWithAnimation];
     } failedHandler:^(NSError *error) {
+        [self.view showTipsWithError:error];
     }];
 }
 

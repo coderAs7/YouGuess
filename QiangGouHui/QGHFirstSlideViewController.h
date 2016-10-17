@@ -7,11 +7,12 @@
 //
 
 #import "BaseViewController.h"
+#import "QGHClassificationItem.h"
 
 
 @protocol QGHFirstSlideViewControllerDelegate <NSObject>
 
-- (void)slideViewControllerSelectType:(NSString *)goodstype title:(NSString *)title;
+- (void)slideViewControllerSelectItem:(QGHClassificationItem *)item;
 
 @end
 

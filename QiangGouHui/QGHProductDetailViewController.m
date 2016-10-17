@@ -456,7 +456,7 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 //    UIImage *shareImage = [image scaledToFitSize:CGSizeMake(200, 200)];
     NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/us/app/fen-xiang/id1138627393?l=zh&ls=1&mt=8"];
     if (self.productDetailModel.product.shareurl.length > 0) {
-        NSString *appendStr = [NSString stringWithFormat:@"&id=%@", [[MMHAccountSession currentSession] userId]];
+        NSString *appendStr = [NSString stringWithFormat:@"&referee_id=%@", [[MMHAccountSession currentSession] userId]];
         NSString *shareUrlStr = [self.productDetailModel.product.shareurl stringByAppendingString:appendStr];
         url = [NSURL URLWithString:shareUrlStr];
     }

@@ -10,8 +10,6 @@
 
 @interface QGHProductSubClassViewController : BaseViewController
 
-@property (nonatomic, assign) QGHBussType type;
-
-- (instancetype)initWithSelectedGoodsType:(NSString *)selectedGoodsType selectedArea:(NSString *)area;
+- (instancetype)initWithSelectedGoodsType:(NSString *)selectedGoodsType selectedArea:(NSString *)area bussType:(QGHBussType)bussType;
 
 @end

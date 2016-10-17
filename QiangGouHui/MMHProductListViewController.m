@@ -188,6 +188,12 @@ static NSString * const QGHProductListCellIdentifier = @"QGHProductListCellIdent
         if (!weakSelf) return;
         
         [weakSelf searchReloadView:filter];
+        
+        QGHProductList *productList = [[QGHProductList alloc] initWithFilter:self.filter];
+        productList.delegate = self;
+        self.productList = productList;
+        [productList refetch];
+        
         [self.navigationController popViewControllerAnimated:NO];
     };
    

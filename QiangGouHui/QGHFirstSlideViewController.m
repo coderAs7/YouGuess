@@ -108,8 +108,8 @@
         self.dataSource = [self configureDataSource:self.itemArr];
         [tableView reloadData];
     } else {
-        if ([self.delegate respondsToSelector:@selector(slideViewControllerSelectType:title:)]) {
-            [self.delegate slideViewControllerSelectType:item.itemId title:item.name];
+        if ([self.delegate respondsToSelector:@selector(slideViewControllerSelectItem:)]) {
+            [self.delegate slideViewControllerSelectItem:item];
             [UIView animateWithDuration:0.5 animations:^{
                 self.view.x = -mmh_screen_width();
             }];
