@@ -238,15 +238,15 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
         city = self.selectedCity;
     }
     
-    _purchaseList = [[QGHFirstPageGoodsList alloc] initWithFlag:1 city:city goodstype:self.selectedGoodsType];
+    _purchaseList = [[QGHFirstPageGoodsList alloc] initWithFlag:1 city:city goodstype:nil];
     _purchaseList.delegate = self;
     [_purchaseList refetch];
     
-    _appointList = [[QGHFirstPageGoodsList alloc] initWithFlag:2 city:city goodstype:self.selectedGoodsType];
+    _appointList = [[QGHFirstPageGoodsList alloc] initWithFlag:2 city:city goodstype:nil];
     _appointList.delegate = self;
     [_appointList refetch];
     
-    _customList = [[QGHFirstPageGoodsList alloc] initWithFlag:3 city:city goodstype:self.selectedGoodsType];
+    _customList = [[QGHFirstPageGoodsList alloc] initWithFlag:3 city:city goodstype:nil];
     _customList.delegate = self;
     [_customList refetch];
 }
@@ -524,7 +524,7 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 
 - (void)slideViewControllerSelectItem:(QGHClassificationItem *)item {
-    QGHProductSubClassViewController *productSubClassVC = [[QGHProductSubClassViewController alloc] initWithSelectedGoodsType:self.selectedGoodsType selectedArea:self.selectedCity bussType:item.type];
+    QGHProductSubClassViewController *productSubClassVC = [[QGHProductSubClassViewController alloc] initWithSelectedGoodsType:item.itemId selectedArea:self.selectedCity bussType:item.type];
     productSubClassVC.title = item.name;
     [self.navigationController pushViewController:productSubClassVC animated:YES];
 }
