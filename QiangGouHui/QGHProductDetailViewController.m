@@ -24,6 +24,7 @@
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDKUI.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
+#import <ShareSDKUI/SSUIShareActionSheetStyle.h>
 #import "QGHProductPicViewController.h"
 #import "EMSDK.h"
 #import "MMHAccountSession.h"
@@ -462,16 +463,49 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     }
     
     NSMutableDictionary *shareParameters = [NSMutableDictionary dictionary];
-    [shareParameters SSDKSetupWeChatParamsByText:self.productDetailModel.product.title title:@"芬想" url:url thumbImage:nil image:image musicFileURL:nil extInfo:nil fileData:nil emoticonData:nil type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeWechatSession];
-    [shareParameters SSDKSetupWeChatParamsByText:self.productDetailModel.product.title title:@"芬想" url:url thumbImage:nil image:image musicFileURL:nil extInfo:nil fileData:nil emoticonData:nil type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeWechatTimeline];
-    [shareParameters SSDKSetupQQParamsByText:self.productDetailModel.product.title title:@"芬想" url:url thumbImage:nil image:image type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeQQFriend];
-    [shareParameters SSDKSetupQQParamsByText:self.productDetailModel.product.title title:@"芬想" url:url thumbImage:nil image:image type:SSDKContentTypeAuto forPlatformSubType:SSDKPlatformSubTypeQZone];
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [ShareSDK showShareActionSheet:self.view items:nil shareParams:shareParameters onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
-            //TODO
-        }];
-    });
+    [shareParameters SSDKSetupShareParamsByText:self.productDetailModel.product.title
+                                     images:@[image]
+                                        url:url
+                                      title:@"芬想"
+                                       type:SSDKContentTypeAuto];
+    [shareParameters SSDKEnableUseClientShare];
+    [SSUIShareActionSheetStyle setShareActionSheetStyle:ShareActionSheetStyleSimple];
+    [ShareSDK showShareActionSheet:nil items:nil shareParams:shareParameters onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+        switch (state) {
+            case SSDKResponseStateSuccess:
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                                                    message:nil
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"确定"
+                                                          otherButtonTitles:nil];
+                [alertView show];
+                break;
+            }
+            case SSDKResponseStateFail:
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                    message:[NSString stringWithFormat:@"%@", error]
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"确定"
+                                                          otherButtonTitles:nil];
+                [alertView show];
+                break;
+            }
+            case SSDKResponseStateCancel:
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享已取消"
+                                                                    message:nil
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"确定"
+                                                          otherButtonTitles:nil];
+                [alertView show];
+                break;
+            }
+            default:
+                break;
+        }
+    }];
 }
 
 - (void)addCartBtnAction {

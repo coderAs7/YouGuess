@@ -58,9 +58,17 @@
 				<string>wb2731126139</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>QQ41E5AE1A</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2016101701</string>
+	<string>2016101901</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>tel</string>
@@ -91,6 +99,7 @@
 		<string>mqqwpa</string>
 		<string>mqzone</string>
 		<string>mqq</string>
+		<string>mqqopensdkapiV4</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

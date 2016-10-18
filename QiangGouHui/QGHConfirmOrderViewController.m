@@ -142,7 +142,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     placeholder.numberOfLines = 0;
     placeholder.textColor = C6;
     placeholder.font = F3;
-    placeholder.text = @"预约商品，海外直购需要提供客户身份信息，请输入身份证号码";
+    placeholder.text = @"用户备注";
     [placeholder sizeToFit];
     [textView addSubview:placeholder];
     self.placeholderLabel = placeholder;
