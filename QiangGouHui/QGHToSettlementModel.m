@@ -19,10 +19,13 @@
     
     NSMutableArray *goodInfoArr = [NSMutableArray array];
     for (QGHProductDetailModel *product in self.productArr) {
-        NSMutableDictionary *goodInfoDict = [@{@"good_id": product.product.goodsId, @"count": @(product.skuSelectModel.count), @"price": product.product.discount_price} mutableCopy];
+        NSMutableDictionary *goodInfoDict = [@{@"good_id": product.product.goodsId, @"count": @(product.skuSelectModel.count)} mutableCopy];
         if ([product isAllSpecSelected]) {
             QGHSKUPrice *skuPrice = [product allSepcSelectedPrice];
             [goodInfoDict addEntriesFromDictionary:@{@"sku": skuPrice.priceId}];
+            [goodInfoDict addEntriesFromDictionary:@{@"price": skuPrice.discount_price}];
+        } else {
+            [goodInfoDict addEntriesFromDictionary:@{@"price": product.product.discount_price}];
         }
         [goodInfoArr addObject:goodInfoDict];
     }

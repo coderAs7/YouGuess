@@ -463,10 +463,10 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     }
     
     NSMutableDictionary *shareParameters = [NSMutableDictionary dictionary];
-    [shareParameters SSDKSetupShareParamsByText:self.productDetailModel.product.title
+    [shareParameters SSDKSetupShareParamsByText:self.productDetailModel.product.sub_title
                                      images:@[image]
                                         url:url
-                                      title:@"芬想"
+                                      title:self.productDetailModel.product.title
                                        type:SSDKContentTypeAuto];
     [shareParameters SSDKEnableUseClientShare];
     [SSUIShareActionSheetStyle setShareActionSheetStyle:ShareActionSheetStyleSimple];
@@ -516,7 +516,11 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
     }
     
     MMHProductSpecSelectionViewController *specVC = [[MMHProductSpecSelectionViewController alloc] initWithProductDetail:self.productDetailModel specSelectedHandler:^(QGHSKUSelectModel *selectedSpec) {
-        [[MMHNetworkAdapter sharedAdapter] addCartFrom:self goodsId:self.productDetailModel.product.goodsId count:selectedSpec.count price:self.productDetailModel.product.discount_price skuId:self.productDetailModel.allSepcSelectedPrice.priceId succeededHandler:^{
+        NSString *price = [self.productDetailModel allSepcSelectedPrice].discount_price;
+        if (price.length == 0) {
+            price = self.productDetailModel.product.discount_price;
+        }
+        [[MMHNetworkAdapter sharedAdapter] addCartFrom:self goodsId:self.productDetailModel.product.goodsId count:selectedSpec.count price:price skuId:self.productDetailModel.allSepcSelectedPrice.priceId succeededHandler:^{
             [self.view showTips:@"加入购物车成功"];
         } failedHandler:^(NSError *error) {
             [self.view showTipsWithError:error];

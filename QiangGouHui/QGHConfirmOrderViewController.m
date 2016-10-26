@@ -443,7 +443,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
         toSettlementModel.cartItemIds = cardIds;
     }
     
-    toSettlementModel.amount = [[self getSumPrice] floatValue];
+    toSettlementModel.amount = [[self getSumPrice] floatValue] + self.mailPrice;
 
     __weak typeof(self) weakSelf = self;
     [[MMHNetworkAdapter sharedAdapter] sendRequestSettlementFrom:self parameters:[toSettlementModel parameters] succeededHandler:^(NSString *payId, NSString *orderNo) {
