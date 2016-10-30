@@ -8,7 +8,7 @@
 
 #import "MMHPayWayViewController.h"
 #import "MMHWeChatAdapter.h"
-
+#import "QGHOrderListViewController.h"
 #import "MMHNetworkAdapter+Order.h"
 
 static NSString *const MMHPayWayPriceCellIdentifier = @"priceCellIdentifier";
@@ -51,6 +51,13 @@ static NSString *const MMHPayWayCellIdentifier = @"payWayCellIdentifier";
     
     [self.view addSubview:self.tableView];
 }
+
+
+- (void)popViewController {
+    QGHOrderListViewController *listVC = [[QGHOrderListViewController alloc] init];
+    [QGHTabBarController redirectToCenterWithController:listVC];
+}
+
 
 #pragma mark - UITableView DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

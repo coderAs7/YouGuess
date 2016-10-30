@@ -41,4 +41,6 @@ typedef NS_ENUM(NSInteger, QGHLoginType) {
 #define EaseMob_push_production @"EaseMob_push_production"
 #define EaseMobPwd @"QiangGouHui123"
 
+#define kDefault_LocationTips @"locationTips"
+
 #endif /* QGHDefines_h */

@@ -26,5 +26,6 @@
 @property (nonatomic, copy) NSString *posttype;
 @property (nonatomic, copy) NSString *postid;
 @property (nonatomic, copy) NSString *express_time;
+@property (nonatomic, copy) NSString *exception;
 
 @end

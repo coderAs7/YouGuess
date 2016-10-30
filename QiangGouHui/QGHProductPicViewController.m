@@ -19,6 +19,12 @@
 
 @implementation QGHProductPicViewController
 
+
+- (void)dealloc {
+    NSLog(@"fuck1");
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

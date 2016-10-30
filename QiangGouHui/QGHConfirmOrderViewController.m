@@ -443,12 +443,13 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
         toSettlementModel.cartItemIds = cardIds;
     }
     
-    toSettlementModel.amount = [[self getSumPrice] floatValue] + self.mailPrice;
+    toSettlementModel.amount = [[self getSumPrice] floatValue];
 
     __weak typeof(self) weakSelf = self;
     [[MMHNetworkAdapter sharedAdapter] sendRequestSettlementFrom:self parameters:[toSettlementModel parameters] succeededHandler:^(NSString *payId, NSString *orderNo) {
         MMHPayWayViewController *payWayVC = [[MMHPayWayViewController alloc] initWithPayPrice:[[weakSelf getSumPrice] floatValue] + self.mailPrice orderNo:orderNo payWay:^(MMHPayWay payWay) {
-            [[MMHPayManager sharedInstance] goToPayManager:orderNo price:[self getSumPrice] productTitle:[self getProductTitle] payWay:payWay invoker:weakSelf successHandler:^{
+            NSString *payPrice = [NSString stringWithFormat:@"%g", [[weakSelf getSumPrice] floatValue] + self.mailPrice];
+            [[MMHPayManager sharedInstance] goToPayManager:orderNo price:payPrice productTitle:[self getProductTitle] payWay:payWay invoker:weakSelf successHandler:^{
                 [self goToOrderList];
             } failHandler:^(NSString *error) {
                 [self.view showTips:error];

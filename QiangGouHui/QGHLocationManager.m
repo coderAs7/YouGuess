@@ -54,6 +54,10 @@
 
 
 - (NSString *)currentCity {
+    if (!_city) {
+        return @"广州";
+    }
+    
     if ([_city hasSuffix:@"市"]) {
         return [_city stringByReplacingOccurrencesOfString:@"市" withString:@""];
     }
@@ -85,7 +89,7 @@
     switch (status) {
         case kCLAuthorizationStatusDenied : {
 //            if ([[MMHTool userDefaultGetWithKey:MMHIsOpenLocation] isEqualToString:@"No"]) {
-                UIAlertView *tempA = [[UIAlertView alloc] initWithTitle:@"当前定位服务未打开，可能会影响商品价格变化，小主去设置吧" message:@"方法：设置-隐私-定位服务-妈妈好-选择“始终”" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
+                UIAlertView *tempA = [[UIAlertView alloc] initWithTitle:@"当前定位服务未打开，可能会影响商品价格变化，小主去设置吧" message:@"方法：设置-隐私-定位服务-芬想-选择“始终”" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
                 [tempA show];
             /*}*/ break;
         }

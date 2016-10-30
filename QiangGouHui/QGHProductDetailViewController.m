@@ -80,6 +80,11 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 }
 
 
+- (void)dealloc {
+    NSLog(@"fuck2");
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"商品详情";
@@ -104,6 +109,8 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self addChildViewController:_productPicViewController];
+    [self.view addSubview:_productPicViewController.view];
     
     [self fetchData];
 }
@@ -114,8 +121,6 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
         _productPicViewController = [[QGHProductPicViewController alloc] init];
         _productPicViewController.view.frame = CGRectMake(0, self.view.height, mmh_screen_width(), self.view.height - 48);
         _productPicViewController.delegate = self;
-        [self addChildViewController:_productPicViewController];
-        [self.view addSubview:_productPicViewController.view];
     }
 }
 
@@ -566,6 +571,8 @@ static NSString *const QGHProductDetailImageCellIdentifier = @"QGHProductDetailI
 
 
 - (void)cartBtnAction {
+    [self.productPicViewController.view removeFromSuperview];
+    [self.productPicViewController removeFromParentViewController];
     [QGHTabBarController redirectToCart];
 }
 

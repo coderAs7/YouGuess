@@ -266,7 +266,7 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
         return cell;
     } else if (indexPath.section == 3) {
         QGHOrderDetailCommonCell *cell = [tableView dequeueReusableCellWithIdentifier:QGHOrderDetailExpressCellIdentifier forIndexPath:indexPath];
-        NSString *productPrice = [NSString stringWithFormat:@"¥%g", self.orderInfo.amount];
+        NSString *productPrice = [NSString stringWithFormat:@"¥%g", self.orderInfo.amount - self.orderInfo.postage];
         NSString *postPrice = [NSString stringWithFormat:@"¥%g", self.orderInfo.postage];
         [cell setData:@[@{@"key": @"商品金额", @"value": productPrice}, @{@"key": @"运费", @"value": postPrice}]];
         
@@ -298,7 +298,11 @@ static NSString *const QGHOrderDetailInfoCellIdentifier = @"QGHOrderDetailInfoCe
 //                cell.orderState = @"已取消";
 //                break;
             case QGHOrderListItemStatusRefund:
-                cell.orderState = @"退款退货";
+                if (self.orderInfo.exception.length > 0) {
+                    cell.orderState = @"已处理";
+                } else {
+                    cell.orderState = @"退款退货";
+                }
                 break;
             default:
                 break;

@@ -444,7 +444,7 @@ NSString * const MMHProductSpecSelectionHeaderIdentifier = @"MMHProductSpecSelec
     NSArray *keys = self.productDetail.categoryDict.allKeys;
     NSArray *categoryArr = [self.productDetail.categoryDict objectForKey:[keys objectAtIndex:indexPath.section]];
     
-    NSString *nameOfOption = ((QGHSKUCategory *)[categoryArr objectAtIndex:indexPath.row]).name;
+    NSString *nameOfOption = ((QGHSKUCategory *)[categoryArr objectAtIndex:indexPath.row]).value;
     
     CGSize size = [ProductSpecSelectionCell sizeWithString:nameOfOption];
     return size;

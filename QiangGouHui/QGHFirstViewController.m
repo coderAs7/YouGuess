@@ -87,6 +87,8 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
     _slideVC.delegate = self;
     [self addChildViewController:_slideVC];
     [self.view addSubview:_slideVC.view];
+    
+    [self fetchGoodsList];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -99,8 +101,8 @@ static NSString *QGHGoodsCellIdentifier = @"QGHGoodsCellIdentifier";
 
 - (void)viewDidAppear:(BOOL)animated {
     if (![CLLocationManager locationServicesEnabled] || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"您的定位未打开，不能查看实体店，请打开定位！" message:@"方法：设置-隐私-定位服务-妈妈好-选择“始终”" delegate:nil cancelButtonTitle:@"我知道啦！" otherButtonTitles:nil, nil];
-        [alertView show];
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"您的定位未打开，不能查看商品列表，请打开定位！" message:@"方法：设置-隐私-定位服务-芬想-选择“始终”" delegate:nil cancelButtonTitle:@"我知道啦！" otherButtonTitles:nil, nil];
+//        [alertView show];
         
         return;
     }
