@@ -122,7 +122,9 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
 - (void)setSumLabelValue {
     float sumPrice = 0;
     for (QGHCartItem *item in self.cartItemArr) {
-        sumPrice += item.min_price * item.count;
+        if (item.isSelected) {
+            sumPrice += item.min_price * item.count;
+        }
     }
     
 //    self.sumLabel.text = [NSString stringWithFormat:@"合计：%g", sumPrice];
@@ -223,7 +225,7 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
     float sumPrice = 0;
     for (QGHCartItem *item in self.cartItemArr) {
         if (item.isSelected) {
-            sumPrice += item.min_price;
+            sumPrice += item.min_price * item.count;
         } else {
             allSelected = NO;
         }
@@ -260,7 +262,7 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
             allSelected = NO;
         }
         
-        sumPrice += item.min_price;
+        sumPrice += item.min_price * item.count;
     }
     
     if (allSelected) {
@@ -269,6 +271,11 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
         [self setSumPrice:sumPrice];
     }
    
+    for (QGHCartItem *item in self.cartItemArr) {
+        item.isSelected = !allSelected;
+    }
+    
+    [self.tableView reloadData];
     
     if (allSelected) {
         [self.allSelectButton setImage:[UIImage imageNamed:@"dizhi_weixuanzhong"] forState:UIControlStateNormal];
@@ -276,16 +283,23 @@ static NSString *const QGHCartCellIdentifier = @"QGHCartCellIdentifier";
         [self.allSelectButton setImage:[UIImage imageNamed:@"dizhi_xuanzhong"] forState:UIControlStateNormal];
     }
 
-    for (QGHCartItem *item in self.cartItemArr) {
-        item.isSelected = !allSelected;
-    }
-    
-    [self.tableView reloadData];
 }
 
 
 - (void)buyNowButtonAction {
-    QGHConfirmOrderViewController *confirmOrderVC = [[QGHConfirmOrderViewController alloc] initWithCartItemArr:self.cartItemArr];
+    NSMutableArray *arr = [NSMutableArray array];
+    for (QGHCartItem *item in self.cartItemArr) {
+        if (item.isSelected) {
+            [arr addObject:item];
+        }
+    }
+    
+    if (arr.count == 0) {
+        [self.view showTips:@"请选择商品"];
+        return;
+    }
+    
+    QGHConfirmOrderViewController *confirmOrderVC = [[QGHConfirmOrderViewController alloc] initWithCartItemArr:arr];
     [self.navigationController pushViewController:confirmOrderVC animated:YES];
 }
 

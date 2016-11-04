@@ -58,13 +58,16 @@ static NSString *const QGHOrderListBottomCellIdentifier = @"QGHOrderListBottomCe
     [self makeOrderListArr];
     [self makeTableView];
     
-    [self fetchData];
-    
     NSInteger selectedIndex = [self.statusArr indexOfObject:@(_selectedStatus)];
     self.segmentList.selectedButtonIndex = selectedIndex;
     [self.segmentList makeCurrentSelectionVisible];
 }
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self fetchData];
+}
 
 - (void)createSegment {
     self.segmentList = [[MMHUnderlinedSegmentedControl alloc] init];

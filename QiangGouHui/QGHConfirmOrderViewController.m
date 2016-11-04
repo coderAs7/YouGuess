@@ -480,7 +480,7 @@ static NSString *const QGHConfirmOrderCommonCellIdentifier = @"QGHConfirmOrderCo
     [UIView setAnimationDuration:duration.doubleValue];
     [UIView setAnimationCurve:curve.intValue];
     
-    [self.tableView setMaxY:self.tableView.bounds.size.height - keyboardRect.size.height + 48];
+    [self.tableView setMaxY:self.view.bounds.size.height - keyboardRect.size.height];
     
     [UIView commitAnimations];
     
